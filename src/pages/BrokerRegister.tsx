@@ -64,6 +64,8 @@ const BrokerRegister = () => {
         phone: form.phone,
         creci: form.creci,
         bio: form.bio,
+        manager_name: form.manager_name,
+        company_name: form.company_name,
         status: "pending",
       });
 
