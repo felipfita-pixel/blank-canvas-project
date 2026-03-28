@@ -18,11 +18,13 @@ export type Database = {
         Row: {
           avatar_url: string | null
           bio: string | null
+          company_name: string
           created_at: string
           creci: string | null
           email: string
           full_name: string
           id: string
+          manager_name: string
           neighborhoods: string[] | null
           phone: string
           status: string
@@ -32,11 +34,13 @@ export type Database = {
         Insert: {
           avatar_url?: string | null
           bio?: string | null
+          company_name?: string
           created_at?: string
           creci?: string | null
           email: string
           full_name: string
           id?: string
+          manager_name?: string
           neighborhoods?: string[] | null
           phone?: string
           status?: string
@@ -46,11 +50,13 @@ export type Database = {
         Update: {
           avatar_url?: string | null
           bio?: string | null
+          company_name?: string
           created_at?: string
           creci?: string | null
           email?: string
           full_name?: string
           id?: string
+          manager_name?: string
           neighborhoods?: string[] | null
           phone?: string
           status?: string

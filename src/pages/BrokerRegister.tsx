@@ -122,6 +122,20 @@ const BrokerRegister = () => {
               <Input value={form.phone} onChange={(e) => update("phone", e.target.value)} className="h-11 rounded-lg" placeholder="(21) 99999-9999" />
             </div>
           </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                Nome do Gerente *
+              </label>
+              <Input value={form.manager_name} onChange={(e) => update("manager_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome do gerente" />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                Empresa *
+              </label>
+              <Input value={form.company_name} onChange={(e) => update("company_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome da empresa" />
+            </div>
+          </div>
           <div>
             <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
               CRECI
