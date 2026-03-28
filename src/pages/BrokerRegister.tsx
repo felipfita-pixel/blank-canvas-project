@@ -20,6 +20,8 @@ const BrokerRegister = () => {
     phone: "",
     creci: "",
     bio: "",
+    manager_name: "",
+    company_name: "",
   });
 
   const update = (field: string, value: string) =>
