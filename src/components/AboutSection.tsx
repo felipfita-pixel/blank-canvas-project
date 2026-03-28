@@ -1,0 +1,280 @@
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Users, Phone, MessageCircle, User, Home } from "lucide-react";
+import ScheduleModal from "@/components/ScheduleModal";
+import { useSiteContent } from "@/hooks/useSiteContent";
+import { supabase } from "@/integrations/supabase/client";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
+import bairroLeblon from "@/assets/bairro-leblon.jpg";
+import bairroBarra from "@/assets/bairro-barra.jpg";
+import bairroBotafogo from "@/assets/bairro-botafogo.jpg";
+import propertyKitchen from "@/assets/property-kitchen.jpg";
+import propertyCondo from "@/assets/property-condo.jpg";
+import propertyLiving from "@/assets/property-living.jpg";
+
+const fallbackImages = [bairroLeblon, bairroBotafogo, bairroBarra, propertyKitchen, propertyCondo, propertyLiving];
+
+const WHATSAPP_ADMIN = "5521975316631";
+
+const BOT_FIRST_NAMES = [
+  "Carlos", "Fernanda", "Ricardo", "Juliana", "André", "Patrícia", "Marcos",
+  "Camila", "Roberto", "Luciana", "Eduardo", "Beatriz", "Paulo", "Mariana",
+  "Gustavo", "Aline", "Thiago", "Renata", "Diego", "Vanessa", "Bruno",
+  "Tatiana", "Rafael", "Débora", "Leonardo", "Cristina", "Henrique",
+  "Sabrina", "Vinícius", "Priscila"
+];
+
+const BOT_LAST_NAMES = [
+  "Silva", "Santos", "Oliveira", "Souza", "Pereira", "Costa", "Rodrigues",
+  "Almeida", "Nascimento", "Lima", "Araújo", "Fernandes", "Carvalho",
+  "Gomes", "Martins", "Rocha", "Ribeiro", "Barros", "Freitas", "Moreira"
+];
+
+interface BrokerBot {
+  id: string;
+  full_name: string;
+  avatar_url: string | null;
+  isBot: boolean;
+  isAttending: boolean;
+}
+
+interface RealBroker {
+  id: string;
+  full_name: string;
+  creci: string | null;
+  avatar_url: string | null;
+  status: string;
+}
+
+const BOT_AVATAR_SEEDS = [
+  "Carlos", "Fernanda", "Ricardo", "Juliana", "Andre", "Patricia", "Marcos",
+  "Camila", "Roberto", "Luciana", "Eduardo", "Beatriz", "Paulo", "Mariana",
+  "Gustavo", "Aline", "Thiago", "Renata", "Diego", "Vanessa", "Bruno",
+  "Tatiana", "Rafael", "Debora", "Leonardo", "Cristina", "Henrique",
+  "Sabrina", "Vinicius", "Priscila"
+];
+
+const generateBotBrokers = (): BrokerBot[] => {
+  return BOT_FIRST_NAMES.map((firstName, i) => ({
+    id: `bot-${i}`,
+    full_name: `${firstName} ${BOT_LAST_NAMES[i % BOT_LAST_NAMES.length]}`,
+    avatar_url: `https://i.pravatar.cc/80?img=${(i % 70) + 1}`,
+    isBot: true,
+    isAttending: i < 15,
+  }));
+};
+
+// Shuffle array using Fisher-Yates
+const shuffleArray = <T,>(arr: T[]): T[] => {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+const AboutSection = () => {
+  const { get } = useSiteContent();
+  const about = get("about");
+  const [realBrokers, setRealBrokers] = useState<RealBroker[]>([]);
+  const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
+  const [scheduleOpen, setScheduleOpen] = useState(false);
+  const [shuffledBots, setShuffledBots] = useState<BrokerBot[]>(() => shuffleArray(generateBotBrokers()));
+
+  useEffect(() => {
+    const fetchBrokers = async () => {
+      const { data } = await supabase
+        .from("brokers")
+        .select("id, full_name, creci, avatar_url, status")
+        .eq("status", "approved")
+        .order("full_name");
+      if (data) setRealBrokers(data);
+    };
+
+    const fetchNeighborhoods = async () => {
+      const { data } = await supabase
+        .from("properties")
+        .select("neighborhood")
+        .eq("active", true)
+        .neq("neighborhood", "")
+        .not("neighborhood", "is", null);
+      if (data) {
+        const unique = [...new Set(data.map((p) => p.neighborhood).filter(Boolean))] as string[];
+        setNeighborhoods(unique.sort());
+      }
+    };
+
+    fetchBrokers();
+    fetchNeighborhoods();
+  }, []);
+
+  // Shuffle bot brokers every 30 minutes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShuffledBots(shuffleArray(generateBotBrokers()));
+    }, 30 * 60 * 1000); // 30 minutes
+    return () => clearInterval(interval);
+  }, []);
+
+  const displayNeighborhoods = neighborhoods.length > 0
+    ? neighborhoods.map((n) => ({ name: n, image: "" }))
+    : (about.content.neighborhoods || []);
+
+  // Real brokers always on top, then shuffled bots
+  const allBrokersList: BrokerBot[] = [
+    ...realBrokers.map(b => ({ id: b.id, full_name: b.full_name, avatar_url: b.avatar_url, isBot: false, isAttending: false })),
+    ...shuffledBots,
+  ];
+
+  const totalOnline = allBrokersList.length;
+  const totalAttending = realBrokers.length + 15;
+
+  const handleWhatsApp = (broker: BrokerBot) => {
+    const msg = encodeURIComponent(`Olá, gostaria de falar com ${broker.full_name} sobre imóveis.`);
+    window.open(`https://wa.me/${WHATSAPP_ADMIN}?text=${msg}`, "_blank");
+  };
+
+  const handleChat = () => {
+    const chatBtn = document.querySelector('[data-chat-widget-trigger]') as HTMLButtonElement;
+    if (chatBtn) chatBtn.click();
+  };
+
+  return (
+    <section id="about" className="section-padding bg-cream">
+      <div className="container-main">
+        <div className="grid lg:grid-cols-[1fr_260px] gap-6 items-start">
+          {/* Left: About + Campaign */}
+          <div>
+            <h2 className="text-3xl font-heading font-bold text-primary mb-1 italic">{about.title}</h2>
+            <div className="w-12 h-1 bg-secondary rounded mb-4" />
+            <p className="text-muted-foreground mb-6 leading-relaxed text-sm">{about.subtitle}</p>
+
+            <h3 className="text-2xl font-heading font-bold text-foreground mb-1">{about.content.campaign_title || "Escolha sua Campanha"}</h3>
+            <p className="text-sm text-muted-foreground mb-4">{about.content.campaign_subtitle || ""}</p>
+            {displayNeighborhoods.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-12">Nenhum bairro cadastrado no momento.</p>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {displayNeighborhoods.map((n: any, i: number) => (
+                  <div key={i} className="relative rounded-lg overflow-hidden aspect-[4/3] group cursor-pointer shadow-sm"
+                    onClick={() => {
+                      const chatBtn = document.querySelector('[data-chat-widget-trigger]') as HTMLButtonElement;
+                      if (chatBtn) {
+                        const availableBroker = realBrokers[i % Math.max(realBrokers.length, 1)];
+                        if (availableBroker) {
+                          chatBtn.setAttribute('data-broker-id', availableBroker.id);
+                          chatBtn.setAttribute('data-broker-name', availableBroker.full_name);
+                        } else {
+                          chatBtn.setAttribute('data-broker-id', '');
+                          chatBtn.setAttribute('data-broker-name', 'Administrador');
+                        }
+                        chatBtn.setAttribute('data-neighborhood', n.name);
+                        chatBtn.click();
+                      }
+                    }}
+                  >
+                    <img src={n.image || fallbackImages[i % fallbackImages.length]} alt={n.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-navy-dark/30 to-transparent" />
+                    <div className="absolute bottom-2 left-2">
+                      <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading">{n.name}</span>
+                      <div className="flex items-center gap-1 text-secondary text-[10px] font-semibold mt-0.5">
+                        <MessageCircle className="w-3 h-3" /> Falar com corretor
+                      </div>
+                    </div>
+                    <button className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary transition-colors">
+                      <MessageCircle className="w-3 h-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+              <a href="https://consultor.patrimovel.com.br/felipefita/imoveis/Venda/Tipo/Lan%C3%A7amento/Bairro/0/busca.aspx" target="_blank" rel="noopener noreferrer">
+                <Button className="bg-emerald-600 text-primary-foreground hover:bg-emerald-700 rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
+                  <Home className="w-4 h-4 mr-2" />Todos os Imóveis
+                </Button>
+              </a>
+              <Button onClick={() => setScheduleOpen(true)} className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
+                <MessageCircle className="w-4 h-4 mr-2" />Agendar Consultoria
+              </Button>
+            </div>
+            <ScheduleModal open={scheduleOpen} onOpenChange={setScheduleOpen} />
+          </div>
+
+          {/* Right: Brokers Online compact list - sticky */}
+          <div className="bg-card rounded-xl border border-border shadow-sm sticky top-20 z-30">
+            <div className="p-3 border-b border-border">
+              <div className="flex items-center gap-2 mb-1">
+                <Users className="w-4 h-4 text-primary" />
+                <span className="font-bold text-sm text-foreground">Corretores Online</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="text-[10px] font-semibold text-emerald-600">
+                  {totalOnline} online • {totalAttending} atendendo
+                </span>
+              </div>
+            </div>
+
+            <ScrollArea className="h-[420px]">
+              <div className="p-2 space-y-1.5">
+                {allBrokersList.slice(0, 30).map((broker) => (
+                  <div key={broker.id} className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-muted/50 transition-colors">
+                    {/* Avatar */}
+                    <div className="relative flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                        {broker.avatar_url ? (
+                          <img src={broker.avatar_url} alt={broker.full_name} className="w-full h-full object-cover" />
+                        ) : (
+                          <User className="w-4 h-4 text-primary" />
+                        )}
+                      </div>
+                      <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-card" />
+                      </span>
+                    </div>
+
+                    {/* Info */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-semibold text-foreground truncate">{broker.full_name}</p>
+                      {broker.isAttending ? (
+                        <Badge className="bg-secondary/20 text-secondary text-[8px] px-1 py-0 h-3.5">Atendendo</Badge>
+                      ) : (
+                        <Badge className="bg-emerald-100 text-emerald-700 text-[8px] px-1 py-0 h-3.5">Disponível</Badge>
+                      )}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex gap-0.5 flex-shrink-0">
+                      <button
+                        onClick={() => handleWhatsApp(broker)}
+                        className="w-6 h-6 rounded-full bg-[#25D366] flex items-center justify-center text-white hover:bg-[#1da851] transition-colors"
+                      >
+                        <Phone className="w-3 h-3" />
+                      </button>
+                      <button
+                        onClick={handleChat}
+                        className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:bg-navy-light transition-colors"
+                      >
+                        <MessageCircle className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AboutSection;
