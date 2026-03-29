@@ -107,6 +107,13 @@ export type Database = {
             referencedRelation: "brokers"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "chat_messages_broker_id_fkey"
+            columns: ["broker_id"]
+            isOneToOne: false
+            referencedRelation: "brokers_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       companies: {
@@ -385,6 +392,13 @@ export type Database = {
             referencedRelation: "brokers"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "properties_broker_id_fkey"
+            columns: ["broker_id"]
+            isOneToOne: false
+            referencedRelation: "brokers_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       scheduling_requests: {
@@ -494,7 +508,48 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      brokers_public: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          company_name: string | null
+          created_at: string | null
+          creci: string | null
+          full_name: string | null
+          id: string | null
+          manager_name: string | null
+          neighborhoods: string[] | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          company_name?: string | null
+          created_at?: string | null
+          creci?: string | null
+          full_name?: string | null
+          id?: string | null
+          manager_name?: string | null
+          neighborhoods?: string[] | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          company_name?: string | null
+          created_at?: string | null
+          creci?: string | null
+          full_name?: string | null
+          id?: string | null
+          manager_name?: string | null
+          neighborhoods?: string[] | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       delete_email: {
