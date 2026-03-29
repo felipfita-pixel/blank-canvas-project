@@ -10,7 +10,6 @@ interface Broker {
   full_name: string;
   avatar_url: string | null;
   neighborhoods: string[] | null;
-  phone: string;
   isBot: boolean;
   isAttending: boolean;
 }
