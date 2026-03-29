@@ -86,9 +86,8 @@ const AboutSection = () => {
   useEffect(() => {
     const fetchBrokers = async () => {
       const { data } = await supabase
-        .from("brokers")
+        .from("brokers_public")
         .select("id, full_name, creci, avatar_url, status")
-        .eq("status", "approved")
         .order("full_name");
       if (data) setRealBrokers(data);
     };

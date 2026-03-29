@@ -70,8 +70,8 @@ const PropertyDetail = () => {
         setProperty(data as Property);
         if (data.broker_id) {
           const { data: brokerData } = await supabase
-            .from("brokers")
-            .select("id, full_name, creci, phone, avatar_url")
+            .from("brokers_public")
+            .select("id, full_name, creci, avatar_url")
             .eq("id", data.broker_id)
             .single();
           if (brokerData) setBroker(brokerData as Broker);

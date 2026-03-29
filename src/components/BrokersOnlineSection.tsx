@@ -10,7 +10,6 @@ interface Broker {
   full_name: string;
   avatar_url: string | null;
   neighborhoods: string[] | null;
-  phone: string;
   isBot: boolean;
   isAttending: boolean;
 }
@@ -64,9 +63,8 @@ const BrokersOnlineSection = () => {
   useEffect(() => {
     const fetchBrokers = async () => {
       const { data } = await supabase
-        .from("brokers")
-        .select("id, full_name, avatar_url, neighborhoods, phone")
-        .eq("status", "approved");
+        .from("brokers_public")
+        .select("id, full_name, avatar_url, neighborhoods");
       if (data) {
         setRealBrokers(data.map(b => ({ ...b, isBot: false, isAttending: false })));
       }
