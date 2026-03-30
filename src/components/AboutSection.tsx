@@ -1,6 +1,7 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { staticProperties } from "@/data/staticProperties";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize, Search, SlidersHorizontal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
@@ -34,6 +35,14 @@ const BOT_LAST_NAMES = [
   "Gomes", "Martins", "Rocha", "Ribeiro", "Barros", "Freitas", "Moreira"
 ];
 
+const propertyTypeLabels: Record<string, string> = {
+  apartment: "Apartamento",
+  house: "Casa",
+  penthouse: "Cobertura",
+  commercial: "Comercial",
+  land: "Terreno",
+};
+
 interface BrokerBot {
   id: string;
   full_name: string;
@@ -50,14 +59,6 @@ interface RealBroker {
   status: string;
 }
 
-const BOT_AVATAR_SEEDS = [
-  "Carlos", "Fernanda", "Ricardo", "Juliana", "Andre", "Patricia", "Marcos",
-  "Camila", "Roberto", "Luciana", "Eduardo", "Beatriz", "Paulo", "Mariana",
-  "Gustavo", "Aline", "Thiago", "Renata", "Diego", "Vanessa", "Bruno",
-  "Tatiana", "Rafael", "Debora", "Leonardo", "Cristina", "Henrique",
-  "Sabrina", "Vinicius", "Priscila"
-];
-
 const generateBotBrokers = (): BrokerBot[] => {
   return BOT_FIRST_NAMES.map((firstName, i) => ({
     id: `bot-${i}`,
@@ -68,7 +69,6 @@ const generateBotBrokers = (): BrokerBot[] => {
   }));
 };
 
-// Shuffle array using Fisher-Yates
 const shuffleArray = <T,>(arr: T[]): T[] => {
   const shuffled = [...arr];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -77,6 +77,13 @@ const shuffleArray = <T,>(arr: T[]): T[] => {
   }
   return shuffled;
 };
+
+const normalizeText = (value?: string | null) =>
+  (value ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
 
 interface FeaturedProperty {
   id: string;
@@ -91,6 +98,8 @@ interface FeaturedProperty {
   suites?: number | null;
   city?: string | null;
   property_type?: string | null;
+  description?: string | null;
+  address?: string | null;
 }
 
 const AboutSection = () => {
@@ -101,6 +110,7 @@ const AboutSection = () => {
   const [featuredProperties, setFeaturedProperties] = useState<FeaturedProperty[]>([]);
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [shuffledBots, setShuffledBots] = useState<BrokerBot[]>(() => shuffleArray(generateBotBrokers()));
+  const [searchQuery, setSearchQuery] = useState("");
   const [filterCity, setFilterCity] = useState("all");
   const [filterNeighborhood, setFilterNeighborhood] = useState("all");
   const [filterType, setFilterType] = useState("all");
@@ -112,16 +122,18 @@ const AboutSection = () => {
         .from("brokers_public")
         .select("id, full_name, creci, avatar_url, status")
         .order("full_name");
+
       if (data) setRealBrokers(data);
     };
 
     const fetchProperties = async () => {
       const { data } = await supabase
         .from("properties")
-        .select("id, title, images, neighborhood, price, bedrooms, bathrooms, parking_spots, area, suites, city, property_type")
+        .select("id, title, images, neighborhood, price, bedrooms, bathrooms, parking_spots, area, suites, city, property_type, description, address")
         .eq("active", true)
-        .order("created_at", { ascending: false })
-        .limit(6);
+        .order("featured", { ascending: false })
+        .order("created_at", { ascending: false });
+
       if (data) setFeaturedProperties(data);
     };
 
@@ -129,7 +141,6 @@ const AboutSection = () => {
     fetchProperties();
   }, []);
 
-  // Shuffle bot brokers every 30 minutes
   useEffect(() => {
     const interval = setInterval(() => {
       setShuffledBots(shuffleArray(generateBotBrokers()));
@@ -137,9 +148,110 @@ const AboutSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Real brokers always on top, then shuffled bots
+  const staticCampaignProperties = useMemo<FeaturedProperty[]>(
+    () =>
+      staticProperties.map((property) => ({
+        id: property.id,
+        title: property.title,
+        images: property.images,
+        neighborhood: property.neighborhood,
+        price: property.price,
+        bedrooms: property.bedrooms,
+        bathrooms: property.bathrooms,
+        parking_spots: property.parking_spots,
+        area: property.area,
+        suites: null,
+        city: property.city,
+        property_type: property.property_type,
+        description: property.description,
+        address: property.address,
+      })),
+    []
+  );
+
+  const mergedProperties = useMemo(() => {
+    const dbTitles = new Set(featuredProperties.map((property) => normalizeText(property.title)));
+
+    return [
+      ...staticCampaignProperties.filter((property) => !dbTitles.has(normalizeText(property.title))),
+      ...featuredProperties,
+    ];
+  }, [featuredProperties, staticCampaignProperties]);
+
+  const cityOptions = useMemo(
+    () =>
+      [...new Set(mergedProperties.map((property) => property.city).filter(Boolean) as string[])].sort((a, b) =>
+        a.localeCompare(b, "pt-BR")
+      ),
+    [mergedProperties]
+  );
+
+  const allNeighborhoodOptions = useMemo(
+    () =>
+      [...new Set(mergedProperties.map((property) => property.neighborhood).filter(Boolean) as string[])].sort((a, b) =>
+        a.localeCompare(b, "pt-BR")
+      ),
+    [mergedProperties]
+  );
+
+  const neighborhoodOptions = useMemo(() => {
+    const source =
+      filterCity === "all"
+        ? mergedProperties
+        : mergedProperties.filter((property) => property.city === filterCity);
+
+    return [...new Set(source.map((property) => property.neighborhood).filter(Boolean) as string[])].sort((a, b) =>
+      a.localeCompare(b, "pt-BR")
+    );
+  }, [filterCity, mergedProperties]);
+
+  const typeOptions = useMemo(
+    () =>
+      [...new Set(mergedProperties.map((property) => property.property_type).filter(Boolean) as string[])].sort((a, b) =>
+        (propertyTypeLabels[a] ?? a).localeCompare(propertyTypeLabels[b] ?? b, "pt-BR")
+      ),
+    [mergedProperties]
+  );
+
+  useEffect(() => {
+    if (filterNeighborhood !== "all" && !neighborhoodOptions.includes(filterNeighborhood)) {
+      setFilterNeighborhood("all");
+    }
+  }, [filterNeighborhood, neighborhoodOptions]);
+
+  const filteredProperties = useMemo(() => {
+    const normalizedSearch = normalizeText(searchQuery);
+
+    return mergedProperties.filter((property) => {
+      const matchesCity = filterCity === "all" || property.city === filterCity;
+      const matchesNeighborhood = filterNeighborhood === "all" || property.neighborhood === filterNeighborhood;
+      const matchesType = filterType === "all" || property.property_type === filterType;
+
+      const searchableContent = [
+        property.title,
+        property.neighborhood,
+        property.city,
+        property.address,
+        property.description,
+        property.property_type ? propertyTypeLabels[property.property_type] ?? property.property_type : "",
+      ]
+        .map((value) => normalizeText(value))
+        .join(" ");
+
+      const matchesSearch = !normalizedSearch || searchableContent.includes(normalizedSearch);
+
+      return matchesCity && matchesNeighborhood && matchesType && matchesSearch;
+    });
+  }, [filterCity, filterNeighborhood, filterType, mergedProperties, searchQuery]);
+
   const allBrokersList: BrokerBot[] = [
-    ...realBrokers.map(b => ({ id: b.id, full_name: b.full_name, avatar_url: b.avatar_url, isBot: false, isAttending: false })),
+    ...realBrokers.map((broker) => ({
+      id: broker.id,
+      full_name: broker.full_name,
+      avatar_url: broker.avatar_url,
+      isBot: false,
+      isAttending: false,
+    })),
     ...shuffledBots,
   ];
 
@@ -156,162 +268,207 @@ const AboutSection = () => {
     if (chatBtn) chatBtn.click();
   };
 
+  const handleSearchButtonClick = () => {
+    document.getElementById("campaign-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const clearFilters = () => {
+    setSearchQuery("");
+    setFilterCity("all");
+    setFilterNeighborhood("all");
+    setFilterType("all");
+  };
+
   return (
     <section id="about" className="section-padding bg-cream">
       <div className="container-main">
         <div className="grid lg:grid-cols-[1fr_260px] gap-6 items-start">
-          {/* Left: About + Campaign */}
           <div>
             <h2 className="text-3xl font-heading font-bold text-primary mb-1 italic">{about.title}</h2>
             <div className="w-12 h-1 bg-secondary rounded mb-4" />
             <p className="text-muted-foreground mb-6 leading-relaxed text-sm">{about.subtitle}</p>
 
-            <h3 className="text-2xl font-heading font-bold text-foreground mb-1">{about.content.campaign_title || "Escolha sua Campanha"}</h3>
+            <h3 className="text-2xl font-heading font-bold text-foreground mb-1">
+              {about.content.campaign_title || "Escolha sua Campanha"}
+            </h3>
             <p className="text-sm text-muted-foreground mb-4">{about.content.campaign_subtitle || ""}</p>
-            {(() => {
-              const staticProps: FeaturedProperty[] = staticProperties.map(sp => ({
-                id: sp.id,
-                title: sp.title,
-                images: sp.images,
-                neighborhood: sp.neighborhood,
-                price: sp.price,
-                bedrooms: sp.bedrooms,
-                bathrooms: sp.bathrooms,
-                parking_spots: sp.parking_spots,
-                area: sp.area,
-                suites: null,
-                city: sp.city,
-                property_type: sp.property_type,
-              }));
-              const mergedProps = [
-                ...staticProps.filter(sp => !featuredProperties.some(fp => fp.title === sp.title)),
-                ...featuredProperties,
-              ];
 
-              // Extract unique cities & neighborhoods for filters
-              const cities = [...new Set(mergedProps.map(p => p.city).filter(Boolean))].sort() as string[];
-              const hoods = [...new Set(mergedProps.map(p => p.neighborhood).filter(Boolean))].sort() as string[];
+            <div className="bg-card rounded-xl border border-border p-4 mb-4 shadow-sm">
+              <h4 className="text-sm font-bold text-foreground mb-3">Resultado de Busca</h4>
 
-              // Apply filters
-              const filteredProps = mergedProps.filter(p => {
-                if (filterCity !== "all" && p.city !== filterCity) return false;
-                if (filterNeighborhood !== "all" && p.neighborhood !== filterNeighborhood) return false;
-                if (filterType !== "all" && p.property_type !== filterType) return false;
-                return true;
-              });
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,180px))_auto]">
+                <Input
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Pesquisar por imóvel, endereço, cidade ou bairro"
+                />
 
-              return (
-                <>
-                  {/* Filter Bar */}
-                  <div className="bg-card rounded-xl border border-border p-4 mb-4 shadow-sm">
-                    <h4 className="text-sm font-bold text-foreground mb-3">Resultado de Busca</h4>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <Select value={filterCity} onValueChange={setFilterCity}>
-                        <SelectTrigger className="w-[160px] bg-background"><SelectValue placeholder="Cidade" /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Todas as Cidades</SelectItem>
-                          {cities.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                      <Select value={filterNeighborhood} onValueChange={setFilterNeighborhood}>
-                        <SelectTrigger className="w-[160px] bg-background"><SelectValue placeholder="Bairro" /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Todos os Bairros</SelectItem>
-                          {hoods.map(n => <SelectItem key={n} value={n}>{n}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                      <Select value={filterType} onValueChange={setFilterType}>
-                        <SelectTrigger className="w-[160px] bg-background"><SelectValue placeholder="Tipo de Imóvel" /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Todos os Tipos</SelectItem>
-                          <SelectItem value="apartment">Apartamento</SelectItem>
-                          <SelectItem value="house">Casa</SelectItem>
-                          <SelectItem value="penthouse">Cobertura</SelectItem>
-                          <SelectItem value="commercial">Comercial</SelectItem>
-                          <SelectItem value="land">Terreno</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowMoreFilters(!showMoreFilters)}
-                        className="bg-foreground text-background hover:bg-foreground/90 font-semibold"
+                <Select value={filterCity} onValueChange={setFilterCity}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Cidade" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todas as Cidades</SelectItem>
+                    {cityOptions.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={filterNeighborhood} onValueChange={setFilterNeighborhood}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Bairro" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todos os Bairros</SelectItem>
+                    {neighborhoodOptions.map((neighborhood) => (
+                      <SelectItem key={neighborhood} value={neighborhood}>
+                        {neighborhood}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={filterType} onValueChange={setFilterType}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Tipo de Imóvel" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todos os Tipos</SelectItem>
+                    {typeOptions.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {propertyTypeLabels[type] ?? type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <div className="flex gap-3 md:col-span-2 xl:col-span-1">
+                  <Button variant="outline" type="button" onClick={() => setShowMoreFilters((value) => !value)} className="flex-1 font-semibold">
+                    <SlidersHorizontal className="w-4 h-4 mr-1" />
+                    Mais Filtros
+                  </Button>
+                  <Button type="button" onClick={handleSearchButtonClick} className="flex-1 font-semibold">
+                    <Search className="w-4 h-4 mr-1" />
+                    Pesquisar
+                  </Button>
+                </div>
+              </div>
+
+              {showMoreFilters && (
+                <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-xs text-muted-foreground">
+                    {cityOptions.length} cidades • {allNeighborhoodOptions.length} bairros • {typeOptions.length} tipos disponíveis
+                  </p>
+                  <Button variant="ghost" size="sm" type="button" onClick={clearFilters}>
+                    Limpar filtros
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            <div id="campaign-results">
+              <p className="text-xs text-muted-foreground mb-3">{filteredProperties.length} imóvel(is) encontrado(s)</p>
+
+              {filteredProperties.length === 0 ? (
+                <p className="text-sm text-muted-foreground text-center py-12">
+                  Nenhum imóvel encontrado com os filtros selecionados.
+                </p>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {filteredProperties.map((property, index) => {
+                    const image = property.images && property.images.length > 0 ? property.images[0] : fallbackImages[index % fallbackImages.length];
+                    const formattedPrice = property.price > 0
+                      ? new Intl.NumberFormat("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                          maximumFractionDigits: 0,
+                        }).format(property.price)
+                      : null;
+
+                    return (
+                      <div
+                        key={property.id}
+                        className="rounded-lg overflow-hidden group cursor-pointer shadow-sm bg-card border border-border"
+                        onClick={() => navigate(`/imovel/${property.id}`)}
                       >
-                        <SlidersHorizontal className="w-4 h-4 mr-1" /> Mais Filtros
-                      </Button>
-                      <Button
-                        size="sm"
-                        onClick={() => { setFilterCity("all"); setFilterNeighborhood("all"); setFilterType("all"); }}
-                        className="bg-foreground text-background hover:bg-foreground/90 font-semibold"
-                      >
-                        <Search className="w-4 h-4 mr-1" /> Pesquisar
-                      </Button>
-                    </div>
-                    {showMoreFilters && (
-                      <div className="flex flex-wrap items-center gap-3 mt-3 pt-3 border-t border-border">
-                        <p className="text-xs text-muted-foreground">Filtros ativos: {filterCity !== "all" ? filterCity : ""} {filterNeighborhood !== "all" ? filterNeighborhood : ""} {filterType !== "all" ? filterType : ""} {filterCity === "all" && filterNeighborhood === "all" && filterType === "all" ? "Nenhum" : ""}</p>
-                      </div>
-                    )}
-                  </div>
-
-                  <p className="text-xs text-muted-foreground mb-3">{filteredProps.length} imóvel(is) encontrado(s)</p>
-
-                  {filteredProps.length === 0 ? (
-                    <p className="text-sm text-muted-foreground text-center py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
-                  ) : (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                      {filteredProps.map((prop, i) => {
-                        const image = prop.images && prop.images.length > 0 ? prop.images[0] : fallbackImages[i % fallbackImages.length];
-                        const formattedPrice = prop.price > 0
-                          ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(prop.price)
-                          : null;
-                        return (
-                          <div
-                            key={prop.id}
-                            className="rounded-lg overflow-hidden group cursor-pointer shadow-sm bg-card border border-border"
-                            onClick={() => navigate(`/imovel/${prop.id}`)}
-                          >
-                            <div className="relative aspect-[4/3] overflow-hidden">
-                              <img src={image} alt={prop.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
-                              <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/60 via-transparent to-transparent" />
-                              <div className="absolute bottom-2 left-2 right-2">
-                                <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading line-clamp-2">{prop.title}</span>
-                              </div>
-                              <button className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary transition-colors">
-                                <Home className="w-3 h-3" />
-                              </button>
-                            </div>
-                            <div className="p-2 space-y-1">
-                              {prop.neighborhood && <p className="text-[10px] text-muted-foreground font-medium">{prop.neighborhood}</p>}
-                              <div className="flex items-center gap-2 flex-wrap text-[9px] text-muted-foreground">
-                                {prop.bedrooms != null && prop.bedrooms > 0 && <span className="flex items-center gap-0.5"><Bed className="w-3 h-3" />{prop.bedrooms} Qts</span>}
-                                {prop.suites != null && prop.suites > 0 && <span className="flex items-center gap-0.5"><Bed className="w-3 h-3 text-secondary" />{prop.suites} Suíte</span>}
-                                {prop.bathrooms != null && prop.bathrooms > 0 && <span className="flex items-center gap-0.5"><Bath className="w-3 h-3" />{prop.bathrooms} Ban</span>}
-                                {prop.parking_spots != null && prop.parking_spots > 0 && <span className="flex items-center gap-0.5"><Car className="w-3 h-3" />{prop.parking_spots} Vaga</span>}
-                                {prop.area != null && prop.area > 0 && <span className="flex items-center gap-0.5"><Maximize className="w-3 h-3" />{prop.area}m²</span>}
-                              </div>
-                              {formattedPrice && <p className="text-secondary font-bold text-xs">{formattedPrice}</p>}
-                            </div>
+                        <div className="relative aspect-[4/3] overflow-hidden">
+                          <img
+                            src={image}
+                            alt={property.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/60 via-transparent to-transparent" />
+                          <div className="absolute bottom-2 left-2 right-2">
+                            <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading line-clamp-2">
+                              {property.title}
+                            </span>
                           </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </>
-              );
-            })()}
+                          <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground">
+                            <Home className="w-3 h-3" />
+                          </div>
+                        </div>
+                        <div className="p-2 space-y-1">
+                          {property.neighborhood && (
+                            <p className="text-[10px] text-muted-foreground font-medium">{property.neighborhood}</p>
+                          )}
+                          <div className="flex items-center gap-2 flex-wrap text-[9px] text-muted-foreground">
+                            {property.bedrooms != null && property.bedrooms > 0 && (
+                              <span className="flex items-center gap-0.5">
+                                <Bed className="w-3 h-3" />
+                                {property.bedrooms} Qts
+                              </span>
+                            )}
+                            {property.suites != null && property.suites > 0 && (
+                              <span className="flex items-center gap-0.5">
+                                <Bed className="w-3 h-3 text-secondary" />
+                                {property.suites} Suíte
+                              </span>
+                            )}
+                            {property.bathrooms != null && property.bathrooms > 0 && (
+                              <span className="flex items-center gap-0.5">
+                                <Bath className="w-3 h-3" />
+                                {property.bathrooms} Ban
+                              </span>
+                            )}
+                            {property.parking_spots != null && property.parking_spots > 0 && (
+                              <span className="flex items-center gap-0.5">
+                                <Car className="w-3 h-3" />
+                                {property.parking_spots} Vaga
+                              </span>
+                            )}
+                            {property.area != null && property.area > 0 && (
+                              <span className="flex items-center gap-0.5">
+                                <Maximize className="w-3 h-3" />
+                                {property.area}m²
+                              </span>
+                            )}
+                          </div>
+                          {formattedPrice && <p className="text-secondary font-bold text-xs">{formattedPrice}</p>}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
               <Button onClick={() => navigate("/imoveis")} className="bg-emerald-600 text-primary-foreground hover:bg-emerald-700 rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
-                <Home className="w-4 h-4 mr-2" />Todos os Imóveis
+                <Home className="w-4 h-4 mr-2" />
+                Todos os Imóveis
               </Button>
               <Button onClick={() => setScheduleOpen(true)} className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
-                <MessageCircle className="w-4 h-4 mr-2" />Agendar Consultoria
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Agendar Consultoria
               </Button>
             </div>
             <ScheduleModal open={scheduleOpen} onOpenChange={setScheduleOpen} />
           </div>
 
-          {/* Right: Brokers Online compact list - sticky */}
           <div className="bg-card rounded-xl border border-border shadow-sm sticky top-20 z-30">
             <div className="p-3 border-b border-border">
               <div className="flex items-center gap-2 mb-1">
@@ -333,7 +490,6 @@ const AboutSection = () => {
               <div className="p-2 space-y-1.5">
                 {allBrokersList.slice(0, 30).map((broker) => (
                   <div key={broker.id} className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-muted/50 transition-colors">
-                    {/* Avatar */}
                     <div className="relative flex-shrink-0">
                       <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
                         {broker.avatar_url ? (
@@ -348,7 +504,6 @@ const AboutSection = () => {
                       </span>
                     </div>
 
-                    {/* Info */}
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-semibold text-foreground truncate">{broker.full_name}</p>
                       {broker.isAttending ? (
@@ -358,7 +513,6 @@ const AboutSection = () => {
                       )}
                     </div>
 
-                    {/* Actions */}
                     <div className="flex gap-0.5 flex-shrink-0">
                       <button
                         onClick={() => handleWhatsApp(broker)}
