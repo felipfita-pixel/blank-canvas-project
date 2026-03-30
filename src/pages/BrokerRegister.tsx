@@ -7,6 +7,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { UserPlus } from "lucide-react";
 import CustomCaptcha, { type CustomCaptchaRef } from "@/components/CustomCaptcha";
+import { z } from "zod";
+
+const brokerSchema = z.object({
+  full_name: z.string().trim().min(1, "Nome completo é obrigatório").max(100),
+  email: z.string().trim().email("E-mail inválido").max(255),
+  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+  phone: z.string().max(20).optional(),
+  creci: z.string().max(30).optional(),
+  bio: z.string().max(1000).optional(),
+  manager_name: z.string().trim().min(1, "Nome do gerente é obrigatório").max(100),
+  company_name: z.string().trim().min(1, "Nome da empresa é obrigatório").max(200),
+});
 
 const BrokerRegister = () => {
   const navigate = useNavigate();
@@ -33,8 +45,9 @@ const BrokerRegister = () => {
       toast.error("Por favor, confirme que você não é um robô");
       return;
     }
-    if (form.password.length < 6) {
-      toast.error("A senha deve ter pelo menos 6 caracteres");
+    const result = brokerSchema.safeParse(form);
+    if (!result.success) {
+      toast.error(result.error.errors[0].message);
       return;
     }
     setLoading(true);
