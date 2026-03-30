@@ -7,7 +7,7 @@ const TestimonialsSection = () => {
   const items = section.content.items || [];
 
   return (
-    <section className="section-padding">
+    <section id="testimonials" className="section-padding">
       <div className="container-main text-center">
         <h2 className="text-3xl font-heading font-bold text-primary mb-10 italic">{section.title}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">

@@ -9,6 +9,8 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ServicesSection from "@/components/ServicesSection";
 import FeaturedProperties from "@/components/FeaturedProperties";
 import WhereWeOperate from "@/components/WhereWeOperate";
+import NeighborhoodsSection from "@/components/NeighborhoodsSection";
+import ContactSection from "@/components/ContactSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatWidget from "@/components/ChatWidget";
 
@@ -37,6 +39,8 @@ const Index = () => {
       <TestimonialsSection />
       <ServicesSection />
       <FeaturedProperties />
+      <NeighborhoodsSection />
+      <ContactSection />
       <WhereWeOperate />
       <WhatsAppButton />
       <ChatWidget />
