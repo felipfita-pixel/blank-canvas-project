@@ -145,9 +145,7 @@ const PropertyDetail = () => {
   const nextImage = () => setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
   const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no imóvel "${property.title}" (${formatPrice(property.price)}). Podemos conversar?`);
-  const whatsappLink = broker?.phone
-    ? `https://wa.me/55${broker.phone.replace(/\D/g, "")}?text=${whatsappMessage}`
-    : `https://wa.me/?text=${whatsappMessage}`;
+  const whatsappLink = `https://wa.me/5521975316631?text=${whatsappMessage}`;
 
   const details = [
     { icon: Bed, label: "Quartos", value: property.bedrooms },
