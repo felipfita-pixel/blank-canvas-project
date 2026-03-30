@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { staticProperties } from "@/data/staticProperties";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -50,21 +51,47 @@ const Properties = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    const fetch = async () => {
+    const fetchProps = async () => {
       const { data } = await supabase
         .from("properties")
         .select("*")
         .eq("active", true)
         .order("featured", { ascending: false })
         .order("created_at", { ascending: false });
-      if (data) {
-        setProperties(data as Property[]);
-        const hoods = [...new Set(data.map((p: any) => p.neighborhood).filter(Boolean))] as string[];
-        setNeighborhoods(hoods.sort());
-      }
+
+      // Convert static properties to Property format
+      const staticAsProperties: Property[] = staticProperties.map((sp) => ({
+        id: sp.id,
+        title: sp.title,
+        description: sp.description,
+        price: sp.price,
+        property_type: sp.property_type,
+        transaction_type: sp.transaction_type,
+        neighborhood: sp.neighborhood,
+        city: sp.city,
+        bedrooms: sp.bedrooms,
+        bathrooms: sp.bathrooms,
+        parking_spots: sp.parking_spots,
+        area: sp.area,
+        images: sp.images,
+        featured: true,
+      }));
+
+      const dbProperties = (data as Property[]) || [];
+      // Merge: DB first, then static (skip duplicates by title)
+      const merged = [
+        ...dbProperties,
+        ...staticAsProperties.filter(
+          (sp) => !dbProperties.some((dp) => dp.title === sp.title)
+        ),
+      ];
+
+      setProperties(merged);
+      const hoods = [...new Set(merged.map((p) => p.neighborhood).filter(Boolean))] as string[];
+      setNeighborhoods(hoods.sort());
       setLoading(false);
     };
-    fetch();
+    fetchProps();
   }, []);
 
   const filtered = properties.filter((p) => {
