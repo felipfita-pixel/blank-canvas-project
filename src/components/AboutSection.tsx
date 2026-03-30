@@ -162,25 +162,22 @@ const AboutSection = () => {
             <h3 className="text-2xl font-heading font-bold text-foreground mb-1">{about.content.campaign_title || "Escolha sua Campanha"}</h3>
             <p className="text-sm text-muted-foreground mb-4">{about.content.campaign_subtitle || ""}</p>
             {(() => {
-              const staticProps: FeaturedProperty[] = [
-                {
-                  id: "static-be-in-rio",
-                  title: "Be in Rio Praia Copacabana",
-                  images: [
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-19.jpg",
-                  ],
-                  neighborhood: "Copacabana",
-                  price: 0,
-                  bedrooms: 2,
-                  bathrooms: 2,
-                  parking_spots: 0,
-                  area: 153,
-                  suites: 1,
-                },
+              const staticProps: FeaturedProperty[] = staticProperties.map(sp => ({
+                id: sp.id,
+                title: sp.title,
+                images: sp.images,
+                neighborhood: sp.neighborhood,
+                price: sp.price,
+                bedrooms: sp.bedrooms,
+                bathrooms: sp.bathrooms,
+                parking_spots: sp.parking_spots,
+                area: sp.area,
+                suites: null,
+              }));
+              const mergedProps = [
+                ...staticProps.filter(sp => !featuredProperties.some(fp => fp.title === sp.title)),
+                ...featuredProperties,
               ];
-              const mergedProps = featuredProperties.length > 0
-                ? [...staticProps.filter(sp => !featuredProperties.some(fp => fp.title === sp.title)), ...featuredProperties].slice(0, 6)
-                : staticProps;
               return mergedProps.length === 0 ? (
                 <p className="text-sm text-muted-foreground text-center py-12">Nenhum imóvel cadastrado no momento.</p>
               ) : (
