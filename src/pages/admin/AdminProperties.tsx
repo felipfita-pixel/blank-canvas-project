@@ -96,6 +96,20 @@ const AdminProperties = () => {
     setForm((prev) => ({ ...prev, images: prev.images.filter((_, i) => i !== index) }));
   };
 
+  const handleAddImageByUrl = () => {
+    const trimmed = imageUrl.trim();
+    if (!trimmed) { toast.error("Cole uma URL de imagem válida"); return; }
+    try {
+      new URL(trimmed);
+    } catch {
+      toast.error("URL inválida"); return;
+    }
+    setForm((prev) => ({ ...prev, images: [...prev.images, trimmed] }));
+    toast.success("Imagem adicionada por link!");
+    setImageUrl("");
+    setLinkDialogOpen(false);
+  };
+
   const handleSave = async () => {
     if (!form.title.trim()) { toast.error("Título é obrigatório"); return; }
 
