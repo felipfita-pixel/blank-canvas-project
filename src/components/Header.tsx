@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import ScheduleModal from "@/components/ScheduleModal";
 
-const navLinks = [
+const navLinks: { label: string; sectionId?: string; href?: string }[] = [
   { label: "Apresentação", sectionId: "about" },
   { label: "Bairros", sectionId: "neighborhoods" },
   { label: "Estilo de Vida", sectionId: "lifestyle" },
