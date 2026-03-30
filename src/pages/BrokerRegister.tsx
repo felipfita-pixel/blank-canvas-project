@@ -48,6 +48,10 @@ const BrokerRegister = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!termsAccepted) {
+      toast.error("Você deve aceitar o Termo de Uso para se cadastrar.");
+      return;
+    }
     if (!captchaVerified) {
       toast.error("Por favor, confirme que você não é um robô");
       return;
