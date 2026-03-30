@@ -115,7 +115,7 @@ const BrokerRegister = () => {
     }
 
     setLoading(false);
-    toast.success("Cadastro realizado! Verifique seu e-mail e aguarde a aprovação do administrador.");
+    toast.success("Cadastro realizado com sucesso! Aguarde a aprovação do administrador.");
     navigate("/login");
   };
 
