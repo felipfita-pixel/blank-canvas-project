@@ -107,24 +107,29 @@ const BrokerRegister = () => {
         </div>
 
         <form onSubmit={handleRegister} className="bg-card rounded-2xl p-8 shadow-2xl space-y-4">
-          <div>
-            <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-              Nome Completo do Corretor *
-            </label>
-            <Input value={form.full_name} onChange={(e) => update("full_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome completo do corretor" />
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-                Nome do Gerente *
-              </label>
-              <Input value={form.manager_name} onChange={(e) => update("manager_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome do seu gerente" />
+          <div className="rounded-xl border border-border/60 bg-muted/20 p-4 space-y-4">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+              Dados obrigatórios para aprovação
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                  Nome Completo do Corretor *
+                </label>
+                <Input value={form.full_name} onChange={(e) => update("full_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome completo do corretor" />
+              </div>
+              <div>
+                <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                  Nome do Gerente *
+                </label>
+                <Input value={form.manager_name} onChange={(e) => update("manager_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome do gerente responsável" />
+              </div>
             </div>
             <div>
               <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-                Empresa / Imobiliária *
+                Empresa que o Corretor Representa *
               </label>
-              <Input value={form.company_name} onChange={(e) => update("company_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome da empresa que representa" />
+              <Input value={form.company_name} onChange={(e) => update("company_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome da empresa / imobiliária" />
             </div>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
