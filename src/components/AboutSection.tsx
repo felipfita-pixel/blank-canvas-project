@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { staticProperties } from "@/data/staticProperties";
 import { Button } from "@/components/ui/button";
-import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize } from "lucide-react";
+import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize, Search, SlidersHorizontal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { supabase } from "@/integrations/supabase/client";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import bairroLeblon from "@/assets/bairro-leblon.jpg";
 import bairroBarra from "@/assets/bairro-barra.jpg";
 import bairroBotafogo from "@/assets/bairro-botafogo.jpg";
