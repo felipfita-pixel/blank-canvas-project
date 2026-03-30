@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Users, Phone, MessageCircle, User, Home } from "lucide-react";
+import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
 import { useSiteContent } from "@/hooks/useSiteContent";
@@ -82,6 +82,11 @@ interface FeaturedProperty {
   images: string[] | null;
   neighborhood: string | null;
   price: number;
+  bedrooms?: number | null;
+  bathrooms?: number | null;
+  parking_spots?: number | null;
+  area?: number | null;
+  suites?: number | null;
 }
 
 const AboutSection = () => {
@@ -105,7 +110,7 @@ const AboutSection = () => {
     const fetchProperties = async () => {
       const { data } = await supabase
         .from("properties")
-        .select("id, title, images, neighborhood, price")
+        .select("id, title, images, neighborhood, price, bedrooms, bathrooms, parking_spots, area, suites")
         .eq("active", true)
         .order("created_at", { ascending: false })
         .limit(6);
@@ -162,28 +167,14 @@ const AboutSection = () => {
                   title: "Be in Rio Praia Copacabana",
                   images: [
                     "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-19.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-33-768x425.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-34-768x499.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-35-768x499.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-36-768x420.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-37-768x499.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-38-768x499.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-20-768x499.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-21-768x306.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-22-768x499.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-23-768x499.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-24.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-25-768x577.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-26-768x178.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-27-768x383.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-28-768x499.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-29-768x577.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-30-768x218.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-31-768x214.jpg",
-                    "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-32-768x616.jpg",
                   ],
                   neighborhood: "Copacabana",
                   price: 0,
+                  bedrooms: 2,
+                  bathrooms: 2,
+                  parking_spots: 0,
+                  area: 153,
+                  suites: 1,
                 },
               ];
               const mergedProps = featuredProperties.length > 0
@@ -202,28 +193,49 @@ const AboutSection = () => {
                     return (
                       <div
                         key={prop.id}
-                        className="relative rounded-lg overflow-hidden aspect-[4/3] group cursor-pointer shadow-sm"
-                        onClick={() => navigate(isStatic ? `/imovel/${prop.id}` : `/imovel/${prop.id}`)}
+                        className="rounded-lg overflow-hidden group cursor-pointer shadow-sm bg-card border border-border"
+                        onClick={() => navigate(`/imovel/${prop.id}`)}
                       >
-                        <img
-                          src={image}
-                          alt={prop.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-navy-dark/30 to-transparent" />
-                        <div className="absolute bottom-2 left-2 right-2">
-                          <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading line-clamp-2">{prop.title}</span>
+                        <div className="relative aspect-[4/3] overflow-hidden">
+                          <img
+                            src={image}
+                            alt={prop.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/60 via-transparent to-transparent" />
+                          <div className="absolute bottom-2 left-2 right-2">
+                            <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading line-clamp-2">{prop.title}</span>
+                          </div>
+                          <button className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary transition-colors">
+                            <Home className="w-3 h-3" />
+                          </button>
+                        </div>
+                        <div className="p-2 space-y-1">
                           {prop.neighborhood && (
-                            <p className="text-primary-foreground/70 text-[10px] mt-0.5">{prop.neighborhood}</p>
+                            <p className="text-[10px] text-muted-foreground font-medium">{prop.neighborhood}</p>
                           )}
+                          <div className="flex items-center gap-2 flex-wrap text-[9px] text-muted-foreground">
+                            {prop.bedrooms != null && prop.bedrooms > 0 && (
+                              <span className="flex items-center gap-0.5"><Bed className="w-3 h-3" />{prop.bedrooms} Qts</span>
+                            )}
+                            {prop.suites != null && prop.suites > 0 && (
+                              <span className="flex items-center gap-0.5"><Bed className="w-3 h-3 text-secondary" />{prop.suites} Suíte</span>
+                            )}
+                            {prop.bathrooms != null && prop.bathrooms > 0 && (
+                              <span className="flex items-center gap-0.5"><Bath className="w-3 h-3" />{prop.bathrooms} Ban</span>
+                            )}
+                            {prop.parking_spots != null && prop.parking_spots > 0 && (
+                              <span className="flex items-center gap-0.5"><Car className="w-3 h-3" />{prop.parking_spots} Vaga</span>
+                            )}
+                            {prop.area != null && prop.area > 0 && (
+                              <span className="flex items-center gap-0.5"><Maximize className="w-3 h-3" />{prop.area}m²</span>
+                            )}
+                          </div>
                           {formattedPrice && (
-                            <p className="text-secondary font-bold text-xs mt-0.5">{formattedPrice}</p>
+                            <p className="text-secondary font-bold text-xs">{formattedPrice}</p>
                           )}
                         </div>
-                        <button className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary transition-colors">
-                          <Home className="w-3 h-3" />
-                        </button>
                       </div>
                     );
                   })}
