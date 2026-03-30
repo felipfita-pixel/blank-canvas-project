@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import ScheduleModal from "@/components/ScheduleModal";
 
-const navLinks = [
+const navLinks: { label: string; sectionId?: string; href?: string }[] = [
   { label: "Apresentação", sectionId: "about" },
   { label: "Bairros", sectionId: "neighborhoods" },
   { label: "Estilo de Vida", sectionId: "lifestyle" },
   { label: "Serviços", sectionId: "services" },
-  { label: "Catálogo", sectionId: "featured" },
+  { label: "Catálogo", href: "/imoveis" },
   { label: "Diferenciais", sectionId: "testimonials" },
   { label: "Contato", sectionId: "contact" },
 ];
@@ -63,16 +63,26 @@ const Header = () => {
           </Link>
 
           <nav className="hidden xl:flex items-center gap-0.5">
-            {navLinks.map((link) => (
-              <button
-                key={link.label}
-                type="button"
-                onClick={() => handleSectionNavigation(link.sectionId)}
-                className="relative text-[13px] text-primary-foreground/70 hover:text-primary-foreground px-3 py-2 rounded-lg hover:bg-primary-foreground/5 transition-all duration-300 uppercase tracking-wide font-body font-medium whitespace-nowrap"
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map((link) =>
+              link.href ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="relative text-[13px] text-primary-foreground/70 hover:text-primary-foreground px-3 py-2 rounded-lg hover:bg-primary-foreground/5 transition-all duration-300 uppercase tracking-wide font-body font-medium whitespace-nowrap"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => handleSectionNavigation(link.sectionId!)}
+                  className="relative text-[13px] text-primary-foreground/70 hover:text-primary-foreground px-3 py-2 rounded-lg hover:bg-primary-foreground/5 transition-all duration-300 uppercase tracking-wide font-body font-medium whitespace-nowrap"
+                >
+                  {link.label}
+                </button>
+              )
+            )}
           </nav>
 
           <div className="hidden xl:flex items-center gap-3 flex-shrink-0">
@@ -112,22 +122,39 @@ const Header = () => {
               className="xl:hidden bg-navy backdrop-blur-xl border-t border-primary-foreground/5 overflow-hidden"
             >
               <div className="px-4 py-5 space-y-1">
-                {navLinks.map((link, i) => (
-                  <motion.button
-                    key={link.label}
-                    type="button"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/5 py-2.5 px-3 rounded-lg transition-colors uppercase text-sm tracking-wide"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      handleSectionNavigation(link.sectionId);
-                    }}
-                  >
-                    {link.label}
-                  </motion.button>
-                ))}
+                {navLinks.map((link, i) =>
+                  link.href ? (
+                    <motion.div
+                      key={link.label}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                    >
+                      <Link
+                        to={link.href}
+                        className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/5 py-2.5 px-3 rounded-lg transition-colors uppercase text-sm tracking-wide"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.button
+                      key={link.label}
+                      type="button"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/5 py-2.5 px-3 rounded-lg transition-colors uppercase text-sm tracking-wide"
+                      onClick={() => {
+                        setMobileOpen(false);
+                        handleSectionNavigation(link.sectionId!);
+                      }}
+                    >
+                      {link.label}
+                    </motion.button>
+                  )
+                )}
                 <div className="pt-3 space-y-2">
                   <Link
                     to="/login"
