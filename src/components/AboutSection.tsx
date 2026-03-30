@@ -89,6 +89,8 @@ interface FeaturedProperty {
   parking_spots?: number | null;
   area?: number | null;
   suites?: number | null;
+  city?: string | null;
+  property_type?: string | null;
 }
 
 const AboutSection = () => {
