@@ -99,6 +99,10 @@ const AboutSection = () => {
   const [featuredProperties, setFeaturedProperties] = useState<FeaturedProperty[]>([]);
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [shuffledBots, setShuffledBots] = useState<BrokerBot[]>(() => shuffleArray(generateBotBrokers()));
+  const [filterCity, setFilterCity] = useState("all");
+  const [filterNeighborhood, setFilterNeighborhood] = useState("all");
+  const [filterType, setFilterType] = useState("all");
+  const [showMoreFilters, setShowMoreFilters] = useState(false);
 
   useEffect(() => {
     const fetchBrokers = async () => {
