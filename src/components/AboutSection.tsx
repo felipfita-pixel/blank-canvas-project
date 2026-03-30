@@ -82,6 +82,11 @@ interface FeaturedProperty {
   images: string[] | null;
   neighborhood: string | null;
   price: number;
+  bedrooms?: number | null;
+  bathrooms?: number | null;
+  parking_spots?: number | null;
+  area?: number | null;
+  suites?: number | null;
 }
 
 const AboutSection = () => {
