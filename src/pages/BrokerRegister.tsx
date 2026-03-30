@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { UserPlus } from "lucide-react";
 import CustomCaptcha, { type CustomCaptchaRef } from "@/components/CustomCaptcha";
