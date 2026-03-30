@@ -241,11 +241,9 @@ const AboutSection = () => {
               );
             })()}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
-              <a href="https://consultor.patrimovel.com.br/felipefita/imoveis/Venda/Tipo/Lan%C3%A7amento/Bairro/0/busca.aspx" target="_blank" rel="noopener noreferrer">
-                <Button className="bg-emerald-600 text-primary-foreground hover:bg-emerald-700 rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
-                  <Home className="w-4 h-4 mr-2" />Todos os Imóveis
-                </Button>
-              </a>
+              <Button onClick={() => navigate("/imoveis")} className="bg-emerald-600 text-primary-foreground hover:bg-emerald-700 rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
+                <Home className="w-4 h-4 mr-2" />Todos os Imóveis
+              </Button>
               <Button onClick={() => setScheduleOpen(true)} className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
                 <MessageCircle className="w-4 h-4 mr-2" />Agendar Consultoria
               </Button>
