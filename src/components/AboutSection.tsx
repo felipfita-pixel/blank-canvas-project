@@ -189,14 +189,14 @@ const AboutSection = () => {
               ];
 
               // Extract unique cities & neighborhoods for filters
-              const cities = [...new Set(mergedProps.map(p => (p as any).city).filter(Boolean))].sort() as string[];
+              const cities = [...new Set(mergedProps.map(p => p.city).filter(Boolean))].sort() as string[];
               const hoods = [...new Set(mergedProps.map(p => p.neighborhood).filter(Boolean))].sort() as string[];
 
               // Apply filters
               const filteredProps = mergedProps.filter(p => {
-                if (filterCity !== "all" && (p as any).city !== filterCity) return false;
+                if (filterCity !== "all" && p.city !== filterCity) return false;
                 if (filterNeighborhood !== "all" && p.neighborhood !== filterNeighborhood) return false;
-                if (filterType !== "all" && (p as any).property_type !== filterType) return false;
+                if (filterType !== "all" && p.property_type !== filterType) return false;
                 return true;
               });
 
