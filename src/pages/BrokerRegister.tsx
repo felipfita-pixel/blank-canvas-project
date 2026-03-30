@@ -29,6 +29,7 @@ const BrokerRegister = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const captchaRef = useRef<CustomCaptchaRef>(null);
   const [form, setForm] = useState({
     full_name: "",
