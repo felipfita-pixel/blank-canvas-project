@@ -12,7 +12,7 @@ import { z } from "zod";
 const brokerSchema = z.object({
   full_name: z.string().trim().min(1, "Nome completo é obrigatório").max(100),
   email: z.string().trim().email("E-mail inválido").max(255),
-  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres").regex(/[a-zA-Z]/, "A senha deve conter pelo menos uma letra"),
   confirmPassword: z.string().min(1, "Confirme sua senha"),
   phone: z.string().max(20).optional(),
   creci: z.string().max(30).optional(),
@@ -148,7 +148,7 @@ const BrokerRegister = () => {
               <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
                 Senha *
               </label>
-              <Input type="password" value={form.password} onChange={(e) => update("password", e.target.value)} required className="h-11 rounded-lg" placeholder="Mínimo 6 caracteres" />
+              <Input type="password" value={form.password} onChange={(e) => update("password", e.target.value)} required className="h-11 rounded-lg" placeholder="Mín. 6 caracteres com letra" />
             </div>
             <div>
               <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
