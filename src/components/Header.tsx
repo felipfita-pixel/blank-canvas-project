@@ -1,30 +1,42 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, User, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import ScheduleModal from "@/components/ScheduleModal";
 
 const navLinks = [
-  { label: "Apresentação", href: "#about" },
-  { label: "Bairros", href: "#neighborhoods" },
-  { label: "Estilo de Vida", href: "#lifestyle" },
-  { label: "Serviços", href: "#services" },
-  { label: "Catálogo", href: "#featured" },
-  { label: "Diferenciais", href: "#testimonials" },
-  { label: "Contato", href: "#contact" },
+  { label: "Apresentação", sectionId: "about" },
+  { label: "Bairros", sectionId: "neighborhoods" },
+  { label: "Estilo de Vida", sectionId: "lifestyle" },
+  { label: "Serviços", sectionId: "services" },
+  { label: "Catálogo", sectionId: "featured" },
+  { label: "Diferenciais", sectionId: "testimonials" },
+  { label: "Contato", sectionId: "contact" },
 ];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scheduleOpen, setScheduleOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const handleSectionNavigation = (sectionId: string) => {
+    if (location.pathname === "/") {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    sessionStorage.setItem("pendingScrollSection", sectionId);
+    navigate("/");
+  };
 
   return (
     <>
@@ -39,7 +51,7 @@ const Header = () => {
         }`}
       >
         <div className="container-main flex items-center justify-between px-3 sm:px-6 lg:px-8 h-14 sm:h-16">
-          <a href="#" className="flex items-center gap-3 group flex-shrink-0">
+          <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
             <div className="flex flex-col leading-none">
               <span className="font-heading text-xs sm:text-sm font-bold text-primary-foreground tracking-wide">
                 CORRETORES <span className="text-secondary">ASSOCIADOS</span>
@@ -48,17 +60,18 @@ const Header = () => {
                 Consultoria Imobiliária FF
               </span>
             </div>
-          </a>
+          </Link>
 
           <nav className="hidden xl:flex items-center gap-0.5">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.label}
-                href={link.href}
+                type="button"
+                onClick={() => handleSectionNavigation(link.sectionId)}
                 className="relative text-[13px] text-primary-foreground/70 hover:text-primary-foreground px-3 py-2 rounded-lg hover:bg-primary-foreground/5 transition-all duration-300 uppercase tracking-wide font-body font-medium whitespace-nowrap"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -81,6 +94,7 @@ const Header = () => {
           </div>
 
           <button
+            type="button"
             className="xl:hidden w-9 h-9 rounded-lg bg-primary-foreground/5 flex items-center justify-center text-primary-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
@@ -99,17 +113,20 @@ const Header = () => {
             >
               <div className="px-4 py-5 space-y-1">
                 {navLinks.map((link, i) => (
-                  <motion.a
+                  <motion.button
                     key={link.label}
-                    href={link.href}
+                    type="button"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="block text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/5 py-2.5 px-3 rounded-lg transition-colors uppercase text-sm tracking-wide"
-                    onClick={() => setMobileOpen(false)}
+                    className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/5 py-2.5 px-3 rounded-lg transition-colors uppercase text-sm tracking-wide"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      handleSectionNavigation(link.sectionId);
+                    }}
                   >
                     {link.label}
-                  </motion.a>
+                  </motion.button>
                 ))}
                 <div className="pt-3 space-y-2">
                   <Link
@@ -120,7 +137,10 @@ const Header = () => {
                     <span className="text-sm uppercase tracking-wide">Painel</span>
                   </Link>
                   <Button
-                    onClick={() => { setMobileOpen(false); setScheduleOpen(true); }}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setScheduleOpen(true);
+                    }}
                     className="w-full bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-lg shadow-md uppercase tracking-wide"
                   >
                     <CalendarCheck className="w-4 h-4 mr-2" />

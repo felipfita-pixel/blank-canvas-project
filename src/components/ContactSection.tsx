@@ -48,7 +48,6 @@ const ContactSection = () => {
       toast.error("Erro ao enviar mensagem");
       return;
     }
-    // Send email notification
     supabase.functions.invoke("send-transactional-email", {
       body: {
         templateName: "new-contact-notification",
@@ -98,23 +97,23 @@ const ContactSection = () => {
               </div>
               <div className="mt-10">
                 <div className="border-t border-primary-foreground/10 pt-6 flex gap-3">
-                  {c.instagram && (
-                    <a href={c.instagram} target="_blank" rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors">
+                  {c.instagram ? (
+                    <a href={c.instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors">
                       <Instagram className="w-4 h-4" />
                     </a>
+                  ) : (
+                    <button type="button" disabled className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/40 cursor-not-allowed">
+                      <Instagram className="w-4 h-4" />
+                    </button>
                   )}
-                  {c.facebook && (
-                    <a href={c.facebook} target="_blank" rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors">
+                  {c.facebook ? (
+                    <a href={c.facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors">
                       <Facebook className="w-4 h-4" />
                     </a>
-                  )}
-                  {!c.instagram && !c.facebook && (
-                    <>
-                      <a href="#" className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors"><Instagram className="w-4 h-4" /></a>
-                      <a href="#" className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors"><Facebook className="w-4 h-4" /></a>
-                    </>
+                  ) : (
+                    <button type="button" disabled className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/40 cursor-not-allowed">
+                      <Facebook className="w-4 h-4" />
+                    </button>
                   )}
                 </div>
               </div>
