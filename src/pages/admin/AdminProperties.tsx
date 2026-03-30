@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, Upload, X, ImageIcon } from "lucide-react";
+import { Plus, Pencil, Trash2, Upload, X, ImageIcon, Link } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface Property {
@@ -39,6 +39,8 @@ const AdminProperties = () => {
   const [editing, setEditing] = useState<Property | null>(null);
   const [form, setForm] = useState(emptyProperty);
   const [uploading, setUploading] = useState(false);
+  const [linkDialogOpen, setLinkDialogOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const fetchProperties = async () => {
     setLoading(true);
@@ -92,6 +94,20 @@ const AdminProperties = () => {
 
   const removeImage = (index: number) => {
     setForm((prev) => ({ ...prev, images: prev.images.filter((_, i) => i !== index) }));
+  };
+
+  const handleAddImageByUrl = () => {
+    const trimmed = imageUrl.trim();
+    if (!trimmed) { toast.error("Cole uma URL de imagem válida"); return; }
+    try {
+      new URL(trimmed);
+    } catch {
+      toast.error("URL inválida"); return;
+    }
+    setForm((prev) => ({ ...prev, images: [...prev.images, trimmed] }));
+    toast.success("Imagem adicionada por link!");
+    setImageUrl("");
+    setLinkDialogOpen(false);
   };
 
   const handleSave = async () => {
@@ -263,20 +279,43 @@ const AdminProperties = () => {
                   ))}
                 </div>
               )}
-              <label className="flex items-center justify-center gap-2 border-2 border-dashed border-border rounded-lg p-4 cursor-pointer hover:border-primary/50 hover:bg-muted/30 transition-colors">
-                <Upload className="w-5 h-5 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">
-                  {uploading ? "Enviando..." : "Clique para adicionar imagens"}
-                </span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageUpload}
-                  disabled={uploading}
-                  className="hidden"
-                />
-              </label>
+              <div className="flex gap-2">
+                <label className="flex-1 flex items-center justify-center gap-2 border-2 border-dashed border-border rounded-lg p-4 cursor-pointer hover:border-primary/50 hover:bg-muted/30 transition-colors">
+                  <Upload className="w-5 h-5 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">
+                    {uploading ? "Enviando..." : "Upload de imagens"}
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleImageUpload}
+                    disabled={uploading}
+                    className="hidden"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setLinkDialogOpen(!linkDialogOpen)}
+                  className="flex items-center justify-center gap-2 border-2 border-dashed border-border rounded-lg p-4 hover:border-primary/50 hover:bg-muted/30 transition-colors"
+                >
+                  <Link className="w-5 h-5 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">Por Link</span>
+                </button>
+              </div>
+              {linkDialogOpen && (
+                <div className="flex gap-2 mt-2">
+                  <Input
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="Cole a URL da imagem aqui..."
+                    className="h-10 rounded-lg flex-1"
+                  />
+                  <Button type="button" onClick={handleAddImageByUrl} size="sm" className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-lg h-10 px-4">
+                    Adicionar
+                  </Button>
+                </div>
+              )}
             </div>
 
             <div className="flex items-center gap-6">
