@@ -39,6 +39,8 @@ const AdminProperties = () => {
   const [editing, setEditing] = useState<Property | null>(null);
   const [form, setForm] = useState(emptyProperty);
   const [uploading, setUploading] = useState(false);
+  const [linkDialogOpen, setLinkDialogOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const fetchProperties = async () => {
     setLoading(true);
