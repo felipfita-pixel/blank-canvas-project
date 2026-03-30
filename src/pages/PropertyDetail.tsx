@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -51,6 +51,7 @@ const propertyTypeLabels: Record<string, string> = {
 
 const PropertyDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [property, setProperty] = useState<Property | null>(null);
   const [broker, setBroker] = useState<Broker | null>(null);
   const [loading, setLoading] = useState(true);
@@ -135,9 +136,9 @@ const PropertyDetail = () => {
         {/* Gallery */}
         <div className="relative bg-primary/5">
           <div className="container-main py-4">
-            <Link to="/imoveis" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
+            <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
               <ArrowLeft className="w-4 h-4" /> Voltar
-            </Link>
+            </button>
           </div>
           <div className="relative aspect-[16/9] max-h-[500px] overflow-hidden">
             <img
