@@ -114,7 +114,7 @@ const AdminContent = () => {
     { key: "about", label: "ℹ️ Quem Somos / Campanhas" },
     { key: "cta_banner", label: "📢 Banner CTA" },
     { key: "lifestyle", label: "🏡 Estilo de Vida" },
-    { key: "neighborhoods_guide", label: "🗺️ Guia de Bairros" },
+    { key: "neighborhoods_guide", label: "🗺️ Guia de Lançamentos" },
     { key: "testimonials", label: "⭐ Depoimentos" },
     { key: "services", label: "🛎️ Serviços" },
     { key: "where_we_operate", label: "📍 Onde Atuamos" },
