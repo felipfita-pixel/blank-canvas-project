@@ -279,20 +279,43 @@ const AdminProperties = () => {
                   ))}
                 </div>
               )}
-              <label className="flex items-center justify-center gap-2 border-2 border-dashed border-border rounded-lg p-4 cursor-pointer hover:border-primary/50 hover:bg-muted/30 transition-colors">
-                <Upload className="w-5 h-5 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">
-                  {uploading ? "Enviando..." : "Clique para adicionar imagens"}
-                </span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageUpload}
-                  disabled={uploading}
-                  className="hidden"
-                />
-              </label>
+              <div className="flex gap-2">
+                <label className="flex-1 flex items-center justify-center gap-2 border-2 border-dashed border-border rounded-lg p-4 cursor-pointer hover:border-primary/50 hover:bg-muted/30 transition-colors">
+                  <Upload className="w-5 h-5 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">
+                    {uploading ? "Enviando..." : "Upload de imagens"}
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleImageUpload}
+                    disabled={uploading}
+                    className="hidden"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setLinkDialogOpen(!linkDialogOpen)}
+                  className="flex items-center justify-center gap-2 border-2 border-dashed border-border rounded-lg p-4 hover:border-primary/50 hover:bg-muted/30 transition-colors"
+                >
+                  <Link className="w-5 h-5 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">Por Link</span>
+                </button>
+              </div>
+              {linkDialogOpen && (
+                <div className="flex gap-2 mt-2">
+                  <Input
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="Cole a URL da imagem aqui..."
+                    className="h-10 rounded-lg flex-1"
+                  />
+                  <Button type="button" onClick={handleAddImageByUrl} size="sm" className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-lg h-10 px-4">
+                    Adicionar
+                  </Button>
+                </div>
+              )}
             </div>
 
             <div className="flex items-center gap-6">
