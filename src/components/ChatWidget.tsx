@@ -129,6 +129,7 @@ const ChatWidget = () => {
     <>
       {/* Floating chat button */}
       <motion.button
+        id="chat-trigger"
         ref={triggerRef}
         data-chat-widget-trigger
         initial={{ scale: 0 }}
