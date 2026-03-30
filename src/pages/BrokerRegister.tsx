@@ -157,12 +157,6 @@ const BrokerRegister = () => {
           </div>
           <div>
             <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-              CRECI
-            </label>
-            <Input value={form.creci} onChange={(e) => update("creci", e.target.value)} className="h-11 rounded-lg" placeholder="Número do CRECI" />
-          </div>
-          <div>
-            <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
               Sobre você
             </label>
             <Textarea value={form.bio} onChange={(e) => update("bio", e.target.value)} className="rounded-lg min-h-[80px]" placeholder="Conte um pouco sobre sua experiência..." />
