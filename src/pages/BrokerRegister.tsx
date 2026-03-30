@@ -45,8 +45,9 @@ const BrokerRegister = () => {
       toast.error("Por favor, confirme que você não é um robô");
       return;
     }
-    if (form.password.length < 6) {
-      toast.error("A senha deve ter pelo menos 6 caracteres");
+    const result = brokerSchema.safeParse(form);
+    if (!result.success) {
+      toast.error(result.error.errors[0].message);
       return;
     }
     setLoading(true);
