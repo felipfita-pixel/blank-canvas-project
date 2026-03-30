@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { staticProperties } from "@/data/staticProperties";
 import { Button } from "@/components/ui/button";
 import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize } from "lucide-react";
 import { useNavigate } from "react-router-dom";
