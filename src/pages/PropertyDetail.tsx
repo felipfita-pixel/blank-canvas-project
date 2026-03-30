@@ -136,9 +136,9 @@ const PropertyDetail = () => {
         {/* Gallery */}
         <div className="relative bg-primary/5">
           <div className="container-main py-4">
-            <Link to="/imoveis" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
+            <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
               <ArrowLeft className="w-4 h-4" /> Voltar
-            </Link>
+            </button>
           </div>
           <div className="relative aspect-[16/9] max-h-[500px] overflow-hidden">
             <img
