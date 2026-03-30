@@ -584,6 +584,19 @@ export type Database = {
           read_ct: number
         }[]
       }
+      register_broker: {
+        Args: {
+          p_bio?: string
+          p_company_name?: string
+          p_creci?: string
+          p_email: string
+          p_full_name: string
+          p_manager_name?: string
+          p_phone?: string
+          p_user_id: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "broker"
