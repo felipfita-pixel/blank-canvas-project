@@ -57,17 +57,32 @@ const BrokerRegister = () => {
     }
     setLoading(true);
 
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email: form.email.trim(),
-      password: form.password,
-      options: {
-        data: { full_name: form.full_name },
-        emailRedirectTo: window.location.origin,
-      },
-    });
+    let authData;
+    try {
+      const result = await supabase.auth.signUp({
+        email: form.email.trim(),
+        password: form.password,
+        options: {
+          data: { full_name: form.full_name },
+          emailRedirectTo: window.location.origin,
+        },
+      });
 
-    if (authError) {
-      toast.error("Erro no cadastro: " + authError.message);
+      if (result.error) {
+        const msg = result.error.message.toLowerCase();
+        if (msg.includes("captcha") || msg.includes("security")) {
+          toast.error("Erro de verificação de segurança. Tente novamente.");
+        } else {
+          toast.error("Erro no cadastro: " + result.error.message);
+        }
+        setLoading(false);
+        captchaRef.current?.reset();
+        setCaptchaVerified(false);
+        return;
+      }
+      authData = result.data;
+    } catch (err: any) {
+      toast.error("Erro inesperado no cadastro. Tente novamente.");
       setLoading(false);
       captchaRef.current?.reset();
       setCaptchaVerified(false);
