@@ -2423,6 +2423,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=36&img=23008&wd=800&ht=600&m=crop"],
   },
   {
@@ -2439,6 +2440,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=22&img=17055&wd=800&ht=600&m=crop"],
   },
   // ========== PAGE 5 (Bairro/5) ==========
@@ -2456,6 +2458,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=2&img=17554&wd=800&ht=600&m=crop"],
   },
   {
@@ -2472,6 +2475,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=125&img=20384&wd=800&ht=600&m=crop"],
   },
   // ========== PAGE 6 (Bairro/6) ==========
@@ -2489,6 +2493,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=62&img=18677&wd=800&ht=600&m=crop"],
   },
   {
@@ -2505,6 +2510,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=41&img=17941&wd=800&ht=600&m=crop"],
   },
   {
@@ -2521,6 +2527,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=104&img=19924&wd=800&ht=600&m=crop"],
   },
   {
@@ -2537,6 +2544,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=11&img=16559&wd=800&ht=600&m=crop"],
   },
   {
@@ -2553,6 +2561,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=42&img=18008&wd=800&ht=600&m=crop"],
   },
   {
@@ -2569,6 +2578,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=103&img=19901&wd=800&ht=600&m=crop"],
   },
   {
@@ -2585,6 +2595,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=7&img=16507&wd=800&ht=600&m=crop"],
   },
   {
@@ -2601,6 +2612,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=76&img=19037&wd=800&ht=600&m=crop"],
   },
   {
@@ -2617,6 +2629,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=60&img=18646&wd=800&ht=600&m=crop"],
   },
   // ========== PAGE 7 (Bairro/7) ==========
@@ -2634,6 +2647,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=59&img=18588&wd=800&ht=600&m=crop"],
   },
   {
@@ -2650,6 +2664,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=150&img=21184&wd=800&ht=600&m=crop"],
   },
   {
@@ -2666,6 +2681,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=65&img=18775&wd=800&ht=600&m=crop"],
   },
   {
@@ -2682,6 +2698,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=38&img=17844&wd=800&ht=600&m=crop"],
   },
   {
@@ -2698,6 +2715,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=1&img=23535&wd=800&ht=600&m=crop"],
   },
   {
@@ -2714,6 +2732,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=146&img=21104&wd=800&ht=600&m=crop"],
   },
   {
@@ -2730,6 +2749,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=83&img=19424&wd=800&ht=600&m=crop"],
   },
   {
@@ -2746,6 +2766,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=39&img=17878&wd=800&ht=600&m=crop"],
   },
   {
@@ -2762,6 +2783,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=9&img=16532&wd=800&ht=600&m=crop"],
   },
   // ========== PAGE 8 (Bairro/8) ==========
@@ -2779,6 +2801,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=33&img=17658&wd=800&ht=600&m=crop"],
   },
   {
@@ -2795,6 +2818,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=123&img=20612&wd=800&ht=600&m=crop"],
   },
   {
@@ -2811,6 +2835,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=10&img=16553&wd=800&ht=600&m=crop"],
   },
   {
@@ -2827,6 +2852,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=79&img=19208&wd=800&ht=600&m=crop"],
   },
   {
@@ -2843,6 +2869,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=57&img=18504&wd=800&ht=600&m=crop"],
   },
   {
@@ -2859,6 +2886,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=13&img=16609&wd=800&ht=600&m=crop"],
   },
   {
@@ -2875,6 +2903,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=66&img=18814&wd=800&ht=600&m=crop"],
   },
   {
@@ -2891,6 +2920,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=4&img=16712&wd=800&ht=600&m=crop"],
   },
   {
@@ -2907,6 +2937,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=27&img=17456&wd=800&ht=600&m=crop"],
   },
   // ========== PAGE 9 (Bairro/9) ==========
@@ -2924,6 +2955,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=8&img=17549&wd=800&ht=600&m=crop"],
   },
   {
@@ -2940,6 +2972,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=14&img=16846&wd=800&ht=600&m=crop"],
   },
   {
@@ -2956,6 +2989,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=108&img=20032&wd=800&ht=600&m=crop"],
   },
   {
@@ -2972,6 +3006,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=81&img=19349&wd=800&ht=600&m=crop"],
   },
   {
@@ -2988,6 +3023,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=34&img=17694&wd=800&ht=600&m=crop"],
   },
   {
@@ -3004,6 +3040,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=45&img=18153&wd=800&ht=600&m=crop"],
   },
   {
@@ -3020,6 +3057,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=21&img=17053&wd=800&ht=600&m=crop"],
   },
   {
@@ -3036,6 +3074,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=19&img=17551&wd=800&ht=600&m=crop"],
   },
   {
@@ -3052,6 +3091,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=17&img=16727&wd=800&ht=600&m=crop"],
   },
   // ========== PAGE 10 (Bairro/10) ==========
@@ -3069,6 +3109,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=15&img=16659&wd=800&ht=600&m=crop"],
   },
   {
@@ -3085,6 +3126,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["https://consultor.patrimovel.com.br/felipefita/imoveis/Venda/Tipo/Lan%C3%A7amento/Bairro/10/busca.aspx"],
   },
   {
@@ -3101,6 +3143,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=455&img=28406&wd=800&ht=600&m=crop"],
   },
   {
@@ -3117,6 +3160,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=454&img=28406&wd=800&ht=600&m=crop"],
   },
   {
@@ -3133,6 +3177,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=452&img=28431&wd=800&ht=600&m=crop"],
   },
   {
@@ -3149,6 +3194,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=445&img=28152&wd=800&ht=600&m=crop"],
   },
   {
@@ -3165,6 +3211,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=443&img=28161&wd=800&ht=600&m=crop"],
   },
   {
@@ -3181,6 +3228,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=433&img=28011&wd=800&ht=600&m=crop"],
   },
   // ========== PAGE 11 (Bairro/11) ==========
@@ -3198,6 +3246,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=432&img=28264&wd=800&ht=600&m=crop"],
   },
   {
@@ -3214,6 +3263,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=430&img=27941&wd=800&ht=600&m=crop"],
   },
   {
@@ -3230,6 +3280,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=429&img=28049&wd=800&ht=600&m=crop"],
   },
   {
@@ -3246,6 +3297,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=425&img=27887&wd=800&ht=600&m=crop"],
   },
   {
@@ -3262,6 +3314,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=422&img=27831&wd=800&ht=600&m=crop"],
   },
   {
@@ -3278,6 +3331,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=418&img=27698&wd=800&ht=600&m=crop"],
   },
   {
@@ -3294,6 +3348,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=413&img=27598&wd=800&ht=600&m=crop"],
   },
   {
@@ -3310,6 +3365,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=412&img=27574&wd=800&ht=600&m=crop"],
   },
   {
@@ -3326,6 +3382,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     property_type: "Apartamento",
     transaction_type: "Venda",
+    parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=409&img=27639&wd=800&ht=600&m=crop"],
   },
 ];
