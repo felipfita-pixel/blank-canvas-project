@@ -45,6 +45,7 @@ const Index = () => {
       <WhereWeOperate />
       <WhatsAppButton />
       <ChatWidget />
+      <BrokerChatPanel />
     </div>
   );
 };
