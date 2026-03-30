@@ -13,11 +13,15 @@ const brokerSchema = z.object({
   full_name: z.string().trim().min(1, "Nome completo é obrigatório").max(100),
   email: z.string().trim().email("E-mail inválido").max(255),
   password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+  confirmPassword: z.string().min(1, "Confirme sua senha"),
   phone: z.string().max(20).optional(),
   creci: z.string().max(30).optional(),
   bio: z.string().max(1000).optional(),
   manager_name: z.string().trim().min(1, "Nome do gerente é obrigatório").max(100),
   company_name: z.string().trim().min(1, "Nome da empresa é obrigatório").max(200),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "As senhas não coincidem",
+  path: ["confirmPassword"],
 });
 
 const BrokerRegister = () => {
@@ -29,6 +33,7 @@ const BrokerRegister = () => {
     full_name: "",
     email: "",
     password: "",
+    confirmPassword: "",
     phone: "",
     creci: "",
     bio: "",
@@ -145,6 +150,12 @@ const BrokerRegister = () => {
               </label>
               <Input type="password" value={form.password} onChange={(e) => update("password", e.target.value)} required className="h-11 rounded-lg" placeholder="Mínimo 6 caracteres" />
             </div>
+            <div>
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                Confirmar Senha *
+              </label>
+              <Input type="password" value={form.confirmPassword} onChange={(e) => update("confirmPassword", e.target.value)} required className="h-11 rounded-lg" placeholder="Repita a senha" />
+            </div>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
@@ -178,6 +189,11 @@ const BrokerRegister = () => {
             Já tem conta?{" "}
             <Link to="/login" className="text-secondary hover:underline font-semibold">
               Fazer Login
+            </Link>
+          </p>
+          <p className="text-center text-sm text-muted-foreground">
+            <Link to="/forgot-password" className="text-secondary hover:underline font-semibold">
+              Esqueceu sua senha?
             </Link>
           </p>
         </form>
