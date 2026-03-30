@@ -17,10 +17,16 @@ const ScheduleModal = ({ open, onOpenChange }: ScheduleModalProps) => {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", whatsapp: "", message: "" });
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim()) {
       toast.error("Preencha nome e e-mail.");
+      return;
+    }
+    if (!emailRegex.test(form.email.trim())) {
+      toast.error("Informe um e-mail válido.");
       return;
     }
     setLoading(true);
