@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Users, Phone, MessageCircle, User, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { supabase } from "@/integrations/supabase/client";
@@ -75,11 +76,20 @@ const shuffleArray = <T,>(arr: T[]): T[] => {
   return shuffled;
 };
 
+interface FeaturedProperty {
+  id: string;
+  title: string;
+  images: string[] | null;
+  neighborhood: string | null;
+  price: number;
+}
+
 const AboutSection = () => {
   const { get } = useSiteContent();
   const about = get("about");
+  const navigate = useNavigate();
   const [realBrokers, setRealBrokers] = useState<RealBroker[]>([]);
-  const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
+  const [featuredProperties, setFeaturedProperties] = useState<FeaturedProperty[]>([]);
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [shuffledBots, setShuffledBots] = useState<BrokerBot[]>(() => shuffleArray(generateBotBrokers()));
 
@@ -92,34 +102,27 @@ const AboutSection = () => {
       if (data) setRealBrokers(data);
     };
 
-    const fetchNeighborhoods = async () => {
+    const fetchProperties = async () => {
       const { data } = await supabase
         .from("properties")
-        .select("neighborhood")
+        .select("id, title, images, neighborhood, price")
         .eq("active", true)
-        .neq("neighborhood", "")
-        .not("neighborhood", "is", null);
-      if (data) {
-        const unique = [...new Set(data.map((p) => p.neighborhood).filter(Boolean))] as string[];
-        setNeighborhoods(unique.sort());
-      }
+        .order("created_at", { ascending: false })
+        .limit(6);
+      if (data) setFeaturedProperties(data);
     };
 
     fetchBrokers();
-    fetchNeighborhoods();
+    fetchProperties();
   }, []);
 
   // Shuffle bot brokers every 30 minutes
   useEffect(() => {
     const interval = setInterval(() => {
       setShuffledBots(shuffleArray(generateBotBrokers()));
-    }, 30 * 60 * 1000); // 30 minutes
+    }, 30 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
-
-  const displayNeighborhoods = neighborhoods.length > 0
-    ? neighborhoods.map((n) => ({ name: n, image: "" }))
-    : (about.content.neighborhoods || []);
 
   // Real brokers always on top, then shuffled bots
   const allBrokersList: BrokerBot[] = [
@@ -152,42 +155,43 @@ const AboutSection = () => {
 
             <h3 className="text-2xl font-heading font-bold text-foreground mb-1">{about.content.campaign_title || "Escolha sua Campanha"}</h3>
             <p className="text-sm text-muted-foreground mb-4">{about.content.campaign_subtitle || ""}</p>
-            {displayNeighborhoods.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-12">Nenhum bairro cadastrado no momento.</p>
+            {featuredProperties.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-12">Nenhum imóvel cadastrado no momento.</p>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {displayNeighborhoods.map((n: any, i: number) => (
-                  <div key={i} className="relative rounded-lg overflow-hidden aspect-[4/3] group cursor-pointer shadow-sm"
-                    onClick={() => {
-                      const chatBtn = document.querySelector('[data-chat-widget-trigger]') as HTMLButtonElement;
-                      if (chatBtn) {
-                        const availableBroker = realBrokers[i % Math.max(realBrokers.length, 1)];
-                        if (availableBroker) {
-                          chatBtn.setAttribute('data-broker-id', availableBroker.id);
-                          chatBtn.setAttribute('data-broker-name', availableBroker.full_name);
-                        } else {
-                          chatBtn.setAttribute('data-broker-id', '');
-                          chatBtn.setAttribute('data-broker-name', 'Administrador');
-                        }
-                        chatBtn.setAttribute('data-neighborhood', n.name);
-                        chatBtn.click();
-                      }
-                    }}
-                  >
-                    <img src={n.image || fallbackImages[i % fallbackImages.length]} alt={n.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-navy-dark/30 to-transparent" />
-                    <div className="absolute bottom-2 left-2">
-                      <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading">{n.name}</span>
-                      <div className="flex items-center gap-1 text-secondary text-[10px] font-semibold mt-0.5">
-                        <MessageCircle className="w-3 h-3" /> Falar com corretor
+                {featuredProperties.map((prop, i) => {
+                  const image = prop.images && prop.images.length > 0 ? prop.images[0] : fallbackImages[i % fallbackImages.length];
+                  const formattedPrice = prop.price > 0
+                    ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(prop.price)
+                    : null;
+                  return (
+                    <div
+                      key={prop.id}
+                      className="relative rounded-lg overflow-hidden aspect-[4/3] group cursor-pointer shadow-sm"
+                      onClick={() => navigate(`/imovel/${prop.id}`)}
+                    >
+                      <img
+                        src={image}
+                        alt={prop.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-navy-dark/30 to-transparent" />
+                      <div className="absolute bottom-2 left-2 right-2">
+                        <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading line-clamp-2">{prop.title}</span>
+                        {prop.neighborhood && (
+                          <p className="text-primary-foreground/70 text-[10px] mt-0.5">{prop.neighborhood}</p>
+                        )}
+                        {formattedPrice && (
+                          <p className="text-secondary font-bold text-xs mt-0.5">{formattedPrice}</p>
+                        )}
                       </div>
+                      <button className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary transition-colors">
+                        <Home className="w-3 h-3" />
+                      </button>
                     </div>
-                    <button className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary transition-colors">
-                      <MessageCircle className="w-3 h-3" />
-                    </button>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
