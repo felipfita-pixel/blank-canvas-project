@@ -76,11 +76,20 @@ const shuffleArray = <T,>(arr: T[]): T[] => {
   return shuffled;
 };
 
+interface FeaturedProperty {
+  id: string;
+  title: string;
+  images: string[] | null;
+  neighborhood: string | null;
+  price: number;
+}
+
 const AboutSection = () => {
   const { get } = useSiteContent();
   const about = get("about");
+  const navigate = useNavigate();
   const [realBrokers, setRealBrokers] = useState<RealBroker[]>([]);
-  const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
+  const [featuredProperties, setFeaturedProperties] = useState<FeaturedProperty[]>([]);
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [shuffledBots, setShuffledBots] = useState<BrokerBot[]>(() => shuffleArray(generateBotBrokers()));
 
@@ -93,34 +102,27 @@ const AboutSection = () => {
       if (data) setRealBrokers(data);
     };
 
-    const fetchNeighborhoods = async () => {
+    const fetchProperties = async () => {
       const { data } = await supabase
         .from("properties")
-        .select("neighborhood")
+        .select("id, title, images, neighborhood, price")
         .eq("active", true)
-        .neq("neighborhood", "")
-        .not("neighborhood", "is", null);
-      if (data) {
-        const unique = [...new Set(data.map((p) => p.neighborhood).filter(Boolean))] as string[];
-        setNeighborhoods(unique.sort());
-      }
+        .order("created_at", { ascending: false })
+        .limit(6);
+      if (data) setFeaturedProperties(data);
     };
 
     fetchBrokers();
-    fetchNeighborhoods();
+    fetchProperties();
   }, []);
 
   // Shuffle bot brokers every 30 minutes
   useEffect(() => {
     const interval = setInterval(() => {
       setShuffledBots(shuffleArray(generateBotBrokers()));
-    }, 30 * 60 * 1000); // 30 minutes
+    }, 30 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
-
-  const displayNeighborhoods = neighborhoods.length > 0
-    ? neighborhoods.map((n) => ({ name: n, image: "" }))
-    : (about.content.neighborhoods || []);
 
   // Real brokers always on top, then shuffled bots
   const allBrokersList: BrokerBot[] = [
