@@ -8,7 +8,7 @@ import bairroBarra from "@/assets/bairro-barra.jpg";
 
 const fallbackImages = [bairroLeblon, bairroBotafogo, bairroBarra];
 
-const WHATSAPP_ADMIN = "5521975316631";
+
 
 const NeighborhoodsSection = () => {
   const { get } = useSiteContent();
