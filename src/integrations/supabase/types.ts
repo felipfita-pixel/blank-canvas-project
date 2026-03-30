@@ -68,7 +68,11 @@ export type Database = {
       chat_messages: {
         Row: {
           broker_id: string | null
+          conversation_id: string | null
           created_at: string
+          file_name: string | null
+          file_type: string | null
+          file_url: string | null
           id: string
           is_from_client: boolean
           message: string
@@ -79,7 +83,11 @@ export type Database = {
         }
         Insert: {
           broker_id?: string | null
+          conversation_id?: string | null
           created_at?: string
+          file_name?: string | null
+          file_type?: string | null
+          file_url?: string | null
           id?: string
           is_from_client?: boolean
           message?: string
@@ -90,7 +98,11 @@ export type Database = {
         }
         Update: {
           broker_id?: string | null
+          conversation_id?: string | null
           created_at?: string
+          file_name?: string | null
+          file_type?: string | null
+          file_url?: string | null
           id?: string
           is_from_client?: boolean
           message?: string
