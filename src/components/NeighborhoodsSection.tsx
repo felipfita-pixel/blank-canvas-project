@@ -16,12 +16,16 @@ const NeighborhoodsSection = () => {
   const items = section.content.items || [];
 
   const handleCardClick = (item: any) => {
-    const name = item.name || "este lançamento";
+    const name = item.name || "";
     const desc = item.desc || "";
-    const message = encodeURIComponent(
-      `Olá, tenho interesse no lançamento *${name}*${desc ? ` (${desc})` : ""}. Gostaria de mais informações.`
-    );
-    window.open(`https://wa.me/${WHATSAPP_ADMIN}?text=${message}`, "_blank");
+    const trigger = document.getElementById("chat-trigger");
+    if (trigger) {
+      trigger.setAttribute("data-neighborhood", name);
+      trigger.setAttribute("data-broker-name", "");
+      trigger.setAttribute("data-broker-id", "");
+      trigger.setAttribute("data-prefill-message", `Olá, tenho interesse no lançamento ${name}${desc ? ` (${desc})` : ""}. Gostaria de mais informações.`);
+      trigger.click();
+    }
   };
 
   return (
