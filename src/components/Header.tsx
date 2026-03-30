@@ -122,22 +122,39 @@ const Header = () => {
               className="xl:hidden bg-navy backdrop-blur-xl border-t border-primary-foreground/5 overflow-hidden"
             >
               <div className="px-4 py-5 space-y-1">
-                {navLinks.map((link, i) => (
-                  <motion.button
-                    key={link.label}
-                    type="button"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/5 py-2.5 px-3 rounded-lg transition-colors uppercase text-sm tracking-wide"
-                    onClick={() => {
-                      setMobileOpen(false);
-                      handleSectionNavigation(link.sectionId);
-                    }}
-                  >
-                    {link.label}
-                  </motion.button>
-                ))}
+                {navLinks.map((link, i) =>
+                  link.href ? (
+                    <motion.div
+                      key={link.label}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                    >
+                      <Link
+                        to={link.href}
+                        className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/5 py-2.5 px-3 rounded-lg transition-colors uppercase text-sm tracking-wide"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.button
+                      key={link.label}
+                      type="button"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/5 py-2.5 px-3 rounded-lg transition-colors uppercase text-sm tracking-wide"
+                      onClick={() => {
+                        setMobileOpen(false);
+                        handleSectionNavigation(link.sectionId!);
+                      }}
+                    >
+                      {link.label}
+                    </motion.button>
+                  )
+                )}
                 <div className="pt-3 space-y-2">
                   <Link
                     to="/login"
