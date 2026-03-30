@@ -18,9 +18,15 @@ const ContactSection = () => {
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const captchaRef = useRef<CustomCaptchaRef>(null);
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleSubmit = async () => {
-    if (!formData.name || !formData.email) {
+    if (!formData.name.trim() || !formData.email.trim()) {
       toast.error("Preencha nome e e-mail");
+      return;
+    }
+    if (!emailRegex.test(formData.email.trim())) {
+      toast.error("Informe um e-mail válido");
       return;
     }
     if (!captchaVerified) {

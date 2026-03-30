@@ -44,10 +44,16 @@ const ChatWidget = () => {
     return () => trigger.removeEventListener("click", handleTriggerClick);
   }, []);
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleInfoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!info.name.trim() || !info.email.trim()) {
       toast.error("Preencha nome e e-mail.");
+      return;
+    }
+    if (!emailRegex.test(info.email.trim())) {
+      toast.error("Informe um e-mail válido.");
       return;
     }
     // Pre-fill message with neighborhood if available
