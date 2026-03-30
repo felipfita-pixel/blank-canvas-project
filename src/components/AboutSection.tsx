@@ -203,7 +203,7 @@ const AboutSection = () => {
                       <div
                         key={prop.id}
                         className="relative rounded-lg overflow-hidden aspect-[4/3] group cursor-pointer shadow-sm"
-                        onClick={() => !isStatic && navigate(`/imovel/${prop.id}`)}
+                        onClick={() => navigate(isStatic ? `/imovel/${prop.id}` : `/imovel/${prop.id}`)}
                       >
                         <img
                           src={image}
