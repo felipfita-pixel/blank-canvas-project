@@ -51,6 +51,7 @@ const propertyTypeLabels: Record<string, string> = {
 
 const PropertyDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [property, setProperty] = useState<Property | null>(null);
   const [broker, setBroker] = useState<Broker | null>(null);
   const [loading, setLoading] = useState(true);
