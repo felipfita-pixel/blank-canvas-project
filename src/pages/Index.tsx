@@ -13,6 +13,7 @@ import NeighborhoodsSection from "@/components/NeighborhoodsSection";
 import ContactSection from "@/components/ContactSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatWidget from "@/components/ChatWidget";
+import BrokerChatPanel from "@/components/BrokerChatPanel";
 
 const Index = () => {
   const location = useLocation();
