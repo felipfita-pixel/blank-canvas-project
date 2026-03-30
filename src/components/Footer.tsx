@@ -1,10 +1,23 @@
 import { Instagram, Facebook, MapPin, Phone, Mail } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
 const Footer = () => {
   const { get } = useSiteContent();
   const section = get("footer");
   const c = section.content;
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSectionNavigation = (sectionId: string) => {
+    if (location.pathname === "/") {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    sessionStorage.setItem("pendingScrollSection", sectionId);
+    navigate("/");
+  };
 
   return (
     <footer className="bg-primary">
@@ -18,23 +31,33 @@ const Footer = () => {
             <p className="text-primary-foreground/40 text-xs tracking-[0.2em] uppercase mb-4">{section.subtitle}</p>
             <p className="text-primary-foreground/60 text-sm leading-relaxed mb-6 max-w-sm">{c.description}</p>
             <div className="flex gap-3">
-              <a href={c.instagram || "#"} target="_blank" rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground hover:opacity-80 transition-opacity" aria-label="Instagram">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href={c.facebook || "#"} target="_blank" rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground hover:opacity-80 transition-opacity" aria-label="Facebook">
-                <Facebook className="w-5 h-5" />
-              </a>
+              {c.instagram ? (
+                <a href={c.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground hover:opacity-80 transition-opacity" aria-label="Instagram">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              ) : (
+                <button type="button" disabled className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-secondary-foreground/60 cursor-not-allowed" aria-label="Instagram indisponível">
+                  <Instagram className="w-5 h-5" />
+                </button>
+              )}
+              {c.facebook ? (
+                <a href={c.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground hover:opacity-80 transition-opacity" aria-label="Facebook">
+                  <Facebook className="w-5 h-5" />
+                </a>
+              ) : (
+                <button type="button" disabled className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-secondary-foreground/60 cursor-not-allowed" aria-label="Facebook indisponível">
+                  <Facebook className="w-5 h-5" />
+                </button>
+              )}
             </div>
           </div>
 
           <div>
             <h4 className="font-heading font-bold text-primary-foreground text-lg mb-5">Links Rápidos</h4>
             <ul className="space-y-3 text-sm text-primary-foreground/60">
-              <li><a href="#about" className="hover:text-secondary transition-colors">Apresentação</a></li>
-              <li><a href="#lifestyle" className="hover:text-secondary transition-colors">Ilha Pura</a></li>
-              <li><a href="#services" className="hover:text-secondary transition-colors">Serviços</a></li>
+              <li><button type="button" onClick={() => handleSectionNavigation("about")} className="hover:text-secondary transition-colors">Apresentação</button></li>
+              <li><button type="button" onClick={() => handleSectionNavigation("lifestyle")} className="hover:text-secondary transition-colors">Ilha Pura</button></li>
+              <li><button type="button" onClick={() => handleSectionNavigation("services")} className="hover:text-secondary transition-colors">Serviços</button></li>
             </ul>
           </div>
 
