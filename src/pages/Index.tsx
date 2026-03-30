@@ -22,7 +22,7 @@ const Index = () => {
       <AboutSection />
       <CtaBanner />
       <LifestyleSection />
-      <NeighborhoodsSection />
+      
       
       <TestimonialsSection />
       <ServicesSection />
