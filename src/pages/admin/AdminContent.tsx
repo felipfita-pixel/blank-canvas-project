@@ -219,29 +219,9 @@ const AdminContent = () => {
                     />
                   )}
 
-                  {/* Neighborhoods guide */}
+                  {/* Neighborhoods guide - imóveis vêm automaticamente do banco */}
                   {key === "neighborhoods_guide" && (
-                    <>
-                      <h4 className="font-bold text-sm text-foreground">Bairros</h4>
-                      {(sec.content.items || []).map((item: any, i: number) => (
-                        <div key={i} className="flex gap-3 items-start border border-border rounded-lg p-3">
-                          <ImageUpload
-                            label={`Imagem`}
-                            value={item.image || ""}
-                            onChange={(v) => updateContentArrayItem(key, "items", i, "image", v)}
-                            folder="neighborhoods"
-                          />
-                          <div className="flex-1 space-y-2">
-                            <Field label="Nome" value={item.name} onChange={(v) => updateContentArrayItem(key, "items", i, "name", v)} />
-                            <Field label="Descrição" value={item.desc} onChange={(v) => updateContentArrayItem(key, "items", i, "desc", v)} />
-                          </div>
-                          <Button variant="ghost" size="icon" className="text-destructive mt-5" onClick={() => removeContentArrayItem(key, "items", i)}><Trash2 className="w-4 h-4" /></Button>
-                        </div>
-                      ))}
-                      <Button variant="outline" size="sm" onClick={() => addContentArrayItem(key, "items", { name: "", desc: "", image: "" })}>
-                        <Plus className="w-3 h-3 mr-1" /> Bairro
-                      </Button>
-                    </>
+                    <p className="text-sm text-muted-foreground">Os imóveis desta seção são carregados automaticamente do cadastro de imóveis.</p>
                   )}
 
                   {/* Testimonials */}
