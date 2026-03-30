@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { UserPlus } from "lucide-react";
 import CustomCaptcha, { type CustomCaptchaRef } from "@/components/CustomCaptcha";
@@ -28,6 +29,7 @@ const BrokerRegister = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const captchaRef = useRef<CustomCaptchaRef>(null);
   const [form, setForm] = useState({
     full_name: "",
@@ -46,6 +48,10 @@ const BrokerRegister = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!termsAccepted) {
+      toast.error("Você deve aceitar o Termo de Uso para se cadastrar.");
+      return;
+    }
     if (!captchaVerified) {
       toast.error("Por favor, confirme que você não é um robô");
       return;
@@ -193,9 +199,35 @@ const BrokerRegister = () => {
             <Textarea value={form.bio} onChange={(e) => update("bio", e.target.value)} className="rounded-lg min-h-[80px]" placeholder="Conte um pouco sobre sua experiência..." />
           </div>
 
+          <div className="rounded-xl border border-border/60 bg-muted/10 p-4 space-y-3">
+            <p className="text-xs font-bold uppercase tracking-wider text-foreground">
+              Termo de Uso Simplificado (50/50)
+            </p>
+            <div className="text-xs text-muted-foreground space-y-2 leading-relaxed">
+              <p>Ao se cadastrar na plataforma, o <strong className="text-foreground">CORRETOR</strong> declara estar ciente e de acordo que:</p>
+              <ul className="list-disc list-inside space-y-1 ml-1">
+                <li>Toda negociação originada pelo site terá divisão de comissão de <strong className="text-foreground">50% para o corretor</strong> e <strong className="text-foreground">50% para o administrador</strong>;</li>
+                <li>O aceite é automático no momento do cadastro;</li>
+                <li>O não cumprimento das regras poderá resultar em exclusão da plataforma.</li>
+              </ul>
+              <p className="italic">E, por estarem de acordo, as partes aceitam o presente instrumento por meio eletrônico.</p>
+            </div>
+            <div className="flex items-start gap-2 pt-1">
+              <Checkbox
+                id="terms"
+                checked={termsAccepted}
+                onCheckedChange={(checked) => setTermsAccepted(checked === true)}
+                className="mt-0.5"
+              />
+              <label htmlFor="terms" className="text-xs text-foreground cursor-pointer leading-snug">
+                Li e aceito o Termo de Uso Simplificado (50/50) *
+              </label>
+            </div>
+          </div>
+
           <CustomCaptcha ref={captchaRef} onChange={setCaptchaVerified} />
 
-          <Button type="submit" disabled={loading || !captchaVerified} className="w-full bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-xl h-12 font-semibold text-base">
+          <Button type="submit" disabled={loading || !captchaVerified || !termsAccepted} className="w-full bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-xl h-12 font-semibold text-base">
             <UserPlus className="w-4 h-4 mr-2" />
             {loading ? "Cadastrando..." : "Solicitar Cadastro"}
           </Button>
