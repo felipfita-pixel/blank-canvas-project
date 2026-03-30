@@ -220,6 +220,7 @@ const Properties = () => {
 
       <Footer />
       <WhatsAppButton />
+      <ChatWidget />
     </div>
   );
 };
