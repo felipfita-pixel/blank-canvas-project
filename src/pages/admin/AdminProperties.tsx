@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, Upload, X, ImageIcon } from "lucide-react";
+import { Plus, Pencil, Trash2, Upload, X, ImageIcon, Link } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface Property {
