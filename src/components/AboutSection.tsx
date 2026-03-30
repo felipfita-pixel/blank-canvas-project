@@ -155,7 +155,21 @@ const AboutSection = () => {
 
             <h3 className="text-2xl font-heading font-bold text-foreground mb-1">{about.content.campaign_title || "Escolha sua Campanha"}</h3>
             <p className="text-sm text-muted-foreground mb-4">{about.content.campaign_subtitle || ""}</p>
-            {featuredProperties.length === 0 ? (
+            {(() => {
+              const staticProperties: FeaturedProperty[] = [
+                {
+                  id: "static-be-in-rio",
+                  title: "Be in Rio Praia Copacabana",
+                  images: ["https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-19.jpg"],
+                  neighborhood: "Copacabana",
+                  price: 0,
+                },
+              ];
+              const allProps = featuredProperties.length > 0 ? featuredProperties : staticProperties;
+              const mergedProps = featuredProperties.length > 0
+                ? [...staticProperties.filter(sp => !featuredProperties.some(fp => fp.title === sp.title)), ...featuredProperties].slice(0, 6)
+                : staticProperties;
+              return mergedProps.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-12">Nenhum imóvel cadastrado no momento.</p>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
