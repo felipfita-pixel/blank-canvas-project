@@ -118,7 +118,7 @@ const AboutSection = () => {
     const fetchProperties = async () => {
       const { data } = await supabase
         .from("properties")
-        .select("id, title, images, neighborhood, price, bedrooms, bathrooms, parking_spots, area, suites")
+        .select("id, title, images, neighborhood, price, bedrooms, bathrooms, parking_spots, area, suites, city, property_type")
         .eq("active", true)
         .order("created_at", { ascending: false })
         .limit(6);
