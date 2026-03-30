@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { getStaticProperty } from "@/data/staticProperties";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -58,8 +59,36 @@ const PropertyDetail = () => {
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
-    const fetch = async () => {
+    const fetchData = async () => {
       if (!id) return;
+
+      // Check static properties first
+      const staticProp = getStaticProperty(id);
+      if (staticProp) {
+        setProperty({
+          id: staticProp.id,
+          title: staticProp.title,
+          description: staticProp.description,
+          price: staticProp.price,
+          property_type: staticProp.property_type,
+          transaction_type: staticProp.transaction_type,
+          neighborhood: staticProp.neighborhood,
+          city: staticProp.city,
+          state: staticProp.state,
+          address: staticProp.address,
+          bedrooms: staticProp.bedrooms,
+          bathrooms: staticProp.bathrooms,
+          suites: null,
+          parking_spots: staticProp.parking_spots,
+          area: staticProp.area,
+          images: staticProp.images,
+          featured: true,
+          broker_id: null,
+        });
+        setLoading(false);
+        return;
+      }
+
       const { data } = await supabase
         .from("properties")
         .select("*")
@@ -80,7 +109,7 @@ const PropertyDetail = () => {
       }
       setLoading(false);
     };
-    fetch();
+    fetchData();
   }, [id]);
 
   if (loading) {
