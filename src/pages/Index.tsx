@@ -39,6 +39,8 @@ const Index = () => {
       <TestimonialsSection />
       <ServicesSection />
       <FeaturedProperties />
+      <NeighborhoodsSection />
+      <ContactSection />
       <WhereWeOperate />
       <WhatsAppButton />
       <ChatWidget />
