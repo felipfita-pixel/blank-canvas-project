@@ -96,16 +96,15 @@ const BrokerRegister = () => {
     }
 
     if (authData.user) {
-      const { error: brokerError } = await supabase.from("brokers").insert({
-        user_id: authData.user.id,
-        full_name: form.full_name,
-        email: form.email.trim(),
-        phone: form.phone,
-        creci: form.creci,
-        bio: form.bio,
-        manager_name: form.manager_name,
-        company_name: form.company_name,
-        status: "pending",
+      const { error: brokerError } = await supabase.rpc("register_broker", {
+        p_user_id: authData.user.id,
+        p_full_name: form.full_name,
+        p_email: form.email.trim(),
+        p_phone: form.phone,
+        p_creci: form.creci,
+        p_bio: form.bio,
+        p_manager_name: form.manager_name,
+        p_company_name: form.company_name,
       });
 
       if (brokerError) {
