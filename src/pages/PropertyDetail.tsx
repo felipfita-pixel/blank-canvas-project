@@ -310,6 +310,7 @@ const PropertyDetail = () => {
 
       <Footer />
       <WhatsAppButton />
+      <ChatWidget />
     </div>
   );
 };
