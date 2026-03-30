@@ -28,16 +28,19 @@ const ChatWidget = () => {
       const bid = trigger.getAttribute("data-broker-id") || "";
       const bname = trigger.getAttribute("data-broker-name") || "";
       const hood = trigger.getAttribute("data-neighborhood") || "";
+      const prefill = trigger.getAttribute("data-prefill-message") || "";
       
       setBrokerId(bid);
       setBrokerName(bname);
       setNeighborhood(hood);
+      if (prefill) setMessage(prefill);
       setOpen(true);
 
       // Clean up attributes
       trigger.removeAttribute("data-broker-id");
       trigger.removeAttribute("data-broker-name");
       trigger.removeAttribute("data-neighborhood");
+      trigger.removeAttribute("data-prefill-message");
     };
 
     trigger.addEventListener("click", handleTriggerClick);
