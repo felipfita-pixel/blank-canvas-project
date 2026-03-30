@@ -178,71 +178,124 @@ const AboutSection = () => {
                 parking_spots: sp.parking_spots,
                 area: sp.area,
                 suites: null,
+                city: sp.city,
+                property_type: sp.property_type,
               }));
               const mergedProps = [
                 ...staticProps.filter(sp => !featuredProperties.some(fp => fp.title === sp.title)),
                 ...featuredProperties,
               ];
-              return mergedProps.length === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-12">Nenhum imóvel cadastrado no momento.</p>
-              ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {mergedProps.map((prop, i) => {
-                    const image = prop.images && prop.images.length > 0 ? prop.images[0] : fallbackImages[i % fallbackImages.length];
-                    const formattedPrice = prop.price > 0
-                      ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(prop.price)
-                      : null;
-                    const isStatic = prop.id.startsWith("static-");
-                    return (
-                      <div
-                        key={prop.id}
-                        className="rounded-lg overflow-hidden group cursor-pointer shadow-sm bg-card border border-border"
-                        onClick={() => navigate(`/imovel/${prop.id}`)}
+
+              // Extract unique cities & neighborhoods for filters
+              const cities = [...new Set(mergedProps.map(p => (p as any).city).filter(Boolean))].sort() as string[];
+              const hoods = [...new Set(mergedProps.map(p => p.neighborhood).filter(Boolean))].sort() as string[];
+
+              // Apply filters
+              const filteredProps = mergedProps.filter(p => {
+                if (filterCity !== "all" && (p as any).city !== filterCity) return false;
+                if (filterNeighborhood !== "all" && p.neighborhood !== filterNeighborhood) return false;
+                if (filterType !== "all" && (p as any).property_type !== filterType) return false;
+                return true;
+              });
+
+              return (
+                <>
+                  {/* Filter Bar */}
+                  <div className="bg-card rounded-xl border border-border p-4 mb-4 shadow-sm">
+                    <h4 className="text-sm font-bold text-foreground mb-3">Resultado de Busca</h4>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <Select value={filterCity} onValueChange={setFilterCity}>
+                        <SelectTrigger className="w-[160px] bg-background"><SelectValue placeholder="Cidade" /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Todas as Cidades</SelectItem>
+                          {cities.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                      <Select value={filterNeighborhood} onValueChange={setFilterNeighborhood}>
+                        <SelectTrigger className="w-[160px] bg-background"><SelectValue placeholder="Bairro" /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Todos os Bairros</SelectItem>
+                          {hoods.map(n => <SelectItem key={n} value={n}>{n}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                      <Select value={filterType} onValueChange={setFilterType}>
+                        <SelectTrigger className="w-[160px] bg-background"><SelectValue placeholder="Tipo de Imóvel" /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Todos os Tipos</SelectItem>
+                          <SelectItem value="apartment">Apartamento</SelectItem>
+                          <SelectItem value="house">Casa</SelectItem>
+                          <SelectItem value="penthouse">Cobertura</SelectItem>
+                          <SelectItem value="commercial">Comercial</SelectItem>
+                          <SelectItem value="land">Terreno</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowMoreFilters(!showMoreFilters)}
+                        className="bg-foreground text-background hover:bg-foreground/90 font-semibold"
                       >
-                        <div className="relative aspect-[4/3] overflow-hidden">
-                          <img
-                            src={image}
-                            alt={prop.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/60 via-transparent to-transparent" />
-                          <div className="absolute bottom-2 left-2 right-2">
-                            <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading line-clamp-2">{prop.title}</span>
-                          </div>
-                          <button className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary transition-colors">
-                            <Home className="w-3 h-3" />
-                          </button>
-                        </div>
-                        <div className="p-2 space-y-1">
-                          {prop.neighborhood && (
-                            <p className="text-[10px] text-muted-foreground font-medium">{prop.neighborhood}</p>
-                          )}
-                          <div className="flex items-center gap-2 flex-wrap text-[9px] text-muted-foreground">
-                            {prop.bedrooms != null && prop.bedrooms > 0 && (
-                              <span className="flex items-center gap-0.5"><Bed className="w-3 h-3" />{prop.bedrooms} Qts</span>
-                            )}
-                            {prop.suites != null && prop.suites > 0 && (
-                              <span className="flex items-center gap-0.5"><Bed className="w-3 h-3 text-secondary" />{prop.suites} Suíte</span>
-                            )}
-                            {prop.bathrooms != null && prop.bathrooms > 0 && (
-                              <span className="flex items-center gap-0.5"><Bath className="w-3 h-3" />{prop.bathrooms} Ban</span>
-                            )}
-                            {prop.parking_spots != null && prop.parking_spots > 0 && (
-                              <span className="flex items-center gap-0.5"><Car className="w-3 h-3" />{prop.parking_spots} Vaga</span>
-                            )}
-                            {prop.area != null && prop.area > 0 && (
-                              <span className="flex items-center gap-0.5"><Maximize className="w-3 h-3" />{prop.area}m²</span>
-                            )}
-                          </div>
-                          {formattedPrice && (
-                            <p className="text-secondary font-bold text-xs">{formattedPrice}</p>
-                          )}
-                        </div>
+                        <SlidersHorizontal className="w-4 h-4 mr-1" /> Mais Filtros
+                      </Button>
+                      <Button
+                        size="sm"
+                        onClick={() => { setFilterCity("all"); setFilterNeighborhood("all"); setFilterType("all"); }}
+                        className="bg-foreground text-background hover:bg-foreground/90 font-semibold"
+                      >
+                        <Search className="w-4 h-4 mr-1" /> Pesquisar
+                      </Button>
+                    </div>
+                    {showMoreFilters && (
+                      <div className="flex flex-wrap items-center gap-3 mt-3 pt-3 border-t border-border">
+                        <p className="text-xs text-muted-foreground">Filtros ativos: {filterCity !== "all" ? filterCity : ""} {filterNeighborhood !== "all" ? filterNeighborhood : ""} {filterType !== "all" ? filterType : ""} {filterCity === "all" && filterNeighborhood === "all" && filterType === "all" ? "Nenhum" : ""}</p>
                       </div>
-                    );
-                  })}
-                </div>
+                    )}
+                  </div>
+
+                  <p className="text-xs text-muted-foreground mb-3">{filteredProps.length} imóvel(is) encontrado(s)</p>
+
+                  {filteredProps.length === 0 ? (
+                    <p className="text-sm text-muted-foreground text-center py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
+                  ) : (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {filteredProps.map((prop, i) => {
+                        const image = prop.images && prop.images.length > 0 ? prop.images[0] : fallbackImages[i % fallbackImages.length];
+                        const formattedPrice = prop.price > 0
+                          ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(prop.price)
+                          : null;
+                        return (
+                          <div
+                            key={prop.id}
+                            className="rounded-lg overflow-hidden group cursor-pointer shadow-sm bg-card border border-border"
+                            onClick={() => navigate(`/imovel/${prop.id}`)}
+                          >
+                            <div className="relative aspect-[4/3] overflow-hidden">
+                              <img src={image} alt={prop.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                              <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/60 via-transparent to-transparent" />
+                              <div className="absolute bottom-2 left-2 right-2">
+                                <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading line-clamp-2">{prop.title}</span>
+                              </div>
+                              <button className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary transition-colors">
+                                <Home className="w-3 h-3" />
+                              </button>
+                            </div>
+                            <div className="p-2 space-y-1">
+                              {prop.neighborhood && <p className="text-[10px] text-muted-foreground font-medium">{prop.neighborhood}</p>}
+                              <div className="flex items-center gap-2 flex-wrap text-[9px] text-muted-foreground">
+                                {prop.bedrooms != null && prop.bedrooms > 0 && <span className="flex items-center gap-0.5"><Bed className="w-3 h-3" />{prop.bedrooms} Qts</span>}
+                                {prop.suites != null && prop.suites > 0 && <span className="flex items-center gap-0.5"><Bed className="w-3 h-3 text-secondary" />{prop.suites} Suíte</span>}
+                                {prop.bathrooms != null && prop.bathrooms > 0 && <span className="flex items-center gap-0.5"><Bath className="w-3 h-3" />{prop.bathrooms} Ban</span>}
+                                {prop.parking_spots != null && prop.parking_spots > 0 && <span className="flex items-center gap-0.5"><Car className="w-3 h-3" />{prop.parking_spots} Vaga</span>}
+                                {prop.area != null && prop.area > 0 && <span className="flex items-center gap-0.5"><Maximize className="w-3 h-3" />{prop.area}m²</span>}
+                              </div>
+                              {formattedPrice && <p className="text-secondary font-bold text-xs">{formattedPrice}</p>}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </>
               );
             })()}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
