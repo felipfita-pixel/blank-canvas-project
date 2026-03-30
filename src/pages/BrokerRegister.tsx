@@ -107,46 +107,52 @@ const BrokerRegister = () => {
         </div>
 
         <form onSubmit={handleRegister} className="bg-card rounded-2xl p-8 shadow-2xl space-y-4">
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-                Nome Completo *
-              </label>
-              <Input value={form.full_name} onChange={(e) => update("full_name", e.target.value)} required className="h-11 rounded-lg" placeholder="João Silva" />
-            </div>
-            <div>
-              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-                E-mail *
-              </label>
-              <Input type="email" value={form.email} onChange={(e) => update("email", e.target.value)} required className="h-11 rounded-lg" placeholder="joao@email.com" />
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-                Senha *
-              </label>
-              <Input type="password" value={form.password} onChange={(e) => update("password", e.target.value)} required className="h-11 rounded-lg" placeholder="Mínimo 6 caracteres" />
-            </div>
-            <div>
-              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-                Telefone
-              </label>
-              <Input value={form.phone} onChange={(e) => update("phone", e.target.value)} className="h-11 rounded-lg" placeholder="(21) 99999-9999" />
-            </div>
+          <div>
+            <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+              Nome Completo do Corretor *
+            </label>
+            <Input value={form.full_name} onChange={(e) => update("full_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome completo do corretor" />
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
               <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
                 Nome do Gerente *
               </label>
-              <Input value={form.manager_name} onChange={(e) => update("manager_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome do gerente" />
+              <Input value={form.manager_name} onChange={(e) => update("manager_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome do seu gerente" />
             </div>
             <div>
               <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
-                Empresa *
+                Empresa / Imobiliária *
               </label>
-              <Input value={form.company_name} onChange={(e) => update("company_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome da empresa" />
+              <Input value={form.company_name} onChange={(e) => update("company_name", e.target.value)} required className="h-11 rounded-lg" placeholder="Nome da empresa que representa" />
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                E-mail *
+              </label>
+              <Input type="email" value={form.email} onChange={(e) => update("email", e.target.value)} required className="h-11 rounded-lg" placeholder="joao@email.com" />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                Senha *
+              </label>
+              <Input type="password" value={form.password} onChange={(e) => update("password", e.target.value)} required className="h-11 rounded-lg" placeholder="Mínimo 6 caracteres" />
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                Telefone
+              </label>
+              <Input value={form.phone} onChange={(e) => update("phone", e.target.value)} className="h-11 rounded-lg" placeholder="(21) 99999-9999" />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider mb-1.5 block">
+                CRECI
+              </label>
+              <Input value={form.creci} onChange={(e) => update("creci", e.target.value)} className="h-11 rounded-lg" placeholder="Número do CRECI" />
             </div>
           </div>
           <div>
