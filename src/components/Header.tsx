@@ -63,16 +63,26 @@ const Header = () => {
           </Link>
 
           <nav className="hidden xl:flex items-center gap-0.5">
-            {navLinks.map((link) => (
-              <button
-                key={link.label}
-                type="button"
-                onClick={() => handleSectionNavigation(link.sectionId)}
-                className="relative text-[13px] text-primary-foreground/70 hover:text-primary-foreground px-3 py-2 rounded-lg hover:bg-primary-foreground/5 transition-all duration-300 uppercase tracking-wide font-body font-medium whitespace-nowrap"
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map((link) =>
+              link.href ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="relative text-[13px] text-primary-foreground/70 hover:text-primary-foreground px-3 py-2 rounded-lg hover:bg-primary-foreground/5 transition-all duration-300 uppercase tracking-wide font-body font-medium whitespace-nowrap"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => handleSectionNavigation(link.sectionId!)}
+                  className="relative text-[13px] text-primary-foreground/70 hover:text-primary-foreground px-3 py-2 rounded-lg hover:bg-primary-foreground/5 transition-all duration-300 uppercase tracking-wide font-body font-medium whitespace-nowrap"
+                >
+                  {link.label}
+                </button>
+              )
+            )}
           </nav>
 
           <div className="hidden xl:flex items-center gap-3 flex-shrink-0">
