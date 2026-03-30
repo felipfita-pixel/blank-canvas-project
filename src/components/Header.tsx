@@ -10,7 +10,7 @@ const navLinks = [
   { label: "Bairros", sectionId: "neighborhoods" },
   { label: "Estilo de Vida", sectionId: "lifestyle" },
   { label: "Serviços", sectionId: "services" },
-  { label: "Catálogo", sectionId: "featured" },
+  { label: "Catálogo", href: "/imoveis" },
   { label: "Diferenciais", sectionId: "testimonials" },
   { label: "Contato", sectionId: "contact" },
 ];
