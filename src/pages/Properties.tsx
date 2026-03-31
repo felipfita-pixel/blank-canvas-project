@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Bed, Bath, Maximize, Car, Search, SlidersHorizontal } from "lucide-react";
+import ImageLightbox from "@/components/ImageLightbox";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
@@ -50,6 +51,18 @@ const Properties = () => {
   const [filterNeighborhood, setFilterNeighborhood] = useState("all");
   const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = (p: Property, imgIndex = 0) => {
+    const imgs = p.images && p.images.length > 0
+      ? p.images.map((src, i) => ({ src, alt: `${p.title} - Foto ${i + 1}` }))
+      : [{ src: propertyCondo, alt: p.title }];
+    setLightboxImages(imgs);
+    setLightboxIndex(imgIndex);
+    setLightboxOpen(true);
+  };
 
   useEffect(() => {
     const fetchProps = async () => {
@@ -181,9 +194,12 @@ const Properties = () => {
             <p className="text-sm text-muted-foreground mb-6">{filtered.length} imóvel(is) encontrado(s)</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((p) => (
-                <Link to={`/imovel/${p.id}`} key={p.id} className="group">
+                <div key={p.id} className="group">
                   <div className="bg-card rounded-xl overflow-hidden shadow-md border border-border hover:shadow-xl transition-shadow">
-                    <div className="relative aspect-[4/3]">
+                    <div
+                      className="relative aspect-[4/3] cursor-pointer"
+                      onClick={() => openLightbox(p)}
+                    >
                       <img
                         src={p.images && p.images.length > 0 ? p.images[0] : propertyCondo}
                         alt={p.title}
@@ -196,6 +212,11 @@ const Properties = () => {
                       <Badge variant="outline" className="absolute top-3 right-3 bg-card/90 backdrop-blur-sm text-foreground text-[10px]">
                         {p.transaction_type === "rent" ? "Aluguel" : "Venda"}
                       </Badge>
+                      {p.images && p.images.length > 1 && (
+                        <span className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+                          {p.images.length} fotos
+                        </span>
+                      )}
                     </div>
                     <div className="p-5">
                       <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">
@@ -203,20 +224,33 @@ const Properties = () => {
                       </p>
                       <h3 className="font-semibold text-foreground mb-2 line-clamp-1">{p.title}</h3>
                       <p className="text-lg font-bold text-secondary mb-4">{formatPrice(p.price)}</p>
-                      <div className="flex flex-wrap items-center gap-3 text-muted-foreground text-xs">
+                      <div className="flex flex-wrap items-center gap-3 text-muted-foreground text-xs mb-4">
                         {p.bedrooms ? <span className="flex items-center gap-1"><Bed className="w-4 h-4" /> {p.bedrooms} quartos</span> : null}
                         {p.bathrooms ? <span className="flex items-center gap-1"><Bath className="w-4 h-4" /> {p.bathrooms} ban.</span> : null}
                         {p.area ? <span className="flex items-center gap-1"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
                         {p.parking_spots ? <span className="flex items-center gap-1"><Car className="w-4 h-4" /> {p.parking_spots} vaga(s)</span> : null}
                       </div>
+                      <Link to={`/imovel/${p.id}`}>
+                        <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
+                          Ver Detalhes
+                        </Button>
+                      </Link>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </>
         )}
       </div>
+
+      <ImageLightbox
+        images={lightboxImages}
+        currentIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNavigate={setLightboxIndex}
+      />
 
       <Footer />
       <WhatsAppButton />
