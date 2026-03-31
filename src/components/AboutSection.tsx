@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize, Search, SlidersHorizontal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
+import ImageLightbox from "@/components/ImageLightbox";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { supabase } from "@/integrations/supabase/client";
 import { ScrollArea } from "@/components/ui/scroll-area";
