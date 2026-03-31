@@ -141,6 +141,10 @@ const FeaturedProperties = () => {
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
         onNavigate={setLightboxIndex}
+        propertyTitle={properties.find(p => {
+          const imgs = p.images && p.images.length > 0 ? p.images : [propertyCondo];
+          return imgs.some(src => lightboxImages.some(li => li.src === src));
+        })?.title}
       />
     </section>
   );

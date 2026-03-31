@@ -253,6 +253,12 @@ const Properties = () => {
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
         onNavigate={setLightboxIndex}
+        propertyTitle={filtered.find(p => {
+          const imgs = p.images && p.images.length > 0
+            ? p.images.map(src => src)
+            : [propertyCondo];
+          return imgs.some(src => lightboxImages.some(li => li.src === src));
+        })?.title}
       />
 
       <Footer />
