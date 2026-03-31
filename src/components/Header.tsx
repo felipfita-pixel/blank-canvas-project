@@ -70,6 +70,18 @@ const Header = () => {
           >
             Contato
           </button>
+          {isAdmin ? (
+            <Link to="/admin" className="p-1.5 rounded-lg text-secondary/70 hover:text-secondary transition-colors" title="Painel Admin">
+              <Settings className="w-4 h-4" />
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="text-sm text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors duration-300 font-body"
+            >
+              Área Restrita
+            </Link>
+          )}
         </nav>
 
         <button
