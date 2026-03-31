@@ -50,11 +50,17 @@ const WhereWeOperate = () => {
               ))}
             </div>
           </div>
-          <div className="bg-muted rounded-xl h-64 lg:h-80 flex items-center justify-center">
-            <div className="text-center text-muted-foreground">
-              <MapPin className="w-10 h-10 mx-auto mb-2 opacity-40" />
-              <p className="text-sm">Mapa da região</p>
-            </div>
+          <div className="rounded-xl h-64 lg:h-80 overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235207.81610780452!2d-43.58841988378907!3d-22.911013799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bde559108a05b%3A0x50dc426c672fd24e!2sRio%20de%20Janeiro%2C%20RJ!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Mapa de atuação"
+            />
           </div>
         </div>
       </div>
