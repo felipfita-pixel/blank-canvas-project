@@ -207,17 +207,13 @@ const ChatWidget = () => {
 
   return (
     <>
-      <motion.button
+      <button
         id="chat-trigger"
         ref={triggerRef}
         data-chat-widget-trigger
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
-        className="fixed bottom-24 right-4 sm:bottom-28 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
-      >
-        <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
-      </motion.button>
+        className="hidden"
+        aria-hidden="true"
+      />
 
       <AnimatePresence>
         {open && (
