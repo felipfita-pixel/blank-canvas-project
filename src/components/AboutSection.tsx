@@ -277,6 +277,17 @@ const AboutSection = () => {
     document.getElementById("campaign-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const openLightbox = (property: FeaturedProperty, imgIndex = 0) => {
+    const images = property.images && property.images.length > 0
+      ? property.images.map((src, index) => ({ src, alt: `${property.title} - Foto ${index + 1}` }))
+      : [{ src: propertyCondo, alt: property.title }];
+
+    setLightboxImages(images);
+    setLightboxIndex(imgIndex);
+    setLightboxTitle(property.title);
+    setLightboxOpen(true);
+  };
+
   const clearFilters = () => {
     setSearchQuery("");
     setFilterCity("all");
