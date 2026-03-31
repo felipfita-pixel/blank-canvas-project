@@ -3565,6 +3565,7 @@ export const catalogStaticProperties: StaticProperty[] = [
   { id: "pat-apartamento-apartamento-padr-o-182", title: "Apartamento - Apartamento Padrão", description: "CO410399", property_type: "apartment", transaction_type: "sale", price: 0, area: 660, bedrooms: 4, bathrooms: 5, parking_spots: 0, neighborhood: "Copacabana", city: "Rio de Janeiro", address: "Avenida Nossa Senhora de Copacabana - Copacabana", state: "RJ", images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=339467.jpg&c=CO410399&wd=410&ht=410&m=prop"] }
 ];
 
+export const staticProperties = [...featuredStaticProperties, ...catalogStaticProperties];
 
 export function getStaticProperty(id: string): StaticProperty | undefined {
   return staticProperties.find((p) => p.id === id);
