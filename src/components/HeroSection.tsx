@@ -33,10 +33,10 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-3xl sm:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground leading-[1.15] mb-6"
+          className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-[1.15] mb-6"
         >
           Encontre o imóvel dos seus{" "}
-          <span className="text-secondary">sonhos</span>
+          <span className="text-secondary italic">sonhos</span>
         </motion.h1>
 
         <motion.p

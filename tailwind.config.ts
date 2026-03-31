@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         heading: ['Montserrat', 'sans-serif'],
+        display: ['Playfair Display', 'serif'],
         body: ['Tahoma', 'Verdana', 'Geneva', 'sans-serif'],
       },
       colors: {
