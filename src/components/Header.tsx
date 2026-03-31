@@ -42,7 +42,7 @@ const Header = () => {
         <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
           <Building className="w-8 h-8 text-secondary" />
           <div className="flex flex-col leading-none">
-            <span className="font-heading text-base sm:text-lg font-bold text-primary-foreground tracking-wide">
+            <span className="font-heading text-base sm:text-lg font-bold text-primary-foreground tracking-normal">
               Corretores Associados & FF
             </span>
             <span className="text-[9px] sm:text-[10px] text-primary-foreground/50 tracking-[0.2em] uppercase font-body mt-0.5">
