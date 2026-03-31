@@ -1217,7 +1217,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 264,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=473&img=28709&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=473&img=28709&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soul-rio-gago-coutinho",
@@ -1234,7 +1234,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 82,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=467&img=28601&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=467&img=28601&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-bruma-mozak",
@@ -1251,7 +1251,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 415,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=480&img=28795&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=480&img=28795&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-breeze-inspire",
@@ -1268,7 +1268,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 149,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=475&img=28741&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=475&img=28741&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-estacao-botafogo",
@@ -1285,7 +1285,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 117,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=468&img=28657&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=468&img=28657&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-tide-residencial",
@@ -1302,7 +1302,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 90,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=466&img=28543&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=466&img=28543&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-be-in-rio-pompeu",
@@ -1319,7 +1319,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 80,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=462&img=28500&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=462&img=28500&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-riio-piero-lissoni",
@@ -1336,7 +1336,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 4,
     area: 1042,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=436&img=28233&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=436&img=28233&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-modo-design-living",
@@ -1353,7 +1353,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 79,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=446&img=28187&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=446&img=28187&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-rio-residence-park",
@@ -1370,7 +1370,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 47,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=444&img=28239&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=444&img=28239&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-gavi",
@@ -1387,7 +1387,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 150,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=447&img=28285&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=447&img=28285&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-be-in-rio-paul-redfern",
@@ -1404,7 +1404,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 80,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=440&img=28065&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=440&img=28065&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-arpx-studios",
@@ -1421,7 +1421,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 99,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=428&img=27914&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=428&img=27914&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ilha-pura-oro",
@@ -1438,7 +1438,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 461,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=415&img=27750&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=415&img=27750&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soul-rio-barata",
@@ -1455,7 +1455,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 77,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=417&img=27778&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=417&img=27778&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-green-view",
@@ -1472,7 +1472,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 273,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=394&img=27444&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=394&img=27444&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-karioka-botafogo",
@@ -1489,7 +1489,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 139,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=399&img=27177&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=399&img=27177&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soul-rio-alberto",
@@ -1506,7 +1506,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 74,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=393&img=27031&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=393&img=27031&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-summit-vila",
@@ -1523,7 +1523,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 81,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=379&img=26877&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=379&img=26877&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-enseada-botafogo",
@@ -1540,7 +1540,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 290,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=358&img=26494&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=358&img=26494&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-sal-rio",
@@ -1557,7 +1557,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 35,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=340&img=25813&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=340&img=25813&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-palms-recreio",
@@ -1574,7 +1574,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 187,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=381&img=26947&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=381&img=26947&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-claris-casa-clube",
@@ -1591,7 +1591,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 4,
     area: 580,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=25&img=17530&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=25&img=17530&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-oba-urca",
@@ -1608,7 +1608,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 269,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=289&img=24797&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=289&img=24797&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-786-prudente",
@@ -1625,7 +1625,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 330,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=290&img=24851&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=290&img=24851&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-cores-fatima",
@@ -1642,7 +1642,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 98,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=281&img=24476&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=281&img=24476&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-vista-ipanema",
@@ -1659,7 +1659,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 346,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=141&img=22737&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=141&img=22737&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-kauai-pontal",
@@ -1676,7 +1676,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 155,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=111&img=22605&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=111&img=22605&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-be-on-porto",
@@ -1693,7 +1693,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 38,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=120&img=22772&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=120&img=22772&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-zenture-residencial",
@@ -1710,7 +1710,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 417,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=70&img=22911&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=70&img=22911&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soho-gavea",
@@ -1727,7 +1727,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 130,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=128&img=20547&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=128&img=20547&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-enredo",
@@ -1744,7 +1744,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 52,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=156&img=21299&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=156&img=21299&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-jardim-barra-clube",
@@ -1761,7 +1761,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 225,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=3&img=22958&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=3&img=22958&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-alma-ipanema",
@@ -1778,7 +1778,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 196,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=36&img=23008&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=36&img=23008&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ilha-pura-elos",
@@ -1795,7 +1795,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 266,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=22&img=17055&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=22&img=17055&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-helo-ipanema",
@@ -1812,7 +1812,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 143,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=152&img=21501&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=152&img=21501&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-gloria-residencial",
@@ -1829,7 +1829,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 311,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=138&img=23096&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=138&img=23096&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-satamini-12",
@@ -1846,7 +1846,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 199,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=121&img=20320&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=121&img=20320&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-concept-cyrela",
@@ -1863,7 +1863,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 414,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=12&img=16588&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=12&img=16588&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-casa-gabizo",
@@ -1880,7 +1880,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 156,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=132&img=20664&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=132&img=20664&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-art-houses",
@@ -1897,7 +1897,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 4,
     area: 467,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=73&img=18969&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=73&img=18969&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-duet-barra",
@@ -1914,7 +1914,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 68,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=18&img=17542&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=18&img=17542&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-nurban",
@@ -1931,7 +1931,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 247,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=32&img=17632&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=32&img=17632&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-atlantico-golf",
@@ -1948,7 +1948,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 424,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=2&img=17554&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=2&img=17554&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-murano-residencial",
@@ -1965,7 +1965,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 66,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=6&img=23199&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=6&img=23199&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-parque-sustentavel-gavea",
@@ -1982,7 +1982,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 115,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=112&img=20222&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=112&img=20222&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-villa-mares",
@@ -1999,7 +1999,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 66,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=107&img=19995&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=107&img=19995&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ipa-studios",
@@ -2016,7 +2016,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 111,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=125&img=20384&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=125&img=20384&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-cora-gavea",
@@ -2033,7 +2033,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 119,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=63&img=23372&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=63&img=23372&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-rio-residence-park",
@@ -2050,7 +2050,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 47,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=444&img=28239&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=444&img=28239&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-be-in-rio-paul-redfern",
@@ -2067,7 +2067,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 80,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=440&img=28065&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=440&img=28065&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ilha-pura-oro-ornare",
@@ -2084,7 +2084,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 461,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=415&img=27750&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=415&img=27750&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soul-rio-barata-ribeiro",
@@ -2101,7 +2101,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 77,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=417&img=27778&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=417&img=27778&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-green-view",
@@ -2118,7 +2118,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 273,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=394&img=27444&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=394&img=27444&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-karioka-botafogo",
@@ -2135,7 +2135,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 139,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=399&img=27177&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=399&img=27177&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-brasil-surfe-clube",
@@ -2152,7 +2152,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 80,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=400&img=27195&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=400&img=27195&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soul-rio-alberto-campos",
@@ -2169,7 +2169,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 74,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=393&img=27031&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=393&img=27031&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-villas-beach-residence",
@@ -2186,7 +2186,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 180,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=461&img=28481&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=461&img=28481&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-terrah-americas-clube",
@@ -2203,7 +2203,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 490,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=382&img=26911&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=382&img=26911&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-summit-vila-residences",
@@ -2220,7 +2220,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 81,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=379&img=26877&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=379&img=26877&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-sal-rio-residencial",
@@ -2237,7 +2237,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 35,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=340&img=25813&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=340&img=25813&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-origem-ciclo",
@@ -2254,7 +2254,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 180,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=316&img=25271&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=316&img=25271&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-palms-recreio",
@@ -2271,7 +2271,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 187,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=381&img=26947&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=381&img=26947&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-claris-casa-clube",
@@ -2288,7 +2288,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 4,
     area: 580,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=25&img=17530&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=25&img=17530&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-786-prudente",
@@ -2305,7 +2305,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 330,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=290&img=24851&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=290&img=24851&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-cores-fatima",
@@ -2322,7 +2322,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 98,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=281&img=24476&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=281&img=24476&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-vista-ipanema",
@@ -2339,7 +2339,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 346,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=141&img=22737&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=141&img=22737&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-kauai-pontal",
@@ -2356,7 +2356,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 2,
     area: 155,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=111&img=22605&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=111&img=22605&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-be-on-porto",
@@ -2373,7 +2373,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 0,
     area: 38,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=120&img=22772&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=120&img=22772&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-zenture-residencial",
@@ -2390,7 +2390,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 3,
     area: 417,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=70&img=22911&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=70&img=22911&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soho-gavea",
@@ -2407,7 +2407,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     parking_spots: 1,
     area: 130,
     price: 0,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=128&img=20547&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=128&img=20547&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-alma-ipanema-style",
@@ -2424,7 +2424,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=36&img=23008&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=36&img=23008&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ilha-pura-elos-2",
@@ -2441,7 +2441,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=22&img=17055&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=22&img=17055&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-atlantico-golf-absolute",
@@ -2458,7 +2458,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=2&img=17554&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=2&img=17554&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ipa-studios-design",
@@ -2475,7 +2475,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=125&img=20384&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=125&img=20384&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-urquiza-leblon",
@@ -2492,7 +2492,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=62&img=18677&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=62&img=18677&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ornato-tijuca",
@@ -2509,7 +2509,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=41&img=17941&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=41&img=17941&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-we-sorocaba",
@@ -2526,7 +2526,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=104&img=19924&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=104&img=19924&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-wave-by-yoo",
@@ -2543,7 +2543,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=11&img=16559&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=11&img=16559&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-tie-residencial",
@@ -2560,7 +2560,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=42&img=18008&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=42&img=18008&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-l-art-residences",
@@ -2577,7 +2577,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=103&img=19901&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=103&img=19901&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-be-peninsula-parque",
@@ -2594,7 +2594,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=7&img=16507&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=7&img=16507&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-easy-botafogo",
@@ -2611,7 +2611,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=76&img=19037&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=76&img=19037&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-canto-rio",
@@ -2628,7 +2628,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=60&img=18646&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=60&img=18646&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-canto-mar",
@@ -2645,7 +2645,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=59&img=18588&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=59&img=18588&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-azuis-mozak",
@@ -2662,7 +2662,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=150&img=21184&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=150&img=21184&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-sambaiba-323",
@@ -2679,7 +2679,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=65&img=18775&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=65&img=18775&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-all-jardim-oceanico",
@@ -2696,7 +2696,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=38&img=17844&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=38&img=17844&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-oceana-golf",
@@ -2713,7 +2713,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=1&img=23535&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=1&img=23535&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-tom-delfim-moreira",
@@ -2730,7 +2730,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=146&img=21104&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=146&img=21104&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-atmosfera-condominium",
@@ -2747,7 +2747,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=83&img=19424&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=83&img=19424&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-b-lar",
@@ -2764,7 +2764,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=39&img=17878&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=39&img=17878&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-orygem-acqua-home",
@@ -2781,7 +2781,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=9&img=16532&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=9&img=16532&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-s-design-residencial",
@@ -2798,7 +2798,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=33&img=17658&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=33&img=17658&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-epitacio-3714",
@@ -2815,7 +2815,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=123&img=20612&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=123&img=20612&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-playa-exclusive",
@@ -2832,7 +2832,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=10&img=16553&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=10&img=16553&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-on-the-sea-arpoador",
@@ -2849,7 +2849,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=79&img=19208&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=79&img=19208&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-arte-jardim-botanico",
@@ -2866,7 +2866,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=57&img=18504&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=57&img=18504&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-living-sunset",
@@ -2883,7 +2883,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=13&img=16609&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=13&img=16609&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-lineu-708",
@@ -2900,7 +2900,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=66&img=18814&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=66&img=18814&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-cyano-exclusive",
@@ -2917,7 +2917,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=4&img=16712&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=4&img=16712&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-skylux",
@@ -2934,7 +2934,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=27&img=17456&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=27&img=17456&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-mudra-full-living",
@@ -2951,7 +2951,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=8&img=17549&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=8&img=17549&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-latitud-condominium",
@@ -2968,7 +2968,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=14&img=16846&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=14&img=16846&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-like-residencial-club",
@@ -2985,7 +2985,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=108&img=20032&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=108&img=20032&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-oka-residence-lagoa",
@@ -3002,7 +3002,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=81&img=19349&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=81&img=19349&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-spotlight-jardim-botafogo",
@@ -3019,7 +3019,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=34&img=17694&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=34&img=17694&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-east-side-meier",
@@ -3036,7 +3036,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=45&img=18153&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=45&img=18153&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ilha-pura-saint-michel",
@@ -3053,7 +3053,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=21&img=17053&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=21&img=17053&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ilha-pura-viure",
@@ -3070,7 +3070,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=19&img=17551&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=19&img=17551&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ilha-pura-millenio",
@@ -3087,7 +3087,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=17&img=16727&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=17&img=16727&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-riserva-golf",
@@ -3104,7 +3104,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=15&img=16659&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=15&img=16659&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-luzes-do-rio-candeeiro",
@@ -3138,7 +3138,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=455&img=28406&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=455&img=28406&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-dias-ferreira-studios",
@@ -3155,7 +3155,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=454&img=28406&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=454&img=28406&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-fases-residencial",
@@ -3172,7 +3172,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=452&img=28431&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=452&img=28431&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-ar-ipanema",
@@ -3189,7 +3189,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=445&img=28152&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=445&img=28152&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-cidade-arte-wood",
@@ -3206,7 +3206,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=443&img=28161&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=443&img=28161&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-green-lake",
@@ -3223,7 +3223,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=433&img=28011&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=433&img=28011&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soul-rio-princesa",
@@ -3240,7 +3240,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=432&img=28264&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=432&img=28264&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-soul-rio-fatima",
@@ -3257,7 +3257,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=430&img=27941&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=430&img=27941&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-orla-ipanema-residencial",
@@ -3274,7 +3274,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=429&img=28049&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=429&img=28049&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-cop4-studios",
@@ -3291,7 +3291,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=425&img=27887&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=425&img=27887&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-guilhem-mozak",
@@ -3308,7 +3308,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=422&img=27831&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=422&img=27831&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-be-in-rio-nascimento",
@@ -3325,7 +3325,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=418&img=27698&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=418&img=27698&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-onlife",
@@ -3342,7 +3342,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=413&img=27598&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=413&img=27598&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-be-in-rio-prudente",
@@ -3359,7 +3359,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=412&img=27574&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=412&img=27574&wd=800&ht=600&m=crop"],
   },
 {
     id: "static-dias-downtown-studios",
@@ -3376,7 +3376,7 @@ export const catalogStaticProperties: StaticProperty[] = [
     property_type: "Apartamento",
     transaction_type: "Venda",
     parking_spots: 1,
-    images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=409&img=27639&wd=800&ht=600&m=crop"],
+    images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=409&img=27639&wd=800&ht=600&m=crop"],
   }
 ];
 
