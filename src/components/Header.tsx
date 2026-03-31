@@ -38,7 +38,7 @@ const Header = () => {
     >
       <div className="container-main flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
         <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-          <img src={logoFF} alt="FF Imóveis" className="h-10 sm:h-12 w-auto rounded" />
+          <Building className="w-8 h-8 text-secondary" />
           <div className="flex flex-col leading-none">
             <span className="font-heading text-base sm:text-lg font-bold text-primary-foreground tracking-wide">
               Felipe Fita
