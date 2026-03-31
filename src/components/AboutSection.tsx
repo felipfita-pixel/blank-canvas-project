@@ -456,16 +456,6 @@ const AboutSection = () => {
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
-              <Button onClick={() => navigate("/imoveis")} className="bg-emerald-600 text-primary-foreground hover:bg-emerald-700 rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
-                <Home className="w-4 h-4 mr-2" />
-                Todos os Imóveis
-              </Button>
-              <Button onClick={() => setScheduleOpen(true)} className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-full px-8 py-4 font-semibold text-sm shadow-lg hover:scale-105 transition-all">
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Agendar Consultoria
-              </Button>
-            </div>
             <ScheduleModal open={scheduleOpen} onOpenChange={setScheduleOpen} />
           </div>
 
