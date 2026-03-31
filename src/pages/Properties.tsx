@@ -55,6 +55,7 @@ const Properties = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [lightboxTitle, setLightboxTitle] = useState("");
 
   const openLightbox = (p: Property, imgIndex = 0) => {
     const imgs = p.images && p.images.length > 0
@@ -62,6 +63,7 @@ const Properties = () => {
       : [{ src: propertyCondo, alt: p.title }];
     setLightboxImages(imgs);
     setLightboxIndex(imgIndex);
+    setLightboxTitle(p.title);
     setLightboxOpen(true);
   };
 
