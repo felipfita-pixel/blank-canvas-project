@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatWidget from "@/components/ChatWidget";
+import TalkToSpecialistButton from "@/components/TalkToSpecialistButton";
+import ImageLightbox from "@/components/ImageLightbox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Maximize, Car, MapPin, ArrowLeft, ChevronLeft, ChevronRight, MessageCircle, Share2, Heart } from "lucide-react";
@@ -58,12 +60,12 @@ const PropertyDetail = () => {
   const [broker, setBroker] = useState<Broker | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentImage, setCurrentImage] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!id) return;
 
-      // Check static properties first
       const staticProp = getStaticProperty(id);
       if (staticProp) {
         setProperty({
@@ -140,12 +142,13 @@ const PropertyDetail = () => {
   }
 
   const images = property.images && property.images.length > 0 ? property.images : [placeholderImage];
+  const lightboxImages = images.map((src, i) => ({ src, alt: `${property.title} - Foto ${i + 1}` }));
   const location = [property.address, property.neighborhood, property.city, property.state].filter(Boolean).join(", ");
 
   const prevImage = () => setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   const nextImage = () => setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
-  const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no imóvel "${property.title}" (${formatPrice(property.price)}). Podemos conversar?`);
+  const whatsappMessage = encodeURIComponent(`Olá! Tenho interesse no imóvel "${property.title}". Podemos conversar?`);
   const whatsappLink = `https://wa.me/5521975316631?text=${whatsappMessage}`;
 
   const details = [
@@ -168,7 +171,10 @@ const PropertyDetail = () => {
               <ArrowLeft className="w-4 h-4" /> Voltar
             </button>
           </div>
-          <div className="relative aspect-[16/9] max-h-[500px] overflow-hidden">
+          <div
+            className="relative aspect-[16/9] max-h-[500px] overflow-hidden cursor-pointer"
+            onClick={() => setLightboxOpen(true)}
+          >
             <img
               src={images[currentImage]}
               alt={property.title}
@@ -176,17 +182,17 @@ const PropertyDetail = () => {
             />
             {images.length > 1 && (
               <>
-                <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
+                <button onClick={(e) => { e.stopPropagation(); prevImage(); }} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
                   <ChevronLeft className="w-5 h-5 text-foreground" />
                 </button>
-                <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
+                <button onClick={(e) => { e.stopPropagation(); nextImage(); }} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
                   <ChevronRight className="w-5 h-5 text-foreground" />
                 </button>
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                   {images.map((_, i) => (
                     <button
                       key={i}
-                      onClick={() => setCurrentImage(i)}
+                      onClick={(e) => { e.stopPropagation(); setCurrentImage(i); }}
                       className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentImage ? "bg-secondary" : "bg-card/60"}`}
                     />
                   ))}
@@ -194,13 +200,17 @@ const PropertyDetail = () => {
               </>
             )}
             <div className="absolute top-4 right-4 flex gap-2">
-              <button className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
+              <button onClick={(e) => e.stopPropagation()} className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
                 <Heart className="w-5 h-5 text-foreground" />
               </button>
-              <button className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
+              <button onClick={(e) => e.stopPropagation()} className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
                 <Share2 className="w-5 h-5 text-foreground" />
               </button>
             </div>
+            {/* Click to enlarge hint */}
+            <span className="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1.5 rounded-full">
+              📷 Clique para ampliar{images.length > 1 ? ` • ${images.length} fotos` : ""}
+            </span>
           </div>
 
           {/* Thumbnails */}
@@ -210,7 +220,7 @@ const PropertyDetail = () => {
                 {images.map((img, i) => (
                   <button
                     key={i}
-                    onClick={() => setCurrentImage(i)}
+                    onClick={() => { setCurrentImage(i); setLightboxOpen(true); }}
                     className={`flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-colors ${i === currentImage ? "border-secondary" : "border-transparent opacity-60 hover:opacity-100"}`}
                   >
                     <img src={img} alt="" className="w-full h-full object-cover" />
@@ -312,9 +322,20 @@ const PropertyDetail = () => {
         </div>
       </div>
 
+      <ImageLightbox
+        images={lightboxImages}
+        currentIndex={currentImage}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNavigate={(i) => { setCurrentImage(i); }}
+        propertyTitle={property.title}
+        propertyId={property.id}
+      />
+
       <Footer />
       <WhatsAppButton />
       <ChatWidget />
+      <TalkToSpecialistButton />
     </div>
   );
 };
