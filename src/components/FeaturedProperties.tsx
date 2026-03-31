@@ -132,6 +132,14 @@ const FeaturedProperties = () => {
           </Link>
         </div>
       </div>
+
+      <ImageLightbox
+        images={lightboxImages}
+        currentIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNavigate={setLightboxIndex}
+      />
     </section>
   );
 };
