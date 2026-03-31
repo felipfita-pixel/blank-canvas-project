@@ -240,6 +240,11 @@ const PropertyDetail = () => {
                 </p>
               )}
 
+              {property.price > 0 && (
+                <p className="text-3xl font-bold text-secondary mb-8">
+                  {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
+                </p>
+              )}
 
               {/* Details grid */}
               {details.length > 0 && (

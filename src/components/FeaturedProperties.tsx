@@ -110,7 +110,9 @@ const FeaturedProperties = () => {
                 <div className="p-5 text-left">
                   <h3 className="font-semibold text-foreground mb-1 line-clamp-1">{p.title}</h3>
                   <p className="text-sm text-muted-foreground mb-2">{p.neighborhood || ""}</p>
-                  
+                  {p.price > 0 && (
+                    <p className="text-lg font-bold text-secondary mb-4">{formatPrice(p.price)}</p>
+                  )}
                   <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-muted-foreground text-xs mb-4">
                     {p.bedrooms ? <span className="flex items-center gap-1"><Bed className="w-4 h-4" /> {p.bedrooms} quartos</span> : null}
                     {p.bathrooms ? <span className="flex items-center gap-1"><Bath className="w-4 h-4" /> {p.bathrooms} banheiros</span> : null}
