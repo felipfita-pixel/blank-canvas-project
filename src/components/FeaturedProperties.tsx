@@ -88,9 +88,12 @@ const FeaturedProperties = () => {
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((p) => (
-            <Link to={`/imovel/${p.id}`} key={p.id} className="group">
+            <div key={p.id} className="group">
               <div className="bg-card rounded-xl overflow-hidden shadow-md border border-border hover:shadow-xl transition-shadow">
-                <div className="relative aspect-[4/3]">
+                <div
+                  className="relative aspect-[4/3] cursor-pointer"
+                  onClick={() => openLightbox(p)}
+                >
                   <img
                     src={p.images && p.images.length > 0 ? p.images[0] : propertyCondo}
                     alt={p.title}
@@ -98,6 +101,11 @@ const FeaturedProperties = () => {
                     loading="lazy"
                   />
                   <Badge className="absolute top-3 left-3 bg-secondary text-secondary-foreground">Destaque</Badge>
+                  {p.images && p.images.length > 1 && (
+                    <span className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+                      {p.images.length} fotos
+                    </span>
+                  )}
                 </div>
                 <div className="p-5 text-left">
                   <h3 className="font-semibold text-foreground mb-1 line-clamp-1">{p.title}</h3>
@@ -108,12 +116,14 @@ const FeaturedProperties = () => {
                     {p.bathrooms ? <span className="flex items-center gap-1"><Bath className="w-4 h-4" /> {p.bathrooms} banheiros</span> : null}
                     {p.area ? <span className="flex items-center gap-1"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
                   </div>
-                  <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
-                    Ver Detalhes
-                  </Button>
+                  <Link to={`/imovel/${p.id}`}>
+                    <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
+                      Ver Detalhes
+                    </Button>
+                  </Link>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
         <div className="mt-8">
