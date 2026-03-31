@@ -3382,3 +3382,7 @@ export const catalogStaticProperties: StaticProperty[] = [
 
 // Combined for backward compatibility
 export const staticProperties: StaticProperty[] = [...featuredStaticProperties, ...catalogStaticProperties];
+
+// Helper to find a static property by ID
+export const getStaticProperty = (id: string): StaticProperty | undefined =>
+  staticProperties.find((p) => p.id === id);
