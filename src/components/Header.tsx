@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import logoFF from "@/assets/logo-ff.jpeg";
+import { Menu, X, Building } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
