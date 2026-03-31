@@ -3391,6 +3391,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=105&img=19953&wd=410&ht=410&m=crop"],
   },
   {
@@ -3406,6 +3408,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=5&img=17552&wd=410&ht=410&m=crop"],
   },
   {
@@ -3421,6 +3425,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3436,6 +3442,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3451,6 +3459,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3466,6 +3476,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 8,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3481,6 +3493,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3496,6 +3510,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3511,6 +3527,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3526,6 +3544,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3541,6 +3561,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3556,6 +3578,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3571,6 +3595,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3586,6 +3612,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3601,6 +3629,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=28194.jpg&c=P0556&wd=410&ht=410&m=prop"],
   },
   {
@@ -3616,6 +3646,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3631,6 +3663,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3646,6 +3680,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3661,6 +3697,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3676,6 +3714,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3691,6 +3731,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3706,6 +3748,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3721,6 +3765,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3736,6 +3782,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3751,6 +3799,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3766,6 +3816,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3781,6 +3833,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 2,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3796,6 +3850,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3811,6 +3867,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3826,6 +3884,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3841,6 +3901,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3856,6 +3918,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3871,6 +3935,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3886,6 +3952,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3901,6 +3969,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3916,6 +3986,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 100,
     area: 750,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=347166.jpg&c=CA08526&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=347166.jpg&c=CA08526&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=347164.jpg&c=CA08526&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=347164.jpg&c=CA08526&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=347107.jpg&c=CA08526&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=347107.jpg&c=CA08526&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=347108.jpg&c=CA08526&wd=800&ht=600&m=prop"],
   },
   {
@@ -3931,6 +4003,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3946,6 +4020,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3961,6 +4037,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -3976,6 +4054,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=53839.jpg&c=P1388&wd=410&ht=410&m=prop"],
   },
   {
@@ -3991,6 +4071,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4006,6 +4088,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4021,6 +4105,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4036,6 +4122,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4051,6 +4139,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4066,6 +4156,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4081,6 +4173,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4096,6 +4190,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4111,6 +4207,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 6,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4126,6 +4224,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4141,6 +4241,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4156,6 +4258,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4171,6 +4275,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 850,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=370944.jpg&c=CA09944&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=370944.jpg&c=CA09944&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=370900.jpg&c=CA09944&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=370900.jpg&c=CA09944&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=370899.jpg&c=CA09944&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=370899.jpg&c=CA09944&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=370897.jpg&c=CA09944&wd=800&ht=600&m=prop"],
   },
   {
@@ -4186,6 +4292,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4201,6 +4309,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4216,6 +4326,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4231,6 +4343,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4246,6 +4360,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4261,6 +4377,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4276,6 +4394,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4291,6 +4411,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4306,6 +4428,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4321,6 +4445,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4336,6 +4462,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4351,6 +4479,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4366,6 +4496,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4381,6 +4513,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4396,6 +4530,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4411,6 +4547,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4426,6 +4564,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4441,6 +4581,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4456,6 +4598,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4471,6 +4615,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4486,6 +4632,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4501,6 +4649,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4516,6 +4666,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4531,6 +4683,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4546,6 +4700,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4561,6 +4717,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4576,6 +4734,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4591,6 +4751,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4606,6 +4768,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4621,6 +4785,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4636,6 +4802,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4651,6 +4819,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4666,6 +4836,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4681,6 +4853,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4696,6 +4870,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4711,6 +4887,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4726,6 +4904,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4741,6 +4921,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4756,6 +4938,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4771,6 +4955,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4786,6 +4972,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4801,6 +4989,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4816,6 +5006,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=43966.jpg&c=P1015&wd=410&ht=410&m=prop"],
   },
   {
@@ -4831,6 +5023,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4846,6 +5040,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4861,6 +5057,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4876,6 +5074,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4891,6 +5091,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4906,6 +5108,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4921,6 +5125,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4936,6 +5142,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4951,6 +5159,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4966,6 +5176,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4981,6 +5193,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -4996,6 +5210,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5011,6 +5227,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5026,6 +5244,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5041,6 +5261,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5056,6 +5278,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5071,6 +5295,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5086,6 +5312,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 2,
     area: 543,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=373092.jpg&c=CA08552&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=373092.jpg&c=CA08552&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=295201.jpg&c=CA08552&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=295201.jpg&c=CA08552&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=295703.jpg&c=CA08552&wd=800&ht=600&m=prop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=295703.jpg&c=CA08552&wd=800&ht=600&m=crop", "http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=avu&nologo=yep&i=295704.jpg&c=CA08552&wd=800&ht=600&m=prop"],
   },
   {
@@ -5101,6 +5329,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5116,6 +5346,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5131,6 +5363,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=47725.jpg&c=P1147&wd=410&ht=410&m=prop"],
   },
   {
@@ -5146,6 +5380,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5161,6 +5397,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5176,6 +5414,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5191,6 +5431,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5206,6 +5448,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5221,6 +5465,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5236,6 +5482,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 6,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5251,6 +5499,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5266,6 +5516,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5281,6 +5533,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5296,6 +5550,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5311,6 +5567,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5326,6 +5584,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5341,6 +5601,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5356,6 +5618,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5371,6 +5635,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5386,6 +5652,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=47146.jpg&c=P1083&wd=410&ht=410&m=prop"],
   },
   {
@@ -5401,6 +5669,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5416,6 +5686,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 4,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5431,6 +5703,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5446,6 +5720,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5461,6 +5737,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5476,6 +5754,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5491,6 +5771,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5506,6 +5788,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5521,6 +5805,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5536,6 +5822,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=52461.jpg&c=P1343&wd=410&ht=410&m=prop"],
   },
   {
@@ -5551,6 +5839,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5566,6 +5856,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5581,6 +5873,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=15477.jpg&c=P38520&wd=410&ht=410&m=prop"],
   },
   {
@@ -5596,6 +5890,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5611,6 +5907,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5626,6 +5924,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5641,6 +5941,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5656,6 +5958,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5671,6 +5975,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5686,6 +5992,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5701,6 +6009,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5716,6 +6026,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5731,6 +6043,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5746,6 +6060,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=50717.jpg&c=P1032&wd=410&ht=410&m=prop"],
   },
   {
@@ -5761,6 +6077,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5776,6 +6094,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5791,6 +6111,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5806,6 +6128,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5821,6 +6145,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5836,6 +6162,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5851,6 +6179,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5866,6 +6196,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5881,6 +6213,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5896,6 +6230,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5911,6 +6247,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5926,6 +6264,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 5,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5941,6 +6281,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5956,6 +6298,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5971,6 +6315,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -5986,6 +6332,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6001,6 +6349,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6016,6 +6366,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6031,6 +6383,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6046,6 +6400,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6061,6 +6417,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 5,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6076,6 +6434,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6091,6 +6451,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6106,6 +6468,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6121,6 +6485,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6136,6 +6502,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6151,6 +6519,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6166,6 +6536,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 0,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   },
   {
@@ -6181,6 +6553,8 @@ export const catalogStaticProperties: StaticProperty[] = [
     bathrooms: 0,
     area: 2,
     parking_spots: 0,
+    address: "",
+    state: "RJ",
     images: ["http://cdn.patrimovel.com.br/logo/2.png", "http://cdn.patrimovel.com.br//imagemLocal.ashx?use=user&i=50423&wd=800&ht=600&m=crop&#39;);width:"],
   }
 
