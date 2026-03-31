@@ -116,6 +116,10 @@ const AboutSection = () => {
   const [filterNeighborhood, setFilterNeighborhood] = useState("all");
   const [filterType, setFilterType] = useState("all");
   const [showMoreFilters, setShowMoreFilters] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [lightboxTitle, setLightboxTitle] = useState("");
 
   useEffect(() => {
     const fetchBrokers = async () => {
