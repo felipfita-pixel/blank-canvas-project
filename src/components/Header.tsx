@@ -50,11 +50,6 @@ const Header = () => {
             </span>
           </div>
         </Link>
-        {isAdmin && (
-          <Link to="/admin" className="ml-2 p-1.5 rounded-lg text-secondary/70 hover:text-secondary transition-colors" title="Painel Admin">
-            <Settings className="w-4 h-4" />
-          </Link>
-        )}
 
         <nav className="hidden md:flex items-center gap-8">
           <Link
