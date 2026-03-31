@@ -50,11 +50,6 @@ const Header = () => {
             </span>
           </div>
         </Link>
-        {isAdmin && (
-          <Link to="/admin" className="ml-2 p-1.5 rounded-lg text-secondary/70 hover:text-secondary transition-colors" title="Painel Admin">
-            <Settings className="w-4 h-4" />
-          </Link>
-        )}
 
         <nav className="hidden md:flex items-center gap-8">
           <Link
@@ -70,6 +65,18 @@ const Header = () => {
           >
             Contato
           </button>
+          {isAdmin ? (
+            <Link to="/admin" className="p-1.5 rounded-lg text-secondary/70 hover:text-secondary transition-colors" title="Painel Admin">
+              <Settings className="w-4 h-4" />
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="text-sm text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors duration-300 font-body"
+            >
+              Área Restrita
+            </Link>
+          )}
         </nav>
 
         <button
@@ -105,6 +112,23 @@ const Header = () => {
               >
                 Contato
               </button>
+              {isAdmin ? (
+                <Link
+                  to="/admin"
+                  className="block text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Painel Admin
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="block text-primary-foreground/50 hover:text-primary-foreground/80 py-2.5 px-3 rounded-lg transition-colors text-sm"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Área Restrita
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
