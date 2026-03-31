@@ -32,7 +32,7 @@ const TalkToSpecialistButton = () => {
       transition={{ delay: 1.5, type: "spring", stiffness: 120 }}
       className="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-40 group"
     >
-      <div className="relative bg-secondary text-secondary-foreground rounded-2xl shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 transition-all duration-300 px-4 py-3 flex flex-col items-center gap-1.5 hover:scale-105">
+      <div className="relative bg-secondary text-secondary-foreground rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 px-4 py-3 flex flex-col items-center gap-1.5 hover:scale-105">
         {/* Pulse indicator */}
         <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
