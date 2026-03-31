@@ -100,6 +100,11 @@ const NeighborhoodsSection = () => {
                         {prop.neighborhood && (
                           <p className="text-primary-foreground/70 text-sm">{prop.neighborhood}</p>
                         )}
+                        {prop.price > 0 && (
+                          <p className="text-secondary font-bold text-sm mt-1">
+                            {formatPrice(prop.price)}
+                          </p>
+                        )}
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/30">
                         <span className="bg-white/90 text-foreground px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 group-hover:scale-105 transition-transform">
@@ -155,6 +160,11 @@ const NeighborhoodsSection = () => {
               <h3 className="text-xl font-heading font-bold text-white">{currentProp.title}</h3>
               {currentProp.neighborhood && (
                 <p className="text-white/70 text-sm">{currentProp.neighborhood}</p>
+              )}
+              {currentProp.price > 0 && (
+                <p className="text-secondary font-bold text-lg mt-1">
+                  {formatPrice(currentProp.price)}
+                </p>
               )}
               <div className="flex items-center justify-center gap-3 mt-4">
                 <Button
