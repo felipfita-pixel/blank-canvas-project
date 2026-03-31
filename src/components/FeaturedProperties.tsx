@@ -36,7 +36,26 @@ const FeaturedProperties = () => {
         .eq("featured", true)
         .order("created_at", { ascending: false })
         .limit(6);
-      if (data) setProperties(data as Property[]);
+
+      // Merge DB featured + static featured (24)
+      const dbProps = (data as Property[]) || [];
+      const staticAsProps: Property[] = featuredStaticProperties.map((sp) => ({
+        id: sp.id,
+        title: sp.title,
+        neighborhood: sp.neighborhood,
+        price: sp.price,
+        bedrooms: sp.bedrooms,
+        bathrooms: sp.bathrooms,
+        area: sp.area,
+        images: sp.images,
+        featured: true,
+        transaction_type: sp.transaction_type,
+      }));
+      const merged = [
+        ...dbProps,
+        ...staticAsProps.filter((sp) => !dbProps.some((dp) => dp.title === sp.title)),
+      ];
+      setProperties(merged);
       setLoading(false);
     };
     fetch();
