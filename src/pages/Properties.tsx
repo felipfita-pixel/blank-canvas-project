@@ -224,7 +224,7 @@ const Properties = () => {
                         {propertyTypeLabels[p.property_type] || p.property_type} · {p.neighborhood || p.city}
                       </p>
                       <h3 className="font-semibold text-foreground mb-2 line-clamp-1">{p.title}</h3>
-                      <p className="text-lg font-bold text-secondary mb-4">{formatPrice(p.price)}</p>
+                      
                       <div className="flex flex-wrap items-center gap-3 text-muted-foreground text-xs mb-4">
                         {p.bedrooms ? <span className="flex items-center gap-1"><Bed className="w-4 h-4" /> {p.bedrooms} quartos</span> : null}
                         {p.bathrooms ? <span className="flex items-center gap-1"><Bath className="w-4 h-4" /> {p.bathrooms} ban.</span> : null}
