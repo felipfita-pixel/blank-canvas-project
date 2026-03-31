@@ -16,8 +16,8 @@ export interface StaticProperty {
   images: string[];
 }
 
-export const staticProperties: StaticProperty[] = [
-  {
+export const featuredStaticProperties: StaticProperty[] = [
+{
     id: "static-be-in-rio",
     title: "Be in Rio Praia Copacabana",
     description:
@@ -56,7 +56,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-32-768x616.jpg",
     ],
   },
-  {
+{
     id: "static-dias-ferreira",
     title: "Dias Ferreira Leblon Studios",
     description:
@@ -93,7 +93,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-18-768x265.jpg",
     ],
   },
-  {
+{
     id: "static-carioca-lapa",
     title: "Carioca Lapa",
     description:
@@ -132,7 +132,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-59-768x394.jpg",
     ],
   },
-  {
+{
     id: "static-agora-studios",
     title: "Agora Studios Boutique",
     description:
@@ -169,7 +169,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-56-768x545.jpg",
     ],
   },
-  {
+{
     id: "static-mare-ipanema",
     title: "Mare Ipanema",
     description:
@@ -199,7 +199,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-90-768x484.jpg",
     ],
   },
-  {
+{
     id: "static-gavi-gavea",
     title: "Gavi – Gávea + Vida",
     description:
@@ -238,7 +238,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-19-768x216.jpg",
     ],
   },
-  {
+{
     id: "static-peninsula-singular",
     title: "Peninsula Collection – Singular",
     description:
@@ -277,7 +277,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-367-768x379.jpg",
     ],
   },
-  {
+{
     id: "static-peninsula-gran-thai",
     title: "Peninsula Collection – Gran Thai",
     description:
@@ -316,7 +316,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-387.jpg",
     ],
   },
-  {
+{
     id: "static-barra-home-design",
     title: "Barra Home Design",
     description:
@@ -355,7 +355,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-110-768x430.jpg",
     ],
   },
-  {
+{
     id: "static-modo-botafogo",
     title: "Modo Botafogo",
     description:
@@ -392,7 +392,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-148-768x545.jpg",
     ],
   },
-  {
+{
     id: "static-ilhamar-beach",
     title: "Ilhamar Beach & Home",
     description:
@@ -431,7 +431,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-130-768x499.jpg",
     ],
   },
-  {
+{
     id: "static-rio-residence",
     title: "Rio+ Residence Club",
     description:
@@ -457,7 +457,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-7354-768x433.jpg",
     ],
   },
-  {
+{
     id: "static-sal-ipanema",
     title: "Sal Praia de Ipanema",
     description:
@@ -496,7 +496,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/12/foto-79.jpg",
     ],
   },
-  {
+{
     id: "static-cidade-arte",
     title: "Cidade Arte – Arte Wood",
     description:
@@ -535,7 +535,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-39-768x438.jpg",
     ],
   },
-  {
+{
     id: "static-brise-studios",
     title: "Brise Studios Design",
     description:
@@ -574,7 +574,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-77-768x429.jpg",
     ],
   },
-  {
+{
     id: "static-soul-rio",
     title: "Soul Rio – Princesa Januaria",
     description:
@@ -613,7 +613,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-97-768x348.jpg",
     ],
   },
-  {
+{
     id: "static-ceu-laranjeiras",
     title: "Céu Laranjeiras",
     description:
@@ -652,7 +652,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-117.jpg",
     ],
   },
-  {
+{
     id: "static-orla-ipanema",
     title: "Orla Ipanema",
     description:
@@ -684,7 +684,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-130-768x538.jpg",
     ],
   },
-  {
+{
     id: "static-residencial-nova-york",
     title: "Residencial Nova York",
     description:
@@ -709,7 +709,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-136-768x430.jpg",
     ],
   },
-  {
+{
     id: "static-green-park",
     title: "Green Park – Green Lake",
     description:
@@ -748,7 +748,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-156-768x469.jpg",
     ],
   },
-  {
+{
     id: "static-four-houses",
     title: "Condominio Four Houses",
     description:
@@ -777,7 +777,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-166.jpg",
     ],
   },
-  {
+{
     id: "static-ibiuna-botafogo",
     title: "Ibiuna Vista Botafogo",
     description:
@@ -812,7 +812,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-182-768x445.jpg",
     ],
   },
-  {
+{
     id: "static-gavea99",
     title: "Gávea99",
     description:
@@ -844,7 +844,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-195-768x430.jpg",
     ],
   },
-  {
+{
     id: "static-arpx-studios",
     title: "ARPX Studios Arpoador",
     description:
@@ -865,8 +865,11 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/09/NL-arpx_logotipo_1200x1200_02-4-e1758285604338-300x248.webp",
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2025/09/NL-arpx_logotipo_1200x1200_01-3-768x768.webp",
     ],
-  },
-  {
+  }
+];
+
+export const catalogStaticProperties: StaticProperty[] = [
+{
     id: "static-endless-peninsula",
     title: "Endless Península",
     description:
@@ -905,7 +908,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-230.jpg",
     ],
   },
-  {
+{
     id: "static-copa",
     title: "COPA",
     description:
@@ -942,7 +945,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-248-768x592.jpg",
     ],
   },
-  {
+{
     id: "static-grajau-samba",
     title: "Grajaú Samba Residencial",
     description:
@@ -971,7 +974,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-258.jpg",
     ],
   },
-  {
+{
     id: "static-terramarine-icarai",
     title: "Terramarine Icaraí Residence Club",
     description:
@@ -1000,7 +1003,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-268.jpg",
     ],
   },
-  {
+{
     id: "static-casa-portinari",
     title: "Casa Portinari",
     description:
@@ -1029,7 +1032,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-278.jpg",
     ],
   },
-  {
+{
     id: "static-green-park-barra",
     title: "Green Park Barra",
     description:
@@ -1058,7 +1061,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-288.jpg",
     ],
   },
-  {
+{
     id: "static-ilha-pura-astra",
     title: "Ilha Pura – Astra Smart Facilities",
     description:
@@ -1087,7 +1090,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-298.jpg",
     ],
   },
-  {
+{
     id: "static-positano-recreio",
     title: "Positano Recreio Condomínio",
     description:
@@ -1114,7 +1117,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-306.jpg",
     ],
   },
-  {
+{
     id: "static-enseada-botafogo",
     title: "Enseada Botafogo",
     description:
@@ -1143,7 +1146,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-316.jpg",
     ],
   },
-  {
+{
     id: "static-arq-life-botafogo",
     title: "Arq Life Design Botafogo",
     description:
@@ -1172,7 +1175,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-326.jpg",
     ],
   },
-  {
+{
     id: "static-orla-bothanica",
     title: "Orla Bothanica",
     description:
@@ -1199,8 +1202,7 @@ export const staticProperties: StaticProperty[] = [
       "https://nairaleiteimoveis.com.br/wp-content/uploads/2026/01/foto-334.jpg",
     ],
   },
-  // ===== Patrimovel Lançamentos (pages 1-6) =====
-  {
+{
     id: "static-ilha-pura-artefacto",
     title: "Ilha Pura - Pura Por Artefacto",
     description: "Lançamento exclusivo na Barra da Tijuca. Apartamentos de 3 e 4 quartos com plantas de 117 a 264 m², acabamentos por Artefacto, infraestrutura completa de lazer e segurança no condomínio Ilha Pura.",
@@ -1217,7 +1219,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=473&img=28709&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-soul-rio-gago-coutinho",
     title: "Soul Rio Gago Coutinho 53",
     description: "Studios, 1 e 2 quartos em Laranjeiras. Plantas de 27 a 82 m², localização privilegiada próxima ao metrô e ao Parque Guinle.",
@@ -1234,7 +1236,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=467&img=28601&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-bruma-mozak",
     title: "Bruma Mozak",
     description: "Lançamento de altíssimo padrão no Leblon. Apartamentos de 4 e 5 suítes com plantas de 227 a 415 m², acabamento premium e vista deslumbrante.",
@@ -1251,7 +1253,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=480&img=28795&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-breeze-inspire",
     title: "Breeze Inspire Residence",
     description: "Apartamentos de 2 e 3 quartos com suíte na Barra Olímpica. Plantas de 55 a 149 m², condomínio com lazer completo e fácil acesso às principais vias.",
@@ -1268,7 +1270,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=475&img=28741&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-estacao-botafogo",
     title: "Estação Botafogo",
     description: "Gardens, Studios, Double Suítes e Lojas em Botafogo. Plantas de 62 a 117 m², localização nobre próxima ao metrô.",
@@ -1285,7 +1287,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=468&img=28657&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-tide-residencial",
     title: "Tide Residencial",
     description: "Apartamentos de 1, 2 e 3 quartos no Recreio dos Bandeirantes. Plantas de 34 a 90 m², próximo à praia e com infraestrutura de lazer.",
@@ -1302,7 +1304,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=466&img=28543&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-be-in-rio-pompeu",
     title: "Be in Rio Pompeu Loureiro",
     description: "Studios e Double Studios em Copacabana. Plantas de 30 a 80 m², localização privilegiada a poucos passos da praia.",
@@ -1319,7 +1321,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=462&img=28500&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-riio-piero-lissoni",
     title: "Riio by Piero Lissoni",
     description: "Apartamentos de luxo na Barra da Tijuca assinados por Piero Lissoni. De 4 a 6 quartos, 262 a 1042 m², vista para o mar e acabamento de altíssimo padrão.",
@@ -1336,7 +1338,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=436&img=28233&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-modo-design-living",
     title: "Modo Design Living",
     description: "Studios e Double Studios em Botafogo. Plantas de 69 a 79 m², design contemporâneo e localização estratégica.",
@@ -1353,7 +1355,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=446&img=28187&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-rio-residence-park",
     title: "Rio + Residence Park",
     description: "Apartamentos de 2 quartos na Pechincha. Plantas de 43 a 47 m², condomínio com lazer completo e ótima localização.",
@@ -1370,7 +1372,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=444&img=28239&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-gavi",
     title: "Gaví",
     description: "Lançamento exclusivo na Gávea. Empreendimento de alto padrão em uma das localizações mais nobres do Rio de Janeiro.",
@@ -1387,7 +1389,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=447&img=28285&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-be-in-rio-paul-redfern",
     title: "Be in Rio Paul Redfern",
     description: "Studios e Double Suítes em Ipanema. Localização privilegiada a poucos metros da praia, design moderno e sofisticado.",
@@ -1404,7 +1406,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=440&img=28065&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-arpx-studios",
     title: "Arpx Studios",
     description: "Studios e Double Suítes no Arpoador. Plantas de 31 a 99 m², localização icônica com vista privilegiada.",
@@ -1421,7 +1423,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=428&img=27914&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ilha-pura-oro",
     title: "Ilha Pura - Oro by Ornare",
     description: "Apartamentos de 3 e 4 quartos na Barra Olímpica. Plantas de 171 a 461 m², acabamento Ornare e infraestrutura premium.",
@@ -1438,7 +1440,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=415&img=27750&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-soul-rio-barata",
     title: "Soul Rio Barata Ribeiro 573",
     description: "Apartamentos de 1 e 2 quartos em Copacabana. Plantas de 33 a 77 m², localização central e acessível.",
@@ -1455,7 +1457,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=417&img=27778&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-green-view",
     title: "Green View",
     description: "Apartamentos de 2, 3 e 4 quartos na Barra da Tijuca. Plantas de 64 a 273 m², condomínio com lazer completo e área verde.",
@@ -1472,7 +1474,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=394&img=27444&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-karioka-botafogo",
     title: "Karioka Botafogo",
     description: "Apartamentos de 2 quartos no Humaitá. Plantas de 73 a 139 m², projeto moderno em localização charmosa.",
@@ -1489,7 +1491,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=399&img=27177&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-soul-rio-alberto",
     title: "Soul Rio Alberto de Campos",
     description: "Apartamentos de 1 quarto em Ipanema. Plantas de 29 a 74 m², localização nobre próxima à praia.",
@@ -1506,7 +1508,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=393&img=27031&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-summit-vila",
     title: "Summit Vila Residences",
     description: "Apartamentos de 2 quartos com suíte em Vila Isabel. Plantas de 54 a 81 m², projeto moderno e bem localizado.",
@@ -1523,7 +1525,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=379&img=26877&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-enseada-botafogo",
     title: "Enseada Botafogo",
     description: "Apartamentos de 2 a 4 quartos em Botafogo. Plantas de 94 a 290 m², frente para a Praia de Botafogo com vista para o Pão de Açúcar.",
@@ -1540,7 +1542,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=358&img=26494&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-sal-rio",
     title: "Sal Rio Residencial",
     description: "Studios e apartamentos de 1 quarto no Centro. Plantas de 22 a 35 m², ideal para investimento ou moradia compacta.",
@@ -1557,7 +1559,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=340&img=25813&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-palms-recreio",
     title: "Palms Recreio Style Residence",
     description: "Apartamentos de 2 e 3 quartos e coberturas de 3 e 4 quartos no Recreio. Plantas de 65 a 187 m², próximo à praia.",
@@ -1574,7 +1576,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=381&img=26947&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-claris-casa-clube",
     title: "Claris Casa & Clube",
     description: "Casas de 3 e 4 suítes na Barra da Tijuca. Plantas de 318 a 580 m², condomínio fechado com clube privativo.",
@@ -1591,7 +1593,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=25&img=17530&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-oba-urca",
     title: "Oba Urca",
     description: "Apartamentos de 1 a 4 quartos na Urca. Plantas de 31 a 269 m², localização exclusiva aos pés do Pão de Açúcar.",
@@ -1608,7 +1610,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=289&img=24797&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-786-prudente",
     title: "786 Prudente",
     description: "Apartamentos de 3 quartos em Ipanema. Plantas de 167 a 330 m², alto padrão na Rua Prudente de Morais.",
@@ -1625,7 +1627,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=290&img=24851&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-cores-fatima",
     title: "Cores de Fátima",
     description: "Gardens e apartamentos de 1 e 2 quartos no Centro. Plantas de 35 a 98 m², projeto colorido e moderno.",
@@ -1642,7 +1644,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=281&img=24476&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-vista-ipanema",
     title: "Vista Ipanema Residencial",
     description: "Apartamentos de 3 e 4 quartos em Ipanema. Plantas de 173 a 346 m², vista deslumbrante e acabamento premium.",
@@ -1659,7 +1661,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=141&img=22737&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-kauai-pontal",
     title: "Kauai Pontal Oceânico",
     description: "Apartamentos de 2 a 4 quartos no Recreio dos Bandeirantes. Plantas de 58 a 155 m², condomínio com lazer completo.",
@@ -1676,7 +1678,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=111&img=22605&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-be-on-porto",
     title: "Be On Porto Residencial",
     description: "Apartamentos de 1 e 2 quartos em São Cristóvão. Plantas de 32 a 38 m², próximo à região portuária revitalizada.",
@@ -1693,7 +1695,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=120&img=22772&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-zenture-residencial",
     title: "Zenture Residencial",
     description: "Apartamentos de 3 e 4 quartos em Botafogo. Plantas de 125 a 417 m², projeto sofisticado em localização nobre.",
@@ -1710,7 +1712,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=70&img=22911&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-soho-gavea",
     title: "Soho Gávea",
     description: "Apartamentos de 1 a 3 quartos na Gávea. Plantas de 30 a 130 m², localização próxima à PUC e ao Jardim Botânico.",
@@ -1727,7 +1729,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=128&img=20547&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-enredo",
     title: "Enredo",
     description: "Studios e apartamentos de 1 quarto no Centro. Plantas de 25 a 52 m², design contemporâneo e localização central.",
@@ -1744,7 +1746,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=156&img=21299&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-jardim-barra-clube",
     title: "Jardim da Barra Condomínio Clube",
     description: "Apartamentos de 2 e 3 quartos em Jacarepaguá. Plantas de 61 a 225 m², condomínio clube com lazer completo.",
@@ -1761,7 +1763,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=3&img=22958&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-alma-ipanema",
     title: "Alma Ipanema Residencial Style",
     description: "Apartamentos de 1 e 2 quartos em Ipanema. Plantas de 58 a 196 m², na Rua Visconde de Pirajá.",
@@ -1778,7 +1780,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=36&img=23008&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ilha-pura-elos",
     title: "Ilha Pura - Elos",
     description: "Apartamentos de 2 a 4 quartos na Barra da Tijuca. Plantas de 86 a 266 m², infraestrutura completa do condomínio Ilha Pura.",
@@ -1795,7 +1797,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=22&img=17055&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-helo-ipanema",
     title: "Helô",
     description: "Apartamentos de 2 quartos em Ipanema. Plantas de 71 a 143 m², projeto elegante na Rua Redentor.",
@@ -1812,7 +1814,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=152&img=21501&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-gloria-residencial",
     title: "Glória Residencial",
     description: "Apartamentos de 2 e 3 quartos na Glória. Plantas de 77 a 311 m², vista para o Aterro do Flamengo.",
@@ -1829,7 +1831,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=138&img=23096&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-satamini-12",
     title: "Satamini 12",
     description: "Apartamentos de 1 a 3 quartos na Tijuca. Plantas de 45 a 199 m², localização privilegiada próxima ao metrô.",
@@ -1846,7 +1848,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=121&img=20320&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-concept-cyrela",
     title: "Concept by RJZ Cyrela",
     description: "Apartamentos de 3 e 4 quartos na Barra da Tijuca. Plantas de 151 a 414 m², alto padrão com assinatura Cyrela.",
@@ -1863,7 +1865,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=12&img=16588&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-casa-gabizo",
     title: "Casa Gabizo Residencial",
     description: "Apartamentos de 2 e 3 quartos na Tijuca. Plantas de 51 a 156 m², projeto moderno em bairro tradicional.",
@@ -1880,7 +1882,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=132&img=20664&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-art-houses",
     title: "Art Houses",
     description: "Casas de 4 e 5 suítes no Recreio dos Bandeirantes. Plantas de 253 a 467 m², condomínio exclusivo de casas.",
@@ -1897,7 +1899,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=73&img=18969&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-duet-barra",
     title: "Duet Barra Residence",
     description: "Apartamentos de 2 e 3 quartos em Jacarepaguá. Plantas de 52 a 68 m², condomínio com lazer e boa localização.",
@@ -1914,7 +1916,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=18&img=17542&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-nurban",
     title: "Nurban",
     description: "Apartamentos de 3 suítes em Botafogo. Plantas de 109 a 247 m², incluindo coberturas duplex.",
@@ -1931,7 +1933,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=32&img=17632&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-atlantico-golf",
     title: "Atlântico Golf Absolute Design",
     description: "Apartamentos de 2, 3 e 4 suítes na Barra da Tijuca. Plantas de 117 a 424 m², frente para o campo de golfe.",
@@ -1948,7 +1950,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=2&img=17554&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-murano-residencial",
     title: "Murano Residencial",
     description: "Apartamentos de 2 e 3 quartos no Camorim. Plantas de 56 a 66 m², condomínio com lazer e natureza.",
@@ -1965,7 +1967,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=6&img=23199&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-parque-sustentavel-gavea",
     title: "Parque Sustentável da Gávea",
     description: "Apartamentos de 1, 2 e 3 quartos na Gávea. Plantas de 37 a 115 m², projeto sustentável em localização privilegiada.",
@@ -1982,7 +1984,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=112&img=20222&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-villa-mares",
     title: "Villa Mares",
     description: "Apartamentos de 2 quartos no Recreio dos Bandeirantes. Plantas de 45 a 66 m², próximo à praia.",
@@ -1999,7 +2001,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=107&img=19995&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ipa-studios",
     title: "Ipa Studios Design",
     description: "Apartamentos de 1 quarto em Ipanema. Plantas de 39 a 111 m², design autoral na Rua Prudente de Morais.",
@@ -2016,7 +2018,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=125&img=20384&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-cora-gavea",
     title: "Cora Gávea",
     description: "Apartamentos de 2 e 3 quartos na Gávea. Plantas de 70 a 119 m², projeto elegante em bairro nobre.",
@@ -2033,8 +2035,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=63&img=23372&wd=800&ht=600&m=crop"],
   },
-  // ===== Patrimovel Lançamentos (pages 2-4) =====
-  {
+{
     id: "static-rio-residence-park",
     title: "Rio + Residence Park",
     description: "Lançamento em Pechincha com apartamentos de 2 quartos, plantas de 43 a 47 m². Ideal para quem busca praticidade e localização acessível.",
@@ -2051,7 +2052,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=444&img=28239&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-be-in-rio-paul-redfern",
     title: "be in Rio Paul Redfern",
     description: "Studios e Double Suítes em Ipanema, na Rua Paul Redfern. Plantas de 1 a 2 quartos, projeto moderno em localização privilegiada.",
@@ -2068,7 +2069,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=440&img=28065&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ilha-pura-oro-ornare",
     title: "Ilha Pura - Oro by Ornare",
     description: "Apartamentos de 3 e 4 quartos na Barra Olímpica, com plantas de 171 a 461 m². Acabamentos de alto padrão by Ornare no condomínio Ilha Pura.",
@@ -2085,7 +2086,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=415&img=27750&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-soul-rio-barata-ribeiro",
     title: "Soul Rio Barata Ribeiro 573",
     description: "Apartamentos de 1 e 2 quartos em Copacabana, na Rua Barata Ribeiro. Plantas de 33 a 77 m², projeto contemporâneo.",
@@ -2102,7 +2103,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=417&img=27778&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-green-view",
     title: "Green View",
     description: "Apartamentos de 2 a 4 quartos na Barra da Tijuca, Avenida das Américas. Plantas de 64 a 273 m², lazer completo e vista verde.",
@@ -2119,7 +2120,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=394&img=27444&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-karioka-botafogo",
     title: "Karioka Botafogo",
     description: "Apartamentos de 2 quartos no Humaitá, Rua Visconde de Caravelas. Plantas de 73 a 139 m², projeto sofisticado em bairro charmoso.",
@@ -2136,7 +2137,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=399&img=27177&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-brasil-surfe-clube",
     title: "Brasil Surfe Clube",
     description: "Empreendimento exclusivo em Búzios, na Praia Baía Formosa. Projeto diferenciado com conceito surfe e lifestyle praiano.",
@@ -2153,7 +2154,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=400&img=27195&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-soul-rio-alberto-campos",
     title: "Soul Rio Alberto de Campos",
     description: "Apartamentos de 1 quarto em Ipanema, Rua Alberto de Campos. Plantas de 29 a 74 m², localização nobre.",
@@ -2170,7 +2171,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=393&img=27031&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-villas-beach-residence",
     title: "Villas Beach Residence",
     description: "Lotes a partir de 180 m² no Recreio dos Bandeirantes. Condomínio fechado com infraestrutura completa de lazer.",
@@ -2187,7 +2188,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=461&img=28481&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-terrah-americas-clube",
     title: "Terrah Americas Clube",
     description: "Lotes de 180 a 490 m² no Recreio dos Bandeirantes. Condomínio clube com segurança e lazer completo.",
@@ -2204,7 +2205,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=382&img=26911&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-summit-vila-residences",
     title: "Summit Vila Residences",
     description: "Apartamentos de 2 quartos com suíte em Vila Isabel. Plantas de 54 a 81 m², projeto moderno em bairro tradicional.",
@@ -2221,7 +2222,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=379&img=26877&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-sal-rio-residencial",
     title: "Sal Rio Residencial",
     description: "Studios e apartamentos de 1 quarto no Centro, Rua Sacadura Cabral. Plantas de 22 a 35 m², ideal para investimento.",
@@ -2238,7 +2239,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=340&img=25813&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-origem-ciclo",
     title: "Origem Ciclo",
     description: "Lotes de 180 m² em Vargem Pequena, Estrada dos Bandeirantes. Condomínio fechado com natureza e tranquilidade.",
@@ -2255,7 +2256,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=316&img=25271&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-palms-recreio",
     title: "Palms Recreio Style Residence",
     description: "Apartamentos de 2 e 3 quartos e coberturas de 3 e 4 quartos no Recreio. Plantas de 65 a 187 m².",
@@ -2272,7 +2273,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=381&img=26947&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-claris-casa-clube",
     title: "Claris Casa & Clube",
     description: "Casas de 3 e 4 suítes na Barra da Tijuca, Avenida Prefeito Dulcídio Cardoso. Plantas de 318 a 580 m², condomínio clube exclusivo.",
@@ -2289,7 +2290,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=25&img=17530&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-786-prudente",
     title: "786 Prudente",
     description: "Apartamentos de 3 quartos em Ipanema, Rua Prudente de Morais. Plantas de 167 a 330 m², alto padrão.",
@@ -2306,7 +2307,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=290&img=24851&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-cores-fatima",
     title: "Cores de Fátima",
     description: "Gardens e apartamentos de 1 e 2 quartos no Centro, Avenida Nossa Senhora de Fátima. Plantas de 35 a 98 m².",
@@ -2323,7 +2324,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=281&img=24476&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-vista-ipanema",
     title: "Vista Ipanema Residencial",
     description: "Apartamentos de 3 e 4 quartos em Ipanema, Rua Prudente de Morais. Plantas de 173 a 346 m², vista privilegiada.",
@@ -2340,7 +2341,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=141&img=22737&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-kauai-pontal",
     title: "Kauai Pontal Oceânico",
     description: "Apartamentos de 2 a 4 quartos no Recreio dos Bandeirantes. Plantas de 58 a 155 m², projeto com vista oceânica.",
@@ -2357,7 +2358,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=111&img=22605&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-be-on-porto",
     title: "be on Porto Residencial",
     description: "Apartamentos de 1 e 2 quartos em São Cristóvão. Plantas de 32 a 38 m², ideal para investimento e moradia compacta.",
@@ -2374,7 +2375,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=120&img=22772&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-zenture-residencial",
     title: "Zenture Residencial",
     description: "Apartamentos de 3 e 4 quartos em Botafogo, Rua Sorocaba. Plantas de 125 a 417 m², projeto de alto padrão.",
@@ -2391,7 +2392,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=70&img=22911&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-soho-gavea",
     title: "Soho Gávea",
     description: "Apartamentos de 1 a 3 quartos na Gávea, Rua Marquês de São Vicente. Plantas de 30 a 130 m², localização nobre.",
@@ -2408,8 +2409,7 @@ export const staticProperties: StaticProperty[] = [
     price: 0,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=128&img=20547&wd=800&ht=600&m=crop"],
   },
-  // ========== PAGE 4 (Bairro/4) ==========
-  {
+{
     id: "static-alma-ipanema-style",
     title: "Alma Ipanema Residencial Style",
     description: "Apartamentos de 1 e 2 quartos na Rua Visconde de Pirajá, Ipanema. Lançamento com áreas de 58 a 196m².",
@@ -2426,7 +2426,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=36&img=23008&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ilha-pura-elos-2",
     title: "Ilha Pura - Elos",
     description: "Apartamentos de 2 a 4 quartos na Avenida Salvador Allende, Barra da Tijuca. Áreas de 86 a 266m².",
@@ -2443,8 +2443,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=22&img=17055&wd=800&ht=600&m=crop"],
   },
-  // ========== PAGE 5 (Bairro/5) ==========
-  {
+{
     id: "static-atlantico-golf-absolute",
     title: "Atlântico Golf Absolute Design",
     description: "Apartamentos de 2, 3 e 4 suítes na Avenida das Américas, Barra da Tijuca. Áreas de 117 a 424m².",
@@ -2461,7 +2460,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=2&img=17554&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ipa-studios-design",
     title: "Ipa Studios Design",
     description: "Apartamentos de 1 quarto na Rua Prudente de Morais, Ipanema. Áreas de 39 a 111m².",
@@ -2478,8 +2477,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=125&img=20384&wd=800&ht=600&m=crop"],
   },
-  // ========== PAGE 6 (Bairro/6) ==========
-  {
+{
     id: "static-urquiza-leblon",
     title: "Urquiza Leblon",
     description: "Studios e apartamentos de 1 quarto na Rua Professor Arthur Ramos, Leblon. Áreas de 67 a 131m².",
@@ -2496,7 +2494,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=62&img=18677&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ornato-tijuca",
     title: "Ornato Tijuca",
     description: "Apartamentos de 2, 3 e 4 quartos na Rua Dona Delfina, Tijuca. Áreas de 70 a 249m².",
@@ -2513,7 +2511,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=41&img=17941&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-we-sorocaba",
     title: "We Sorocaba",
     description: "Apartamentos de 3 e 4 quartos na Rua Sorocaba, Botafogo. Áreas de 109 a 262m².",
@@ -2530,7 +2528,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=104&img=19924&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-wave-by-yoo",
     title: "Wave by Yoo",
     description: "Apartamentos de 2 a 4 quartos na Avenida Lúcio Costa, Barra da Tijuca. Áreas de 76 a 275m².",
@@ -2547,7 +2545,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=11&img=16559&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-tie-residencial",
     title: "Tiê Residencial",
     description: "Apartamentos de 2, 3 e 4 quartos na Rua Homem de Melo, Tijuca. Áreas de 76 a 163m².",
@@ -2564,7 +2562,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=42&img=18008&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-l-art-residences",
     title: "L'Art Residences",
     description: "Apartamentos de 2 quartos na Rua Paula Brito, Andaraí. Áreas de 71 a 164m².",
@@ -2581,7 +2579,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=103&img=19901&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-be-peninsula-parque",
     title: "Be Península Parque",
     description: "Apartamentos de 2 e 3 suítes na Rua Jacarandás da Península, Barra da Tijuca. Áreas de 74 a 269m².",
@@ -2598,7 +2596,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=7&img=16507&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-easy-botafogo",
     title: "Easy Botafogo",
     description: "Apartamentos de 2 e 3 quartos na Rua Professor Álvaro Rodrigues, Botafogo. Áreas de 95 a 257m².",
@@ -2615,7 +2613,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=76&img=19037&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-canto-rio",
     title: "Canto Rio",
     description: "Studios e coberturas duplex na Rua Francisco Otaviano, Arpoador. Áreas de 36 a 109m².",
@@ -2632,8 +2630,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=60&img=18646&wd=800&ht=600&m=crop"],
   },
-  // ========== PAGE 7 (Bairro/7) ==========
-  {
+{
     id: "static-canto-mar",
     title: "Canto Mar",
     description: "Apartamentos de 4 suítes na Rua Francisco Otaviano, Arpoador. Áreas de 229 a 539m².",
@@ -2650,7 +2647,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=59&img=18588&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-azuis-mozak",
     title: "Azuis Mozak",
     description: "Apartamentos de 3 e 4 quartos na Avenida Epitácio Pessoa, Lagoa. Área de 300m².",
@@ -2667,7 +2664,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=150&img=21184&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-sambaiba-323",
     title: "Sambaíba 323",
     description: "Apartamentos de 2 e 3 quartos na Rua Sambaíba, Leblon. Áreas de 93 a 222m².",
@@ -2684,7 +2681,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=65&img=18775&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-all-jardim-oceanico",
     title: "All Jardim Oceânico",
     description: "Apartamentos de 2 e 3 quartos na Avenida Nuta James, Barra da Tijuca. Áreas de 77 a 172m².",
@@ -2701,7 +2698,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=38&img=17844&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-oceana-golf",
     title: "Oceana Golf Absolute Design",
     description: "Apartamentos de 4 suítes na Avenida Ermanno Dallari, Barra da Tijuca. Áreas de 194 a 547m².",
@@ -2718,7 +2715,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=1&img=23535&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-tom-delfim-moreira",
     title: "Tom Delfim Moreira",
     description: "Apartamentos de 4 suítes na Avenida Delfim Moreira, Leblon. Áreas de 284 a 501m².",
@@ -2735,7 +2732,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=146&img=21104&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-atmosfera-condominium",
     title: "Atmosfera Condominium Park",
     description: "Apartamentos de 3 e 4 quartos na Rua Mariz e Barros, Praça da Bandeira. Áreas de 88 a 203m².",
@@ -2752,7 +2749,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=83&img=19424&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-b-lar",
     title: "B Lar",
     description: "Apartamentos de 1 e 2 quartos na Rua Presidente Carlos de Campos, Laranjeiras. Áreas de 35 a 76m².",
@@ -2769,7 +2766,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=39&img=17878&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-orygem-acqua-home",
     title: "Orygem Acqua Home",
     description: "Apartamentos de 3 e 4 quartos na Avenida Cândido Portinari, Barra da Tijuca. Áreas de 125 a 378m².",
@@ -2786,8 +2783,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=9&img=16532&wd=800&ht=600&m=crop"],
   },
-  // ========== PAGE 8 (Bairro/8) ==========
-  {
+{
     id: "static-s-design-residencial",
     title: "S Design Residencial",
     description: "Apartamentos de 3 e 4 quartos na Rua Conde de Irajá, Botafogo. Áreas de 150 a 274m².",
@@ -2804,7 +2800,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=33&img=17658&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-epitacio-3714",
     title: "Epitácio 3714",
     description: "Apartamentos de 3 quartos na Avenida Epitácio Pessoa 3714, Lagoa. Áreas de 161 a 201m².",
@@ -2821,7 +2817,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=123&img=20612&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-playa-exclusive",
     title: "Playa Exclusive Residences",
     description: "Apartamentos de 3 e 4 quartos na Avenida Sobral Pinto, Barra da Tijuca. Áreas de 117 a 147m².",
@@ -2838,7 +2834,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=10&img=16553&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-on-the-sea-arpoador",
     title: "On The Sea Arpoador",
     description: "Apartamentos de 2 suítes na Rua Francisco Otaviano, Arpoador. Áreas de 70 a 187m².",
@@ -2855,7 +2851,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=79&img=19208&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-arte-jardim-botanico",
     title: "Arte Jardim Botânico",
     description: "Apartamentos de 2 e 3 quartos na Rua Jardim Botânico, Jardim Botânico. Áreas de 73 a 260m².",
@@ -2872,7 +2868,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=57&img=18504&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-living-sunset",
     title: "Living Sunset",
     description: "Apartamentos de 1 e 2 quartos na Estrada Coronel Pedro Corrêa, Jacarepaguá. Áreas de 34 a 55m².",
@@ -2889,7 +2885,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=13&img=16609&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-lineu-708",
     title: "Lineu 708",
     description: "Apartamentos de 4 suítes na Avenida Lineu de Paula Machado, Lagoa. Áreas de 214 a 448m².",
@@ -2906,7 +2902,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=66&img=18814&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-cyano-exclusive",
     title: "Cyano Exclusive Residences",
     description: "Apartamentos de 4 a 6 suítes na Avenida Lúcio Costa, Barra da Tijuca. Áreas de 285 a 889m².",
@@ -2923,7 +2919,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=4&img=16712&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-skylux",
     title: "Skylux",
     description: "Apartamentos de 1 quarto na Rua Visconde de Inhaúma, Centro. Áreas de 32 a 61m².",
@@ -2940,8 +2936,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=27&img=17456&wd=800&ht=600&m=crop"],
   },
-  // ========== PAGE 9 (Bairro/9) ==========
-  {
+{
     id: "static-mudra-full-living",
     title: "Mudrá Full Living",
     description: "Apartamentos de 2 e 3 quartos na Avenida Cândido Portinari, Barra da Tijuca. Áreas de 78 a 221m².",
@@ -2958,7 +2953,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=8&img=17549&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-latitud-condominium",
     title: "Latitud Condominium Design",
     description: "Apartamentos de 3 e 4 quartos na Avenida Rosauro Estellita, Barra da Tijuca. Áreas de 120 a 372m².",
@@ -2975,7 +2970,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=14&img=16846&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-like-residencial-club",
     title: "Like Residencial Club",
     description: "Apartamentos de 2 e 3 quartos na Estrada Coronel Pedro Corrêa, Jacarepaguá. Áreas de 63 a 167m².",
@@ -2992,7 +2987,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=108&img=20032&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-oka-residence-lagoa",
     title: "Oka Residence Lagoa",
     description: "Apartamentos de 3 a 5 quartos na Avenida Borges de Medeiros, Lagoa. Áreas de 164 a 439m².",
@@ -3009,7 +3004,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=81&img=19349&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-spotlight-jardim-botafogo",
     title: "Spotlight Jardim Botafogo",
     description: "Apartamentos de 3 e 4 suítes na Rua General Goes Monteiro, Botafogo. Áreas de 96 a 294m².",
@@ -3026,7 +3021,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=34&img=17694&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-east-side-meier",
     title: "East Side Méier",
     description: "Apartamentos de 2 e 3 quartos na Rua José Bonifácio, Todos os Santos. Áreas de 49 a 68m².",
@@ -3043,7 +3038,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=45&img=18153&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ilha-pura-saint-michel",
     title: "Ilha Pura - Saint Michel",
     description: "Apartamentos de 3 e 4 quartos na Avenida Salvador Allende, Barra da Tijuca. Áreas de 131 a 325m².",
@@ -3060,7 +3055,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=21&img=17053&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ilha-pura-viure",
     title: "Ilha Pura - Viure",
     description: "Apartamentos de 2 e 3 quartos na Estrada dos Bandeirantes, Barra da Tijuca. Áreas de 84 a 115m².",
@@ -3077,7 +3072,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=19&img=17551&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ilha-pura-millenio",
     title: "Ilha Pura - Millenio",
     description: "Apartamentos de 2 suítes na Avenida Abraham Medina, Barra da Tijuca. Áreas de 77 a 83m².",
@@ -3094,8 +3089,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=17&img=16727&wd=800&ht=600&m=crop"],
   },
-  // ========== PAGE 10 (Bairro/10) ==========
-  {
+{
     id: "static-riserva-golf",
     title: "Riserva Golf Vista Mare Residenziale",
     description: "Apartamentos de 4 a 6 suítes na Avenida Ermanno Dallari, Barra da Tijuca. Áreas de 266 a 1.308m².",
@@ -3112,7 +3106,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=15&img=16659&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-luzes-do-rio-candeeiro",
     title: "Luzes do Rio - Condomínio Candeeiro",
     description: "Empreendimento na Via Binário do Porto, São Cristóvão.",
@@ -3129,7 +3123,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["https://consultor.patrimovel.com.br/felipefita/imoveis/Venda/Tipo/Lan%C3%A7amento/Bairro/10/busca.aspx"],
   },
-  {
+{
     id: "static-madri-residencial",
     title: "Madri Residencial",
     description: "Empreendimento em Rocha Miranda.",
@@ -3146,7 +3140,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=455&img=28406&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-dias-ferreira-studios",
     title: "Dias Ferreira Leblon Studios",
     description: "Studios na Rua Dias Ferreira, Leblon.",
@@ -3163,7 +3157,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=454&img=28406&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-fases-residencial",
     title: "Fases Residencial",
     description: "Empreendimento na Rua do Bispo, Tijuca.",
@@ -3180,7 +3174,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=452&img=28431&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-ar-ipanema",
     title: "AR Ipanema",
     description: "Empreendimento na Rua Joaquim Nabuco, Ipanema.",
@@ -3197,7 +3191,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=445&img=28152&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-cidade-arte-wood",
     title: "Cidade Arte - Arte Wood",
     description: "Empreendimento na Avenida Antônio Gallotti, Barra Olímpica.",
@@ -3214,7 +3208,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=443&img=28161&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-green-lake",
     title: "Green Lake",
     description: "Empreendimento na Barra da Tijuca.",
@@ -3231,8 +3225,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=433&img=28011&wd=800&ht=600&m=crop"],
   },
-  // ========== PAGE 11 (Bairro/11) ==========
-  {
+{
     id: "static-soul-rio-princesa",
     title: "Soul Rio Princesa Januária",
     description: "Empreendimento na Rua Princesa Januária, Flamengo.",
@@ -3249,7 +3242,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=432&img=28264&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-soul-rio-fatima",
     title: "Soul Rio Nossa Senhora de Fátima",
     description: "Empreendimento na Avenida Nossa Senhora de Fátima, Centro.",
@@ -3266,7 +3259,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=430&img=27941&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-orla-ipanema-residencial",
     title: "Orla Ipanema Residencial",
     description: "Empreendimento na Rua Prudente de Morais, Ipanema.",
@@ -3283,7 +3276,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=429&img=28049&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-cop4-studios",
     title: "Cop4 Studios",
     description: "Studios na Avenida Nossa Senhora de Copacabana, Copacabana.",
@@ -3300,7 +3293,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=425&img=27887&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-guilhem-mozak",
     title: "Guilhem Mozak",
     description: "Apartamentos de 1 e 2 quartos na Rua Almirante Guilhem, Leblon. Áreas de 32 a 77m².",
@@ -3317,7 +3310,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=422&img=27831&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-be-in-rio-nascimento",
     title: "Be in Rio Nascimento Silva 387",
     description: "Studios, gardens, double suites e coberturas na Rua Nascimento Silva, Ipanema.",
@@ -3334,7 +3327,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=418&img=27698&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-onlife",
     title: "Onlife",
     description: "Empreendimento na Estrada dos Bandeirantes, Jacarepaguá.",
@@ -3351,7 +3344,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=413&img=27598&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-be-in-rio-prudente",
     title: "Be in Rio Prudente 589",
     description: "Studios e double studios na Rua Prudente de Morais, Ipanema. Áreas de 38 a 83m².",
@@ -3368,7 +3361,7 @@ export const staticProperties: StaticProperty[] = [
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=412&img=27574&wd=800&ht=600&m=crop"],
   },
-  {
+{
     id: "static-dias-downtown-studios",
     title: "Dias Downtown Studios",
     description: "Studios na Rua Gonçalves Dias, Centro. Áreas de 23 a 43m².",
@@ -3384,8 +3377,12 @@ export const staticProperties: StaticProperty[] = [
     transaction_type: "Venda",
     parking_spots: 1,
     images: ["http://cdn.patrimovel.com.br//ImagemLocalCacher.ashx?use=emp&id=409&img=27639&wd=800&ht=600&m=crop"],
-  },
+  }
 ];
 
-export const getStaticProperty = (id: string) =>
+// Combined for backward compatibility
+export const staticProperties: StaticProperty[] = [...featuredStaticProperties, ...catalogStaticProperties];
+
+// Helper to find a static property by ID
+export const getStaticProperty = (id: string): StaticProperty | undefined =>
   staticProperties.find((p) => p.id === id);
