@@ -219,10 +219,6 @@ const AdminContent = () => {
                     />
                   )}
 
-                  {/* Neighborhoods guide - imóveis vêm automaticamente do banco */}
-                  {key === "neighborhoods_guide" && (
-                    <p className="text-sm text-muted-foreground">Os imóveis desta seção são carregados automaticamente do cadastro de imóveis.</p>
-                  )}
 
                   {/* Testimonials */}
                   {key === "testimonials" && (
