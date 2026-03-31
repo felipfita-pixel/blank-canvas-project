@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Bed, Bath, Maximize, Car, Search, SlidersHorizontal } from "lucide-react";
+import ImageLightbox from "@/components/ImageLightbox";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {

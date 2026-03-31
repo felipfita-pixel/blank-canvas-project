@@ -5,6 +5,7 @@ import { featuredStaticProperties } from "@/data/staticProperties";
 import { Bed, Bath, Maximize } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import ImageLightbox from "@/components/ImageLightbox";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
