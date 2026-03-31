@@ -159,9 +159,9 @@ const NeighborhoodsSection = () => {
               {currentProp.neighborhood && (
                 <p className="text-white/70 text-sm">{currentProp.neighborhood}</p>
               )}
-              {formatPrice(currentProp.price) && (
-                <p className="text-secondary font-bold text-lg mt-1">{formatPrice(currentProp.price)}</p>
-              )}
+              <p className="text-secondary font-bold text-lg mt-1">
+                {formatPrice(currentProp.price) || "Sob consulta"}
+              </p>
               <div className="flex items-center justify-center gap-3 mt-4">
                 <Button
                   onClick={() => { setLightboxOpen(false); navigate(`/imovel/${currentProp.id}`); }}
