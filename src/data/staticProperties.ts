@@ -3568,3 +3568,9 @@ export const catalogStaticProperties: StaticProperty[] = [
   { id: "pat-apartamento-apartamento-padr-o-186", title: "Apartamento - Apartamento Padrão", description: "Apartamento - Apartamento Padrão", property_type: "apartment", transaction_type: "sale", price: 0, area: 0, bedrooms: 0, bathrooms: 0, parking_spots: 0, neighborhood: "", city: "Rio de Janeiro", address: "", state: "RJ", images: [""] },
   { id: "pat-apartamento-apartamento-padr-o-187", title: "Apartamento - Apartamento Padrão", description: "Apartamento - Apartamento Padrão", property_type: "apartment", transaction_type: "sale", price: 0, area: 0, bedrooms: 0, bathrooms: 0, parking_spots: 0, neighborhood: "", city: "Rio de Janeiro", address: "", state: "RJ", images: ["https://cdn.patrimovel.com.br//ImagemLocal.ashx?use=avu&nologo=yep&i=339467.jpg&c=CO410399&wd=410&ht=410&m=prop"] }
 ];
+
+export const staticProperties = [...featuredStaticProperties, ...catalogStaticProperties];
+
+export function getStaticProperty(id: string): StaticProperty | undefined {
+  return staticProperties.find((p) => p.id === id);
+}
