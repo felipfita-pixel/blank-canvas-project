@@ -112,6 +112,23 @@ const Header = () => {
               >
                 Contato
               </button>
+              {isAdmin ? (
+                <Link
+                  to="/admin"
+                  className="block text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Painel Admin
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="block text-primary-foreground/50 hover:text-primary-foreground/80 py-2.5 px-3 rounded-lg transition-colors text-sm"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Área Restrita
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
