@@ -256,6 +256,7 @@ const Properties = () => {
       <Footer />
       <WhatsAppButton />
       <ChatWidget />
+      <TalkToSpecialistButton />
     </div>
   );
 };
