@@ -410,7 +410,13 @@ const AboutSection = () => {
                         className="rounded-lg overflow-hidden group cursor-pointer shadow-sm bg-card border border-border"
                         onClick={() => navigate(`/imovel/${property.id}`)}
                       >
-                        <div className="relative aspect-[4/3] overflow-hidden">
+                        <div
+                          className="relative aspect-[4/3] overflow-hidden cursor-zoom-in"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            openLightbox(property);
+                          }}
+                        >
                           <img
                             src={image}
                             alt={property.title}
@@ -425,6 +431,12 @@ const AboutSection = () => {
                           </div>
                           <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground">
                             <Home className="w-3 h-3" />
+                          </div>
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/30">
+                            <span className="bg-background/90 text-foreground px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 group-hover:scale-105 transition-transform">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+                              Ampliar fotos
+                            </span>
                           </div>
                         </div>
                         <div className="p-2 space-y-1">
