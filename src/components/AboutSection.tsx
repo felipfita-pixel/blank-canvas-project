@@ -484,6 +484,15 @@ const AboutSection = () => {
               )}
             </div>
 
+            <ImageLightbox
+              images={lightboxImages}
+              currentIndex={lightboxIndex}
+              isOpen={lightboxOpen}
+              onClose={() => setLightboxOpen(false)}
+              onNavigate={setLightboxIndex}
+              propertyTitle={lightboxTitle}
+            />
+
             <ScheduleModal open={scheduleOpen} onOpenChange={setScheduleOpen} />
           </div>
 
