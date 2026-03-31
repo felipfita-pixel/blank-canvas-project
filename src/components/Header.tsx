@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Building } from "lucide-react";
+import { Menu, X, Building, Settings } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -48,6 +50,11 @@ const Header = () => {
             </span>
           </div>
         </Link>
+        {isAdmin && (
+          <Link to="/admin" className="ml-2 p-1.5 rounded-lg text-secondary/70 hover:text-secondary transition-colors" title="Painel Admin">
+            <Settings className="w-4 h-4" />
+          </Link>
+        )}
 
         <nav className="hidden md:flex items-center gap-8">
           <Link
