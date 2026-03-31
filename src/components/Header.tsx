@@ -9,6 +9,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
