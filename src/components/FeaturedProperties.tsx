@@ -27,6 +27,18 @@ const formatPrice = (price: number) =>
 const FeaturedProperties = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = (p: Property, imgIndex = 0) => {
+    const imgs = p.images && p.images.length > 0
+      ? p.images.map((src, i) => ({ src, alt: `${p.title} - Foto ${i + 1}` }))
+      : [{ src: propertyCondo, alt: p.title }];
+    setLightboxImages(imgs);
+    setLightboxIndex(imgIndex);
+    setLightboxOpen(true);
+  };
 
   useEffect(() => {
     const fetch = async () => {
