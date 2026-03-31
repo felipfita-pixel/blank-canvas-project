@@ -64,9 +64,8 @@ const HeroSection = () => {
           </Button>
 
           <Button
-            variant="outline"
             onClick={handleContact}
-            className="border-primary-foreground/20 text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/5 rounded-lg px-8 py-3 transition-all duration-300 text-sm sm:text-base bg-transparent"
+            className="bg-primary-foreground text-primary font-semibold rounded-lg px-8 py-3 hover:bg-primary-foreground/90 shadow-md transition-all duration-300 text-sm sm:text-base"
           >
             Falar Conosco
           </Button>
