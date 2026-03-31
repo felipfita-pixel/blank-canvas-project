@@ -76,23 +76,6 @@ const NeighborhoodsSection = () => {
   return (
     <section id="neighborhoods" className="section-padding bg-cream">
       <div className="container-main text-center">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-3">
-          <h2 className="text-3xl font-heading font-bold text-primary italic">{section.title}</h2>
-          <div className="flex items-center gap-2">
-            <Button size="sm" className="bg-emerald-600 text-primary-foreground hover:bg-emerald-700 rounded-lg hover:scale-105 transition-all" onClick={() => navigate("/imoveis")}>
-              <Home className="w-4 h-4 mr-1" />
-              Todos os Imóveis
-            </Button>
-            <a href="https://wa.me/5521975316631?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20im%C3%B3veis." target="_blank" rel="noopener noreferrer">
-              <Button size="sm" className="bg-[#25D366] text-primary-foreground hover:bg-[#1da851] rounded-lg hover:scale-105 transition-all">
-                <MessageCircle className="w-4 h-4 mr-1" />
-                WhatsApp
-              </Button>
-            </a>
-          </div>
-        </div>
-        <p className="text-muted-foreground mb-10 max-w-xl mx-auto">{section.subtitle}</p>
-
         {properties.length === 0 ? (
           <p className="text-sm text-muted-foreground py-12">Nenhum imóvel disponível no momento.</p>
         ) : (
