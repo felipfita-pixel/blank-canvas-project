@@ -36,7 +36,7 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container-main flex items-center justify-center gap-8 px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
+      <div className="container-main flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
         <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
           <Building className="w-8 h-8 text-secondary" />
           <div className="flex flex-col leading-none">
