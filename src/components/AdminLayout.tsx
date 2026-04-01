@@ -1,7 +1,7 @@
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
-  LayoutDashboard, Users, Building2, FileText, Mail, ShieldCheck, LogOut, Menu, Settings, Landmark, Home,
+  LayoutDashboard, Users, Building2, FileText, Mail, ShieldCheck, LogOut, Menu, Settings, Landmark, Home, MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
