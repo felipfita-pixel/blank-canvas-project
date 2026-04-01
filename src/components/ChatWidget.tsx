@@ -333,20 +333,36 @@ const ChatWidget = () => {
         aria-hidden="true"
       />
 
-      {/* Visible floating chat button */}
+      {/* Floating buttons side by side */}
       {!open && (
-        <motion.button
-          onClick={() => setOpen(true)}
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
-          title="Chat com Corretor"
-        >
-          <MessageCircle className="w-7 h-7" />
-        </motion.button>
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+          <motion.a
+            href="https://wa.me/5521975316631?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20im%C3%B3veis."
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 1, type: "spring", stiffness: 200 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-14 h-14 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
+            title="WhatsApp"
+          >
+            <Phone className="w-6 h-6" />
+          </motion.a>
+          <motion.button
+            onClick={() => setOpen(true)}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-14 h-14 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
+            title="Chat com Corretor"
+          >
+            <MessageCircle className="w-6 h-6" />
+          </motion.button>
+        </div>
       )}
 
       <AnimatePresence>
