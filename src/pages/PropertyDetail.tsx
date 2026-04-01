@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatWidget from "@/components/ChatWidget";
-import TalkToSpecialistButton from "@/components/TalkToSpecialistButton";
+
 import BrokerChatPanel from "@/components/BrokerChatPanel";
 import ImageLightbox from "@/components/ImageLightbox";
 import { Button } from "@/components/ui/button";
