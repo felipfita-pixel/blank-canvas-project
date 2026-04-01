@@ -1,60 +1,119 @@
 
 
-## Plano: Implementar Chat ao Vivo Funcional
+## Plano: Chat Avançado — Atribuição, Status Online, Notificações e Histórico
 
-### Problemas Identificados
+### Resumo
 
-1. **Clientes não conseguem ler respostas dos corretores** — não existe política RLS de SELECT para usuários anônimos; o cliente insere mensagens mas não recebe as respostas
-2. **Administradores não têm acesso ao painel de chat** — o `BrokerChatPanel` só aparece para corretores aprovados, admins ficam sem acesso
-3. **Sem mensagem automática quando ninguém está online** — o cliente fica sem feedback
-4. **E-mail de notificação ainda vai para o endereço antigo** (`felipfita@gmail.com`)
-5. **Botão "IA" redundante** — faz exatamente o mesmo que o botão de chat
+Implementar sistema de atribuição de conversas ("Assumir"), status online do corretor, indicador de digitação, notificação sonora e página dedicada de histórico de chat no admin.
 
 ---
 
-### Alterações
+### 1. Migração SQL — Novos campos e tabela de presença
 
-#### 1. Migração SQL — Permitir clientes lerem suas conversas
-Adicionar política RLS de SELECT na tabela `chat_messages` para que qualquer pessoa possa ler mensagens de uma conversa específica (o `conversation_id` funciona como token de acesso):
-
+**Tabela `chat_messages`** — adicionar coluna `claimed_by`:
 ```sql
-CREATE POLICY "Anyone can read own conversation"
-ON public.chat_messages FOR SELECT
-TO public
-USING (true);
+ALTER TABLE public.chat_messages
+  ADD COLUMN IF NOT EXISTS claimed_by uuid REFERENCES auth.users(id);
 ```
-Nota: como o `conversation_id` é gerado aleatoriamente no cliente e funciona como um segredo compartilhado, permitir SELECT público é aceitável (as mensagens não contêm dados sensíveis além do contexto da conversa).
+Isso permite marcar qual corretor "assumiu" a conversa. A atribuição é por `conversation_id` — quando um corretor assume, todas as mensagens futuras daquele `conversation_id` são associadas a ele.
 
-#### 2. `src/components/ChatWidget.tsx` — Mensagem automática de ausência
-- Após o cliente enviar a **primeira mensagem**, consultar `brokers_public` para verificar se há corretores aprovados
-- Se não houver corretores online/aprovados, inserir automaticamente uma mensagem do sistema: *"Obrigado pelo contato! No momento nossos corretores não estão online, mas responderemos o mais breve possível. Fique à vontade para deixar sua mensagem."*
-- Atualizar o e-mail de notificação de `felipfita@gmail.com` para `felipe@corretoresrj.com`
+**Nova tabela `broker_presence`** — rastrear status online:
+```sql
+CREATE TABLE public.broker_presence (
+  user_id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  is_online boolean NOT NULL DEFAULT false,
+  last_seen_at timestamptz NOT NULL DEFAULT now(),
+  is_typing_conversation text DEFAULT ''
+);
+ALTER TABLE public.broker_presence ENABLE ROW LEVEL SECURITY;
 
-#### 3. `src/components/BrokerChatPanel.tsx` — Acesso para admins
-- Além de verificar se o usuário é um corretor aprovado, verificar também se é admin (`useAuth().isAdmin`)
-- Admins veem **todas** as conversas (sem filtro de `broker_id`)
-- Admins podem responder como "Administrador" quando não possuem perfil de corretor
+-- Qualquer um pode ver presença (para mostrar status ao cliente)
+CREATE POLICY "Anyone can read presence" ON public.broker_presence FOR SELECT TO public USING (true);
+-- Corretor/admin pode atualizar própria presença
+CREATE POLICY "Users update own presence" ON public.broker_presence FOR UPDATE TO authenticated USING (auth.uid() = user_id);
+CREATE POLICY "Users insert own presence" ON public.broker_presence FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
+```
 
-#### 4. `src/components/WhatsAppButton.tsx` — Remover botão IA duplicado
-- Remover o terceiro botão ("IA Especialista") que é idêntico ao botão de chat
-- Manter apenas WhatsApp e Chat
-
-#### 5. `src/pages/Properties.tsx` e `src/pages/PropertyDetail.tsx` — Adicionar BrokerChatPanel
-- Importar e renderizar `BrokerChatPanel` nessas páginas para que corretores/admins possam atender de qualquer tela
+**Publicar `broker_presence` no realtime**:
+```sql
+ALTER PUBLICATION supabase_realtime ADD TABLE broker_presence;
+```
 
 ---
 
-### Resumo do fluxo após implementação
+### 2. `src/hooks/useBrokerPresence.ts` — Hook de presença
 
-```text
-CLIENTE                          CORRETOR/ADMIN
-  |                                    |
-  |-- Abre chat, preenche dados ------>|
-  |-- Envia mensagem ----------------->|
-  |                                    |-- Notificação por e-mail
-  |<-- Msg automática (se offline) ----|
-  |                                    |-- Vê conversa no BrokerChatPanel
-  |<-- Resposta em tempo real ---------|-- Responde pelo painel
-  |-- Continua conversa ------------->|
-```
+- No mount, fazer `upsert` em `broker_presence` com `is_online: true`
+- Heartbeat a cada 30s atualizando `last_seen_at`
+- No unmount / `beforeunload`, marcar `is_online: false`
+- Exportar função `setTyping(conversationId)` que atualiza `is_typing_conversation`
+
+---
+
+### 3. `src/components/BrokerChatPanel.tsx` — Botão "Assumir" e melhorias
+
+**Atribuição de conversa:**
+- Conversas sem `claimed_by` aparecem para todos os corretores com badge "Nova"
+- Ao clicar em uma conversa não assumida, mostrar botão **"Assumir Conversa"** no topo
+- Ao assumir: `UPDATE chat_messages SET claimed_by = user_id WHERE conversation_id = X`
+- Conversas já assumidas por outro corretor ficam ocultas (exceto para admin)
+- Admin pode ver todas e tem botão "Reatribuir" para mudar o dono
+
+**Indicador de digitação:**
+- Usar hook `useBrokerPresence` para atualizar `is_typing_conversation` ao digitar
+- Mostrar "Cliente digitando..." usando realtime subscription na `broker_presence` (no futuro, adicionar presença do cliente também)
+
+**Notificação sonora:**
+- Tocar um som curto (`/notification.mp3`) quando chega mensagem nova de cliente
+- Usar `Audio` API nativa do browser
+
+**Status online dos corretores:**
+- Na lista de conversas, mostrar bolinha verde/cinza ao lado do nome do corretor atribuído
+
+---
+
+### 4. `src/components/ChatWidget.tsx` — Status online para cliente
+
+- Ao abrir o chat, consultar `broker_presence` para verificar se há corretores online
+- Mostrar indicador "🟢 Corretores online" ou "⚪ Corretores offline" no header do chat
+- Mostrar "Corretor está digitando..." quando `is_typing_conversation` bate com o `conversationId`
+
+---
+
+### 5. `src/pages/admin/AdminChatHistory.tsx` — Página de histórico no admin
+
+Nova página com:
+- Lista de todas as conversas com filtros: por corretor, data, status (ativa/encerrada)
+- Busca por nome/email do cliente
+- Visualização completa do histórico de cada conversa
+- Indicação de qual corretor atendeu
+
+---
+
+### 6. Rota e navegação
+
+**`src/App.tsx`**: Adicionar rota `/admin/chat` com `AdminChatHistory`
+
+**`src/components/AdminLayout.tsx`**: Adicionar item "Chat ao Vivo" no menu lateral com ícone `MessageSquare`
+
+---
+
+### 7. Arquivo de áudio
+
+Adicionar `public/notification.mp3` — um som curto de notificação (gerar via script ou usar som padrão do sistema)
+
+---
+
+### Arquivos modificados/criados
+
+| Arquivo | Ação |
+|---|---|
+| Migração SQL | Criar (claimed_by + broker_presence) |
+| `src/hooks/useBrokerPresence.ts` | Criar |
+| `src/components/BrokerChatPanel.tsx` | Modificar (assumir, som, typing) |
+| `src/components/ChatWidget.tsx` | Modificar (status online, typing) |
+| `src/pages/admin/AdminChatHistory.tsx` | Criar |
+| `src/App.tsx` | Adicionar rota /admin/chat |
+| `src/components/AdminLayout.tsx` | Adicionar menu "Chat ao Vivo" |
+| `public/notification.mp3` | Criar |
 
