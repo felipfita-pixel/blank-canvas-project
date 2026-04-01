@@ -13,7 +13,6 @@ import NeighborhoodsSection from "@/components/NeighborhoodsSection";
 import ContactSection from "@/components/ContactSection";
 
 import ChatWidget from "@/components/ChatWidget";
-import BrokerChatPanel from "@/components/BrokerChatPanel";
 
 
 const Index = () => {
@@ -46,7 +45,6 @@ const Index = () => {
       <WhereWeOperate />
       
       <ChatWidget />
-      <BrokerChatPanel />
       
     </div>
   );

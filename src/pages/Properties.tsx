@@ -6,8 +6,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import ChatWidget from "@/components/ChatWidget";
-
-import BrokerChatPanel from "@/components/BrokerChatPanel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -262,8 +260,6 @@ const Properties = () => {
       <Footer />
       
       <ChatWidget />
-      
-      <BrokerChatPanel />
     </div>
   );
 };

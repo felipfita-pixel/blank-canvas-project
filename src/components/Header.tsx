@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Building, Settings } from "lucide-react";
+import { Menu, X, Building, Settings, LogIn, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAdmin } = useAuth();
+  const { user, loading, isAdmin, signOut } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -25,6 +26,68 @@ const Header = () => {
     }
     sessionStorage.setItem("pendingScrollSection", sectionId);
     navigate("/");
+  };
+
+  const handleSignOut = async () => {
+    setMobileOpen(false);
+    await signOut();
+    navigate("/");
+  };
+
+  const renderAuthActions = (mobile = false) => {
+    if (loading) return null;
+
+    const sharedLoginClassName = mobile
+      ? "w-full justify-start rounded-lg px-3"
+      : "h-9 rounded-full px-4";
+
+    const sharedGhostClassName = mobile
+      ? "w-full justify-start rounded-lg px-3 text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+      : "h-9 rounded-full px-4 text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground";
+
+    if (!user) {
+      return (
+        <>
+          <Button variant="ghost" asChild className={sharedGhostClassName}>
+            <Link to="/login" state={{ roleHint: "broker" }} onClick={() => setMobileOpen(false)}>
+              <LogIn className="w-4 h-4" />
+              Login Corretor
+            </Link>
+          </Button>
+          <Button variant="secondary" asChild className={sharedLoginClassName}>
+            <Link to="/login" state={{ roleHint: "admin" }} onClick={() => setMobileOpen(false)}>
+              <Settings className="w-4 h-4" />
+              Painel Admin
+            </Link>
+          </Button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {isAdmin && (
+          <Button variant="secondary" asChild className={sharedLoginClassName}>
+            <Link to="/admin" onClick={() => setMobileOpen(false)}>
+              <Settings className="w-4 h-4" />
+              Painel Admin
+            </Link>
+          </Button>
+        )}
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={() => void handleSignOut()}
+          className={mobile
+            ? "w-full justify-start rounded-lg px-3 text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+            : "h-9 rounded-full border border-primary-foreground/15 px-4 text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+          }
+        >
+          <LogOut className="w-4 h-4" />
+          Sair
+        </Button>
+      </>
+    );
   };
 
   return (
@@ -65,18 +128,7 @@ const Header = () => {
           >
             Contato
           </button>
-          {isAdmin ? (
-            <Link to="/admin" className="p-1.5 rounded-lg text-secondary/70 hover:text-secondary transition-colors" title="Painel Admin">
-              <Settings className="w-4 h-4" />
-            </Link>
-          ) : (
-            <Link
-              to="/login"
-              className="text-sm text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors duration-300 font-body"
-            >
-              Área Restrita
-            </Link>
-          )}
+          <div className="flex items-center gap-2">{renderAuthActions()}</div>
         </nav>
 
         <button
@@ -112,23 +164,7 @@ const Header = () => {
               >
                 Contato
               </button>
-              {isAdmin ? (
-                <Link
-                  to="/admin"
-                  className="block text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Painel Admin
-                </Link>
-              ) : (
-                <Link
-                  to="/login"
-                  className="block text-primary-foreground/50 hover:text-primary-foreground/80 py-2.5 px-3 rounded-lg transition-colors text-sm"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Área Restrita
-                </Link>
-              )}
+              <div className="space-y-1 pt-2">{renderAuthActions(true)}</div>
             </div>
           </motion.div>
         )}
