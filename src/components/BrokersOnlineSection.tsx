@@ -12,6 +12,7 @@ interface Broker {
   neighborhoods: string[] | null;
   isBot: boolean;
   isAttending: boolean;
+  isRealOnline?: boolean;
 }
 
 const BOT_FIRST_NAMES = [
