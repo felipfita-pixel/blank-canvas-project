@@ -335,14 +335,14 @@ const ChatWidget = () => {
 
       {/* Floating buttons side by side */}
       {!open && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+        <div className="fixed bottom-6 right-6 z-[9999] flex items-center gap-3">
           <motion.a
             href="https://wa.me/5521975316631?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20im%C3%B3veis."
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 1, type: "spring", stiffness: 200 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             className="w-14 h-14 rounded-full bg-whatsapp text-whatsapp-foreground shadow-lg hover:bg-whatsapp-hover hover:shadow-xl flex items-center justify-center transition-all"
@@ -352,9 +352,9 @@ const ChatWidget = () => {
           </motion.a>
           <motion.button
             onClick={() => setOpen(true)}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.4 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             className="w-14 h-14 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
