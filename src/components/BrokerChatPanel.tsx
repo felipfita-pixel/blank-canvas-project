@@ -270,8 +270,10 @@ const BrokerChatPanel = () => {
       {/* Floating broker chat button */}
       <button
         onClick={() => setMinimized(!minimized)}
-        className="fixed top-20 right-4 z-50 w-12 h-12 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+        data-broker-panel-trigger
+        className="hidden"
         title="Painel de Atendimento Online"
+      >
       >
         <MessageSquare className="w-5 h-5" />
         {totalUnread > 0 && (
