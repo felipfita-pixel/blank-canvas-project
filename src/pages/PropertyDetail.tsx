@@ -6,8 +6,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import ChatWidget from "@/components/ChatWidget";
-
-import BrokerChatPanel from "@/components/BrokerChatPanel";
 import ImageLightbox from "@/components/ImageLightbox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -340,8 +338,6 @@ const PropertyDetail = () => {
       <Footer />
       
       <ChatWidget />
-      
-      <BrokerChatPanel />
     </div>
   );
 };

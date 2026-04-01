@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,14 +7,34 @@ import { toast } from "sonner";
 import { LogIn, Eye, EyeOff } from "lucide-react";
 import CustomCaptcha, { type CustomCaptchaRef } from "@/components/CustomCaptcha";
 
+type LoginLocationState = {
+  roleHint?: "broker" | "admin";
+};
+
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const captchaRef = useRef<CustomCaptchaRef>(null);
+  const roleHint = (location.state as LoginLocationState | null)?.roleHint;
+
+  const loginTitle =
+    roleHint === "admin"
+      ? "Acesso do Administrador"
+      : roleHint === "broker"
+        ? "Acesso do Corretor"
+        : "Acesso de Corretores e Administradores";
+
+  const loginDescription =
+    roleHint === "admin"
+      ? "Faça login para acessar o painel de controle"
+      : roleHint === "broker"
+        ? "Faça login para acessar seu atendimento"
+        : "Faça login para acessar sua área";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,10 +78,10 @@ const Login = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-heading font-bold text-primary-foreground">
-            Painel Administrativo
+            {loginTitle}
           </h1>
           <p className="text-primary-foreground/60 mt-2 font-body">
-            Faça login para acessar o painel
+            {loginDescription}
           </p>
         </div>
 
