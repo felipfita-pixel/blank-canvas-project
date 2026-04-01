@@ -337,6 +337,7 @@ const PropertyDetail = () => {
       <WhatsAppButton />
       <ChatWidget />
       <TalkToSpecialistButton />
+      <BrokerChatPanel />
     </div>
   );
 };

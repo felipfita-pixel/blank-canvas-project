@@ -152,20 +152,29 @@ const BrokerChatPanel = () => {
     if (!selectedConv || !brokerId) return;
 
     setLoading(true);
-    // Get broker name
-    const { data: brokerData } = await supabase.from("brokers").select("full_name").eq("id", brokerId).maybeSingle();
-
-    const { error } = await supabase.from("chat_messages").insert({
+    
+    let senderName = "Administrador";
+    const insertData: Record<string, unknown> = {
       conversation_id: selectedConv,
       message: msgText,
       is_from_client: false,
-      broker_id: brokerId,
-      sender_name: brokerData?.full_name || "Corretor",
+      sender_name: senderName,
       sender_email: "",
       sender_phone: "",
       file_url: fileUrl || "",
       file_name: fileName || "",
       file_type: fileType || "",
+    };
+
+    if (!isAdminOnly) {
+      // Get broker name
+      const { data: brokerData } = await supabase.from("brokers").select("full_name").eq("id", brokerId!).maybeSingle();
+      senderName = brokerData?.full_name || "Corretor";
+      insertData.sender_name = senderName;
+      insertData.broker_id = brokerId;
+    }
+
+    const { error } = await supabase.from("chat_messages").insert(insertData);
     });
     setLoading(false);
     if (error) {

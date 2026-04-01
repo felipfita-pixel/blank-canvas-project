@@ -263,6 +263,7 @@ const Properties = () => {
       <WhatsAppButton />
       <ChatWidget />
       <TalkToSpecialistButton />
+      <BrokerChatPanel />
     </div>
   );
 };
