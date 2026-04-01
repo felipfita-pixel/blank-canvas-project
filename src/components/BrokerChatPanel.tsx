@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { MessageSquare, Send, Loader2, Paperclip, X, User, Clock, Shield, Circle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -35,7 +36,8 @@ interface ChatMsg {
 const notificationSound = typeof window !== "undefined" ? new Audio("/notification.wav") : null;
 
 const BrokerChatPanel = () => {
-  const { user, isAdmin } = useAuth();
+  const navigate = useNavigate();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const { setTyping } = useBrokerPresence();
   const [brokerId, setBrokerId] = useState<string | null>(null);
   const [isAdminOnly, setIsAdminOnly] = useState(false);
@@ -59,18 +61,46 @@ const BrokerChatPanel = () => {
 
   // Get broker ID for current user (or set admin-only mode)
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      setBrokerId(null);
+      setIsAdminOnly(false);
+      setConversations([]);
+      setSelectedConv(null);
+      setMessages([]);
+      return;
+    }
+
     const fetchBroker = async () => {
       const { data } = await supabase.from("brokers").select("id").eq("user_id", user.id).eq("status", "approved").maybeSingle();
       if (data) {
+        setIsAdminOnly(false);
         setBrokerId(data.id);
       } else if (isAdmin) {
         setIsAdminOnly(true);
         setBrokerId("admin");
+      } else {
+        setIsAdminOnly(false);
+        setBrokerId(null);
       }
     };
     fetchBroker();
   }, [user, isAdmin]);
+
+  const handleTogglePanel = () => {
+    if (authLoading) return;
+
+    if (brokerId) {
+      setMinimized(!minimized);
+      return;
+    }
+
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    toast.error("Acesso restrito a administradores e corretores aprovados.");
+  };
 
   // Fetch conversations
   const fetchConversations = useCallback(async () => {
@@ -260,19 +290,20 @@ const BrokerChatPanel = () => {
   const formatTime = (d: string) => new Date(d).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
   const totalUnread = conversations.reduce((a, c) => a + c.unread, 0);
 
-  if (!brokerId) return null;
-
   const selectedConvData = conversations.find(c => c.conversation_id === selectedConv);
   const isUnclaimed = selectedConvData && !selectedConvData.claimed_by;
+  const triggerTitle = brokerId ? "Painel de Atendimento Online" : "Entrar para abrir o Painel de Atendimento";
 
   return (
     <>
       {/* Floating broker chat button */}
       <button
-        onClick={() => setMinimized(!minimized)}
+        onClick={handleTogglePanel}
         data-broker-panel-trigger
-        className="fixed bottom-6 right-40 z-50 relative w-14 h-14 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
-        title="Painel de Atendimento Online"
+        disabled={authLoading}
+        aria-label={triggerTitle}
+        className="fixed bottom-6 right-40 z-50 relative flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-lg transition-shadow hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+        title={triggerTitle}
       >
         <MessageSquare className="w-5 h-5" />
         {totalUnread > 0 && (
@@ -283,7 +314,7 @@ const BrokerChatPanel = () => {
       </button>
 
       {/* Chat panel */}
-      {!minimized && (
+      {brokerId && !minimized && (
         <div className="fixed top-16 right-4 z-50 w-[400px] bg-background border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ height: "70vh" }}>
           {/* Header */}
           <div className="bg-secondary px-4 py-3 flex items-center justify-between shrink-0">
