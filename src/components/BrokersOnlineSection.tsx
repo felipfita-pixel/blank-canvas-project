@@ -179,8 +179,12 @@ const BrokersOnlineSection = () => {
 
               <h4 className="font-semibold text-foreground text-sm line-clamp-1">{broker.full_name}</h4>
               
-              {broker.isAttending ? (
+              {broker.isRealOnline ? (
+                <Badge className="mt-1 bg-emerald-100 text-emerald-700 text-[10px] px-2">🟢 Online</Badge>
+              ) : broker.isAttending ? (
                 <Badge className="mt-1 bg-secondary/20 text-secondary text-[10px] px-2">Atendendo</Badge>
+              ) : !broker.isBot ? (
+                <Badge className="mt-1 bg-muted text-muted-foreground text-[10px] px-2">Offline</Badge>
               ) : (
                 <Badge className="mt-1 bg-emerald-100 text-emerald-700 text-[10px] px-2">Disponível</Badge>
               )}
