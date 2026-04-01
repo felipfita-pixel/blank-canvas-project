@@ -214,10 +214,11 @@ const PropertyDetail = () => {
               📷 Clique para ampliar{images.length > 1 ? ` • ${images.length} fotos` : ""}
             </span>
           </div>
+          </div>
 
           {/* Thumbnails */}
           {images.length > 1 && (
-            <div className="container-main py-3">
+            <div className="container-main px-4 sm:px-6 lg:px-8 py-3">
               <div className="flex gap-2 overflow-x-auto pb-1">
                 {images.map((img, i) => (
                   <button
