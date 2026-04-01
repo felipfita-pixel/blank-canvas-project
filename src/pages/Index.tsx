@@ -11,7 +11,7 @@ import FeaturedProperties from "@/components/FeaturedProperties";
 import WhereWeOperate from "@/components/WhereWeOperate";
 import NeighborhoodsSection from "@/components/NeighborhoodsSection";
 import ContactSection from "@/components/ContactSection";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
 import ChatWidget from "@/components/ChatWidget";
 import BrokerChatPanel from "@/components/BrokerChatPanel";
 
@@ -44,7 +44,7 @@ const Index = () => {
       <NeighborhoodsSection />
       <ContactSection />
       <WhereWeOperate />
-      <WhatsAppButton />
+      
       <ChatWidget />
       <BrokerChatPanel />
       
