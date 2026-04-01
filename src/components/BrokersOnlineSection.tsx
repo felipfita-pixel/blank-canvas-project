@@ -12,6 +12,7 @@ interface Broker {
   neighborhoods: string[] | null;
   isBot: boolean;
   isAttending: boolean;
+  isRealOnline?: boolean;
 }
 
 const BOT_FIRST_NAMES = [
@@ -62,14 +63,41 @@ const BrokersOnlineSection = () => {
 
   useEffect(() => {
     const fetchBrokers = async () => {
-      const { data } = await supabase
-        .from("brokers_public")
-        .select("id, full_name, avatar_url, neighborhoods");
-      if (data) {
-        setRealBrokers(data.map(b => ({ ...b, isBot: false, isAttending: false })));
+      // Fetch brokers and online presence in parallel
+      const [brokersRes, presenceRes] = await Promise.all([
+        supabase.from("brokers_public").select("id, full_name, avatar_url, neighborhoods, user_id"),
+        supabase.from("broker_presence").select("user_id, is_online").eq("is_online", true),
+      ]);
+
+      const onlineUserIds = new Set(
+        (presenceRes.data || []).map((p: { user_id: string }) => p.user_id)
+      );
+
+      if (brokersRes.data) {
+        setRealBrokers(
+          brokersRes.data.map((b: any) => ({
+            id: b.id,
+            full_name: b.full_name,
+            avatar_url: b.avatar_url,
+            neighborhoods: b.neighborhoods,
+            isBot: false,
+            isAttending: false,
+            isRealOnline: b.user_id ? onlineUserIds.has(b.user_id) : false,
+          }))
+        );
       }
     };
     fetchBrokers();
+
+    // Subscribe to broker_presence changes for real-time updates
+    const channel = supabase
+      .channel("brokers-online-status")
+      .on("postgres_changes", { event: "*", schema: "public", table: "broker_presence" }, () => {
+        fetchBrokers();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
   }, []);
 
   // Shuffle bot brokers every 30 minutes
@@ -80,8 +108,10 @@ const BrokersOnlineSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Real brokers always on top
-  const allBrokers = [...realBrokers, ...shuffledBots];
+  // Online real brokers first, then offline real brokers, then bots
+  const onlineReal = realBrokers.filter(b => b.isRealOnline);
+  const offlineReal = realBrokers.filter(b => !b.isRealOnline);
+  const allBrokers = [...onlineReal, ...offlineReal, ...shuffledBots];
 
   const handleContact = (broker: Broker) => {
     const msg = encodeURIComponent(`Olá, gostaria de falar com ${broker.full_name} sobre imóveis.`);
@@ -108,7 +138,10 @@ const BrokersOnlineSection = () => {
             <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
           </span>
           <span className="text-sm font-semibold text-emerald-600">
-            {allBrokers.length} corretores online • {realBrokers.length + 15} atendendo agora
+            {onlineReal.length > 0
+              ? `${onlineReal.length} corretor${onlineReal.length > 1 ? "es" : ""} online agora`
+              : `${allBrokers.length} corretores disponíveis`}
+            {" • "}{realBrokers.length + 15} atendendo agora
           </span>
         </div>
 
@@ -122,11 +155,18 @@ const BrokersOnlineSection = () => {
               transition={{ delay: i * 0.03 }}
               className="bg-card rounded-xl border border-border p-4 shadow-sm hover:shadow-md transition-shadow relative"
             >
-              {/* Online indicator */}
-              <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-              </span>
+              {/* Online indicator - bright green for real online, subtle for bots */}
+              {(broker.isRealOnline || broker.isBot) && (
+                <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                </span>
+              )}
+              {!broker.isBot && !broker.isRealOnline && (
+                <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-muted-foreground/40" />
+                </span>
+              )}
 
               {/* Avatar */}
               <div className="w-14 h-14 mx-auto mb-2 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
@@ -139,8 +179,12 @@ const BrokersOnlineSection = () => {
 
               <h4 className="font-semibold text-foreground text-sm line-clamp-1">{broker.full_name}</h4>
               
-              {broker.isAttending ? (
+              {broker.isRealOnline ? (
+                <Badge className="mt-1 bg-emerald-100 text-emerald-700 text-[10px] px-2">🟢 Online</Badge>
+              ) : broker.isAttending ? (
                 <Badge className="mt-1 bg-secondary/20 text-secondary text-[10px] px-2">Atendendo</Badge>
+              ) : !broker.isBot ? (
+                <Badge className="mt-1 bg-muted text-muted-foreground text-[10px] px-2">Offline</Badge>
               ) : (
                 <Badge className="mt-1 bg-emerald-100 text-emerald-700 text-[10px] px-2">Disponível</Badge>
               )}
