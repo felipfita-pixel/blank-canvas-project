@@ -338,7 +338,7 @@ const PropertyDetail = () => {
       />
 
       <Footer />
-      <WhatsAppButton />
+      
       <ChatWidget />
       
       <BrokerChatPanel />

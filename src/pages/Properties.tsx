@@ -260,7 +260,7 @@ const Properties = () => {
       />
 
       <Footer />
-      <WhatsAppButton />
+      
       <ChatWidget />
       
       <BrokerChatPanel />
