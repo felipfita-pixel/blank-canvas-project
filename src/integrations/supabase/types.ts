@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      broker_presence: {
+        Row: {
+          is_online: boolean
+          is_typing_conversation: string | null
+          last_seen_at: string
+          user_id: string
+        }
+        Insert: {
+          is_online?: boolean
+          is_typing_conversation?: string | null
+          last_seen_at?: string
+          user_id: string
+        }
+        Update: {
+          is_online?: boolean
+          is_typing_conversation?: string | null
+          last_seen_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       brokers: {
         Row: {
           avatar_url: string | null
@@ -68,6 +89,7 @@ export type Database = {
       chat_messages: {
         Row: {
           broker_id: string | null
+          claimed_by: string | null
           conversation_id: string | null
           created_at: string
           file_name: string | null
@@ -83,6 +105,7 @@ export type Database = {
         }
         Insert: {
           broker_id?: string | null
+          claimed_by?: string | null
           conversation_id?: string | null
           created_at?: string
           file_name?: string | null
@@ -98,6 +121,7 @@ export type Database = {
         }
         Update: {
           broker_id?: string | null
+          claimed_by?: string | null
           conversation_id?: string | null
           created_at?: string
           file_name?: string | null
