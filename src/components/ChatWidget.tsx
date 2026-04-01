@@ -17,6 +17,40 @@ interface ChatMessage {
   sender_name?: string;
 }
 
+const CHAT_SESSION_KEY = "chat_session";
+const CHAT_SESSION_TTL = 5 * 60 * 1000; // 5 minutes
+
+interface ChatSession {
+  conversationId: string;
+  info: { name: string; email: string; phone: string };
+  brokerId: string;
+  brokerName: string;
+  neighborhood: string;
+  savedAt: number;
+}
+
+const saveChatSession = (session: Omit<ChatSession, "savedAt">) => {
+  localStorage.setItem(CHAT_SESSION_KEY, JSON.stringify({ ...session, savedAt: Date.now() }));
+};
+
+const loadChatSession = (): ChatSession | null => {
+  try {
+    const raw = localStorage.getItem(CHAT_SESSION_KEY);
+    if (!raw) return null;
+    const session: ChatSession = JSON.parse(raw);
+    if (Date.now() - session.savedAt > CHAT_SESSION_TTL) {
+      localStorage.removeItem(CHAT_SESSION_KEY);
+      return null;
+    }
+    return session;
+  } catch {
+    localStorage.removeItem(CHAT_SESSION_KEY);
+    return null;
+  }
+};
+
+const clearChatSession = () => localStorage.removeItem(CHAT_SESSION_KEY);
+
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<"info" | "chat">("info");
@@ -32,6 +66,20 @@ const ChatWidget = () => {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Restore session from localStorage on mount
+  useEffect(() => {
+    const session = loadChatSession();
+    if (session) {
+      setInfo(session.info);
+      setConversationId(session.conversationId);
+      setBrokerId(session.brokerId);
+      setBrokerName(session.brokerName);
+      setNeighborhood(session.neighborhood);
+      setStep("chat");
+      setOpen(true);
+    }
+  }, []);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
