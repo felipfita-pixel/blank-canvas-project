@@ -371,7 +371,7 @@ const ChatWidget = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-4 sm:bottom-28 sm:right-6 z-50 w-[320px] sm:w-[380px] bg-background border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            className="fixed bottom-24 right-4 sm:bottom-28 sm:right-6 z-[9999] w-[320px] sm:w-[380px] bg-background border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
             style={{ maxHeight: "70vh" }}
           >
             {/* Header */}

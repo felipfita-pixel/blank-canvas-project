@@ -315,7 +315,7 @@ const BrokerChatPanel = () => {
 
       {/* Chat panel */}
       {brokerId && !minimized && (
-        <div className="fixed top-16 right-4 z-50 w-[400px] bg-background border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ height: "70vh" }}>
+        <div className="fixed top-16 right-4 z-[9999] w-[400px] bg-background border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ height: "70vh" }}>
           {/* Header */}
           <div className="bg-secondary px-4 py-3 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2">
