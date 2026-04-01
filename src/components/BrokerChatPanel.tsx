@@ -274,7 +274,6 @@ const BrokerChatPanel = () => {
         className="hidden"
         title="Painel de Atendimento Online"
       >
-      >
         <MessageSquare className="w-5 h-5" />
         {totalUnread > 0 && (
           <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
