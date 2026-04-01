@@ -68,12 +68,17 @@ const BrokerChatPanel = () => {
   // Fetch conversations
   const fetchConversations = useCallback(async () => {
     if (!brokerId) return;
-    const { data } = await supabase
+    
+    let query = supabase
       .from("chat_messages")
       .select("conversation_id, sender_name, sender_email, sender_phone, message, created_at, read, broker_id, is_from_client")
-      .or(`broker_id.eq.${brokerId},broker_id.is.null`)
       .neq("conversation_id", "")
       .order("created_at", { ascending: false });
+
+    // Admins see all conversations, brokers see only theirs
+    if (!isAdminOnly) {
+      query = query.or(`broker_id.eq.${brokerId},broker_id.is.null`);
+    }
 
     if (!data) return;
 
