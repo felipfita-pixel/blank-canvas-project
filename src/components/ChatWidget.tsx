@@ -263,6 +263,7 @@ const ChatWidget = () => {
 
   const resetChat = () => {
     setOpen(false);
+    clearChatSession();
     setTimeout(() => {
       setStep("info");
       setInfo({ name: "", email: "", phone: "" });
