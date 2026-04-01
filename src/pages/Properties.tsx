@@ -262,7 +262,7 @@ const Properties = () => {
       <Footer />
       <WhatsAppButton />
       <ChatWidget />
-      <TalkToSpecialistButton />
+      
       <BrokerChatPanel />
     </div>
   );

@@ -47,7 +47,7 @@ const Index = () => {
       <WhatsAppButton />
       <ChatWidget />
       <BrokerChatPanel />
-      <TalkToSpecialistButton />
+      
     </div>
   );
 };
