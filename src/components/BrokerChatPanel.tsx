@@ -107,7 +107,7 @@ const BrokerChatPanel = () => {
       }
     }
     setConversations(Array.from(convMap.values()));
-  }, [brokerId]);
+  }, [brokerId, isAdminOnly]);
 
   useEffect(() => { fetchConversations(); }, [fetchConversations]);
 
