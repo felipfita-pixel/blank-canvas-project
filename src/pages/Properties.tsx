@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { staticProperties } from "@/data/staticProperties";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
 import ChatWidget from "@/components/ChatWidget";
 
 import BrokerChatPanel from "@/components/BrokerChatPanel";
