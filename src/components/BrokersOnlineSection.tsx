@@ -155,11 +155,18 @@ const BrokersOnlineSection = () => {
               transition={{ delay: i * 0.03 }}
               className="bg-card rounded-xl border border-border p-4 shadow-sm hover:shadow-md transition-shadow relative"
             >
-              {/* Online indicator */}
-              <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-              </span>
+              {/* Online indicator - bright green for real online, subtle for bots */}
+              {(broker.isRealOnline || broker.isBot) && (
+                <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                </span>
+              )}
+              {!broker.isBot && !broker.isRealOnline && (
+                <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-muted-foreground/40" />
+                </span>
+              )}
 
               {/* Avatar */}
               <div className="w-14 h-14 mx-auto mb-2 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
