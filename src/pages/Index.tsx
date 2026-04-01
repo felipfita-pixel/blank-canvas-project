@@ -12,8 +12,6 @@ import WhereWeOperate from "@/components/WhereWeOperate";
 import NeighborhoodsSection from "@/components/NeighborhoodsSection";
 import ContactSection from "@/components/ContactSection";
 
-import ChatWidget from "@/components/ChatWidget";
-
 
 const Index = () => {
   const location = useLocation();
@@ -43,8 +41,6 @@ const Index = () => {
       <NeighborhoodsSection />
       <ContactSection />
       <WhereWeOperate />
-      
-      <ChatWidget />
       
     </div>
   );

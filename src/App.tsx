@@ -7,6 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AdminLayout from "@/components/AdminLayout";
 import BrokerChatPanel from "@/components/BrokerChatPanel";
+import ChatWidget from "@/components/ChatWidget";
 import Index from "./pages/Index.tsx";
 import Login from "./pages/Login.tsx";
 import BrokerRegister from "./pages/BrokerRegister.tsx";
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BrokerChatPanel />
+          <ChatWidget />
         </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
