@@ -138,7 +138,10 @@ const BrokersOnlineSection = () => {
             <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
           </span>
           <span className="text-sm font-semibold text-emerald-600">
-            {allBrokers.length} corretores online • {realBrokers.length + 15} atendendo agora
+            {onlineReal.length > 0
+              ? `${onlineReal.length} corretor${onlineReal.length > 1 ? "es" : ""} online agora`
+              : `${allBrokers.length} corretores disponíveis`}
+            {" • "}{realBrokers.length + 15} atendendo agora
           </span>
         </div>
 
