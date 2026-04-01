@@ -169,8 +169,8 @@ const AdminChatHistory = () => {
           <SelectContent>
             <SelectItem value="all">Todas as conversas</SelectItem>
             <SelectItem value="unclaimed">Não atribuídas</SelectItem>
-            {brokers.map(b => (
-              <SelectItem key={b.user_id || b.id} value={b.user_id || b.id}>{b.full_name}</SelectItem>
+            {brokers.filter(b => b.user_id).map(b => (
+              <SelectItem key={b.user_id!} value={b.user_id!}>{b.full_name}</SelectItem>
             ))}
           </SelectContent>
         </Select>
