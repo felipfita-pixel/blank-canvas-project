@@ -30,26 +30,6 @@ const Footer = () => {
             </h3>
             <p className="text-primary-foreground/40 text-xs tracking-[0.2em] uppercase mb-4">{section.subtitle}</p>
             <p className="text-primary-foreground/60 text-sm leading-relaxed mb-6 max-w-sm">{c.description}</p>
-            <div className="flex gap-3">
-              {c.instagram ? (
-                <a href={c.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground hover:opacity-80 transition-opacity" aria-label="Instagram">
-                  <Instagram className="w-5 h-5" />
-                </a>
-              ) : (
-                <button type="button" disabled className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-secondary-foreground/60 cursor-not-allowed" aria-label="Instagram indisponível">
-                  <Instagram className="w-5 h-5" />
-                </button>
-              )}
-              {c.facebook ? (
-                <a href={c.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground hover:opacity-80 transition-opacity" aria-label="Facebook">
-                  <Facebook className="w-5 h-5" />
-                </a>
-              ) : (
-                <button type="button" disabled className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-secondary-foreground/60 cursor-not-allowed" aria-label="Facebook indisponível">
-                  <Facebook className="w-5 h-5" />
-                </button>
-              )}
-            </div>
           </div>
 
           <div>
