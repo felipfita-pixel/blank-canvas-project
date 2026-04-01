@@ -372,7 +372,7 @@ const AboutSection = () => {
             <div id="campaign-results">
               <p className="text-xs text-muted-foreground mb-3">{filteredProperties.length} imóvel(is) encontrado(s)</p>
 
-              {filteredProperties.length === 0 ? (
+              {(() => { const validProperties = filteredProperties.filter(p => p.images?.some(img => img && img.trim() !== "")); return validProperties.length === 0 ? (
                 <p className="text-sm text-muted-foreground text-center py-12">
                   Nenhum imóvel encontrado com os filtros selecionados.
                 </p>
