@@ -235,7 +235,7 @@ const PropertyDetail = () => {
         </div>
 
         {/* Content */}
-        <div className="container-main py-8">
+        <div className="container-main px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid lg:grid-cols-[1fr_360px] gap-8">
             {/* Main */}
             <div>
