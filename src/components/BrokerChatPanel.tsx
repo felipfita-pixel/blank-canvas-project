@@ -80,6 +80,7 @@ const BrokerChatPanel = () => {
       query = query.or(`broker_id.eq.${brokerId},broker_id.is.null`);
     }
 
+    const { data } = await query;
     if (!data) return;
 
     const convMap = new Map<string, Conversation>();
