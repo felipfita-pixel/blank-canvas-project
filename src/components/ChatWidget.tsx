@@ -155,9 +155,9 @@ const ChatWidget = () => {
       toast.error("Informe um e-mail válido.");
       return;
     }
-    // Generate conversation ID
     const convId = `conv-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     setConversationId(convId);
+    saveChatSession({ conversationId: convId, info, brokerId, brokerName, neighborhood });
     
     if (neighborhood && !message) {
       setMessage(`Olá! Tenho interesse em imóveis no bairro ${neighborhood}. Podem me ajudar?`);
