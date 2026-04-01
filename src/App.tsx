@@ -51,6 +51,7 @@ const App = () => (
             <Route path="/admin/users" element={<ProtectedRoute requireAdmin><AdminLayout><AdminUsers /></AdminLayout></ProtectedRoute>} />
             <Route path="/admin/settings" element={<ProtectedRoute requireAdmin><AdminLayout><AdminSettings /></AdminLayout></ProtectedRoute>} />
             <Route path="/admin/companies" element={<ProtectedRoute requireAdmin><AdminLayout><AdminCompanies /></AdminLayout></ProtectedRoute>} />
+            <Route path="/admin/chat" element={<ProtectedRoute requireAdmin><AdminLayout><AdminChatHistory /></AdminLayout></ProtectedRoute>} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="*" element={<NotFound />} />
