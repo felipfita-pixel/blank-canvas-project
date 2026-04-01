@@ -345,7 +345,7 @@ const ChatWidget = () => {
             transition={{ delay: 1, type: "spring", stiffness: 200 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="w-14 h-14 rounded-full bg-secondary text-secondary-foreground shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
+            className="w-14 h-14 rounded-full bg-whatsapp text-whatsapp-foreground shadow-lg hover:bg-whatsapp-hover hover:shadow-xl flex items-center justify-center transition-all"
             title="WhatsApp"
           >
             <Phone className="w-6 h-6" />
