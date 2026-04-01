@@ -162,7 +162,9 @@ const PropertyDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <div className="fixed inset-x-0 top-0 z-50 bg-primary shadow-lg shadow-primary/30">
+        <Header />
+      </div>
 
       <div className="pt-20">
         {/* Gallery */}
