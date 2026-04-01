@@ -14,11 +14,6 @@ const WhatsAppButton = () => {
     if (chatBtn) chatBtn.click();
   };
 
-  const handleOpenAI = () => {
-    const chatBtn = document.querySelector('[data-chat-widget-trigger]') as HTMLButtonElement;
-    if (chatBtn) chatBtn.click();
-  };
-
   return (
     <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-50 flex flex-col items-start gap-3">
       {/* Tooltip */}
@@ -65,7 +60,7 @@ const WhatsAppButton = () => {
           <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary-foreground" />
         </motion.a>
 
-        {/* Chat / MSN */}
+        {/* Chat com Corretor */}
         <motion.button
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -77,20 +72,6 @@ const WhatsAppButton = () => {
           title="Chat com Corretor"
         >
           <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary-foreground" />
-        </motion.button>
-
-        {/* AI Assistant */}
-        <motion.button
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleOpenAI}
-          className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-accent flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
-          title="IA Especialista Imobiliária"
-        >
-          <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent-foreground" />
         </motion.button>
       </div>
     </div>
