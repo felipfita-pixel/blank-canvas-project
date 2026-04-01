@@ -1,4 +1,4 @@
-import { Instagram, Facebook, MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
