@@ -31,8 +31,9 @@ interface ChatMsg {
 }
 
 const BrokerChatPanel = () => {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [brokerId, setBrokerId] = useState<string | null>(null);
+  const [isAdminOnly, setIsAdminOnly] = useState(false);
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [selectedConv, setSelectedConv] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMsg[]>([]);

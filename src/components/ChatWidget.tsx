@@ -145,11 +145,41 @@ const ChatWidget = () => {
     supabase.functions.invoke("send-transactional-email", {
       body: {
         templateName: "new-chat-notification",
-        recipientEmail: "felipfita@gmail.com",
+        recipientEmail: "felipe@corretoresrj.com",
         idempotencyKey: `chat-notify-${Date.now()}`,
         templateData: { name: info.name, email: info.email, phone: info.phone, message: msgText },
       },
     });
+
+    // Auto offline message on first client message
+    if (!fileUrl) {
+      const { count } = await supabase
+        .from("chat_messages")
+        .select("id", { count: "exact", head: true })
+        .eq("conversation_id", conversationId)
+        .eq("is_from_client", true);
+      
+      if (count === 1) {
+        // Check if any approved broker exists
+        const { data: brokers } = await supabase
+          .from("brokers_public")
+          .select("id")
+          .eq("status", "approved")
+          .limit(1);
+        
+        if (!brokers || brokers.length === 0) {
+          await supabase.from("chat_messages").insert({
+            conversation_id: conversationId,
+            message: "Obrigado pelo contato! 😊 No momento nossos corretores não estão online, mas responderemos o mais breve possível. Fique à vontade para deixar sua mensagem.",
+            is_from_client: false,
+            sender_name: "Sistema",
+            sender_email: "",
+            sender_phone: "",
+          });
+        }
+      }
+    }
+
     setMessage("");
   };
 
