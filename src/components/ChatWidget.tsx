@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MessageSquare, X, Send, Loader2, Paperclip, Image as ImageIcon } from "lucide-react";
+import { MessageSquare, X, Send, Loader2, Paperclip, Circle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -63,6 +63,8 @@ const ChatWidget = () => {
   const [brokerId, setBrokerId] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [brokersOnline, setBrokersOnline] = useState(false);
+  const [brokerTyping, setBrokerTyping] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -80,6 +82,49 @@ const ChatWidget = () => {
       setOpen(true);
     }
   }, []);
+
+  // Check broker online status
+  useEffect(() => {
+    const checkOnline = async () => {
+      const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+      const { data } = await supabase
+        .from("broker_presence")
+        .select("user_id")
+        .eq("is_online", true)
+        .gte("last_seen_at", fiveMinAgo)
+        .limit(1);
+      setBrokersOnline(!!(data && data.length > 0));
+    };
+    checkOnline();
+
+    // Subscribe to presence changes
+    const channel = supabase
+      .channel("presence-status")
+      .on("postgres_changes", { event: "*", schema: "public", table: "broker_presence" }, () => {
+        checkOnline();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, []);
+
+  // Subscribe to typing indicator
+  useEffect(() => {
+    if (!conversationId) return;
+
+    const channel = supabase
+      .channel(`typing-${conversationId}`)
+      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "broker_presence" }, (payload) => {
+        const row = payload.new as Record<string, unknown>;
+        if (row.is_typing_conversation === conversationId) {
+          setBrokerTyping(true);
+          setTimeout(() => setBrokerTyping(false), 3500);
+        }
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [conversationId]);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -208,14 +253,7 @@ const ChatWidget = () => {
         .eq("is_from_client", true);
       
       if (count === 1) {
-        // Check if any approved broker exists
-        const { data: brokers } = await supabase
-          .from("brokers_public")
-          .select("id")
-          .eq("status", "approved")
-          .limit(1);
-        
-        if (!brokers || brokers.length === 0) {
+        if (!brokersOnline) {
           await supabase.from("chat_messages").insert({
             conversation_id: conversationId,
             message: "Obrigado pelo contato! 😊 No momento nossos corretores não estão online, mas responderemos o mais breve possível. Fique à vontade para deixar sua mensagem.",
@@ -248,8 +286,8 @@ const ChatWidget = () => {
       return;
     }
     const { data: urlData } = supabase.storage.from("property-images").getPublicUrl(path);
-    const fileType = file.type.startsWith("image/") ? "image" : "file";
-    await handleSendMessage(urlData.publicUrl, file.name, fileType);
+    const ft = file.type.startsWith("image/") ? "image" : "file";
+    await handleSendMessage(urlData.publicUrl, file.name, ft);
     setUploading(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
@@ -306,7 +344,13 @@ const ChatWidget = () => {
             {/* Header */}
             <div className="bg-primary px-4 py-3 flex items-center justify-between shrink-0">
               <div>
-                <p className="text-primary-foreground font-semibold text-sm">{chatTitle}</p>
+                <p className="text-primary-foreground font-semibold text-sm flex items-center gap-2">
+                  {chatTitle}
+                  <span className="flex items-center gap-1 text-[10px] font-normal">
+                    <Circle className={`w-2 h-2 ${brokersOnline ? "fill-green-400 text-green-400" : "fill-gray-400 text-gray-400"}`} />
+                    {brokersOnline ? "Online" : "Offline"}
+                  </span>
+                </p>
                 <p className="text-primary-foreground/60 text-xs">{chatSubtitle}</p>
               </div>
               <button onClick={resetChat} className="text-primary-foreground/70 hover:text-primary-foreground">
@@ -354,6 +398,13 @@ const ChatWidget = () => {
                         </div>
                       </div>
                     ))}
+                    {brokerTyping && (
+                      <div className="flex justify-start">
+                        <div className="bg-muted text-foreground rounded-xl px-3 py-2 text-sm">
+                          <p className="text-xs text-muted-foreground animate-pulse">Corretor está digitando...</p>
+                        </div>
+                      </div>
+                    )}
                     <div ref={messagesEndRef} />
                   </div>
 

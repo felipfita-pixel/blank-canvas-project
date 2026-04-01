@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MessageSquare, Send, Loader2, Paperclip, X, User, Clock } from "lucide-react";
+import { MessageSquare, Send, Loader2, Paperclip, X, User, Clock, Shield, Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useBrokerPresence } from "@/hooks/useBrokerPresence";
 import { toast } from "sonner";
 
 interface Conversation {
@@ -17,6 +18,7 @@ interface Conversation {
   last_time: string;
   unread: number;
   broker_id: string | null;
+  claimed_by: string | null;
 }
 
 interface ChatMsg {
@@ -30,8 +32,11 @@ interface ChatMsg {
   sender_name: string;
 }
 
+const notificationSound = typeof window !== "undefined" ? new Audio("/notification.wav") : null;
+
 const BrokerChatPanel = () => {
   const { user, isAdmin } = useAuth();
+  const { setTyping } = useBrokerPresence();
   const [brokerId, setBrokerId] = useState<string | null>(null);
   const [isAdminOnly, setIsAdminOnly] = useState(false);
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -41,8 +46,10 @@ const BrokerChatPanel = () => {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [minimized, setMinimized] = useState(true);
+  const [typingIndicator, setTypingIndicator] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const lastMsgCountRef = useRef(0);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -67,20 +74,14 @@ const BrokerChatPanel = () => {
 
   // Fetch conversations
   const fetchConversations = useCallback(async () => {
-    if (!brokerId) return;
+    if (!brokerId || !user) return;
     
-    let query = supabase
+    const { data } = await supabase
       .from("chat_messages")
-      .select("conversation_id, sender_name, sender_email, sender_phone, message, created_at, read, broker_id, is_from_client")
+      .select("conversation_id, sender_name, sender_email, sender_phone, message, created_at, read, broker_id, is_from_client, claimed_by")
       .neq("conversation_id", "")
       .order("created_at", { ascending: false });
 
-    // Admins see all conversations, brokers see only theirs
-    if (!isAdminOnly) {
-      query = query.or(`broker_id.eq.${brokerId},broker_id.is.null`);
-    }
-
-    const { data } = await query;
     if (!data) return;
 
     const convMap = new Map<string, Conversation>();
@@ -96,6 +97,7 @@ const BrokerChatPanel = () => {
           last_time: msg.created_at,
           unread: 0,
           broker_id: msg.broker_id,
+          claimed_by: msg.claimed_by as string | null,
         });
       }
       const conv = convMap.get(cid)!;
@@ -105,24 +107,45 @@ const BrokerChatPanel = () => {
         conv.sender_email = msg.sender_email;
         conv.sender_phone = msg.sender_phone;
       }
+      // Track claimed_by from any message in conversation
+      if (msg.claimed_by) conv.claimed_by = msg.claimed_by as string;
     }
-    setConversations(Array.from(convMap.values()));
-  }, [brokerId, isAdminOnly]);
+
+    // Filter: admin sees all; broker sees unclaimed OR claimed by self
+    const allConvs = Array.from(convMap.values());
+    if (isAdminOnly) {
+      setConversations(allConvs);
+    } else {
+      setConversations(allConvs.filter(c => !c.claimed_by || c.claimed_by === user?.id));
+    }
+  }, [brokerId, isAdminOnly, user]);
 
   useEffect(() => { fetchConversations(); }, [fetchConversations]);
 
-  // Subscribe to new messages globally
+  // Subscribe to new messages globally + play notification sound
   useEffect(() => {
     if (!brokerId) return;
     const channel = supabase
       .channel("broker-chat-global")
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "chat_messages" }, () => {
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "chat_messages" }, (payload) => {
+        const newMsg = payload.new as Record<string, unknown>;
+        // Play sound for new client messages
+        if (newMsg.is_from_client && notificationSound) {
+          notificationSound.play().catch(() => {});
+        }
         fetchConversations();
         if (selectedConv) fetchMessages(selectedConv);
       })
       .subscribe();
     return () => { supabase.removeChannel(channel); };
   }, [brokerId, fetchConversations, selectedConv]);
+
+  // Subscribe to typing indicators from broker_presence (client typing not tracked yet)
+  useEffect(() => {
+    if (!selectedConv) return;
+    // We don't have client presence yet, so skip for now
+    // Future: subscribe to a client_presence table
+  }, [selectedConv]);
 
   const fetchMessages = async (convId: string) => {
     const { data } = await supabase
@@ -146,6 +169,20 @@ const BrokerChatPanel = () => {
     fetchMessages(convId);
   };
 
+  const handleClaimConversation = async () => {
+    if (!selectedConv || !user) return;
+    const { error } = await supabase
+      .from("chat_messages")
+      .update({ claimed_by: user.id })
+      .eq("conversation_id", selectedConv);
+    if (error) {
+      toast.error("Erro ao assumir conversa.");
+      return;
+    }
+    toast.success("Conversa assumida com sucesso!");
+    fetchConversations();
+  };
+
   const handleSendReply = async (fileUrl?: string, fileName?: string, fileType?: string) => {
     const msgText = fileUrl ? (newMessage.trim() || fileName || "Arquivo enviado") : newMessage.trim();
     if (!msgText && !fileUrl) return;
@@ -167,11 +204,21 @@ const BrokerChatPanel = () => {
     };
 
     if (!isAdminOnly) {
-      // Get broker name
       const { data: brokerData } = await supabase.from("brokers").select("full_name").eq("id", brokerId!).maybeSingle();
       senderName = brokerData?.full_name || "Corretor";
       insertData.sender_name = senderName;
       insertData.broker_id = brokerId;
+    }
+
+    // Auto-claim on first reply if unclaimed
+    const conv = conversations.find(c => c.conversation_id === selectedConv);
+    if (!conv?.claimed_by && user) {
+      insertData.claimed_by = user.id;
+      // Also claim existing messages
+      await supabase
+        .from("chat_messages")
+        .update({ claimed_by: user.id })
+        .eq("conversation_id", selectedConv);
     }
 
     const { error } = await supabase.from("chat_messages").insert(insertData);
@@ -182,6 +229,7 @@ const BrokerChatPanel = () => {
     }
     setNewMessage("");
     fetchMessages(selectedConv);
+    fetchConversations();
   };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -204,10 +252,18 @@ const BrokerChatPanel = () => {
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSendReply(); }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewMessage(e.target.value);
+    if (selectedConv) setTyping(selectedConv);
+  };
+
   const formatTime = (d: string) => new Date(d).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
   const totalUnread = conversations.reduce((a, c) => a + c.unread, 0);
 
   if (!brokerId) return null;
+
+  const selectedConvData = conversations.find(c => c.conversation_id === selectedConv);
+  const isUnclaimed = selectedConvData && !selectedConvData.claimed_by;
 
   return (
     <>
@@ -251,7 +307,12 @@ const BrokerChatPanel = () => {
                   className={`w-full text-left p-2.5 border-b border-border hover:bg-muted/50 transition-colors ${selectedConv === conv.conversation_id ? "bg-muted" : ""}`}
                 >
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-semibold text-foreground truncate">{conv.sender_name || "Cliente"}</p>
+                    <p className="text-xs font-semibold text-foreground truncate flex items-center gap-1">
+                      {!conv.claimed_by && (
+                        <Circle className="w-2 h-2 text-yellow-500 fill-yellow-500 shrink-0" />
+                      )}
+                      {conv.sender_name || "Cliente"}
+                    </p>
                     {conv.unread > 0 && (
                       <Badge variant="destructive" className="text-[9px] px-1 py-0 h-4">{conv.unread}</Badge>
                     )}
@@ -277,11 +338,27 @@ const BrokerChatPanel = () => {
                 <>
                   {/* Selected conversation info */}
                   {(() => {
-                    const conv = conversations.find(c => c.conversation_id === selectedConv);
+                    const conv = selectedConvData;
                     return conv ? (
                       <div className="px-3 py-2 border-b border-border bg-muted/30 shrink-0">
-                        <p className="text-sm font-semibold text-foreground">{conv.sender_name}</p>
-                        <p className="text-[10px] text-muted-foreground">{conv.sender_email} {conv.sender_phone ? `• ${conv.sender_phone}` : ""}</p>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-sm font-semibold text-foreground">{conv.sender_name}</p>
+                            <p className="text-[10px] text-muted-foreground">{conv.sender_email} {conv.sender_phone ? `• ${conv.sender_phone}` : ""}</p>
+                          </div>
+                          {isUnclaimed && (
+                            <Button size="sm" variant="outline" onClick={handleClaimConversation} className="text-xs h-7 gap-1">
+                              <Shield className="w-3 h-3" />
+                              Assumir
+                            </Button>
+                          )}
+                        </div>
+                        {conv.claimed_by && (
+                          <p className="text-[9px] text-green-600 mt-1 flex items-center gap-1">
+                            <Circle className="w-2 h-2 fill-green-500 text-green-500" />
+                            Conversa atribuída
+                          </p>
+                        )}
                       </div>
                     ) : null;
                   })()}
@@ -317,7 +394,7 @@ const BrokerChatPanel = () => {
                       <Input
                         placeholder="Responder..."
                         value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
+                        onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
                         className="flex-1 h-9 text-sm"
                       />
