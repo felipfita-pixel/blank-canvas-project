@@ -240,7 +240,9 @@ const AboutSection = () => {
 
       const matchesSearch = !normalizedSearch || searchableContent.includes(normalizedSearch);
 
-      return matchesCity && matchesNeighborhood && matchesType && matchesSearch;
+      const hasValidImage = property.images?.some(img => img && img.trim() !== "");
+
+      return matchesCity && matchesNeighborhood && matchesType && matchesSearch && hasValidImage;
     });
   }, [filterCity, filterNeighborhood, filterType, mergedProperties, searchQuery]);
 
