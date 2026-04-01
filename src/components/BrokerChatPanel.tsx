@@ -31,8 +31,9 @@ interface ChatMsg {
 }
 
 const BrokerChatPanel = () => {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [brokerId, setBrokerId] = useState<string | null>(null);
+  const [isAdminOnly, setIsAdminOnly] = useState(false);
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [selectedConv, setSelectedConv] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMsg[]>([]);
@@ -49,26 +50,37 @@ const BrokerChatPanel = () => {
 
   useEffect(() => { scrollToBottom(); }, [messages, scrollToBottom]);
 
-  // Get broker ID for current user
+  // Get broker ID for current user (or set admin-only mode)
   useEffect(() => {
     if (!user) return;
     const fetchBroker = async () => {
       const { data } = await supabase.from("brokers").select("id").eq("user_id", user.id).eq("status", "approved").maybeSingle();
-      if (data) setBrokerId(data.id);
+      if (data) {
+        setBrokerId(data.id);
+      } else if (isAdmin) {
+        setIsAdminOnly(true);
+        setBrokerId("admin");
+      }
     };
     fetchBroker();
-  }, [user]);
+  }, [user, isAdmin]);
 
   // Fetch conversations
   const fetchConversations = useCallback(async () => {
     if (!brokerId) return;
-    const { data } = await supabase
+    
+    let query = supabase
       .from("chat_messages")
       .select("conversation_id, sender_name, sender_email, sender_phone, message, created_at, read, broker_id, is_from_client")
-      .or(`broker_id.eq.${brokerId},broker_id.is.null`)
       .neq("conversation_id", "")
       .order("created_at", { ascending: false });
 
+    // Admins see all conversations, brokers see only theirs
+    if (!isAdminOnly) {
+      query = query.or(`broker_id.eq.${brokerId},broker_id.is.null`);
+    }
+
+    const { data } = await query;
     if (!data) return;
 
     const convMap = new Map<string, Conversation>();
@@ -95,7 +107,7 @@ const BrokerChatPanel = () => {
       }
     }
     setConversations(Array.from(convMap.values()));
-  }, [brokerId]);
+  }, [brokerId, isAdminOnly]);
 
   useEffect(() => { fetchConversations(); }, [fetchConversations]);
 
@@ -140,21 +152,29 @@ const BrokerChatPanel = () => {
     if (!selectedConv || !brokerId) return;
 
     setLoading(true);
-    // Get broker name
-    const { data: brokerData } = await supabase.from("brokers").select("full_name").eq("id", brokerId).maybeSingle();
-
-    const { error } = await supabase.from("chat_messages").insert({
+    
+    let senderName = "Administrador";
+    const insertData: Record<string, unknown> = {
       conversation_id: selectedConv,
       message: msgText,
       is_from_client: false,
-      broker_id: brokerId,
-      sender_name: brokerData?.full_name || "Corretor",
+      sender_name: senderName,
       sender_email: "",
       sender_phone: "",
       file_url: fileUrl || "",
       file_name: fileName || "",
       file_type: fileType || "",
-    });
+    };
+
+    if (!isAdminOnly) {
+      // Get broker name
+      const { data: brokerData } = await supabase.from("brokers").select("full_name").eq("id", brokerId!).maybeSingle();
+      senderName = brokerData?.full_name || "Corretor";
+      insertData.sender_name = senderName;
+      insertData.broker_id = brokerId;
+    }
+
+    const { error } = await supabase.from("chat_messages").insert(insertData);
     setLoading(false);
     if (error) {
       toast.error("Erro ao enviar mensagem.");

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatWidget from "@/components/ChatWidget";
 import TalkToSpecialistButton from "@/components/TalkToSpecialistButton";
+import BrokerChatPanel from "@/components/BrokerChatPanel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -262,6 +263,7 @@ const Properties = () => {
       <WhatsAppButton />
       <ChatWidget />
       <TalkToSpecialistButton />
+      <BrokerChatPanel />
     </div>
   );
 };
