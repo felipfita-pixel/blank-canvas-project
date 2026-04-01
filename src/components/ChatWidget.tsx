@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MessageSquare, MessageCircle, X, Send, Loader2, Paperclip, Circle } from "lucide-react";
+import { MessageSquare, MessageCircle, X, Send, Loader2, Paperclip, Circle, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
