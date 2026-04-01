@@ -27,6 +27,10 @@
     --accent: 34 95% 55%;
     --accent-foreground: 0 0% 100%;
 
+    --whatsapp: 142 70% 49%;
+    --whatsapp-foreground: 0 0% 100%;
+    --whatsapp-hover: 142 76% 42%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
@@ -68,6 +72,9 @@
     --muted-foreground: 215 20% 65%;
     --accent: 34 95% 55%;
     --accent-foreground: 0 0% 100%;
+    --whatsapp: 142 70% 49%;
+    --whatsapp-foreground: 0 0% 100%;
+    --whatsapp-hover: 142 76% 42%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 213 32% 20%;

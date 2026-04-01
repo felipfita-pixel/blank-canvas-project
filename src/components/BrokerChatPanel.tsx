@@ -271,7 +271,7 @@ const BrokerChatPanel = () => {
       <button
         onClick={() => setMinimized(!minimized)}
         data-broker-panel-trigger
-        className="hidden"
+        className="fixed bottom-6 right-40 z-50 relative w-14 h-14 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
         title="Painel de Atendimento Online"
       >
         <MessageSquare className="w-5 h-5" />
