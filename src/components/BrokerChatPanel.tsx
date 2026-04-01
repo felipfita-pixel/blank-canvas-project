@@ -175,7 +175,6 @@ const BrokerChatPanel = () => {
     }
 
     const { error } = await supabase.from("chat_messages").insert(insertData);
-    });
     setLoading(false);
     if (error) {
       toast.error("Erro ao enviar mensagem.");
