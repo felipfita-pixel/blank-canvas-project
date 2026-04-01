@@ -63,14 +63,41 @@ const BrokersOnlineSection = () => {
 
   useEffect(() => {
     const fetchBrokers = async () => {
-      const { data } = await supabase
-        .from("brokers_public")
-        .select("id, full_name, avatar_url, neighborhoods");
-      if (data) {
-        setRealBrokers(data.map(b => ({ ...b, isBot: false, isAttending: false })));
+      // Fetch brokers and online presence in parallel
+      const [brokersRes, presenceRes] = await Promise.all([
+        supabase.from("brokers_public").select("id, full_name, avatar_url, neighborhoods, user_id"),
+        supabase.from("broker_presence").select("user_id, is_online").eq("is_online", true),
+      ]);
+
+      const onlineUserIds = new Set(
+        (presenceRes.data || []).map((p: { user_id: string }) => p.user_id)
+      );
+
+      if (brokersRes.data) {
+        setRealBrokers(
+          brokersRes.data.map((b: any) => ({
+            id: b.id,
+            full_name: b.full_name,
+            avatar_url: b.avatar_url,
+            neighborhoods: b.neighborhoods,
+            isBot: false,
+            isAttending: false,
+            isRealOnline: b.user_id ? onlineUserIds.has(b.user_id) : false,
+          }))
+        );
       }
     };
     fetchBrokers();
+
+    // Subscribe to broker_presence changes for real-time updates
+    const channel = supabase
+      .channel("brokers-online-status")
+      .on("postgres_changes", { event: "*", schema: "public", table: "broker_presence" }, () => {
+        fetchBrokers();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
   }, []);
 
   // Shuffle bot brokers every 30 minutes
@@ -81,8 +108,10 @@ const BrokersOnlineSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Real brokers always on top
-  const allBrokers = [...realBrokers, ...shuffledBots];
+  // Online real brokers first, then offline real brokers, then bots
+  const onlineReal = realBrokers.filter(b => b.isRealOnline);
+  const offlineReal = realBrokers.filter(b => !b.isRealOnline);
+  const allBrokers = [...onlineReal, ...offlineReal, ...shuffledBots];
 
   const handleContact = (broker: Broker) => {
     const msg = encodeURIComponent(`Olá, gostaria de falar com ${broker.full_name} sobre imóveis.`);
