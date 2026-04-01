@@ -302,7 +302,7 @@ const BrokerChatPanel = () => {
         data-broker-panel-trigger
         disabled={authLoading}
         aria-label={triggerTitle}
-        className="fixed bottom-6 right-40 z-50 relative flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-lg transition-shadow hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+        className="fixed bottom-6 right-[calc(1.5rem+7.5rem+0.75rem)] z-[9999] flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-lg transition-shadow hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
         title={triggerTitle}
       >
         <MessageSquare className="w-5 h-5" />
