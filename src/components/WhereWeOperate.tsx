@@ -31,8 +31,8 @@ const WhereWeOperate = () => {
               ))}
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                <a href="mailto:felipfita@gmail.com" className="text-sm text-foreground hover:text-secondary transition-colors underline">
-                  contato@corretoresassociados.com.br
+                <a href="mailto:felipe@corretoresrj.com" className="text-sm text-foreground hover:text-secondary transition-colors underline">
+                  felipe@corretoresrj.com
                 </a>
               </div>
             </div>
