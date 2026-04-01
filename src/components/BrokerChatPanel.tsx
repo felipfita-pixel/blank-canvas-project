@@ -50,15 +50,20 @@ const BrokerChatPanel = () => {
 
   useEffect(() => { scrollToBottom(); }, [messages, scrollToBottom]);
 
-  // Get broker ID for current user
+  // Get broker ID for current user (or set admin-only mode)
   useEffect(() => {
     if (!user) return;
     const fetchBroker = async () => {
       const { data } = await supabase.from("brokers").select("id").eq("user_id", user.id).eq("status", "approved").maybeSingle();
-      if (data) setBrokerId(data.id);
+      if (data) {
+        setBrokerId(data.id);
+      } else if (isAdmin) {
+        setIsAdminOnly(true);
+        setBrokerId("admin");
+      }
     };
     fetchBroker();
-  }, [user]);
+  }, [user, isAdmin]);
 
   // Fetch conversations
   const fetchConversations = useCallback(async () => {
