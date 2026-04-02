@@ -248,7 +248,7 @@ const ChatWidget = () => {
       },
     });
 
-    // Auto offline message on first client message
+    // Auto offline message on first client message + start escalation timer
     if (!fileUrl) {
       const { count } = await supabase
         .from("chat_messages")
@@ -267,6 +267,46 @@ const ChatWidget = () => {
             sender_phone: "",
           });
         }
+
+        // Start 30-second escalation timer
+        if (escalationTimerRef.current) clearTimeout(escalationTimerRef.current);
+        escalationTimerRef.current = setTimeout(async () => {
+          // Check if any broker has replied
+          const { data: replies } = await supabase
+            .from("chat_messages")
+            .select("id")
+            .eq("conversation_id", conversationId)
+            .eq("is_from_client", false)
+            .neq("sender_name", "Sistema")
+            .limit(1);
+
+          if (!replies || replies.length === 0) {
+            setEscalated(true);
+            // Notify admin via system message
+            await supabase.from("chat_messages").insert({
+              conversation_id: conversationId,
+              message: "Nenhum corretor disponível no momento. Um administrador foi notificado e responderá em breve. 🔔",
+              is_from_client: false,
+              sender_name: "Sistema",
+              sender_email: "",
+              sender_phone: "",
+            });
+            // Send escalation email to admin
+            supabase.functions.invoke("send-transactional-email", {
+              body: {
+                templateName: "new-chat-notification",
+                recipientEmail: "felipe@corretoresrj.com",
+                idempotencyKey: `chat-escalation-${conversationId}`,
+                templateData: {
+                  name: info.name,
+                  email: info.email,
+                  phone: info.phone,
+                  message: `⚠️ ESCALAÇÃO: Nenhum corretor respondeu em 30 segundos. Cliente ${info.name} aguarda atendimento.`,
+                },
+              },
+            });
+          }
+        }, ESCALATION_TIMEOUT);
       }
     }
 
