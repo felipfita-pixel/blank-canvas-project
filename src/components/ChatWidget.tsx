@@ -353,6 +353,10 @@ const ChatWidget = () => {
   const resetChat = () => {
     setOpen(false);
     clearChatSession();
+    if (escalationTimerRef.current) {
+      clearTimeout(escalationTimerRef.current);
+      escalationTimerRef.current = null;
+    }
     setTimeout(() => {
       setStep("info");
       setInfo({ name: "", email: "", phone: "" });
@@ -362,6 +366,7 @@ const ChatWidget = () => {
       setBrokerName("");
       setBrokerId("");
       setNeighborhood("");
+      setEscalated(false);
     }, 300);
   };
 
