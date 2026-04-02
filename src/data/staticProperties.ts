@@ -3533,6 +3533,10 @@ export const catalogStaticProperties: StaticProperty[] = [
 
 export const staticProperties = [...featuredStaticProperties, ...catalogStaticProperties];
 
+// Re-export featured as first 60 items for showcase/homepage
+const _originalFeatured = featuredStaticProperties;
+export const featuredStaticProperties60 = staticProperties.slice(0, 60);
+
 export function getStaticProperty(id: string): StaticProperty | undefined {
   return staticProperties.find((p) => p.id === id);
 }
