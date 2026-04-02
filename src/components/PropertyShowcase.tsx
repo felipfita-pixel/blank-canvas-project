@@ -99,111 +99,116 @@ const PropertyShowcase = () => {
   if (p.parking_spots) specs.push(`${p.parking_spots} Vaga${p.parking_spots > 1 ? "s" : ""}`);
 
   return (
-    <section className="relative w-full bg-background">
-      <div className="relative flex flex-col lg:flex-row min-h-[420px] lg:min-h-[520px]">
-        {/* Image side */}
-        <div className="relative lg:w-[60%] w-full h-[300px] sm:h-[380px] lg:h-auto overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={p.id}
-              src={image}
-              alt={p.title}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </AnimatePresence>
+    <section className="relative w-full overflow-hidden">
+      <div className="relative flex flex-col lg:flex-row h-[340px] sm:h-[380px] lg:h-[420px]">
+        {/* Details side — dark navy overlay */}
+        <div className="relative lg:w-[42%] w-full bg-primary flex flex-col justify-center px-8 sm:px-12 lg:px-14 py-8 lg:py-10 z-10">
+          {/* Subtle texture overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80 pointer-events-none" />
 
-          {/* Nav arrows on image */}
-          <button
-            onClick={prev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/50 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-background/80 transition-colors z-10"
-            aria-label="Anterior"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/50 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-background/80 transition-colors z-10 lg:hidden"
-            aria-label="Próximo"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
-          {/* Counter */}
-          <div className="absolute bottom-4 left-4 bg-background/60 backdrop-blur-sm text-foreground text-xs px-3 py-1.5 rounded-full z-10">
-            {current + 1} / {properties.length}
-          </div>
-        </div>
-
-        {/* Details side */}
-        <div className="lg:w-[40%] w-full bg-cream-100 flex flex-col items-center justify-center px-6 sm:px-10 lg:px-12 py-8 lg:py-12 relative" style={{ backgroundColor: "hsl(30, 30%, 95%)" }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={p.id}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
+              exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.4 }}
-              className="text-center max-w-sm"
+              className="relative z-10 max-w-md"
             >
-              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-3 uppercase tracking-wide">
+              <h2 className="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-primary-foreground leading-tight mb-3 tracking-wide">
                 {p.title}
               </h2>
 
               {tagline && (
-                <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-[0.15em] mb-5 leading-relaxed">
+                <p className="text-primary-foreground/60 text-xs uppercase tracking-[0.18em] mb-5 leading-relaxed font-light">
                   {tagline.length > 80 ? tagline.slice(0, 80) + "…" : tagline}
                 </p>
               )}
 
-              {specs.length > 0 && (
-                <p className="text-foreground font-semibold text-sm sm:text-base tracking-wide mb-2 uppercase">
-                  {specs.join(" | ")}
-                </p>
-              )}
+              <div className="flex flex-wrap gap-x-6 gap-y-2 mb-4">
+                {p.bedrooms && (
+                  <div className="flex items-center gap-1.5 text-primary-foreground/80">
+                    <Bed className="w-4 h-4 text-secondary" />
+                    <span className="text-sm font-medium">{p.bedrooms} Quarto{p.bedrooms > 1 ? "s" : ""}</span>
+                  </div>
+                )}
+                {p.bathrooms && (
+                  <div className="flex items-center gap-1.5 text-primary-foreground/80">
+                    <Bath className="w-4 h-4 text-secondary" />
+                    <span className="text-sm font-medium">{p.bathrooms} Banheiro{p.bathrooms > 1 ? "s" : ""}</span>
+                  </div>
+                )}
+                {p.area && (
+                  <div className="flex items-center gap-1.5 text-primary-foreground/80">
+                    <Maximize className="w-4 h-4 text-secondary" />
+                    <span className="text-sm font-medium">{p.area} m²</span>
+                  </div>
+                )}
+                {p.parking_spots && (
+                  <div className="flex items-center gap-1.5 text-primary-foreground/80">
+                    <Car className="w-4 h-4 text-secondary" />
+                    <span className="text-sm font-medium">{p.parking_spots} Vaga{p.parking_spots > 1 ? "s" : ""}</span>
+                  </div>
+                )}
+              </div>
 
               {p.neighborhood && (
-                <p className="text-muted-foreground text-xs uppercase tracking-[0.15em] mb-6">
-                  {p.neighborhood}{p.city ? `, ${p.city}` : ""}
+                <p className="text-primary-foreground/50 text-xs tracking-[0.12em] mb-5 italic">
+                  {p.neighborhood}{p.city ? ` – ${p.city}` : ""}
                 </p>
               )}
 
               {p.price > 0 && (
-                <p className="text-secondary font-bold text-lg mb-6">{formatPrice(p.price)}</p>
+                <p className="text-secondary font-bold text-lg mb-5 tracking-wide">{formatPrice(p.price)}</p>
               )}
 
               <Link
                 to={`/imovel/${p.id}`}
-                className="inline-block bg-primary text-primary-foreground font-semibold text-sm px-8 py-3 rounded-lg hover:bg-navy-light transition-colors"
+                className="inline-block border border-secondary text-secondary font-semibold text-xs uppercase tracking-widest px-6 py-2.5 hover:bg-secondary hover:text-primary transition-colors duration-300"
               >
                 Ver Detalhes
               </Link>
             </motion.div>
           </AnimatePresence>
 
-          {/* Right arrow on details panel (desktop) */}
-          <button
-            onClick={next}
-            className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/50 backdrop-blur-sm items-center justify-center text-foreground hover:bg-background/80 transition-colors"
-            aria-label="Próximo"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
-          {/* Dots */}
-          <div className="flex gap-1.5 mt-6">
-            {properties.slice(0, 12).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                className={`w-2 h-2 rounded-full transition-all ${i === current ? "bg-secondary w-5" : "bg-foreground/20"}`}
-                aria-label={`Ir para ${i + 1}`}
-              />
-            ))}
+          {/* Nav arrows */}
+          <div className="absolute bottom-6 left-8 sm:left-12 flex items-center gap-3 z-10">
+            <button
+              onClick={prev}
+              className="w-8 h-8 border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/60 hover:text-secondary hover:border-secondary transition-colors"
+              aria-label="Anterior"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <span className="text-primary-foreground/40 text-xs tracking-widest font-light">
+              {String(current + 1).padStart(2, "0")} / {String(properties.length).padStart(2, "0")}
+            </span>
+            <button
+              onClick={next}
+              className="w-8 h-8 border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/60 hover:text-secondary hover:border-secondary transition-colors"
+              aria-label="Próximo"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
+        </div>
+
+        {/* Image side */}
+        <div className="relative lg:w-[58%] w-full h-full overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={p.id}
+              src={image}
+              alt={p.title}
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6 }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </AnimatePresence>
+          {/* Subtle gradient overlay on image edge */}
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-primary/30 to-transparent pointer-events-none" />
         </div>
       </div>
     </section>
