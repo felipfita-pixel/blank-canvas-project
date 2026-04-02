@@ -51,6 +51,8 @@ const loadChatSession = (): ChatSession | null => {
 
 const clearChatSession = () => localStorage.removeItem(CHAT_SESSION_KEY);
 
+const ESCALATION_TIMEOUT = 30000; // 30 seconds
+
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<"info" | "chat">("info");
@@ -65,9 +67,11 @@ const ChatWidget = () => {
   const [uploading, setUploading] = useState(false);
   const [brokersOnline, setBrokersOnline] = useState(false);
   const [brokerTyping, setBrokerTyping] = useState(false);
+  const [escalated, setEscalated] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const escalationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Restore session from localStorage on mount
   useEffect(() => {
@@ -182,6 +186,13 @@ const ChatWidget = () => {
           if (prev.find(m => m.id === newMsg.id)) return prev;
           return [...prev, newMsg];
         });
+        // Cancel escalation timer if broker replied
+        if (!newMsg.is_from_client && newMsg.sender_name !== "Sistema") {
+          if (escalationTimerRef.current) {
+            clearTimeout(escalationTimerRef.current);
+            escalationTimerRef.current = null;
+          }
+        }
       })
       .subscribe();
 
@@ -244,7 +255,7 @@ const ChatWidget = () => {
       },
     });
 
-    // Auto offline message on first client message
+    // Auto offline message on first client message + start escalation timer
     if (!fileUrl) {
       const { count } = await supabase
         .from("chat_messages")
@@ -263,6 +274,46 @@ const ChatWidget = () => {
             sender_phone: "",
           });
         }
+
+        // Start 30-second escalation timer
+        if (escalationTimerRef.current) clearTimeout(escalationTimerRef.current);
+        escalationTimerRef.current = setTimeout(async () => {
+          // Check if any broker has replied
+          const { data: replies } = await supabase
+            .from("chat_messages")
+            .select("id")
+            .eq("conversation_id", conversationId)
+            .eq("is_from_client", false)
+            .neq("sender_name", "Sistema")
+            .limit(1);
+
+          if (!replies || replies.length === 0) {
+            setEscalated(true);
+            // Notify admin via system message
+            await supabase.from("chat_messages").insert({
+              conversation_id: conversationId,
+              message: "Nenhum corretor disponível no momento. Um administrador foi notificado e responderá em breve. 🔔",
+              is_from_client: false,
+              sender_name: "Sistema",
+              sender_email: "",
+              sender_phone: "",
+            });
+            // Send escalation email to admin
+            supabase.functions.invoke("send-transactional-email", {
+              body: {
+                templateName: "new-chat-notification",
+                recipientEmail: "felipe@corretoresrj.com",
+                idempotencyKey: `chat-escalation-${conversationId}`,
+                templateData: {
+                  name: info.name,
+                  email: info.email,
+                  phone: info.phone,
+                  message: `⚠️ ESCALAÇÃO: Nenhum corretor respondeu em 30 segundos. Cliente ${info.name} aguarda atendimento.`,
+                },
+              },
+            });
+          }
+        }, ESCALATION_TIMEOUT);
       }
     }
 
@@ -302,6 +353,10 @@ const ChatWidget = () => {
   const resetChat = () => {
     setOpen(false);
     clearChatSession();
+    if (escalationTimerRef.current) {
+      clearTimeout(escalationTimerRef.current);
+      escalationTimerRef.current = null;
+    }
     setTimeout(() => {
       setStep("info");
       setInfo({ name: "", email: "", phone: "" });
@@ -311,6 +366,7 @@ const ChatWidget = () => {
       setBrokerName("");
       setBrokerId("");
       setNeighborhood("");
+      setEscalated(false);
     }, 300);
   };
 
