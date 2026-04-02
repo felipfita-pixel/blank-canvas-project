@@ -12,7 +12,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[85svh] flex items-center justify-center bg-primary overflow-hidden">
+    <section className="relative min-h-[45svh] flex items-center justify-center bg-primary overflow-hidden">
       {/* Subtle decorative elements */}
       <div className="absolute top-20 right-10 w-72 h-72 bg-secondary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-10 w-56 h-56 bg-secondary/5 rounded-full blur-3xl" />
