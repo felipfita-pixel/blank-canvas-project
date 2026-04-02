@@ -186,6 +186,13 @@ const ChatWidget = () => {
           if (prev.find(m => m.id === newMsg.id)) return prev;
           return [...prev, newMsg];
         });
+        // Cancel escalation timer if broker replied
+        if (!newMsg.is_from_client && newMsg.sender_name !== "Sistema") {
+          if (escalationTimerRef.current) {
+            clearTimeout(escalationTimerRef.current);
+            escalationTimerRef.current = null;
+          }
+        }
       })
       .subscribe();
 
