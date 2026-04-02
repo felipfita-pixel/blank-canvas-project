@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Bed, Bath, Maximize, Car } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { featuredStaticProperties } from "@/data/staticProperties";
+import { staticProperties } from "@/data/staticProperties";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
