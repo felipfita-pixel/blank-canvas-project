@@ -296,22 +296,24 @@ const BrokerChatPanel = () => {
 
   return (
     <>
-      {/* Floating broker chat button */}
-      <button
-        onClick={handleTogglePanel}
-        data-broker-panel-trigger
-        disabled={authLoading}
-        aria-label={triggerTitle}
-        className="fixed bottom-6 right-[calc(1.5rem+7.5rem+0.75rem)] z-[9999] flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-lg transition-shadow hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
-        title={triggerTitle}
-      >
-        <MessageSquare className="w-5 h-5" />
-        {totalUnread > 0 && (
-          <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
-            {totalUnread}
-          </span>
-        )}
-      </button>
+      {/* Floating broker chat button - only visible when authenticated as broker/admin */}
+      {brokerId && (
+        <button
+          onClick={handleTogglePanel}
+          data-broker-panel-trigger
+          disabled={authLoading}
+          aria-label={triggerTitle}
+          className="fixed bottom-6 right-[calc(1.5rem+7.5rem+0.75rem)] z-[9999] flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-lg transition-shadow hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+          title={triggerTitle}
+        >
+          <MessageSquare className="w-5 h-5" />
+          {totalUnread > 0 && (
+            <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {totalUnread}
+            </span>
+          )}
+        </button>
+      )}
 
       {/* Chat panel */}
       {brokerId && !minimized && (
