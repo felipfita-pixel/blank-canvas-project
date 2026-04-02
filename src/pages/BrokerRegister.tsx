@@ -205,7 +205,7 @@ const BrokerRegister = () => {
             <div className="text-xs text-muted-foreground space-y-2 leading-relaxed">
               <p>Ao se cadastrar na plataforma, o <strong className="text-foreground">CORRETOR</strong> declara estar ciente e de acordo que:</p>
               <ul className="list-disc list-inside space-y-1 ml-1">
-                <li>Toda negociação originada pelo site terá divisão de comissão de <strong className="text-foreground">50% para o corretor</strong> e <strong className="text-foreground">50% para o administrador</strong>;</li>
+                <li>Toda negociação originada pelo site terá divisão de comissão de <strong className="text-foreground">70% para o corretor</strong> e <strong className="text-foreground">30% para o administrador</strong>;</li>
                 <li>O aceite é automático no momento do cadastro;</li>
                 <li>O não cumprimento das regras poderá resultar em exclusão da plataforma.</li>
               </ul>
