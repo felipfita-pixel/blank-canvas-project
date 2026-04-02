@@ -52,9 +52,9 @@ const FeaturedProperties = () => {
         .order("created_at", { ascending: false })
         .limit(6);
 
-      // Merge DB featured + static featured (24)
+      // Merge DB featured + static featured (60)
       const dbProps = (data as Property[]) || [];
-      const staticAsProps: Property[] = featuredStaticProperties.map((sp) => ({
+      const staticAsProps: Property[] = staticProperties.slice(0, 60).map((sp) => ({
         id: sp.id,
         title: sp.title,
         neighborhood: sp.neighborhood,
