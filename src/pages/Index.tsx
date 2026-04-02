@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import PropertyShowcase from "@/components/PropertyShowcase";
 import AboutSection from "@/components/AboutSection";
 import CtaBanner from "@/components/CtaBanner";
 import LifestyleSection from "@/components/LifestyleSection";
