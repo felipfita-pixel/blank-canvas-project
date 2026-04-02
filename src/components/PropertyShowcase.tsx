@@ -41,7 +41,7 @@ const PropertyShowcase = () => {
         .limit(10);
 
       const dbProps = (data as Property[]) || [];
-      const staticAsProps: Property[] = featuredStaticProperties.map((sp) => ({
+      const staticAsProps: Property[] = staticProperties.slice(0, 60).map((sp) => ({
         id: sp.id,
         title: sp.title,
         description: sp.description,
