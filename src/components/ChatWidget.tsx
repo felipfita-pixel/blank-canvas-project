@@ -51,6 +51,8 @@ const loadChatSession = (): ChatSession | null => {
 
 const clearChatSession = () => localStorage.removeItem(CHAT_SESSION_KEY);
 
+const ESCALATION_TIMEOUT = 30000; // 30 seconds
+
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<"info" | "chat">("info");
@@ -65,9 +67,11 @@ const ChatWidget = () => {
   const [uploading, setUploading] = useState(false);
   const [brokersOnline, setBrokersOnline] = useState(false);
   const [brokerTyping, setBrokerTyping] = useState(false);
+  const [escalated, setEscalated] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const escalationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Restore session from localStorage on mount
   useEffect(() => {
