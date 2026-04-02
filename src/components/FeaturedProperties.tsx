@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { featuredStaticProperties } from "@/data/staticProperties";
+import { staticProperties } from "@/data/staticProperties";
 import { Bed, Bath, Maximize } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -52,9 +52,9 @@ const FeaturedProperties = () => {
         .order("created_at", { ascending: false })
         .limit(6);
 
-      // Merge DB featured + static featured (24)
+      // Merge DB featured + static featured (60)
       const dbProps = (data as Property[]) || [];
-      const staticAsProps: Property[] = featuredStaticProperties.map((sp) => ({
+      const staticAsProps: Property[] = staticProperties.slice(0, 60).map((sp) => ({
         id: sp.id,
         title: sp.title,
         neighborhood: sp.neighborhood,
