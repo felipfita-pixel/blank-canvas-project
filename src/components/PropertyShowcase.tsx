@@ -100,10 +100,9 @@ const PropertyShowcase = () => {
 
   return (
     <section className="relative w-full overflow-hidden">
-      <div className="relative flex flex-col lg:flex-row h-[340px] sm:h-[380px] lg:h-[420px]">
-        {/* Details side — dark navy overlay */}
-        <div className="relative lg:w-[42%] w-full bg-primary flex flex-col justify-center px-8 sm:px-12 lg:px-14 py-8 lg:py-10 z-10">
-          {/* Subtle texture overlay */}
+      <div className="relative flex flex-col lg:flex-row h-[380px] sm:h-[420px] lg:h-[480px]">
+        {/* Details side — dark navy */}
+        <div className="relative lg:w-[35%] w-full bg-primary flex flex-col justify-center px-8 sm:px-10 lg:px-12 py-8 lg:py-10 z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80 pointer-events-none" />
 
           <AnimatePresence mode="wait">
@@ -113,58 +112,67 @@ const PropertyShowcase = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.4 }}
-              className="relative z-10 max-w-md"
+              className="relative z-10"
             >
-              <h2 className="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-primary-foreground leading-tight mb-3 tracking-wide">
+              {/* Title */}
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-[2.2rem] font-bold text-primary-foreground leading-[1.15] mb-4 tracking-wide">
                 {p.title}
               </h2>
 
+              {/* Tagline with decorative line */}
               {tagline && (
-                <p className="text-primary-foreground/60 text-xs uppercase tracking-[0.18em] mb-5 leading-relaxed font-light">
-                  {tagline.length > 80 ? tagline.slice(0, 80) + "…" : tagline}
-                </p>
+                <div className="mb-5">
+                  <div className="w-10 h-[2px] bg-secondary mb-3" />
+                  <p className="text-primary-foreground/70 text-[13px] uppercase tracking-[0.15em] leading-relaxed font-light">
+                    {tagline.length > 100 ? tagline.slice(0, 100) + "…" : tagline}
+                  </p>
+                </div>
               )}
 
-              <div className="flex flex-wrap gap-x-6 gap-y-2 mb-4">
+              {/* Specs with larger icons */}
+              <div className="flex flex-wrap gap-x-5 gap-y-3 mb-5">
                 {p.bedrooms && (
-                  <div className="flex items-center gap-1.5 text-primary-foreground/80">
-                    <Bed className="w-4 h-4 text-secondary" />
-                    <span className="text-sm font-medium">{p.bedrooms} Quarto{p.bedrooms > 1 ? "s" : ""}</span>
+                  <div className="flex items-center gap-2 text-primary-foreground/90">
+                    <Bed className="w-[18px] h-[18px] text-secondary" />
+                    <span className="text-[13px] font-medium">{p.bedrooms} Quarto{p.bedrooms > 1 ? "s" : ""}</span>
                   </div>
                 )}
                 {p.bathrooms && (
-                  <div className="flex items-center gap-1.5 text-primary-foreground/80">
-                    <Bath className="w-4 h-4 text-secondary" />
-                    <span className="text-sm font-medium">{p.bathrooms} Banheiro{p.bathrooms > 1 ? "s" : ""}</span>
+                  <div className="flex items-center gap-2 text-primary-foreground/90">
+                    <Bath className="w-[18px] h-[18px] text-secondary" />
+                    <span className="text-[13px] font-medium">{p.bathrooms} Banheiro{p.bathrooms > 1 ? "s" : ""}</span>
                   </div>
                 )}
                 {p.area && (
-                  <div className="flex items-center gap-1.5 text-primary-foreground/80">
-                    <Maximize className="w-4 h-4 text-secondary" />
-                    <span className="text-sm font-medium">{p.area} m²</span>
+                  <div className="flex items-center gap-2 text-primary-foreground/90">
+                    <Maximize className="w-[18px] h-[18px] text-secondary" />
+                    <span className="text-[13px] font-medium">{p.area} m²</span>
                   </div>
                 )}
                 {p.parking_spots && (
-                  <div className="flex items-center gap-1.5 text-primary-foreground/80">
-                    <Car className="w-4 h-4 text-secondary" />
-                    <span className="text-sm font-medium">{p.parking_spots} Vaga{p.parking_spots > 1 ? "s" : ""}</span>
+                  <div className="flex items-center gap-2 text-primary-foreground/90">
+                    <Car className="w-[18px] h-[18px] text-secondary" />
+                    <span className="text-[13px] font-medium">{p.parking_spots} Vaga{p.parking_spots > 1 ? "s" : ""}</span>
                   </div>
                 )}
               </div>
 
+              {/* Location */}
               {p.neighborhood && (
-                <p className="text-primary-foreground/50 text-xs tracking-[0.12em] mb-5 italic">
+                <p className="text-primary-foreground/50 text-[12px] tracking-[0.1em] mb-5 italic font-light">
                   {p.neighborhood}{p.city ? ` – ${p.city}` : ""}
                 </p>
               )}
 
+              {/* Price */}
               {p.price > 0 && (
-                <p className="text-secondary font-bold text-lg mb-5 tracking-wide">{formatPrice(p.price)}</p>
+                <p className="text-secondary font-bold text-xl mb-6 tracking-wide">{formatPrice(p.price)}</p>
               )}
 
+              {/* CTA Button */}
               <Link
                 to={`/imovel/${p.id}`}
-                className="inline-block border border-secondary text-secondary font-semibold text-xs uppercase tracking-widest px-6 py-2.5 hover:bg-secondary hover:text-primary transition-colors duration-300"
+                className="inline-block bg-secondary text-secondary-foreground font-bold text-xs uppercase tracking-[0.2em] px-7 py-3 hover:bg-secondary/90 transition-colors duration-300 rounded-sm"
               >
                 Ver Detalhes
               </Link>
@@ -172,20 +180,20 @@ const PropertyShowcase = () => {
           </AnimatePresence>
 
           {/* Nav arrows */}
-          <div className="absolute bottom-6 left-8 sm:left-12 flex items-center gap-3 z-10">
+          <div className="absolute bottom-5 left-8 sm:left-10 flex items-center gap-3 z-10">
             <button
               onClick={prev}
-              className="w-8 h-8 border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/60 hover:text-secondary hover:border-secondary transition-colors"
+              className="w-9 h-9 border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/60 hover:text-secondary hover:border-secondary transition-colors"
               aria-label="Anterior"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-primary-foreground/40 text-xs tracking-widest font-light">
+            <span className="text-primary-foreground/40 text-xs tracking-widest font-light tabular-nums">
               {String(current + 1).padStart(2, "0")} / {String(properties.length).padStart(2, "0")}
             </span>
             <button
               onClick={next}
-              className="w-8 h-8 border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/60 hover:text-secondary hover:border-secondary transition-colors"
+              className="w-9 h-9 border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/60 hover:text-secondary hover:border-secondary transition-colors"
               aria-label="Próximo"
             >
               <ChevronRight className="w-4 h-4" />
@@ -193,8 +201,8 @@ const PropertyShowcase = () => {
           </div>
         </div>
 
-        {/* Image side */}
-        <div className="relative lg:w-[58%] w-full h-full overflow-hidden">
+        {/* Image side — larger */}
+        <div className="relative lg:w-[65%] w-full h-full overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.img
               key={p.id}
@@ -207,8 +215,7 @@ const PropertyShowcase = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
           </AnimatePresence>
-          {/* Subtle gradient overlay on image edge */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-primary/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-primary/40 to-transparent pointer-events-none" />
         </div>
       </div>
     </section>
