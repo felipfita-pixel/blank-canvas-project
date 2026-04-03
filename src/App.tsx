@@ -22,6 +22,7 @@ import AdminUsers from "./pages/admin/AdminUsers.tsx";
 import AdminSettings from "./pages/admin/AdminSettings.tsx";
 import AdminCompanies from "./pages/admin/AdminCompanies.tsx";
 import AdminChatHistory from "./pages/admin/AdminChatHistory.tsx";
+import AdminDocumentation from "./pages/admin/AdminDocumentation.tsx";
 import Properties from "./pages/Properties.tsx";
 import PropertyDetail from "./pages/PropertyDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
