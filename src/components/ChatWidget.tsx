@@ -257,9 +257,13 @@ const ChatWidget = () => {
     }
 
     // If no broker was pre-selected (e.g. from BrokersOnlineSection), assign from queue
+    let finalBrokerId = brokerId;
+    let finalBrokerName = brokerName;
     if (!brokerId) {
       const assigned = await assignBrokerFromQueue();
       if (assigned) {
+        finalBrokerId = assigned.id;
+        finalBrokerName = assigned.name;
         setBrokerId(assigned.id);
         setBrokerName(assigned.name);
       }
@@ -267,7 +271,7 @@ const ChatWidget = () => {
 
     const convId = `conv-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     setConversationId(convId);
-    saveChatSession({ conversationId: convId, info, brokerId, brokerName, neighborhood });
+    saveChatSession({ conversationId: convId, info, brokerId: finalBrokerId, brokerName: finalBrokerName, neighborhood });
     
     if (neighborhood && !message) {
       setMessage(`Olá! Tenho interesse em imóveis no bairro ${neighborhood}. Podem me ajudar?`);
