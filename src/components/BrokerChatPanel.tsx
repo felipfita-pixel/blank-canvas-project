@@ -363,9 +363,14 @@ const BrokerChatPanel = () => {
                     )}
                   </div>
                   <p className="text-[10px] text-muted-foreground truncate mt-0.5">{conv.last_message}</p>
-                  <p className="text-[9px] text-muted-foreground/50 mt-0.5 flex items-center gap-0.5">
-                    <Clock className="w-2.5 h-2.5" /> {formatTime(conv.last_time)}
-                  </p>
+                  <div className="flex items-center justify-between mt-0.5">
+                    <p className="text-[9px] text-muted-foreground/50 flex items-center gap-0.5">
+                      <Clock className="w-2.5 h-2.5" /> {formatTime(conv.last_time)}
+                    </p>
+                    {!conv.claimed_by && conv.unread > 0 && (
+                      <WaitTimer since={conv.last_time} compact />
+                    )}
+                  </div>
                 </button>
               ))}
             </div>
