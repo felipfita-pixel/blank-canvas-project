@@ -188,9 +188,7 @@ const PropertyShowcase = () => {
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-primary-foreground/40 text-xs tracking-widest font-light tabular-nums">
-              {String(current + 1).padStart(2, "0")} / {String(properties.length).padStart(2, "0")}
-            </span>
+            <SiteVisitCounter />
             <button
               onClick={next}
               className="w-9 h-9 border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/60 hover:text-secondary hover:border-secondary transition-colors"
