@@ -53,10 +53,9 @@ function loadCounter(): number {
       if (date === today) return value;
     }
   } catch {}
-  // New day or first visit: base + today's accumulated increments
-  const value = BASE_VISITS + getTodayIncrements();
-  saveCounter(value);
-  return value;
+  // New day or first visit: start exactly at BASE_VISITS
+  saveCounter(BASE_VISITS);
+  return BASE_VISITS;
 }
 
 function saveCounter(value: number) {
