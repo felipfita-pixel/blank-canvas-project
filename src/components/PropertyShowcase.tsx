@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Bed, Bath, Maximize, Car } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { staticProperties } from "@/data/staticProperties";
+import SiteVisitCounter from "@/components/SiteVisitCounter";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
