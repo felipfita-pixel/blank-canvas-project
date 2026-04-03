@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Building2, Users, Mail, TrendingUp, Landmark, BarChart3, MessageSquare, Phone, AtSign, Home as HomeIcon } from "lucide-react";
+import { Building2, Users, Mail, TrendingUp, Landmark, BarChart3, MessageSquare, Phone, AtSign, Home as HomeIcon, Printer } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const StatCard = ({ icon: Icon, label, value, color, onClick }: { icon: any; label: string; value: number; color: string; onClick?: () => void }) => (
@@ -218,14 +219,14 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-heading font-bold text-foreground mb-6">Dashboard</h1>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+      <h1 className="text-2xl font-heading font-bold text-foreground mb-6 print:text-lg print:mb-2">Dashboard</h1>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6 print:hidden">
         <StatCard icon={Building2} label="Imóveis cadastrados" value={stats.properties} color="bg-navy" onClick={() => navigate("/admin/properties")} />
         <StatCard icon={Users} label="Corretores aprovados" value={stats.brokers} color="bg-secondary" onClick={() => navigate("/admin/brokers")} />
         <StatCard icon={TrendingUp} label="Corretores pendentes" value={stats.pendingBrokers} color="bg-orange-hover" onClick={() => navigate("/admin/brokers")} />
         <StatCard icon={Mail} label="Mensagens não lidas" value={stats.messages} color="bg-destructive" onClick={() => navigate("/admin/messages")} />
       </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 print:hidden">
         <StatCard icon={MessageSquare} label="Chats não lidos" value={stats.chatMessages} color="bg-navy-light" onClick={() => navigate("/admin/messages")} />
         <StatCard icon={Landmark} label="Empresas cadastradas" value={stats.companies} color="bg-navy-light" onClick={() => navigate("/admin/companies")} />
         <StatCard icon={Landmark} label="Empresas pendentes" value={stats.pendingCompanies} color="bg-orange-hover" onClick={() => navigate("/admin/companies")} />
@@ -234,12 +235,18 @@ const AdminDashboard = () => {
 
       {/* Lista de Atendimentos */}
       <div className="bg-card rounded-xl border border-border overflow-hidden">
-        <div className="px-5 py-4 border-b border-border flex items-center justify-between">
+        <div className="px-5 py-4 border-b border-border flex items-center justify-between print:border-0">
           <div>
             <h2 className="text-base font-heading font-bold text-foreground">Lista de Atendimentos</h2>
             <p className="text-xs text-muted-foreground mt-0.5">Clientes, imóveis solicitados e corretores responsáveis</p>
           </div>
-          <Badge variant="outline" className="text-xs">{leads.length} registros</Badge>
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="text-xs print:hidden">{leads.length} registros</Badge>
+            <Button size="sm" variant="outline" className="gap-1.5 print:hidden" onClick={() => window.print()}>
+              <Printer className="w-3.5 h-3.5" />
+              Imprimir
+            </Button>
+          </div>
         </div>
         <ScrollArea className="max-h-[500px]">
           <div className="overflow-x-auto">

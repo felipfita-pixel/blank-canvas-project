@@ -103,3 +103,39 @@
     @apply max-w-7xl mx-auto;
   }
 }
+
+@media print {
+  /* Hide everything except the main content */
+  body { background: white !important; }
+  nav, header, aside, footer,
+  [data-sidebar], [data-broker-panel-trigger],
+  .fixed { display: none !important; }
+
+  /* Show only the printable table area */
+  main { padding: 0 !important; overflow: visible !important; }
+
+  /* Reset scroll area for print */
+  [data-radix-scroll-area-viewport] {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Table styles for print */
+  table {
+    font-size: 10px !important;
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+  table th, table td {
+    border: 1px solid #ddd !important;
+    padding: 4px 6px !important;
+  }
+  table th {
+    background: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Force page break behavior */
+  .bg-card { box-shadow: none !important; border: none !important; }
+}
