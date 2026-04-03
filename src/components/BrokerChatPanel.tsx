@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MessageSquare, Send, Loader2, Paperclip, X, User, Clock, Shield, Circle } from "lucide-react";
+import { MessageSquare, Send, Loader2, Paperclip, X, User, Clock, Shield, Circle, Bell } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useBrokerPresence } from "@/hooks/useBrokerPresence";
+import { useBrokerNotifications } from "@/hooks/useBrokerNotifications";
+import WaitTimer from "@/components/WaitTimer";
 import { toast } from "sonner";
 
 interface Conversation {
