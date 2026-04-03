@@ -232,8 +232,15 @@ export default function AdminDocumentation() {
 
   const handleWhatsApp = async () => {
     await fetchStats();
-    const text = encodeURIComponent(getShareText());
-    window.open(`https://wa.me/?text=${text}`, "_blank");
+    const text = getShareText();
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success("Texto copiado! Cole no WhatsApp.", { duration: 4000 });
+      window.open("https://api.whatsapp.com/send?phone=5521975316631", "_blank");
+    } catch {
+      const encoded = encodeURIComponent(text);
+      window.open(`https://api.whatsapp.com/send?phone=5521975316631&text=${encoded}`, "_blank");
+    }
   };
 
   const handleEmail = async () => {

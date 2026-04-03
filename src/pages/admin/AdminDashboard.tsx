@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Building2, Users, Mail, TrendingUp, Landmark, BarChart3, MessageSquare, Phone, AtSign, Home as HomeIcon, Printer } from "lucide-react";
+import { Building2, Users, Mail, TrendingUp, Landmark, BarChart3, MessageSquare, Phone, AtSign, Home as HomeIcon, Printer, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { toast } from "sonner";
 
 const StatCard = ({ icon: Icon, label, value, color, onClick }: { icon: any; label: string; value: number; color: string; onClick?: () => void }) => (
   <div
@@ -217,6 +218,40 @@ const AdminDashboard = () => {
     day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
   });
 
+  const getLeadsText = () => {
+    const date = new Date().toLocaleString("pt-BR");
+    let text = `📋 LISTA DE ATENDIMENTOS - FF Imobiliária\n`;
+    text += `📅 Gerado em: ${date}\n`;
+    text += `📊 Total: ${leads.length} registros\n\n`;
+    leads.forEach((lead, i) => {
+      text += `${i + 1}. ${lead.client_name}\n`;
+      text += `   📞 ${lead.client_phone} | ✉️ ${lead.client_email}\n`;
+      text += `   🏠 ${lead.property_info}\n`;
+      text += `   👤 Corretor: ${lead.broker_name}`;
+      if (lead.broker_name !== "—") text += ` (${lead.broker_phone})`;
+      text += `\n   📌 ${lead.source === "chat" ? "Chat" : lead.source === "contact" ? "Contato" : "Agendamento"} | ${formatDate(lead.date)}\n\n`;
+    });
+    return text;
+  };
+
+  const handleLeadsWhatsApp = () => {
+    const text = getLeadsText();
+    try {
+      navigator.clipboard.writeText(text);
+      toast.success("Texto copiado! Cole no WhatsApp.", { duration: 4000 });
+      window.open("https://api.whatsapp.com/send?phone=5521975316631", "_blank");
+    } catch {
+      const encoded = encodeURIComponent(text);
+      window.open(`https://api.whatsapp.com/send?phone=5521975316631&text=${encoded}`, "_blank");
+    }
+  };
+
+  const handleLeadsEmail = () => {
+    const subject = encodeURIComponent("Lista de Atendimentos - FF Imobiliária");
+    const body = encodeURIComponent(getLeadsText());
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-heading font-bold text-foreground mb-6 print:text-lg print:mb-2">Dashboard</h1>
@@ -242,6 +277,14 @@ const AdminDashboard = () => {
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="text-xs print:hidden">{leads.length} registros</Badge>
+            <Button size="sm" variant="outline" className="gap-1.5 print:hidden" onClick={handleLeadsEmail}>
+              <Mail className="w-3.5 h-3.5" />
+              Email
+            </Button>
+            <Button size="sm" className="gap-1.5 print:hidden bg-emerald-600 hover:bg-emerald-700 text-white" onClick={handleLeadsWhatsApp}>
+              <MessageCircle className="w-3.5 h-3.5" />
+              WhatsApp
+            </Button>
             <Button size="sm" variant="outline" className="gap-1.5 print:hidden" onClick={() => window.print()}>
               <Printer className="w-3.5 h-3.5" />
               Imprimir
