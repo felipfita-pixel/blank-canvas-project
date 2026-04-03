@@ -201,7 +201,51 @@ const ChatWidget = () => {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleInfoSubmit = (e: React.FormEvent) => {
+  // Queue-based broker assignment: picks the online broker who hasn't been assigned longest
+  const assignBrokerFromQueue = async (): Promise<{ id: string; name: string } | null> => {
+    const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+
+    // Get all online brokers with their last_assigned_at
+    const { data: onlinePresence } = await supabase
+      .from("broker_presence")
+      .select("user_id, last_assigned_at")
+      .eq("is_online", true)
+      .gte("last_seen_at", fiveMinAgo)
+      .order("last_assigned_at", { ascending: true });
+
+    if (!onlinePresence || onlinePresence.length === 0) return null;
+
+    // Get broker info for online users
+    const userIds = onlinePresence.map(p => p.user_id);
+    const { data: brokers } = await supabase
+      .from("brokers")
+      .select("id, full_name, user_id")
+      .eq("status", "approved")
+      .is("deleted_at", null)
+      .in("user_id", userIds);
+
+    if (!brokers || brokers.length === 0) return null;
+
+    // Order brokers by last_assigned_at (from presence), pick first (longest without assignment)
+    const presenceMap = new Map(onlinePresence.map(p => [p.user_id, p.last_assigned_at]));
+    brokers.sort((a, b) => {
+      const aTime = new Date(presenceMap.get(a.user_id!) || "1970-01-01").getTime();
+      const bTime = new Date(presenceMap.get(b.user_id!) || "1970-01-01").getTime();
+      return aTime - bTime;
+    });
+
+    const selected = brokers[0];
+
+    // Update last_assigned_at for the selected broker
+    await supabase
+      .from("broker_presence")
+      .update({ last_assigned_at: new Date().toISOString() })
+      .eq("user_id", selected.user_id!);
+
+    return { id: selected.id, name: selected.full_name };
+  };
+
+  const handleInfoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!info.name.trim() || !info.email.trim()) {
       toast.error("Preencha nome e e-mail.");
@@ -211,9 +255,23 @@ const ChatWidget = () => {
       toast.error("Informe um e-mail válido.");
       return;
     }
+
+    // If no broker was pre-selected (e.g. from BrokersOnlineSection), assign from queue
+    let finalBrokerId = brokerId;
+    let finalBrokerName = brokerName;
+    if (!brokerId) {
+      const assigned = await assignBrokerFromQueue();
+      if (assigned) {
+        finalBrokerId = assigned.id;
+        finalBrokerName = assigned.name;
+        setBrokerId(assigned.id);
+        setBrokerName(assigned.name);
+      }
+    }
+
     const convId = `conv-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     setConversationId(convId);
-    saveChatSession({ conversationId: convId, info, brokerId, brokerName, neighborhood });
+    saveChatSession({ conversationId: convId, info, brokerId: finalBrokerId, brokerName: finalBrokerName, neighborhood });
     
     if (neighborhood && !message) {
       setMessage(`Olá! Tenho interesse em imóveis no bairro ${neighborhood}. Podem me ajudar?`);
