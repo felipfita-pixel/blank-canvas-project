@@ -138,4 +138,13 @@
 
   /* Force page break behavior */
   .bg-card { box-shadow: none !important; border: none !important; }
+
+  /* Hide non-essential elements when printing */
+  .print\\:hidden, [class*="SidebarProvider"], header, nav { display: none !important; }
+  .print\\:block { display: block !important; }
+  .print\\:grid-cols-1 { grid-template-columns: 1fr !important; }
+  .print\\:break-inside-avoid { break-inside: avoid !important; }
+  .print\\:shadow-none { box-shadow: none !important; }
+  .print\\:border { border: 1px solid #e5e7eb !important; }
+  main { padding: 0 !important; }
 }
