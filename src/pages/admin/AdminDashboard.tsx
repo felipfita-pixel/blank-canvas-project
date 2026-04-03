@@ -235,12 +235,18 @@ const AdminDashboard = () => {
 
       {/* Lista de Atendimentos */}
       <div className="bg-card rounded-xl border border-border overflow-hidden">
-        <div className="px-5 py-4 border-b border-border flex items-center justify-between">
+        <div className="px-5 py-4 border-b border-border flex items-center justify-between print:border-0">
           <div>
             <h2 className="text-base font-heading font-bold text-foreground">Lista de Atendimentos</h2>
             <p className="text-xs text-muted-foreground mt-0.5">Clientes, imóveis solicitados e corretores responsáveis</p>
           </div>
-          <Badge variant="outline" className="text-xs">{leads.length} registros</Badge>
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="text-xs print:hidden">{leads.length} registros</Badge>
+            <Button size="sm" variant="outline" className="gap-1.5 print:hidden" onClick={() => window.print()}>
+              <Printer className="w-3.5 h-3.5" />
+              Imprimir
+            </Button>
+          </div>
         </div>
         <ScrollArea className="max-h-[500px]">
           <div className="overflow-x-auto">
