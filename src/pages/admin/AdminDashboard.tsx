@@ -219,14 +219,14 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-heading font-bold text-foreground mb-6">Dashboard</h1>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+      <h1 className="text-2xl font-heading font-bold text-foreground mb-6 print:text-lg print:mb-2">Dashboard</h1>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6 print:hidden">
         <StatCard icon={Building2} label="Imóveis cadastrados" value={stats.properties} color="bg-navy" onClick={() => navigate("/admin/properties")} />
         <StatCard icon={Users} label="Corretores aprovados" value={stats.brokers} color="bg-secondary" onClick={() => navigate("/admin/brokers")} />
         <StatCard icon={TrendingUp} label="Corretores pendentes" value={stats.pendingBrokers} color="bg-orange-hover" onClick={() => navigate("/admin/brokers")} />
         <StatCard icon={Mail} label="Mensagens não lidas" value={stats.messages} color="bg-destructive" onClick={() => navigate("/admin/messages")} />
       </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 print:hidden">
         <StatCard icon={MessageSquare} label="Chats não lidos" value={stats.chatMessages} color="bg-navy-light" onClick={() => navigate("/admin/messages")} />
         <StatCard icon={Landmark} label="Empresas cadastradas" value={stats.companies} color="bg-navy-light" onClick={() => navigate("/admin/companies")} />
         <StatCard icon={Landmark} label="Empresas pendentes" value={stats.pendingCompanies} color="bg-orange-hover" onClick={() => navigate("/admin/companies")} />
