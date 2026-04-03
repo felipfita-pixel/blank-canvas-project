@@ -116,6 +116,15 @@ const Properties = () => {
     if (filterType !== "all" && p.property_type !== filterType) return false;
     if (filterTransaction !== "all" && p.transaction_type !== filterTransaction) return false;
     if (filterNeighborhood !== "all" && p.neighborhood !== filterNeighborhood) return false;
+    if (filterBedrooms !== "all") {
+      const beds = p.bedrooms ?? 0;
+      if (filterBedrooms === "4" && beds < 4) return false;
+      if (filterBedrooms !== "4" && beds !== parseInt(filterBedrooms)) return false;
+    }
+    if (filterPrice !== "all") {
+      if (filterPrice === "above" && p.price <= 5000000) return false;
+      if (filterPrice !== "above" && p.price > parseInt(filterPrice)) return false;
+    }
     return true;
   });
 
