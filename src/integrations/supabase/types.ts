@@ -18,18 +18,21 @@ export type Database = {
         Row: {
           is_online: boolean
           is_typing_conversation: string | null
+          last_assigned_at: string | null
           last_seen_at: string
           user_id: string
         }
         Insert: {
           is_online?: boolean
           is_typing_conversation?: string | null
+          last_assigned_at?: string | null
           last_seen_at?: string
           user_id: string
         }
         Update: {
           is_online?: boolean
           is_typing_conversation?: string | null
+          last_assigned_at?: string | null
           last_seen_at?: string
           user_id?: string
         }
