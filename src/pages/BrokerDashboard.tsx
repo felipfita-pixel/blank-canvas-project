@@ -177,7 +177,13 @@ const BrokerDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Stats */}
+        {/* Métricas de Desempenho */}
+        <div>
+          <h2 className="text-sm font-semibold text-foreground mb-3">📊 Suas Métricas</h2>
+          <BrokerMetricsPanel />
+        </div>
+
+        {/* Stats básicos */}
         <div className="grid grid-cols-2 gap-4">
           <Card>
             <CardContent className="p-4 text-center">
@@ -188,7 +194,7 @@ const BrokerDashboard = () => {
           </Card>
           <Card>
             <CardContent className="p-4 text-center">
-              <MessageSquare className="w-6 h-6 mx-auto text-amber-500 mb-2" />
+              <MessageSquare className="w-6 h-6 mx-auto text-orange mb-2" />
               <p className="text-2xl font-bold text-foreground">{stats.unread}</p>
               <p className="text-xs text-muted-foreground">Não lidas</p>
             </CardContent>
