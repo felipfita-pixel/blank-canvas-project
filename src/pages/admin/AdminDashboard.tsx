@@ -218,6 +218,40 @@ const AdminDashboard = () => {
     day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
   });
 
+  const getLeadsText = () => {
+    const date = new Date().toLocaleString("pt-BR");
+    let text = `📋 LISTA DE ATENDIMENTOS - FF Imobiliária\n`;
+    text += `📅 Gerado em: ${date}\n`;
+    text += `📊 Total: ${leads.length} registros\n\n`;
+    leads.forEach((lead, i) => {
+      text += `${i + 1}. ${lead.client_name}\n`;
+      text += `   📞 ${lead.client_phone} | ✉️ ${lead.client_email}\n`;
+      text += `   🏠 ${lead.property_info}\n`;
+      text += `   👤 Corretor: ${lead.broker_name}`;
+      if (lead.broker_name !== "—") text += ` (${lead.broker_phone})`;
+      text += `\n   📌 ${lead.source === "chat" ? "Chat" : lead.source === "contact" ? "Contato" : "Agendamento"} | ${formatDate(lead.date)}\n\n`;
+    });
+    return text;
+  };
+
+  const handleLeadsWhatsApp = () => {
+    const text = getLeadsText();
+    try {
+      navigator.clipboard.writeText(text);
+      toast.success("Texto copiado! Cole no WhatsApp.", { duration: 4000 });
+      window.open("https://api.whatsapp.com/send?phone=5521975316631", "_blank");
+    } catch {
+      const encoded = encodeURIComponent(text);
+      window.open(`https://api.whatsapp.com/send?phone=5521975316631&text=${encoded}`, "_blank");
+    }
+  };
+
+  const handleLeadsEmail = () => {
+    const subject = encodeURIComponent("Lista de Atendimentos - FF Imobiliária");
+    const body = encodeURIComponent(getLeadsText());
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-heading font-bold text-foreground mb-6 print:text-lg print:mb-2">Dashboard</h1>
