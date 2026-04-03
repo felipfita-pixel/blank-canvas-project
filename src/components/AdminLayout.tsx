@@ -22,6 +22,7 @@ const menuItems = [
   { title: "Chat ao Vivo", url: "/admin/chat", icon: MessageSquare },
   { title: "Administradores", url: "/admin/users", icon: ShieldCheck },
   { title: "Configurações", url: "/admin/settings", icon: Settings },
+  { title: "Documentação", url: "/admin/documentation", icon: FileText },
 ];
 
 function BrokerAvailabilityToggle() {
