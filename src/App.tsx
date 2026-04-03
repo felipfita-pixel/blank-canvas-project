@@ -22,6 +22,7 @@ import AdminUsers from "./pages/admin/AdminUsers.tsx";
 import AdminSettings from "./pages/admin/AdminSettings.tsx";
 import AdminCompanies from "./pages/admin/AdminCompanies.tsx";
 import AdminChatHistory from "./pages/admin/AdminChatHistory.tsx";
+import AdminDocumentation from "./pages/admin/AdminDocumentation.tsx";
 import Properties from "./pages/Properties.tsx";
 import PropertyDetail from "./pages/PropertyDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="/admin/settings" element={<ProtectedRoute requireAdmin><AdminLayout><AdminSettings /></AdminLayout></ProtectedRoute>} />
             <Route path="/admin/companies" element={<ProtectedRoute requireAdmin><AdminLayout><AdminCompanies /></AdminLayout></ProtectedRoute>} />
             <Route path="/admin/chat" element={<ProtectedRoute requireAdmin><AdminLayout><AdminChatHistory /></AdminLayout></ProtectedRoute>} />
+            <Route path="/admin/documentation" element={<ProtectedRoute requireAdmin><AdminLayout><AdminDocumentation /></AdminLayout></ProtectedRoute>} />
             <Route path="/broker-dashboard" element={<ProtectedRoute><BrokerDashboard /></ProtectedRoute>} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
