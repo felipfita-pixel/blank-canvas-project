@@ -41,6 +41,7 @@ const BrokerChatPanel = () => {
   const navigate = useNavigate();
   const { user, isAdmin, loading: authLoading } = useAuth();
   const { setTyping } = useBrokerPresence();
+  const { requestPermission, notifyNewMessage, notifyAssigned } = useBrokerNotifications();
   const [brokerId, setBrokerId] = useState<string | null>(null);
   const [isAdminOnly, setIsAdminOnly] = useState(false);
   const [conversations, setConversations] = useState<Conversation[]>([]);
