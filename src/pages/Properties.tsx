@@ -48,8 +48,10 @@ const Properties = () => {
   const [filterType, setFilterType] = useState("all");
   const [filterTransaction, setFilterTransaction] = useState("all");
   const [filterNeighborhood, setFilterNeighborhood] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterPrice, setFilterPrice] = useState("all");
   const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
