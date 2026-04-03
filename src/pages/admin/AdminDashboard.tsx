@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Building2, Users, Mail, TrendingUp, Landmark, BarChart3, MessageSquare, Phone, AtSign, Home as HomeIcon } from "lucide-react";
+import { Building2, Users, Mail, TrendingUp, Landmark, BarChart3, MessageSquare, Phone, AtSign, Home as HomeIcon, Printer } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
