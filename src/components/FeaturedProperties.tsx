@@ -120,11 +120,42 @@ const FeaturedProperties = () => {
                     {p.bathrooms ? <span className="flex items-center gap-1"><Bath className="w-4 h-4" /> {p.bathrooms} banheiros</span> : null}
                     {p.area ? <span className="flex items-center gap-1"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
                   </div>
-                  <Link to={`/imovel/${p.id}`}>
-                    <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
-                      Ver Detalhes
+                  <div className="flex gap-2">
+                    <Link to={`/imovel/${p.id}`} className="flex-1">
+                      <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
+                        Ver Detalhes
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="shrink-0 text-emerald-600 border-emerald-200 hover:bg-emerald-50"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const url = `${window.location.origin}/imovel/${p.id}`;
+                        const text = encodeURIComponent(`🏠 ${p.title}\n💰 ${formatPrice(p.price)}\n📍 ${p.neighborhood || ""}\n\nVeja mais: ${url}`);
+                        window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
+                      }}
+                      title="Compartilhar no WhatsApp"
+                    >
+                      <Share2 className="w-4 h-4" />
                     </Button>
-                  </Link>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="shrink-0 text-secondary border-secondary/20 hover:bg-secondary/10"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const el = document.getElementById("contact");
+                        if (el) { el.scrollIntoView({ behavior: "smooth" }); return; }
+                        sessionStorage.setItem("pendingScrollSection", "contact");
+                        window.location.href = "/";
+                      }}
+                      title="Agendar Visita"
+                    >
+                      <CalendarDays className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
