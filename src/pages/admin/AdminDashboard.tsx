@@ -277,6 +277,14 @@ const AdminDashboard = () => {
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="text-xs print:hidden">{leads.length} registros</Badge>
+            <Button size="sm" variant="outline" className="gap-1.5 print:hidden" onClick={handleLeadsEmail}>
+              <Mail className="w-3.5 h-3.5" />
+              Email
+            </Button>
+            <Button size="sm" className="gap-1.5 print:hidden bg-emerald-600 hover:bg-emerald-700 text-white" onClick={handleLeadsWhatsApp}>
+              <MessageCircle className="w-3.5 h-3.5" />
+              WhatsApp
+            </Button>
             <Button size="sm" variant="outline" className="gap-1.5 print:hidden" onClick={() => window.print()}>
               <Printer className="w-3.5 h-3.5" />
               Imprimir
