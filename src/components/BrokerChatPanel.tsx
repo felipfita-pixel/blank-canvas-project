@@ -35,7 +35,7 @@ interface ChatMsg {
   sender_name: string;
 }
 
-const notificationSound = typeof window !== "undefined" ? new Audio("/notification.wav") : null;
+// Sound is now managed by useBrokerNotifications hook
 
 const BrokerChatPanel = () => {
   const navigate = useNavigate();
