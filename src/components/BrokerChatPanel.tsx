@@ -155,23 +155,30 @@ const BrokerChatPanel = () => {
 
   useEffect(() => { fetchConversations(); }, [fetchConversations]);
 
-  // Subscribe to new messages globally + play notification sound
+  // Request browser notification permission on mount
+  useEffect(() => {
+    if (brokerId) requestPermission();
+  }, [brokerId, requestPermission]);
+
+  // Subscribe to new messages globally + play notification sound + browser push
   useEffect(() => {
     if (!brokerId) return;
     const channel = supabase
       .channel("broker-chat-global")
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "chat_messages" }, (payload) => {
         const newMsg = payload.new as Record<string, unknown>;
-        // Play sound for new client messages
-        if (newMsg.is_from_client && notificationSound) {
-          notificationSound.play().catch(() => {});
+        if (newMsg.is_from_client) {
+          notifyNewMessage(
+            (newMsg.sender_name as string) || "Cliente",
+            (newMsg.message as string) || "Nova mensagem"
+          );
         }
         fetchConversations();
         if (selectedConv) fetchMessages(selectedConv);
       })
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, [brokerId, fetchConversations, selectedConv]);
+  }, [brokerId, fetchConversations, selectedConv, notifyNewMessage]);
 
   // Subscribe to typing indicators from broker_presence (client typing not tracked yet)
   useEffect(() => {
