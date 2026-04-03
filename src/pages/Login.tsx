@@ -68,6 +68,8 @@ const Login = () => {
     toast.success("Login realizado com sucesso!");
     if (roles.includes("admin")) {
       navigate("/admin");
+    } else if (roles.includes("broker")) {
+      navigate("/broker-dashboard");
     } else {
       navigate("/");
     }
