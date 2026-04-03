@@ -130,7 +130,7 @@ const Properties = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-card border-b border-border sticky top-0 z-30">
+      <div className="bg-card border-b border-border sticky top-16 sm:sticky sm:top-20 z-30">
         <div className="container-main py-4">
           <div className="flex items-center gap-3">
             <div className="relative flex-1">
@@ -147,7 +147,7 @@ const Properties = () => {
             </Button>
           </div>
           {showFilters && (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-3">
               <Select value={filterType} onValueChange={setFilterType}>
                 <SelectTrigger><SelectValue placeholder="Tipo" /></SelectTrigger>
                 <SelectContent>
@@ -174,6 +174,27 @@ const Properties = () => {
                   {neighborhoods.map((n) => (
                     <SelectItem key={n} value={n}>{n}</SelectItem>
                   ))}
+                </SelectContent>
+              </Select>
+              <Select value={filterBedrooms} onValueChange={setFilterBedrooms}>
+                <SelectTrigger><SelectValue placeholder="Quartos" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todos</SelectItem>
+                  <SelectItem value="1">1 quarto</SelectItem>
+                  <SelectItem value="2">2 quartos</SelectItem>
+                  <SelectItem value="3">3 quartos</SelectItem>
+                  <SelectItem value="4">4+ quartos</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={filterPrice} onValueChange={setFilterPrice}>
+                <SelectTrigger><SelectValue placeholder="Preço" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Qualquer preço</SelectItem>
+                  <SelectItem value="500000">Até R$ 500 mil</SelectItem>
+                  <SelectItem value="1000000">Até R$ 1 milhão</SelectItem>
+                  <SelectItem value="2000000">Até R$ 2 milhões</SelectItem>
+                  <SelectItem value="5000000">Até R$ 5 milhões</SelectItem>
+                  <SelectItem value="above">Acima de R$ 5 milhões</SelectItem>
                 </SelectContent>
               </Select>
             </div>
