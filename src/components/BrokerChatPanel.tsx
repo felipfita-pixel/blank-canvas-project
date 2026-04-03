@@ -403,12 +403,16 @@ const BrokerChatPanel = () => {
                             </Button>
                           )}
                         </div>
-                        {conv.claimed_by && (
-                          <p className="text-[9px] text-green-600 mt-1 flex items-center gap-1">
-                            <Circle className="w-2 h-2 fill-green-500 text-green-500" />
-                            Conversa atribuída
-                          </p>
-                        )}
+                        <div className="flex items-center justify-between mt-1">
+                          {conv.claimed_by ? (
+                            <p className="text-[9px] text-green-600 flex items-center gap-1">
+                              <Circle className="w-2 h-2 fill-green-500 text-green-500" />
+                              Conversa atribuída
+                            </p>
+                          ) : (
+                            <WaitTimer since={conv.last_time} />
+                          )}
+                        </div>
                       </div>
                     ) : null;
                   })()}
