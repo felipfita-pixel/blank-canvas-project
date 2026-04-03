@@ -42,6 +42,7 @@ export type Database = {
           company_name: string
           created_at: string
           creci: string | null
+          deleted_at: string | null
           email: string
           full_name: string
           id: string
@@ -58,6 +59,7 @@ export type Database = {
           company_name?: string
           created_at?: string
           creci?: string | null
+          deleted_at?: string | null
           email: string
           full_name: string
           id?: string
@@ -74,6 +76,7 @@ export type Database = {
           company_name?: string
           created_at?: string
           creci?: string | null
+          deleted_at?: string | null
           email?: string
           full_name?: string
           id?: string
