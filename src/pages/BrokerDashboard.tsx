@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Home, LogOut, Wifi, WifiOff, User, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import BrokerMetricsPanel from "@/components/BrokerMetricsPanel";
 
 const BrokerDashboard = () => {
   const { user, signOut, role } = useAuth();
