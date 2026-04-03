@@ -9,43 +9,48 @@ export const useBrokerPresence = () => {
   const heartbeatRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const setOnline = useCallback(async (userId: string) => {
-    await supabase.from("broker_presence").upsert(
-      { user_id: userId, is_online: true, last_seen_at: new Date().toISOString(), is_typing_conversation: "" },
-      { onConflict: "user_id" }
-    );
-  }, []);
-
-  const setOffline = useCallback(async (userId: string) => {
-    await supabase.from("broker_presence").upsert(
-      { user_id: userId, is_online: false, last_seen_at: new Date().toISOString(), is_typing_conversation: "" },
-      { onConflict: "user_id" }
-    );
-  }, []);
-
+  // Only update last_seen_at heartbeat — do NOT change is_online automatically
   useEffect(() => {
     if (!user) return;
 
-    setOnline(user.id);
+    // Ensure presence row exists (but don't force online)
+    const ensureRow = async () => {
+      const { data } = await supabase
+        .from("broker_presence")
+        .select("user_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
 
-    heartbeatRef.current = setInterval(() => {
-      supabase.from("broker_presence").upsert(
-        { user_id: user.id, is_online: true, last_seen_at: new Date().toISOString() },
-        { onConflict: "user_id" }
-      );
+      if (!data) {
+        await supabase.from("broker_presence").upsert(
+          { user_id: user.id, is_online: false, last_seen_at: new Date().toISOString(), is_typing_conversation: "" },
+          { onConflict: "user_id" }
+        );
+      }
+    };
+    ensureRow();
+
+    // Heartbeat only updates last_seen_at (keeps current is_online state)
+    heartbeatRef.current = setInterval(async () => {
+      await supabase.from("broker_presence").update(
+        { last_seen_at: new Date().toISOString() }
+      ).eq("user_id", user.id);
     }, HEARTBEAT_INTERVAL);
 
     const handleBeforeUnload = () => {
-      navigator.sendBeacon && setOffline(user.id);
+      // Set offline when closing browser
+      supabase.from("broker_presence").upsert(
+        { user_id: user.id, is_online: false, last_seen_at: new Date().toISOString(), is_typing_conversation: "" },
+        { onConflict: "user_id" }
+      );
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
       if (heartbeatRef.current) clearInterval(heartbeatRef.current);
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      setOffline(user.id);
     };
-  }, [user, setOnline, setOffline]);
+  }, [user]);
 
   const setTyping = useCallback(
     (conversationId: string) => {

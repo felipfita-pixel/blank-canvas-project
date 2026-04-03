@@ -27,6 +27,7 @@ import PropertyDetail from "./pages/PropertyDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Unsubscribe from "./pages/Unsubscribe.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
+import BrokerDashboard from "./pages/BrokerDashboard.tsx";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
             <Route path="/admin/settings" element={<ProtectedRoute requireAdmin><AdminLayout><AdminSettings /></AdminLayout></ProtectedRoute>} />
             <Route path="/admin/companies" element={<ProtectedRoute requireAdmin><AdminLayout><AdminCompanies /></AdminLayout></ProtectedRoute>} />
             <Route path="/admin/chat" element={<ProtectedRoute requireAdmin><AdminLayout><AdminChatHistory /></AdminLayout></ProtectedRoute>} />
+            <Route path="/broker-dashboard" element={<ProtectedRoute><BrokerDashboard /></ProtectedRoute>} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="*" element={<NotFound />} />
