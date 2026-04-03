@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MessageSquare, Send, Loader2, Paperclip, X, User, Clock, Shield, Circle } from "lucide-react";
+import { MessageSquare, Send, Loader2, Paperclip, X, User, Clock, Shield, Circle, Bell } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useBrokerPresence } from "@/hooks/useBrokerPresence";
+import { useBrokerNotifications } from "@/hooks/useBrokerNotifications";
+import WaitTimer from "@/components/WaitTimer";
 import { toast } from "sonner";
 
 interface Conversation {
@@ -33,12 +35,13 @@ interface ChatMsg {
   sender_name: string;
 }
 
-const notificationSound = typeof window !== "undefined" ? new Audio("/notification.wav") : null;
+// Sound is now managed by useBrokerNotifications hook
 
 const BrokerChatPanel = () => {
   const navigate = useNavigate();
   const { user, isAdmin, loading: authLoading } = useAuth();
   const { setTyping } = useBrokerPresence();
+  const { requestPermission, notifyNewMessage, notifyAssigned } = useBrokerNotifications();
   const [brokerId, setBrokerId] = useState<string | null>(null);
   const [isAdminOnly, setIsAdminOnly] = useState(false);
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -152,23 +155,30 @@ const BrokerChatPanel = () => {
 
   useEffect(() => { fetchConversations(); }, [fetchConversations]);
 
-  // Subscribe to new messages globally + play notification sound
+  // Request browser notification permission on mount
+  useEffect(() => {
+    if (brokerId) requestPermission();
+  }, [brokerId, requestPermission]);
+
+  // Subscribe to new messages globally + play notification sound + browser push
   useEffect(() => {
     if (!brokerId) return;
     const channel = supabase
       .channel("broker-chat-global")
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "chat_messages" }, (payload) => {
         const newMsg = payload.new as Record<string, unknown>;
-        // Play sound for new client messages
-        if (newMsg.is_from_client && notificationSound) {
-          notificationSound.play().catch(() => {});
+        if (newMsg.is_from_client) {
+          notifyNewMessage(
+            (newMsg.sender_name as string) || "Cliente",
+            (newMsg.message as string) || "Nova mensagem"
+          );
         }
         fetchConversations();
         if (selectedConv) fetchMessages(selectedConv);
       })
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, [brokerId, fetchConversations, selectedConv]);
+  }, [brokerId, fetchConversations, selectedConv, notifyNewMessage]);
 
   // Subscribe to typing indicators from broker_presence (client typing not tracked yet)
   useEffect(() => {
@@ -353,9 +363,14 @@ const BrokerChatPanel = () => {
                     )}
                   </div>
                   <p className="text-[10px] text-muted-foreground truncate mt-0.5">{conv.last_message}</p>
-                  <p className="text-[9px] text-muted-foreground/50 mt-0.5 flex items-center gap-0.5">
-                    <Clock className="w-2.5 h-2.5" /> {formatTime(conv.last_time)}
-                  </p>
+                  <div className="flex items-center justify-between mt-0.5">
+                    <p className="text-[9px] text-muted-foreground/50 flex items-center gap-0.5">
+                      <Clock className="w-2.5 h-2.5" /> {formatTime(conv.last_time)}
+                    </p>
+                    {!conv.claimed_by && conv.unread > 0 && (
+                      <WaitTimer since={conv.last_time} compact />
+                    )}
+                  </div>
                 </button>
               ))}
             </div>
@@ -388,12 +403,16 @@ const BrokerChatPanel = () => {
                             </Button>
                           )}
                         </div>
-                        {conv.claimed_by && (
-                          <p className="text-[9px] text-green-600 mt-1 flex items-center gap-1">
-                            <Circle className="w-2 h-2 fill-green-500 text-green-500" />
-                            Conversa atribuída
-                          </p>
-                        )}
+                        <div className="flex items-center justify-between mt-1">
+                          {conv.claimed_by ? (
+                            <p className="text-[9px] text-green-600 flex items-center gap-1">
+                              <Circle className="w-2 h-2 fill-green-500 text-green-500" />
+                              Conversa atribuída
+                            </p>
+                          ) : (
+                            <WaitTimer since={conv.last_time} />
+                          )}
+                        </div>
                       </div>
                     ) : null;
                   })()}
