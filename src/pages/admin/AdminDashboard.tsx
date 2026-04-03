@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Building2, Users, Mail, TrendingUp, Landmark, BarChart3, MessageSquare, Phone, AtSign, Home as HomeIcon, Printer, MessageCircle } from "lucide-react";
+import { Building2, Users, Mail, TrendingUp, Landmark, BarChart3, MessageSquare, Phone, AtSign, Home as HomeIcon, Printer, MessageCircle, FileDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 
 const StatCard = ({ icon: Icon, label, value, color, onClick }: { icon: any; label: string; value: number; color: string; onClick?: () => void }) => (
   <div
@@ -37,6 +39,8 @@ interface LeadEntry {
   date: string;
 }
 
+const CHART_COLORS = ["hsl(var(--secondary))", "hsl(var(--primary))", "hsl(var(--accent))", "#f97316", "#06b6d4", "#8b5cf6"];
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState({
@@ -51,6 +55,9 @@ const AdminDashboard = () => {
   });
   const [leads, setLeads] = useState<LeadEntry[]>([]);
   const [leadsLoading, setLeadsLoading] = useState(true);
+  const [leadsByBroker, setLeadsByBroker] = useState<{ name: string; leads: number }[]>([]);
+  const [leadsBySource, setLeadsBySource] = useState<{ name: string; value: number }[]>([]);
+  const [leadsByDay, setLeadsByDay] = useState<{ day: string; leads: number }[]>([]);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -77,26 +84,20 @@ const AdminDashboard = () => {
     fetchStats();
   }, []);
 
-  // Fetch leads list
   useEffect(() => {
     const fetchLeads = async () => {
       setLeadsLoading(true);
 
-      // Fetch brokers for mapping
       const { data: brokersData } = await supabase
         .from("brokers")
         .select("id, user_id, full_name, phone, email")
         .eq("status", "approved");
-      const brokersMap = new Map(
-        (brokersData ?? []).map(b => [b.id, b])
-      );
-      const brokersByUserId = new Map(
-        (brokersData ?? []).filter(b => b.user_id).map(b => [b.user_id!, b])
-      );
+      const brokersMap = new Map((brokersData ?? []).map(b => [b.id, b]));
+      const brokersByUserId = new Map((brokersData ?? []).filter(b => b.user_id).map(b => [b.user_id!, b]));
 
       const allLeads: LeadEntry[] = [];
 
-      // 1. Chat conversations (grouped by conversation_id)
+      // Chat conversations
       const { data: chatMsgs } = await supabase
         .from("chat_messages")
         .select("conversation_id, sender_name, sender_email, sender_phone, message, created_at, is_from_client, broker_id, claimed_by")
@@ -109,98 +110,89 @@ const AdminDashboard = () => {
           client_name: string; client_email: string; client_phone: string;
           message: string; broker_id: string | null; claimed_by: string | null; date: string;
         }>();
-
         for (const msg of chatMsgs) {
           const cid = msg.conversation_id as string;
           if (!convMap.has(cid) && msg.is_from_client) {
             convMap.set(cid, {
-              client_name: msg.sender_name,
-              client_email: msg.sender_email,
-              client_phone: msg.sender_phone,
-              message: msg.message,
-              broker_id: msg.broker_id,
-              claimed_by: msg.claimed_by as string | null,
-              date: msg.created_at,
+              client_name: msg.sender_name, client_email: msg.sender_email,
+              client_phone: msg.sender_phone, message: msg.message,
+              broker_id: msg.broker_id, claimed_by: msg.claimed_by as string | null, date: msg.created_at,
             });
           }
           const conv = convMap.get(cid);
           if (conv && msg.broker_id) conv.broker_id = msg.broker_id;
           if (conv && msg.claimed_by) conv.claimed_by = msg.claimed_by as string;
         }
-
         for (const [cid, conv] of convMap) {
-          const broker = conv.broker_id ? brokersMap.get(conv.broker_id) : 
-                         conv.claimed_by ? brokersByUserId.get(conv.claimed_by) : null;
+          const broker = conv.broker_id ? brokersMap.get(conv.broker_id) : conv.claimed_by ? brokersByUserId.get(conv.claimed_by) : null;
           allLeads.push({
-            id: `chat-${cid}`,
-            client_name: conv.client_name,
-            client_phone: conv.client_phone,
+            id: `chat-${cid}`, client_name: conv.client_name, client_phone: conv.client_phone,
             client_email: conv.client_email,
             property_info: conv.message.length > 60 ? conv.message.slice(0, 60) + "…" : conv.message,
-            broker_name: broker?.full_name || "—",
-            broker_phone: broker?.phone || "—",
-            broker_email: broker?.email || "—",
-            source: "chat",
-            date: conv.date,
+            broker_name: broker?.full_name || "—", broker_phone: broker?.phone || "—",
+            broker_email: broker?.email || "—", source: "chat", date: conv.date,
           });
         }
       }
 
-      // 2. Contact messages
+      // Contact messages
       const { data: contacts } = await supabase
         .from("contact_messages")
         .select("id, name, email, phone, message, neighborhood, created_at")
-        .order("created_at", { ascending: false })
-        .limit(50);
-
+        .order("created_at", { ascending: false }).limit(50);
       if (contacts) {
         for (const c of contacts) {
           const propertyInfo = [c.neighborhood, c.message].filter(Boolean).join(" — ");
           allLeads.push({
-            id: `contact-${c.id}`,
-            client_name: c.name,
-            client_phone: c.phone || "—",
+            id: `contact-${c.id}`, client_name: c.name, client_phone: c.phone || "—",
             client_email: c.email,
             property_info: propertyInfo.length > 60 ? propertyInfo.slice(0, 60) + "…" : (propertyInfo || "—"),
-            broker_name: "—",
-            broker_phone: "—",
-            broker_email: "—",
-            source: "contact",
-            date: c.created_at,
+            broker_name: "—", broker_phone: "—", broker_email: "—", source: "contact", date: c.created_at,
           });
         }
       }
 
-      // 3. Scheduling requests
+      // Scheduling
       const { data: schedules } = await supabase
         .from("scheduling_requests")
         .select("id, name, email, phone, message, created_at")
-        .order("created_at", { ascending: false })
-        .limit(50);
-
+        .order("created_at", { ascending: false }).limit(50);
       if (schedules) {
         for (const s of schedules) {
           allLeads.push({
-            id: `sched-${s.id}`,
-            client_name: s.name,
-            client_phone: s.phone || "—",
+            id: `sched-${s.id}`, client_name: s.name, client_phone: s.phone || "—",
             client_email: s.email,
             property_info: s.message ? (s.message.length > 60 ? s.message.slice(0, 60) + "…" : s.message) : "Agendamento",
-            broker_name: "—",
-            broker_phone: "—",
-            broker_email: "—",
-            source: "scheduling",
-            date: s.created_at,
+            broker_name: "—", broker_phone: "—", broker_email: "—", source: "scheduling", date: s.created_at,
           });
         }
       }
 
-      // Sort by date descending
       allLeads.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       setLeads(allLeads);
+
+      // Build chart data
+      const brokerCount = new Map<string, number>();
+      const sourceCount = { chat: 0, contact: 0, scheduling: 0 };
+      const dayCount = new Map<string, number>();
+
+      for (const l of allLeads) {
+        if (l.broker_name !== "—") brokerCount.set(l.broker_name, (brokerCount.get(l.broker_name) || 0) + 1);
+        sourceCount[l.source]++;
+        const day = new Date(l.date).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+        dayCount.set(day, (dayCount.get(day) || 0) + 1);
+      }
+
+      setLeadsByBroker(Array.from(brokerCount.entries()).map(([name, leads]) => ({ name, leads })).sort((a, b) => b.leads - a.leads).slice(0, 10));
+      setLeadsBySource([
+        { name: "Chat", value: sourceCount.chat },
+        { name: "Contato", value: sourceCount.contact },
+        { name: "Agendamento", value: sourceCount.scheduling },
+      ].filter(s => s.value > 0));
+      setLeadsByDay(Array.from(dayCount.entries()).map(([day, leads]) => ({ day, leads })).reverse().slice(0, 14).reverse());
+
       setLeadsLoading(false);
     };
-
     fetchLeads();
   }, []);
 
@@ -252,6 +244,21 @@ const AdminDashboard = () => {
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
+  const handleExportCSV = () => {
+    const header = "Cliente,Telefone,Email,Imóvel,Corretor,Telefone Corretor,Origem,Data\n";
+    const rows = leads.map(l =>
+      `"${l.client_name}","${l.client_phone}","${l.client_email}","${l.property_info}","${l.broker_name}","${l.broker_phone}","${l.source}","${formatDate(l.date)}"`
+    ).join("\n");
+    const blob = new Blob([header + rows], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `atendimentos_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("CSV exportado com sucesso!");
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-heading font-bold text-foreground mb-6 print:text-lg print:mb-2">Dashboard</h1>
@@ -268,15 +275,87 @@ const AdminDashboard = () => {
         <StatCard icon={BarChart3} label="Total de leads" value={stats.totalLeads} color="bg-secondary" />
       </div>
 
+      {/* Charts */}
+      <div className="grid lg:grid-cols-3 gap-5 mb-8 print:hidden">
+        {/* Leads by broker */}
+        <Card className="lg:col-span-2">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-semibold">Leads por Corretor</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {leadsByBroker.length > 0 ? (
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={leadsByBroker} layout="vertical" margin={{ left: 10, right: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis type="number" tick={{ fontSize: 11 }} />
+                  <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={100} />
+                  <Tooltip />
+                  <Bar dataKey="leads" fill="hsl(var(--secondary))" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-10">Sem dados</p>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Leads by source */}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-semibold">Leads por Origem</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {leadsBySource.length > 0 ? (
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie data={leadsBySource} cx="50%" cy="50%" innerRadius={50} outerRadius={80} dataKey="value" nameKey="name" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
+                    {leadsBySource.map((_, i) => (
+                      <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-10">Sem dados</p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Volume over time */}
+      {leadsByDay.length > 1 && (
+        <Card className="mb-8 print:hidden">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-semibold">Volume de Leads (últimos dias)</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={leadsByDay}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <XAxis dataKey="day" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 11 }} />
+                <Tooltip />
+                <Bar dataKey="leads" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Lista de Atendimentos */}
       <div className="bg-card rounded-xl border border-border overflow-hidden">
-        <div className="px-5 py-4 border-b border-border flex items-center justify-between print:border-0">
+        <div className="px-5 py-4 border-b border-border flex flex-wrap items-center justify-between gap-2 print:border-0">
           <div>
             <h2 className="text-base font-heading font-bold text-foreground">Lista de Atendimentos</h2>
             <p className="text-xs text-muted-foreground mt-0.5">Clientes, imóveis solicitados e corretores responsáveis</p>
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="text-xs print:hidden">{leads.length} registros</Badge>
+            <Button size="sm" variant="outline" className="gap-1.5 print:hidden" onClick={handleExportCSV}>
+              <FileDown className="w-3.5 h-3.5" />
+              CSV
+            </Button>
             <Button size="sm" variant="outline" className="gap-1.5 print:hidden" onClick={handleLeadsEmail}>
               <Mail className="w-3.5 h-3.5" />
               Email

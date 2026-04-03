@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Bed, Bath, Maximize, Car, Search, SlidersHorizontal } from "lucide-react";
+import { Bed, Bath, Maximize, Car, Search, SlidersHorizontal, Share2, CalendarDays } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
 import propertyCondo from "@/assets/property-condo.jpg";
 
@@ -48,8 +48,10 @@ const Properties = () => {
   const [filterType, setFilterType] = useState("all");
   const [filterTransaction, setFilterTransaction] = useState("all");
   const [filterNeighborhood, setFilterNeighborhood] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterPrice, setFilterPrice] = useState("all");
   const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -114,6 +116,15 @@ const Properties = () => {
     if (filterType !== "all" && p.property_type !== filterType) return false;
     if (filterTransaction !== "all" && p.transaction_type !== filterTransaction) return false;
     if (filterNeighborhood !== "all" && p.neighborhood !== filterNeighborhood) return false;
+    if (filterBedrooms !== "all") {
+      const beds = p.bedrooms ?? 0;
+      if (filterBedrooms === "4" && beds < 4) return false;
+      if (filterBedrooms !== "4" && beds !== parseInt(filterBedrooms)) return false;
+    }
+    if (filterPrice !== "all") {
+      if (filterPrice === "above" && p.price <= 5000000) return false;
+      if (filterPrice !== "above" && p.price > parseInt(filterPrice)) return false;
+    }
     return true;
   });
 
@@ -130,7 +141,7 @@ const Properties = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-card border-b border-border sticky top-0 z-30">
+      <div className="bg-card border-b border-border sticky top-16 sm:sticky sm:top-20 z-30">
         <div className="container-main py-4">
           <div className="flex items-center gap-3">
             <div className="relative flex-1">
@@ -147,7 +158,7 @@ const Properties = () => {
             </Button>
           </div>
           {showFilters && (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-3">
               <Select value={filterType} onValueChange={setFilterType}>
                 <SelectTrigger><SelectValue placeholder="Tipo" /></SelectTrigger>
                 <SelectContent>
@@ -174,6 +185,27 @@ const Properties = () => {
                   {neighborhoods.map((n) => (
                     <SelectItem key={n} value={n}>{n}</SelectItem>
                   ))}
+                </SelectContent>
+              </Select>
+              <Select value={filterBedrooms} onValueChange={setFilterBedrooms}>
+                <SelectTrigger><SelectValue placeholder="Quartos" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todos</SelectItem>
+                  <SelectItem value="1">1 quarto</SelectItem>
+                  <SelectItem value="2">2 quartos</SelectItem>
+                  <SelectItem value="3">3 quartos</SelectItem>
+                  <SelectItem value="4">4+ quartos</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={filterPrice} onValueChange={setFilterPrice}>
+                <SelectTrigger><SelectValue placeholder="Preço" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Qualquer preço</SelectItem>
+                  <SelectItem value="500000">Até R$ 500 mil</SelectItem>
+                  <SelectItem value="1000000">Até R$ 1 milhão</SelectItem>
+                  <SelectItem value="2000000">Até R$ 2 milhões</SelectItem>
+                  <SelectItem value="5000000">Até R$ 5 milhões</SelectItem>
+                  <SelectItem value="above">Acima de R$ 5 milhões</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -233,11 +265,40 @@ const Properties = () => {
                         {p.area ? <span className="flex items-center gap-1"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
                         {p.parking_spots ? <span className="flex items-center gap-1"><Car className="w-4 h-4" /> {p.parking_spots} vaga(s)</span> : null}
                       </div>
-                      <Link to={`/imovel/${p.id}`}>
-                        <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
-                          Ver Detalhes
+                      <div className="flex gap-2">
+                        <Link to={`/imovel/${p.id}`} className="flex-1">
+                          <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
+                            Ver Detalhes
+                          </Button>
+                        </Link>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="shrink-0 text-emerald-600 border-emerald-200 hover:bg-emerald-50"
+                          onClick={() => {
+                            const url = `${window.location.origin}/imovel/${p.id}`;
+                            const text = encodeURIComponent(`🏠 ${p.title}\n💰 ${formatPrice(p.price)}\n📍 ${p.neighborhood || ""}\n\nVeja mais: ${url}`);
+                            window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
+                          }}
+                          title="Compartilhar no WhatsApp"
+                        >
+                          <Share2 className="w-4 h-4" />
                         </Button>
-                      </Link>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="shrink-0 text-secondary border-secondary/20 hover:bg-secondary/10"
+                          onClick={() => {
+                            const el = document.getElementById("contact");
+                            if (el) { el.scrollIntoView({ behavior: "smooth" }); return; }
+                            sessionStorage.setItem("pendingScrollSection", "contact");
+                            window.location.href = "/";
+                          }}
+                          title="Agendar Visita"
+                        >
+                          <CalendarDays className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
