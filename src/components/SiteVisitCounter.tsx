@@ -1,54 +1,69 @@
-import { useState, useEffect } from "react";
-import { Eye } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Users } from "lucide-react";
 
+/**
+ * Contador de visitas simulado:
+ * - Base: 120.000 visitas
+ * - Incrementa +1 a cada:
+ *   • 15 min entre 10h–12h (horário de pico)
+ *   • 20 min entre 12h–15h
+ *   • 30 min nos demais horários
+ * - Usa a data de hoje como referência (acumula apenas dentro do dia)
+ * - Salva no localStorage para manter consistência entre reloads
+ */
+
+const STORAGE_KEY = "site_visit_counter";
 const BASE_VISITS = 120000;
-const BASE_DATE = new Date("2025-01-01T00:00:00");
 
-function getIncrementIntervalMinutes(hour: number): number {
-  if (hour >= 10 && hour < 12) return 15;
-  if (hour >= 12 && hour < 15) return 20;
-  return 30;
+function getIntervalMs(): number {
+  const hour = new Date().getHours();
+  if (hour >= 10 && hour < 12) return 15 * 60 * 1000;
+  if (hour >= 12 && hour < 15) return 20 * 60 * 1000;
+  return 30 * 60 * 1000;
 }
 
-function calculateVisits(): number {
+function getTodayIncrements(): number {
   const now = new Date();
-  const elapsed = now.getTime() - BASE_DATE.getTime();
-  const totalMinutes = elapsed / 60000;
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const todayMin = h * 60 + m;
 
-  // Simulate accumulated visits based on time-of-day intervals
-  // We approximate by counting total increments since base date
-  let visits = BASE_VISITS;
-  const totalDays = Math.floor(totalMinutes / 1440);
-  const remainingMinutes = totalMinutes % 1440;
-
-  // Each full day contributes a fixed amount:
-  // 10h-12h = 2h = 120min / 15 = 8 increments
-  // 12h-15h = 3h = 180min / 20 = 9 increments
-  // 15h-10h(next) = 19h = 1140min / 30 = 38 increments
-  const incrementsPerDay = 8 + 9 + 38; // 55 per day
-  visits += totalDays * incrementsPerDay;
-
-  // Add today's increments based on current hour/minute
-  const currentHour = now.getHours();
-  const currentMinute = now.getMinutes();
-  const todayMinutes = currentHour * 60 + currentMinute;
-
-  // Calculate increments for today up to current time
-  const timeRanges = [
-    { startMin: 0, endMin: 600, interval: 30 },       // 0:00-10:00
-    { startMin: 600, endMin: 720, interval: 15 },      // 10:00-12:00
-    { startMin: 720, endMin: 900, interval: 20 },      // 12:00-15:00
-    { startMin: 900, endMin: 1440, interval: 30 },     // 15:00-24:00
+  let increments = 0;
+  const ranges = [
+    { start: 0, end: 600, interval: 30 },    // 00:00–10:00
+    { start: 600, end: 720, interval: 15 },   // 10:00–12:00
+    { start: 720, end: 900, interval: 20 },   // 12:00–15:00
+    { start: 900, end: 1440, interval: 30 },  // 15:00–24:00
   ];
 
-  for (const range of timeRanges) {
-    if (todayMinutes <= range.startMin) break;
-    const effectiveEnd = Math.min(todayMinutes, range.endMin);
-    const minutesInRange = effectiveEnd - range.startMin;
-    visits += Math.floor(minutesInRange / range.interval);
+  for (const r of ranges) {
+    if (todayMin <= r.start) break;
+    const effectiveEnd = Math.min(todayMin, r.end);
+    increments += Math.floor((effectiveEnd - r.start) / r.interval);
   }
+  return increments;
+}
 
-  return visits;
+function loadCounter(): number {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const { date, value } = JSON.parse(stored);
+      const today = new Date().toDateString();
+      if (date === today) return value;
+    }
+  } catch {}
+  // New day or first visit: base + today's accumulated increments
+  const value = BASE_VISITS + getTodayIncrements();
+  saveCounter(value);
+  return value;
+}
+
+function saveCounter(value: number) {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({ date: new Date().toDateString(), value })
+  );
 }
 
 function formatNumber(n: number): string {
@@ -60,32 +75,37 @@ interface SiteVisitCounterProps {
 }
 
 const SiteVisitCounter = ({ className = "" }: SiteVisitCounterProps) => {
-  const [visits, setVisits] = useState(calculateVisits);
+  const [visits, setVisits] = useState(loadCounter);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
-    const now = new Date();
-    const hour = now.getHours();
-    const intervalMs = getIncrementIntervalMinutes(hour) * 60 * 1000;
-
-    const timer = setInterval(() => {
-      setVisits(calculateVisits());
-    }, intervalMs);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  // Recalculate interval when hour changes
-  useEffect(() => {
-    const checkHour = setInterval(() => {
-      setVisits(calculateVisits());
-    }, 60000); // check every minute for hour transitions
-    return () => clearInterval(checkHour);
+    function scheduleNext() {
+      const ms = getIntervalMs();
+      timerRef.current = setTimeout(() => {
+        setVisits((prev) => {
+          const next = prev + 1;
+          saveCounter(next);
+          return next;
+        });
+        scheduleNext();
+      }, ms);
+    }
+    scheduleNext();
+    return () => clearTimeout(timerRef.current);
   }, []);
 
   return (
-    <div className={`flex items-center gap-2 text-primary-foreground/60 text-xs tracking-wider font-light ${className}`}>
-      <Eye className="w-3.5 h-3.5" />
-      <span className="tabular-nums">{formatNumber(visits)} visitas</span>
+    <div
+      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 ${className}`}
+    >
+      <span className="relative flex h-2 w-2">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+      </span>
+      <Users className="w-3.5 h-3.5 text-secondary" />
+      <span className="text-primary-foreground/70 text-xs tracking-wider font-medium tabular-nums">
+        {formatNumber(visits)} visitas
+      </span>
     </div>
   );
 };
