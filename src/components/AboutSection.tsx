@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { staticProperties } from "@/data/staticProperties";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize, Search, SlidersHorizontal } from "lucide-react";
+import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize, Search, SlidersHorizontal, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
 import { useSiteContent } from "@/hooks/useSiteContent";
@@ -101,6 +101,159 @@ interface FeaturedProperty {
   description?: string | null;
   address?: string | null;
 }
+
+const CAMPAIGN_PER_PAGE = 12;
+
+const CampaignResults = ({ properties, navigate }: { properties: FeaturedProperty[]; navigate: (path: string) => void }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [properties]);
+
+  const totalPages = Math.ceil(properties.length / CAMPAIGN_PER_PAGE);
+  const safePage = Math.min(currentPage, Math.max(totalPages, 1));
+  const paginated = properties.slice((safePage - 1) * CAMPAIGN_PER_PAGE, safePage * CAMPAIGN_PER_PAGE);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+    document.getElementById("campaign-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const getPageNumbers = () => {
+    const pages: (number | "ellipsis")[] = [];
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      pages.push(1);
+      if (safePage > 3) pages.push("ellipsis");
+      for (let i = Math.max(2, safePage - 1); i <= Math.min(totalPages - 1, safePage + 1); i++) pages.push(i);
+      if (safePage < totalPages - 2) pages.push("ellipsis");
+      pages.push(totalPages);
+    }
+    return pages;
+  };
+
+  const formatPrice = (price: number) =>
+    new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(price);
+
+  return (
+    <div id="campaign-results">
+      <p className="text-xs text-muted-foreground mb-3">
+        {properties.length} imóvel(is) encontrado(s)
+        {totalPages > 1 && <span className="ml-2">· Página {safePage} de {totalPages}</span>}
+      </p>
+
+      {properties.length === 0 ? (
+        <p className="text-sm text-muted-foreground text-center py-12">
+          Nenhum imóvel encontrado com os filtros selecionados.
+        </p>
+      ) : (
+        <>
+          <div className="flex flex-col divide-y divide-border">
+            {paginated.map((property, index) => {
+              const image = property.images && property.images.length > 0 ? property.images[0] : fallbackImages[index % fallbackImages.length];
+
+              return (
+                <div key={property.id} className="group py-5 first:pt-0">
+                  <div className="flex flex-col sm:flex-row gap-4 items-start">
+                    {/* Image */}
+                    <div
+                      className="relative w-full sm:w-56 md:w-64 shrink-0 aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                      onClick={() => navigate(`/imovel/${property.id}`)}
+                    >
+                      <img
+                        src={image}
+                        alt={property.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      {property.images && property.images.length > 1 && (
+                        <span className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded-full">
+                          {property.images.length} fotos
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Details */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
+                      <div>
+                        <h4 className="text-base font-heading font-bold text-foreground mb-0.5 line-clamp-1">{property.title}</h4>
+                        <p className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
+                          <MapPin className="w-3 h-3 shrink-0" />
+                          {property.neighborhood ? `${property.neighborhood}${property.city ? `, ${property.city}` : ""}` : property.city || ""}
+                        </p>
+                        {property.description && (
+                          <p className="text-xs text-muted-foreground/80 line-clamp-1 mb-2">{property.description}</p>
+                        )}
+                        <div className="flex flex-wrap items-center gap-3 text-muted-foreground text-xs">
+                          {property.bedrooms != null && property.bedrooms > 0 && (
+                            <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5" /> {property.bedrooms} Qts</span>
+                          )}
+                          {property.bathrooms != null && property.bathrooms > 0 && (
+                            <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5" /> {property.bathrooms} Ban</span>
+                          )}
+                          {property.parking_spots != null && property.parking_spots > 0 && (
+                            <span className="flex items-center gap-1"><Car className="w-3.5 h-3.5" /> {property.parking_spots} Vaga</span>
+                          )}
+                          {property.area != null && property.area > 0 && (
+                            <span className="flex items-center gap-1"><Maximize className="w-3.5 h-3.5" /> {property.area}m²</span>
+                          )}
+                        </div>
+                      </div>
+                      {property.price > 0 && (
+                        <p className="text-sm font-bold text-secondary mt-2">{formatPrice(property.price)}</p>
+                      )}
+                      {/* Mobile button */}
+                      <Button
+                        className="sm:hidden mt-3 w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg text-xs"
+                        onClick={() => navigate(`/imovel/${property.id}`)}
+                      >
+                        Ver Detalhes
+                      </Button>
+                    </div>
+
+                    {/* Arrow - desktop */}
+                    <div className="hidden sm:flex items-center self-center">
+                      <Button
+                        size="icon"
+                        className="w-10 h-10 rounded-full bg-foreground text-background hover:bg-foreground/80"
+                        onClick={() => navigate(`/imovel/${property.id}`)}
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-1.5 mt-6">
+              <Button variant="outline" size="icon" className="w-8 h-8" disabled={safePage <= 1} onClick={() => goToPage(safePage - 1)}>
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              {getPageNumbers().map((p, i) =>
+                p === "ellipsis" ? (
+                  <span key={`e-${i}`} className="px-1 text-muted-foreground text-xs">…</span>
+                ) : (
+                  <Button key={p} variant={p === safePage ? "default" : "outline"} size="icon" className="w-8 h-8 text-xs" onClick={() => goToPage(p as number)}>
+                    {p}
+                  </Button>
+                )
+              )}
+              <Button variant="outline" size="icon" className="w-8 h-8" disabled={safePage >= totalPages} onClick={() => goToPage(safePage + 1)}>
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
 
 const AboutSection = () => {
   const { get } = useSiteContent();
@@ -371,92 +524,7 @@ const AboutSection = () => {
               )}
             </div>
 
-            <div id="campaign-results">
-              <p className="text-xs text-muted-foreground mb-3">{filteredProperties.length} imóvel(is) encontrado(s)</p>
-
-              {filteredProperties.length === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-12">
-                  Nenhum imóvel encontrado com os filtros selecionados.
-                </p>
-              ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {filteredProperties.map((property, index) => {
-                    const image = property.images && property.images.length > 0 ? property.images[0] : fallbackImages[index % fallbackImages.length];
-                    const formattedPrice = property.price > 0
-                      ? new Intl.NumberFormat("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                          maximumFractionDigits: 0,
-                        }).format(property.price)
-                      : null;
-
-                    return (
-                      <div
-                        key={property.id}
-                        className="rounded-lg overflow-hidden group cursor-pointer shadow-sm bg-card border border-border"
-                        onClick={() => navigate(`/imovel/${property.id}`)}
-                      >
-                        <div className="relative aspect-[4/3] overflow-hidden">
-                          <img
-                            src={image}
-                            alt={property.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/60 via-transparent to-transparent" />
-                          <div className="absolute bottom-2 left-2 right-2">
-                            <span className="text-primary-foreground font-bold text-xs tracking-wide font-heading line-clamp-2">
-                              {property.title}
-                            </span>
-                          </div>
-                          <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground">
-                            <Home className="w-3 h-3" />
-                          </div>
-                        </div>
-                        <div className="p-2 space-y-1">
-                          {property.neighborhood && (
-                            <p className="text-[10px] text-muted-foreground font-medium">{property.neighborhood}</p>
-                          )}
-                          <div className="flex items-center gap-2 flex-wrap text-[9px] text-muted-foreground">
-                            {property.bedrooms != null && property.bedrooms > 0 && (
-                              <span className="flex items-center gap-0.5">
-                                <Bed className="w-3 h-3" />
-                                {property.bedrooms} Qts
-                              </span>
-                            )}
-                            {property.suites != null && property.suites > 0 && (
-                              <span className="flex items-center gap-0.5">
-                                <Bed className="w-3 h-3 text-secondary" />
-                                {property.suites} Suíte
-                              </span>
-                            )}
-                            {property.bathrooms != null && property.bathrooms > 0 && (
-                              <span className="flex items-center gap-0.5">
-                                <Bath className="w-3 h-3" />
-                                {property.bathrooms} Ban
-                              </span>
-                            )}
-                            {property.parking_spots != null && property.parking_spots > 0 && (
-                              <span className="flex items-center gap-0.5">
-                                <Car className="w-3 h-3" />
-                                {property.parking_spots} Vaga
-                              </span>
-                            )}
-                            {property.area != null && property.area > 0 && (
-                              <span className="flex items-center gap-0.5">
-                                <Maximize className="w-3 h-3" />
-                                {property.area}m²
-                              </span>
-                            )}
-                          </div>
-                          {formattedPrice && <p className="text-secondary font-bold text-xs">{formattedPrice}</p>}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
+            <CampaignResults properties={filteredProperties} navigate={navigate} />
 
             <ScheduleModal open={scheduleOpen} onOpenChange={setScheduleOpen} />
           </div>
