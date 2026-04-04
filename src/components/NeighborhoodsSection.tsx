@@ -112,7 +112,7 @@ const NeighborhoodsSection = () => {
                   className="relative w-full sm:w-56 md:w-64 shrink-0 aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
                   onClick={() => openLightbox(p)}
                 >
-                  <img
+                  <WatermarkImage
                     src={getImage(p, (safePage - 1) * ITEMS_PER_PAGE + i)}
                     alt={p.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

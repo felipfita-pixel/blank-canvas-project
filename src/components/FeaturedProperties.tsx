@@ -135,7 +135,7 @@ const FeaturedProperties = () => {
                   className="relative w-full sm:w-72 md:w-80 shrink-0 aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
                   onClick={() => openLightbox(p)}
                 >
-                  <img
+                  <WatermarkImage
                     src={p.images && p.images.length > 0 ? p.images[0] : propertyCondo}
                     alt={p.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

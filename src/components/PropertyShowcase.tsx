@@ -204,16 +204,20 @@ const PropertyShowcase = () => {
         {/* Image side — larger */}
         <div className="relative lg:w-[65%] w-full h-full overflow-hidden">
           <AnimatePresence mode="wait">
-            <motion.img
+            <motion.div
               key={p.id}
-              src={image}
-              alt={p.title}
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6 }}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+              className="absolute inset-0 w-full h-full"
+            >
+              <WatermarkImage
+                src={image}
+                alt={p.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </motion.div>
           </AnimatePresence>
           <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-primary/40 to-transparent pointer-events-none" />
         </div>

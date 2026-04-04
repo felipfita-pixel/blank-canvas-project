@@ -177,7 +177,7 @@ const PropertyDetail = () => {
             className="relative aspect-[16/9] max-h-[500px] overflow-hidden cursor-pointer rounded-xl"
             onClick={() => setLightboxOpen(true)}
           >
-            <img
+            <WatermarkImage
               src={images[currentImage]}
               alt={property.title}
               className="w-full h-full object-cover"
