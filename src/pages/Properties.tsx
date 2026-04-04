@@ -256,6 +256,12 @@ const Properties = () => {
                               {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
                             </div>
                           </div>
+                          <div className="flex items-center gap-3 mt-3">
+                            {p.price > 0 && (
+                              <p className="text-lg font-bold text-secondary">{formatPrice(p.price)}</p>
+                            )}
+                            <PropertyShareButtons property={p} />
+                          </div>
                         </div>
 
                         <div className="hidden sm:flex items-center self-center">
