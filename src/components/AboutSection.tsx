@@ -1,15 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { staticProperties } from "@/data/staticProperties";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize, Search, SlidersHorizontal, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Users, Phone, MessageCircle, User, Bed, Bath, Car, Maximize, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { supabase } from "@/integrations/supabase/client";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import SearchFilters from "@/components/SearchFilters";
 import bairroLeblon from "@/assets/bairro-leblon.jpg";
 import bairroBarra from "@/assets/bairro-barra.jpg";
 import bairroBotafogo from "@/assets/bairro-botafogo.jpg";
@@ -267,6 +266,9 @@ const AboutSection = () => {
   const [filterCity, setFilterCity] = useState("all");
   const [filterNeighborhood, setFilterNeighborhood] = useState("all");
   const [filterType, setFilterType] = useState("all");
+  const [filterTransaction, setFilterTransaction] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterPrice, setFilterPrice] = useState("all");
   const [showMoreFilters, setShowMoreFilters] = useState(false);
 
   useEffect(() => {
@@ -380,6 +382,24 @@ const AboutSection = () => {
       const matchesNeighborhood = filterNeighborhood === "all" || property.neighborhood === filterNeighborhood;
       const matchesType = filterType === "all" || property.property_type === filterType;
 
+      // Transaction filter (property needs a transaction_type-like field; skip if not available)
+      const matchesTransaction = filterTransaction === "all";
+
+      // Bedrooms filter
+      let matchesBedrooms = true;
+      if (filterBedrooms !== "all") {
+        const beds = property.bedrooms ?? 0;
+        if (filterBedrooms === "4") matchesBedrooms = beds >= 4;
+        else matchesBedrooms = beds === parseInt(filterBedrooms);
+      }
+
+      // Price filter
+      let matchesPrice = true;
+      if (filterPrice !== "all") {
+        if (filterPrice === "above") matchesPrice = property.price > 5000000;
+        else matchesPrice = property.price <= parseInt(filterPrice);
+      }
+
       const searchableContent = [
         property.title,
         property.neighborhood,
@@ -395,9 +415,9 @@ const AboutSection = () => {
 
       const hasValidImage = property.images?.some(img => img && img.trim() !== "");
 
-      return matchesCity && matchesNeighborhood && matchesType && matchesSearch && hasValidImage;
+      return matchesCity && matchesNeighborhood && matchesType && matchesTransaction && matchesBedrooms && matchesPrice && matchesSearch && hasValidImage;
     });
-  }, [filterCity, filterNeighborhood, filterType, mergedProperties, searchQuery]);
+  }, [filterCity, filterNeighborhood, filterType, filterTransaction, filterBedrooms, filterPrice, mergedProperties, searchQuery]);
 
   const allBrokersList: BrokerBot[] = [
     ...realBrokers.map((broker) => ({
@@ -449,79 +469,22 @@ const AboutSection = () => {
             <p className="text-sm text-muted-foreground mb-4">{about.content.campaign_subtitle || ""}</p>
 
             <div className="bg-card rounded-xl border border-border p-4 mb-4 shadow-sm">
-              <h4 className="text-sm font-bold text-foreground mb-3">Resultado de Busca</h4>
-
-              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,180px))_auto]">
-                <Input
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  placeholder="Pesquisar por imóvel, endereço, cidade ou bairro"
-                />
-
-                <Select value={filterCity} onValueChange={setFilterCity}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Cidade" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todas as Cidades</SelectItem>
-                    {cityOptions.map((city) => (
-                      <SelectItem key={city} value={city}>
-                        {city}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <Select value={filterNeighborhood} onValueChange={setFilterNeighborhood}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Bairro" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos os Bairros</SelectItem>
-                    {neighborhoodOptions.map((neighborhood) => (
-                      <SelectItem key={neighborhood} value={neighborhood}>
-                        {neighborhood}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <Select value={filterType} onValueChange={setFilterType}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Tipo de Imóvel" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos os Tipos</SelectItem>
-                    {typeOptions.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {propertyTypeLabels[type] ?? type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <div className="flex gap-3 md:col-span-2 xl:col-span-1">
-                  <Button variant="outline" type="button" onClick={() => setShowMoreFilters((value) => !value)} className="flex-1 font-semibold">
-                    <SlidersHorizontal className="w-4 h-4 mr-1" />
-                    Mais Filtros
-                  </Button>
-                  <Button type="button" onClick={handleSearchButtonClick} className="flex-1 font-semibold">
-                    <Search className="w-4 h-4 mr-1" />
-                    Pesquisar
-                  </Button>
-                </div>
-              </div>
-
-              {showMoreFilters && (
-                <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-xs text-muted-foreground">
-                    {cityOptions.length} cidades • {allNeighborhoodOptions.length} bairros • {typeOptions.length} tipos disponíveis
-                  </p>
-                  <Button variant="ghost" size="sm" type="button" onClick={clearFilters}>
-                    Limpar filtros
-                  </Button>
-                </div>
-              )}
+              <SearchFilters
+                search={searchQuery}
+                onSearchChange={setSearchQuery}
+                filterType={filterType}
+                onFilterTypeChange={setFilterType}
+                filterTransaction={filterTransaction}
+                onFilterTransactionChange={setFilterTransaction}
+                filterNeighborhood={filterNeighborhood}
+                onFilterNeighborhoodChange={setFilterNeighborhood}
+                filterBedrooms={filterBedrooms}
+                onFilterBedroomsChange={setFilterBedrooms}
+                filterPrice={filterPrice}
+                onFilterPriceChange={setFilterPrice}
+                neighborhoods={neighborhoodOptions}
+                typeOptions={typeOptions}
+              />
             </div>
 
             <CampaignResults properties={filteredProperties} navigate={navigate} />

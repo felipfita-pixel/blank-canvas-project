@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { staticProperties } from "@/data/staticProperties";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SearchFilters from "@/components/SearchFilters";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Bed, Bath, Maximize, Car, Search, SlidersHorizontal, Share2, CalendarDays, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Bed, Bath, Maximize, Car, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
 import propertyCondo from "@/assets/property-condo.jpg";
 
@@ -33,30 +32,22 @@ interface Property {
 const formatPrice = (price: number) =>
   new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(price);
 
-const propertyTypeLabels: Record<string, string> = {
-  apartment: "Apartamento",
-  house: "Casa",
-  penthouse: "Cobertura",
-  commercial: "Comercial",
-  land: "Terreno",
-};
-
 const Properties = () => {
+  const [searchParams] = useSearchParams();
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [filterType, setFilterType] = useState("all");
-  const [filterTransaction, setFilterTransaction] = useState("all");
-  const [filterNeighborhood, setFilterNeighborhood] = useState("all");
-  const [filterBedrooms, setFilterBedrooms] = useState("all");
-  const [filterPrice, setFilterPrice] = useState("all");
+  const [search, setSearch] = useState(searchParams.get("q") || "");
+  const [filterType, setFilterType] = useState(searchParams.get("type") || "all");
+  const [filterTransaction, setFilterTransaction] = useState(searchParams.get("transaction") || "all");
+  const [filterNeighborhood, setFilterNeighborhood] = useState(searchParams.get("neighborhood") || "all");
+  const [filterBedrooms, setFilterBedrooms] = useState(searchParams.get("bedrooms") || "all");
+  const [filterPrice, setFilterPrice] = useState(searchParams.get("price") || "all");
   const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
 
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
-  const [showFilters, setShowFilters] = useState(true);
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -81,7 +72,6 @@ const Properties = () => {
         .order("featured", { ascending: false })
         .order("created_at", { ascending: false });
 
-      // Convert static properties to Property format
       const staticAsProperties: Property[] = staticProperties.map((sp) => ({
         id: sp.id,
         title: sp.title,
@@ -100,7 +90,6 @@ const Properties = () => {
       }));
 
       const dbProperties = (data as Property[]) || [];
-      // Merge: DB first, then static (skip duplicates by title)
       const merged = [
         ...dbProperties,
         ...staticAsProperties.filter(
@@ -151,73 +140,21 @@ const Properties = () => {
       {/* Filters */}
       <div className="bg-card border-b border-border sticky top-16 sm:sticky sm:top-20 z-30">
         <div className="container-main py-4">
-          <div className="flex items-center gap-3">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                placeholder="Buscar por título ou bairro..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-            <Button variant="outline" size="icon" onClick={() => setShowFilters(!showFilters)} className="shrink-0">
-              <SlidersHorizontal className="w-4 h-4" />
-            </Button>
-          </div>
-          {showFilters && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-3">
-              <Select value={filterType} onValueChange={setFilterType}>
-                <SelectTrigger><SelectValue placeholder="Tipo" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos os tipos</SelectItem>
-                  <SelectItem value="apartment">Apartamento</SelectItem>
-                  <SelectItem value="house">Casa</SelectItem>
-                  <SelectItem value="penthouse">Cobertura</SelectItem>
-                  <SelectItem value="commercial">Comercial</SelectItem>
-                  <SelectItem value="land">Terreno</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={filterTransaction} onValueChange={setFilterTransaction}>
-                <SelectTrigger><SelectValue placeholder="Transação" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Venda e Aluguel</SelectItem>
-                  <SelectItem value="sale">Venda</SelectItem>
-                  <SelectItem value="rent">Aluguel</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={filterNeighborhood} onValueChange={setFilterNeighborhood}>
-                <SelectTrigger><SelectValue placeholder="Bairro" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos os bairros</SelectItem>
-                  {neighborhoods.map((n) => (
-                    <SelectItem key={n} value={n}>{n}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select value={filterBedrooms} onValueChange={setFilterBedrooms}>
-                <SelectTrigger><SelectValue placeholder="Quartos" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos</SelectItem>
-                  <SelectItem value="1">1 quarto</SelectItem>
-                  <SelectItem value="2">2 quartos</SelectItem>
-                  <SelectItem value="3">3 quartos</SelectItem>
-                  <SelectItem value="4">4+ quartos</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={filterPrice} onValueChange={setFilterPrice}>
-                <SelectTrigger><SelectValue placeholder="Preço" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Qualquer preço</SelectItem>
-                  <SelectItem value="500000">Até R$ 500 mil</SelectItem>
-                  <SelectItem value="1000000">Até R$ 1 milhão</SelectItem>
-                  <SelectItem value="2000000">Até R$ 2 milhões</SelectItem>
-                  <SelectItem value="5000000">Até R$ 5 milhões</SelectItem>
-                  <SelectItem value="above">Acima de R$ 5 milhões</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          )}
+          <SearchFilters
+            search={search}
+            onSearchChange={setSearch}
+            filterType={filterType}
+            onFilterTypeChange={setFilterType}
+            filterTransaction={filterTransaction}
+            onFilterTransactionChange={setFilterTransaction}
+            filterNeighborhood={filterNeighborhood}
+            onFilterNeighborhoodChange={setFilterNeighborhood}
+            filterBedrooms={filterBedrooms}
+            onFilterBedroomsChange={setFilterBedrooms}
+            filterPrice={filterPrice}
+            onFilterPriceChange={setFilterPrice}
+            neighborhoods={neighborhoods}
+          />
         </div>
       </div>
 
@@ -265,7 +202,6 @@ const Properties = () => {
                   {paginated.map((p) => (
                     <div key={p.id} className="group py-6 first:pt-0">
                       <div className="flex flex-col sm:flex-row gap-5 items-start">
-                        {/* Image */}
                         <div
                           className="relative w-full sm:w-72 md:w-80 shrink-0 aspect-[4/3] sm:aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
                           onClick={() => openLightbox(p)}
@@ -286,7 +222,6 @@ const Properties = () => {
                           )}
                         </div>
 
-                        {/* Details */}
                         <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
                           <div>
                             <h3 className="text-xl font-heading font-bold text-foreground mb-1 line-clamp-1">{p.title}</h3>
@@ -305,7 +240,6 @@ const Properties = () => {
                           </div>
                         </div>
 
-                        {/* Arrow button */}
                         <div className="hidden sm:flex items-center self-center">
                           <Link to={`/imovel/${p.id}`}>
                             <Button
@@ -317,7 +251,6 @@ const Properties = () => {
                           </Link>
                         </div>
 
-                        {/* Mobile: full-width button */}
                         <div className="sm:hidden w-full">
                           <Link to={`/imovel/${p.id}`} className="w-full">
                             <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
@@ -330,7 +263,6 @@ const Properties = () => {
                   ))}
                 </div>
 
-                {/* Pagination */}
                 {totalPages > 1 && (
                   <nav className="flex items-center justify-center gap-2 mt-10 mb-4" aria-label="Paginação">
                     <Button
