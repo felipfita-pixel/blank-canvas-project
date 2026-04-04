@@ -142,7 +142,16 @@ const FeaturedProperties = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <Badge className="absolute top-3 left-3 bg-secondary text-secondary-foreground">Destaque</Badge>
+                  {(() => {
+                    const status = getPropertyStatus(p.title, (p as any).description);
+                    return status ? (
+                      <Badge className={`absolute top-3 left-3 ${statusConfig[status].className}`}>
+                        {statusConfig[status].label}
+                      </Badge>
+                    ) : (
+                      <Badge className="absolute top-3 left-3 bg-secondary text-secondary-foreground">Destaque</Badge>
+                    );
+                  })()}
                   {p.images && p.images.length > 1 && (
                     <span className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
                       {p.images.length} fotos

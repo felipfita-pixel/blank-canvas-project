@@ -168,6 +168,14 @@ const CampaignResults = ({ properties, navigate }: { properties: FeaturedPropert
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
+                      {(() => {
+                        const status = getPropertyStatus(property.title, property.description);
+                        return status ? (
+                          <Badge className={`absolute top-3 left-3 text-[10px] px-1.5 py-0.5 ${statusConfig[status].className}`}>
+                            {statusConfig[status].label}
+                          </Badge>
+                        ) : null;
+                      })()}
                       {property.images && property.images.length > 1 && (
                         <span className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded-full">
                           {property.images.length} fotos
