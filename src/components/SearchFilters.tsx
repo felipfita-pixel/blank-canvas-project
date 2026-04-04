@@ -24,6 +24,7 @@ interface SearchFiltersProps {
   onFilterBedroomsChange: (value: string) => void;
   filterPrice: string;
   onFilterPriceChange: (value: string) => void;
+  neighborhoods: string[];
   typeOptions?: string[];
   hideSearch?: boolean;
   className?: string;
