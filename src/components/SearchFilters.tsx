@@ -111,10 +111,10 @@ const SearchFilters = ({
 
         <Select value={filterBedrooms} onValueChange={onFilterBedroomsChange}>
           <SelectTrigger className="h-10 bg-background">
-            <SelectValue placeholder="Todos" />
+            <SelectValue placeholder="Todos os quartos" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos</SelectItem>
+            <SelectItem value="all">Todos os quartos</SelectItem>
             <SelectItem value="1">1 quarto</SelectItem>
             <SelectItem value="2">2 quartos</SelectItem>
             <SelectItem value="3">3 quartos</SelectItem>
