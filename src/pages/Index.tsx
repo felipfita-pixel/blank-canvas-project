@@ -12,6 +12,7 @@ import FeaturedProperties from "@/components/FeaturedProperties";
 import WhereWeOperate from "@/components/WhereWeOperate";
 import NeighborhoodsSection from "@/components/NeighborhoodsSection";
 import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
 
 const Index = () => {
@@ -43,7 +44,7 @@ const Index = () => {
       <NeighborhoodsSection />
       <ContactSection />
       <WhereWeOperate />
-      
+      <Footer />
     </div>
   );
 };
