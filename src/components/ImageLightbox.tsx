@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, Headset } from "lucide-react";
+import WatermarkImage from "@/components/WatermarkImage";
 
 interface ImageLightboxProps {
   images: { src: string; alt: string }[];
