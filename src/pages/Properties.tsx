@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Bed, Bath, Maximize, Car, Search, SlidersHorizontal, Share2, CalendarDays } from "lucide-react";
+import { Bed, Bath, Maximize, Car, Search, SlidersHorizontal, Share2, CalendarDays, MapPin, ArrowRight } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
 import propertyCondo from "@/assets/property-condo.jpg";
 
@@ -225,12 +225,13 @@ const Properties = () => {
         ) : (
           <>
             <p className="text-sm text-muted-foreground mb-6">{filtered.length} imóvel(is) encontrado(s)</p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex flex-col divide-y divide-border">
               {filtered.map((p) => (
-                <div key={p.id} className="group">
-                  <div className="bg-card rounded-xl overflow-hidden shadow-md border border-border hover:shadow-xl transition-shadow">
+                <div key={p.id} className="group py-6 first:pt-0">
+                  <div className="flex flex-col sm:flex-row gap-5 items-start">
+                    {/* Image */}
                     <div
-                      className="relative aspect-[4/3] cursor-pointer"
+                      className="relative w-full sm:w-72 md:w-80 shrink-0 aspect-[4/3] sm:aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
                       onClick={() => openLightbox(p)}
                     >
                       <img
@@ -242,63 +243,51 @@ const Properties = () => {
                       {p.featured && (
                         <Badge className="absolute top-3 left-3 bg-secondary text-secondary-foreground">Destaque</Badge>
                       )}
-                      <Badge variant="outline" className="absolute top-3 right-3 bg-card/90 backdrop-blur-sm text-foreground text-[10px]">
-                        {p.transaction_type === "rent" ? "Aluguel" : "Venda"}
-                      </Badge>
                       {p.images && p.images.length > 1 && (
                         <span className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
                           {p.images.length} fotos
                         </span>
                       )}
                     </div>
-                    <div className="p-5">
-                      <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">
-                        {propertyTypeLabels[p.property_type] || p.property_type} · {p.neighborhood || p.city}
-                      </p>
-                      <h3 className="font-semibold text-foreground mb-2 line-clamp-1">{p.title}</h3>
-                      {p.price > 0 && (
-                        <p className="text-lg font-bold text-secondary mb-4">{formatPrice(p.price)}</p>
-                      )}
-                      <div className="flex flex-wrap items-center gap-3 text-muted-foreground text-xs mb-4">
-                        {p.bedrooms ? <span className="flex items-center gap-1"><Bed className="w-4 h-4" /> {p.bedrooms} quartos</span> : null}
-                        {p.bathrooms ? <span className="flex items-center gap-1"><Bath className="w-4 h-4" /> {p.bathrooms} ban.</span> : null}
-                        {p.area ? <span className="flex items-center gap-1"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
-                        {p.parking_spots ? <span className="flex items-center gap-1"><Car className="w-4 h-4" /> {p.parking_spots} vaga(s)</span> : null}
+
+                    {/* Details */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
+                      <div>
+                        <h3 className="text-xl font-heading font-bold text-foreground mb-1 line-clamp-1">{p.title}</h3>
+                        <p className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
+                          <MapPin className="w-3.5 h-3.5 shrink-0" />
+                          {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ''}` : p.city || ''}
+                        </p>
+                        {p.description && (
+                          <p className="text-sm text-muted-foreground/80 line-clamp-1 mb-3">{p.description}</p>
+                        )}
+                        <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
+                          {p.parking_spots ? <span className="flex items-center gap-1.5"><Car className="w-4 h-4" /> {p.parking_spots} vaga{p.parking_spots > 1 ? 's' : ''}</span> : null}
+                          {p.bedrooms ? <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" /> {p.bedrooms} quarto{p.bedrooms > 1 ? 's' : ''}</span> : null}
+                          {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
+                        </div>
                       </div>
-                      <div className="flex gap-2">
-                        <Link to={`/imovel/${p.id}`} className="flex-1">
-                          <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
-                            Ver Detalhes
-                          </Button>
-                        </Link>
+                    </div>
+
+                    {/* Arrow button */}
+                    <div className="hidden sm:flex items-center self-center">
+                      <Link to={`/imovel/${p.id}`}>
                         <Button
-                          variant="outline"
                           size="icon"
-                          className="shrink-0 text-emerald-600 border-emerald-200 hover:bg-emerald-50"
-                          onClick={() => {
-                            const url = `${window.location.origin}/imovel/${p.id}`;
-                            const text = encodeURIComponent(`🏠 ${p.title}\n💰 ${formatPrice(p.price)}\n📍 ${p.neighborhood || ""}\n\nVeja mais: ${url}`);
-                            window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
-                          }}
-                          title="Compartilhar no WhatsApp"
+                          className="w-12 h-12 rounded-full bg-foreground text-background hover:bg-foreground/80"
                         >
-                          <Share2 className="w-4 h-4" />
+                          <ArrowRight className="w-5 h-5" />
                         </Button>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="shrink-0 text-secondary border-secondary/20 hover:bg-secondary/10"
-                          onClick={() => {
-                            const el = document.getElementById("contact");
-                            if (el) { el.scrollIntoView({ behavior: "smooth" }); return; }
-                            sessionStorage.setItem("pendingScrollSection", "contact");
-                            window.location.href = "/";
-                          }}
-                          title="Agendar Visita"
-                        >
-                          <CalendarDays className="w-4 h-4" />
+                      </Link>
+                    </div>
+
+                    {/* Mobile: full-width button */}
+                    <div className="sm:hidden w-full">
+                      <Link to={`/imovel/${p.id}`} className="w-full">
+                        <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
+                          Ver Detalhes
                         </Button>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
