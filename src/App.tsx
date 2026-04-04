@@ -28,6 +28,7 @@ import PropertyDetail from "./pages/PropertyDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Unsubscribe from "./pages/Unsubscribe.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
+import AnunciarImovel from "./pages/AnunciarImovel.tsx";
 import BrokerDashboard from "./pages/BrokerDashboard.tsx";
 
 const queryClient = new QueryClient();
