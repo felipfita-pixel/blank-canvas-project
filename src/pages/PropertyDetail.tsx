@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import ImageLightbox from "@/components/ImageLightbox";
+import WatermarkImage from "@/components/WatermarkImage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Maximize, Car, MapPin, ArrowLeft, ChevronLeft, ChevronRight, MessageCircle, Share2, Heart } from "lucide-react";
