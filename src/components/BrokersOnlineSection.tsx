@@ -134,7 +134,10 @@ const BrokersOnlineSection = () => {
         </p>
         <div className="flex items-center justify-center gap-3 mb-4">
           <Button
-            onClick={() => window.open("https://wa.me/5521975316631?text=Olá, gostaria de falar com um corretor!", "_blank")}
+            onClick={() => {
+              const msg = encodeURIComponent("Olá, gostaria de falar com um corretor!");
+              window.open(`https://wa.me/5521975316631?text=${msg}`, "_blank", "noopener,noreferrer");
+            }}
             className="bg-[#25D366] text-primary-foreground hover:bg-[#1da851] font-bold px-6 py-3 rounded-full text-base shadow-lg"
           >
             <Phone className="w-5 h-5 mr-2" />
