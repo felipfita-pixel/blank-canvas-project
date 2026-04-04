@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
+import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
