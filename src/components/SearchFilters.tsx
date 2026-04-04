@@ -44,6 +44,7 @@ const SearchFilters = ({
   onFilterPriceChange,
   neighborhoods,
   typeOptions,
+  hideSearch = false,
   className = "",
 }: SearchFiltersProps) => {
   const types = typeOptions || ["apartment", "house", "penthouse", "commercial", "land"];
