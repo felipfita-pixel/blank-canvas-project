@@ -33,6 +33,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <PageMeta
+        title="Corretores Associados & FF | Imóveis Barra da Tijuca, Recreio e Zona Sul RJ"
+        description="Especialistas em imóveis prontos e lançamentos na Barra da Tijuca, Recreio, Ilha Pura, Península e Zona Sul do Rio de Janeiro."
+        path="/"
+      />
       <Header />
       <HeroSection />
       <PropertyShowcase />
