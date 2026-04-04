@@ -114,7 +114,7 @@ const SearchFilters = ({
             <SelectValue placeholder="Todos os quartos" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos</SelectItem>
+            <SelectItem value="all">Todos os quartos</SelectItem>
             <SelectItem value="1">1 quarto</SelectItem>
             <SelectItem value="2">2 quartos</SelectItem>
             <SelectItem value="3">3 quartos</SelectItem>
