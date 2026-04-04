@@ -127,10 +127,10 @@ const BrokersOnlineSection = () => {
     <section className="section-padding bg-cream">
       <div className="container-main text-center">
         <h2 className="text-3xl font-heading font-bold text-primary mb-2 italic">
-          Corretores Online
+          Fale com um Corretor Online
         </h2>
         <p className="text-muted-foreground mb-2 max-w-xl mx-auto">
-          Nossa equipe está pronta para atender você agora
+          Acesse o chat e converse agora com um de nossos especialistas em imóveis
         </p>
         <div className="flex items-center justify-center gap-2 mb-8">
           <span className="relative flex h-3 w-3">
