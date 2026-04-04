@@ -9,7 +9,7 @@ import { useSiteContent } from "@/hooks/useSiteContent";
 import { supabase } from "@/integrations/supabase/client";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import SearchFilters from "@/components/SearchFilters";
 import bairroLeblon from "@/assets/bairro-leblon.jpg";
 import bairroBarra from "@/assets/bairro-barra.jpg";
 import bairroBotafogo from "@/assets/bairro-botafogo.jpg";

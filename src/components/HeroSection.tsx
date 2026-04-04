@@ -3,31 +3,38 @@ import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, MapPin } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import SearchFilters from "@/components/SearchFilters";
 
 const HeroSection = () => {
   const { get } = useSiteContent();
   const hero = get("hero");
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [search, setSearch] = useState("");
+  const [filterType, setFilterType] = useState("all");
+  const [filterTransaction, setFilterTransaction] = useState("all");
+  const [filterNeighborhood, setFilterNeighborhood] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterPrice, setFilterPrice] = useState("all");
 
   const handleContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/imoveis?q=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      navigate("/imoveis");
-    }
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (search.trim()) params.set("q", search.trim());
+    if (filterType !== "all") params.set("type", filterType);
+    if (filterTransaction !== "all") params.set("transaction", filterTransaction);
+    if (filterNeighborhood !== "all") params.set("neighborhood", filterNeighborhood);
+    if (filterBedrooms !== "all") params.set("bedrooms", filterBedrooms);
+    if (filterPrice !== "all") params.set("price", filterPrice);
+    const qs = params.toString();
+    navigate(qs ? `/imoveis?${qs}` : "/imoveis");
   };
 
   return (
     <section className="relative min-h-[55svh] flex items-center justify-center overflow-hidden">
-      {/* Background image */}
       <img
         src={heroBg}
         alt="Imóveis de luxo no Rio de Janeiro"
@@ -35,7 +42,6 @@ const HeroSection = () => {
         height={1080}
         className="absolute inset-0 w-full h-full object-cover"
       />
-      {/* Dark overlay */}
       <div className="absolute inset-0 bg-primary/75" />
 
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto w-full">
@@ -71,34 +77,37 @@ const HeroSection = () => {
           Atendimento personalizado e consultoria especializada.
         </motion.p>
 
-        {/* Smart search bar */}
-        <motion.form
-          onSubmit={handleSearch}
+        {/* Search filters */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
-          className="max-w-2xl mx-auto mb-8"
+          className="max-w-4xl mx-auto mb-8"
         >
-          <div className="flex items-center bg-card/95 backdrop-blur-sm rounded-full shadow-xl overflow-hidden border border-border/50">
-            <div className="flex items-center gap-2 pl-5 text-muted-foreground">
-              <MapPin className="w-5 h-5 text-secondary flex-shrink-0" />
-            </div>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Busque por bairro, empreendimento ou cidade..."
-              className="flex-1 bg-transparent px-3 py-4 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+          <div className="bg-card/95 backdrop-blur-sm rounded-xl shadow-xl p-4 border border-border/50">
+            <SearchFilters
+              search={search}
+              onSearchChange={setSearch}
+              filterType={filterType}
+              onFilterTypeChange={setFilterType}
+              filterTransaction={filterTransaction}
+              onFilterTransactionChange={setFilterTransaction}
+              filterNeighborhood={filterNeighborhood}
+              onFilterNeighborhoodChange={setFilterNeighborhood}
+              filterBedrooms={filterBedrooms}
+              onFilterBedroomsChange={setFilterBedrooms}
+              filterPrice={filterPrice}
+              onFilterPriceChange={setFilterPrice}
+              neighborhoods={[]}
             />
             <Button
-              type="submit"
-              className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-full m-1.5 px-6 py-2.5 font-semibold text-sm sm:text-base shadow-md"
+              onClick={handleSearch}
+              className="w-full mt-3 bg-secondary text-secondary-foreground hover:bg-orange-hover font-semibold rounded-lg py-3 shadow-md"
             >
-              <Search className="w-4 h-4 mr-2" />
-              Buscar
+              Buscar Imóveis
             </Button>
           </div>
-        </motion.form>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
