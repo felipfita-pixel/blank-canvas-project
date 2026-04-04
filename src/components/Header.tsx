@@ -98,6 +98,12 @@ const Header = () => {
           >
             Imóveis
           </Link>
+          <Link
+            to="/anunciar-imovel"
+            className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300 font-body font-medium"
+          >
+            Anunciar Imóvel
+          </Link>
           <button
             type="button"
             onClick={() => handleSectionNavigation("contact")}

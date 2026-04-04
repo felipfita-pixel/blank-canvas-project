@@ -60,6 +60,7 @@ const App = () => (
             <Route path="/admin/documentation" element={<ProtectedRoute requireAdmin><AdminLayout><AdminDocumentation /></AdminLayout></ProtectedRoute>} />
             <Route path="/broker-dashboard" element={<ProtectedRoute><BrokerDashboard /></ProtectedRoute>} />
             <Route path="/landing" element={<LandingPage />} />
+            <Route path="/anunciar-imovel" element={<AnunciarImovel />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
