@@ -10,6 +10,7 @@ import WatermarkImage from "@/components/WatermarkImage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Maximize, Car, MapPin, ArrowLeft, ChevronLeft, ChevronRight, MessageCircle, Share2, Heart } from "lucide-react";
+import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 const placeholderImage = "/placeholder.svg";
 
 interface Property {
