@@ -151,9 +151,12 @@ const NeighborhoodsSection = () => {
                       {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
                     </div>
                   </div>
-                  {p.price > 0 && (
-                    <p className="text-lg font-bold text-secondary mt-3">{formatPrice(p.price)}</p>
-                  )}
+                  <div className="flex items-center gap-3 mt-3">
+                    {p.price > 0 && (
+                      <p className="text-lg font-bold text-secondary">{formatPrice(p.price)}</p>
+                    )}
+                    <PropertyShareButtons property={p} />
+                  </div>
                   <Link to={`/imovel/${p.id}`} className="sm:hidden mt-4">
                     <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg">
                       Ver Detalhes
