@@ -102,6 +102,159 @@ interface FeaturedProperty {
   address?: string | null;
 }
 
+const CAMPAIGN_PER_PAGE = 12;
+
+const CampaignResults = ({ properties, navigate }: { properties: FeaturedProperty[]; navigate: (path: string) => void }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [properties]);
+
+  const totalPages = Math.ceil(properties.length / CAMPAIGN_PER_PAGE);
+  const safePage = Math.min(currentPage, Math.max(totalPages, 1));
+  const paginated = properties.slice((safePage - 1) * CAMPAIGN_PER_PAGE, safePage * CAMPAIGN_PER_PAGE);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+    document.getElementById("campaign-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const getPageNumbers = () => {
+    const pages: (number | "ellipsis")[] = [];
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      pages.push(1);
+      if (safePage > 3) pages.push("ellipsis");
+      for (let i = Math.max(2, safePage - 1); i <= Math.min(totalPages - 1, safePage + 1); i++) pages.push(i);
+      if (safePage < totalPages - 2) pages.push("ellipsis");
+      pages.push(totalPages);
+    }
+    return pages;
+  };
+
+  const formatPrice = (price: number) =>
+    new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(price);
+
+  return (
+    <div id="campaign-results">
+      <p className="text-xs text-muted-foreground mb-3">
+        {properties.length} imóvel(is) encontrado(s)
+        {totalPages > 1 && <span className="ml-2">· Página {safePage} de {totalPages}</span>}
+      </p>
+
+      {properties.length === 0 ? (
+        <p className="text-sm text-muted-foreground text-center py-12">
+          Nenhum imóvel encontrado com os filtros selecionados.
+        </p>
+      ) : (
+        <>
+          <div className="flex flex-col divide-y divide-border">
+            {paginated.map((property, index) => {
+              const image = property.images && property.images.length > 0 ? property.images[0] : fallbackImages[index % fallbackImages.length];
+
+              return (
+                <div key={property.id} className="group py-5 first:pt-0">
+                  <div className="flex flex-col sm:flex-row gap-4 items-start">
+                    {/* Image */}
+                    <div
+                      className="relative w-full sm:w-56 md:w-64 shrink-0 aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                      onClick={() => navigate(`/imovel/${property.id}`)}
+                    >
+                      <img
+                        src={image}
+                        alt={property.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      {property.images && property.images.length > 1 && (
+                        <span className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded-full">
+                          {property.images.length} fotos
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Details */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
+                      <div>
+                        <h4 className="text-base font-heading font-bold text-foreground mb-0.5 line-clamp-1">{property.title}</h4>
+                        <p className="flex items-center gap-1 text-xs text-muted-foreground mb-1">
+                          <MapPin className="w-3 h-3 shrink-0" />
+                          {property.neighborhood ? `${property.neighborhood}${property.city ? `, ${property.city}` : ""}` : property.city || ""}
+                        </p>
+                        {property.description && (
+                          <p className="text-xs text-muted-foreground/80 line-clamp-1 mb-2">{property.description}</p>
+                        )}
+                        <div className="flex flex-wrap items-center gap-3 text-muted-foreground text-xs">
+                          {property.bedrooms != null && property.bedrooms > 0 && (
+                            <span className="flex items-center gap-1"><Bed className="w-3.5 h-3.5" /> {property.bedrooms} Qts</span>
+                          )}
+                          {property.bathrooms != null && property.bathrooms > 0 && (
+                            <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5" /> {property.bathrooms} Ban</span>
+                          )}
+                          {property.parking_spots != null && property.parking_spots > 0 && (
+                            <span className="flex items-center gap-1"><Car className="w-3.5 h-3.5" /> {property.parking_spots} Vaga</span>
+                          )}
+                          {property.area != null && property.area > 0 && (
+                            <span className="flex items-center gap-1"><Maximize className="w-3.5 h-3.5" /> {property.area}m²</span>
+                          )}
+                        </div>
+                      </div>
+                      {property.price > 0 && (
+                        <p className="text-sm font-bold text-secondary mt-2">{formatPrice(property.price)}</p>
+                      )}
+                      {/* Mobile button */}
+                      <Button
+                        className="sm:hidden mt-3 w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg text-xs"
+                        onClick={() => navigate(`/imovel/${property.id}`)}
+                      >
+                        Ver Detalhes
+                      </Button>
+                    </div>
+
+                    {/* Arrow - desktop */}
+                    <div className="hidden sm:flex items-center self-center">
+                      <Button
+                        size="icon"
+                        className="w-10 h-10 rounded-full bg-foreground text-background hover:bg-foreground/80"
+                        onClick={() => navigate(`/imovel/${property.id}`)}
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-1.5 mt-6">
+              <Button variant="outline" size="icon" className="w-8 h-8" disabled={safePage <= 1} onClick={() => goToPage(safePage - 1)}>
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              {getPageNumbers().map((p, i) =>
+                p === "ellipsis" ? (
+                  <span key={`e-${i}`} className="px-1 text-muted-foreground text-xs">…</span>
+                ) : (
+                  <Button key={p} variant={p === safePage ? "default" : "outline"} size="icon" className="w-8 h-8 text-xs" onClick={() => goToPage(p as number)}>
+                    {p}
+                  </Button>
+                )
+              )}
+              <Button variant="outline" size="icon" className="w-8 h-8" disabled={safePage >= totalPages} onClick={() => goToPage(safePage + 1)}>
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
 const AboutSection = () => {
   const { get } = useSiteContent();
   const about = get("about");
