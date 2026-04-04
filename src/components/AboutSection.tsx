@@ -452,79 +452,22 @@ const AboutSection = () => {
             <p className="text-sm text-muted-foreground mb-4">{about.content.campaign_subtitle || ""}</p>
 
             <div className="bg-card rounded-xl border border-border p-4 mb-4 shadow-sm">
-              <h4 className="text-sm font-bold text-foreground mb-3">Resultado de Busca</h4>
-
-              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,180px))_auto]">
-                <Input
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  placeholder="Pesquisar por imóvel, endereço, cidade ou bairro"
-                />
-
-                <Select value={filterCity} onValueChange={setFilterCity}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Cidade" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todas as Cidades</SelectItem>
-                    {cityOptions.map((city) => (
-                      <SelectItem key={city} value={city}>
-                        {city}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <Select value={filterNeighborhood} onValueChange={setFilterNeighborhood}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Bairro" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos os Bairros</SelectItem>
-                    {neighborhoodOptions.map((neighborhood) => (
-                      <SelectItem key={neighborhood} value={neighborhood}>
-                        {neighborhood}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <Select value={filterType} onValueChange={setFilterType}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Tipo de Imóvel" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos os Tipos</SelectItem>
-                    {typeOptions.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {propertyTypeLabels[type] ?? type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <div className="flex gap-3 md:col-span-2 xl:col-span-1">
-                  <Button variant="outline" type="button" onClick={() => setShowMoreFilters((value) => !value)} className="flex-1 font-semibold">
-                    <SlidersHorizontal className="w-4 h-4 mr-1" />
-                    Mais Filtros
-                  </Button>
-                  <Button type="button" onClick={handleSearchButtonClick} className="flex-1 font-semibold">
-                    <Search className="w-4 h-4 mr-1" />
-                    Pesquisar
-                  </Button>
-                </div>
-              </div>
-
-              {showMoreFilters && (
-                <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-xs text-muted-foreground">
-                    {cityOptions.length} cidades • {allNeighborhoodOptions.length} bairros • {typeOptions.length} tipos disponíveis
-                  </p>
-                  <Button variant="ghost" size="sm" type="button" onClick={clearFilters}>
-                    Limpar filtros
-                  </Button>
-                </div>
-              )}
+              <SearchFilters
+                search={searchQuery}
+                onSearchChange={setSearchQuery}
+                filterType={filterType}
+                onFilterTypeChange={setFilterType}
+                filterTransaction={filterTransaction}
+                onFilterTransactionChange={setFilterTransaction}
+                filterNeighborhood={filterNeighborhood}
+                onFilterNeighborhoodChange={setFilterNeighborhood}
+                filterBedrooms={filterBedrooms}
+                onFilterBedroomsChange={setFilterBedrooms}
+                filterPrice={filterPrice}
+                onFilterPriceChange={setFilterPrice}
+                neighborhoods={neighborhoodOptions}
+                typeOptions={typeOptions}
+              />
             </div>
 
             <CampaignResults properties={filteredProperties} navigate={navigate} />
