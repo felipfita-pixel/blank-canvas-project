@@ -146,6 +146,7 @@ const Header = () => {
                 onClick={() => setMobileOpen(false)}
               >
                 Anunciar Imóvel
+              </Link>
               <button
                 type="button"
                 className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
