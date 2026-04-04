@@ -51,6 +51,11 @@ const Properties = () => {
   const [filterBedrooms, setFilterBedrooms] = useState("all");
   const [filterPrice, setFilterPrice] = useState("all");
   const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
   const [showFilters, setShowFilters] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
