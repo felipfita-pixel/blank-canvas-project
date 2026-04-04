@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { staticProperties } from "@/data/staticProperties";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Users, Phone, MessageCircle, User, Home, Bed, Bath, Car, Maximize, Search, SlidersHorizontal, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Users, Phone, MessageCircle, User, Bed, Bath, Car, Maximize, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
 import { useSiteContent } from "@/hooks/useSiteContent";
