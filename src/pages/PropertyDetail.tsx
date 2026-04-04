@@ -9,8 +9,9 @@ import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Bed, Bath, Maximize, Car, MapPin, ArrowLeft, ChevronLeft, ChevronRight, MessageCircle, Share2, Heart } from "lucide-react";
+import { Bed, Bath, Maximize, Car, MapPin, ArrowLeft, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
+import PropertyShareButtons from "@/components/PropertyShareButtons";
 const placeholderImage = "/placeholder.svg";
 
 interface Property {
@@ -210,13 +211,8 @@ const PropertyDetail = () => {
                 </Badge>
               ) : null;
             })()}
-            <div className="absolute top-4 right-4 flex gap-2">
-              <button onClick={(e) => e.stopPropagation()} className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
-                <Heart className="w-5 h-5 text-foreground" />
-              </button>
-              <button onClick={(e) => e.stopPropagation()} className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
-                <Share2 className="w-5 h-5 text-foreground" />
-              </button>
+            <div className="absolute top-4 right-4">
+              <PropertyShareButtons property={property} />
             </div>
             {/* Click to enlarge hint */}
             <span className="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1.5 rounded-full">
@@ -263,9 +259,12 @@ const PropertyDetail = () => {
               )}
 
               {property.price > 0 && (
-                <p className="text-3xl font-bold text-secondary mb-8">
-                  {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
-                </p>
+                <div className="flex flex-wrap items-center gap-4 mb-8">
+                  <p className="text-3xl font-bold text-secondary">
+                    {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
+                  </p>
+                  <PropertyShareButtons property={property} variant="full" />
+                </div>
               )}
 
               {/* Details grid */}
