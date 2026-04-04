@@ -74,7 +74,7 @@ const Footer = () => {
                 </>
               )}
               <li>
-                <Link to="/cadastro-corretor" className="flex items-center gap-2 hover:text-secondary transition-colors">
+                <Link to="/broker-register" className="flex items-center gap-2 hover:text-secondary transition-colors">
                   <LogIn className="w-4 h-4" />
                   Cadastrar como Corretor
                 </Link>
