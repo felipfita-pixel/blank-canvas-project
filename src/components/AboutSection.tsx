@@ -383,6 +383,24 @@ const AboutSection = () => {
       const matchesNeighborhood = filterNeighborhood === "all" || property.neighborhood === filterNeighborhood;
       const matchesType = filterType === "all" || property.property_type === filterType;
 
+      // Transaction filter (property needs a transaction_type-like field; skip if not available)
+      const matchesTransaction = filterTransaction === "all";
+
+      // Bedrooms filter
+      let matchesBedrooms = true;
+      if (filterBedrooms !== "all") {
+        const beds = property.bedrooms ?? 0;
+        if (filterBedrooms === "4") matchesBedrooms = beds >= 4;
+        else matchesBedrooms = beds === parseInt(filterBedrooms);
+      }
+
+      // Price filter
+      let matchesPrice = true;
+      if (filterPrice !== "all") {
+        if (filterPrice === "above") matchesPrice = property.price > 5000000;
+        else matchesPrice = property.price <= parseInt(filterPrice);
+      }
+
       const searchableContent = [
         property.title,
         property.neighborhood,
@@ -398,9 +416,9 @@ const AboutSection = () => {
 
       const hasValidImage = property.images?.some(img => img && img.trim() !== "");
 
-      return matchesCity && matchesNeighborhood && matchesType && matchesSearch && hasValidImage;
+      return matchesCity && matchesNeighborhood && matchesType && matchesTransaction && matchesBedrooms && matchesPrice && matchesSearch && hasValidImage;
     });
-  }, [filterCity, filterNeighborhood, filterType, mergedProperties, searchQuery]);
+  }, [filterCity, filterNeighborhood, filterType, filterTransaction, filterBedrooms, filterPrice, mergedProperties, searchQuery]);
 
   const allBrokersList: BrokerBot[] = [
     ...realBrokers.map((broker) => ({
