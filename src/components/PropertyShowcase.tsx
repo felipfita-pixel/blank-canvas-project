@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Bed, Bath, Maximize, Car } from "lucide-reac
 import { supabase } from "@/integrations/supabase/client";
 import { staticProperties } from "@/data/staticProperties";
 import SiteVisitCounter from "@/components/SiteVisitCounter";
+import WatermarkImage from "@/components/WatermarkImage";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
