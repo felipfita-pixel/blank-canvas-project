@@ -12,11 +12,15 @@ const Header = () => {
   const navigate = useNavigate();
   const { user, loading, isAdmin, signOut } = useAuth();
 
+  const isHomePage = location.pathname === "/";
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const showSolidBg = scrolled || !isHomePage;
 
   const handleSectionNavigation = (sectionId: string) => {
     setMobileOpen(false);
@@ -73,7 +77,7 @@ const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+        showSolidBg
           ? "bg-primary backdrop-blur-xl shadow-lg shadow-primary/30"
           : "bg-transparent"
       }`}
