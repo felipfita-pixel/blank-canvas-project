@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Bed, Bath, Maximize, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import ImageLightbox from "@/components/ImageLightbox";
+import WatermarkImage from "@/components/WatermarkImage";
 import bairroLeblon from "@/assets/bairro-leblon.jpg";
 import bairroBotafogo from "@/assets/bairro-botafogo.jpg";
 import bairroBarra from "@/assets/bairro-barra.jpg";
@@ -111,7 +112,7 @@ const NeighborhoodsSection = () => {
                   className="relative w-full sm:w-56 md:w-64 shrink-0 aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
                   onClick={() => openLightbox(p)}
                 >
-                  <img
+                  <WatermarkImage
                     src={getImage(p, (safePage - 1) * ITEMS_PER_PAGE + i)}
                     alt={p.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

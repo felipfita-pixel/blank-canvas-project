@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, Headset } from "lucide-react";
+import WatermarkImage from "@/components/WatermarkImage";
 
 interface ImageLightboxProps {
   images: { src: string; alt: string }[];
@@ -89,7 +90,7 @@ const ImageLightbox = ({ images, currentIndex, isOpen, onClose, onNavigate, prop
       )}
 
       <div className="max-w-[90vw] max-h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-        <img
+        <WatermarkImage
           src={current.src}
           alt={current.alt}
           className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
