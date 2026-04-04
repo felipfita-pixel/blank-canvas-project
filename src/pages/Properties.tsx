@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Maximize, Car, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
+import WatermarkImage from "@/components/WatermarkImage";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
