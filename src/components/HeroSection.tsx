@@ -1,36 +1,15 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
-import SearchFilters from "@/components/SearchFilters";
 
 const HeroSection = () => {
   const { get } = useSiteContent();
   const hero = get("hero");
-  const navigate = useNavigate();
-  const [search, setSearch] = useState("");
-  const [filterType, setFilterType] = useState("all");
-  const [filterTransaction, setFilterTransaction] = useState("all");
-  const [filterNeighborhood, setFilterNeighborhood] = useState("all");
-  const [filterBedrooms, setFilterBedrooms] = useState("all");
-  const [filterPrice, setFilterPrice] = useState("all");
 
   const handleContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const handleSearch = () => {
-    const params = new URLSearchParams();
-    if (search.trim()) params.set("q", search.trim());
-    if (filterType !== "all") params.set("type", filterType);
-    if (filterTransaction !== "all") params.set("transaction", filterTransaction);
-    if (filterNeighborhood !== "all") params.set("neighborhood", filterNeighborhood);
-    if (filterBedrooms !== "all") params.set("bedrooms", filterBedrooms);
-    if (filterPrice !== "all") params.set("price", filterPrice);
-    const qs = params.toString();
-    navigate(qs ? `/imoveis?${qs}` : "/imoveis");
   };
 
   return (
