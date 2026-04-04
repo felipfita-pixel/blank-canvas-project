@@ -1,6 +1,7 @@
-import { MapPin, Phone, Mail } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { MapPin, Phone, Mail, LogIn, Settings } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useAuth } from "@/hooks/useAuth";
 
 const Footer = () => {
   const { get } = useSiteContent();
@@ -8,6 +9,7 @@ const Footer = () => {
   const c = section.content;
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleSectionNavigation = (sectionId: string) => {
     if (location.pathname === "/") {
@@ -22,7 +24,7 @@ const Footer = () => {
   return (
     <footer className="bg-primary">
       <div className="container-main px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="grid md:grid-cols-4 gap-12">
           <div>
             <h3 className="font-heading text-xl font-bold mb-1">
               <span className="text-secondary italic">CORRETORES</span>{" "}
@@ -38,6 +40,7 @@ const Footer = () => {
               <li><button type="button" onClick={() => handleSectionNavigation("about")} className="hover:text-secondary transition-colors">Apresentação</button></li>
               <li><button type="button" onClick={() => handleSectionNavigation("lifestyle")} className="hover:text-secondary transition-colors">Ilha Pura</button></li>
               <li><button type="button" onClick={() => handleSectionNavigation("services")} className="hover:text-secondary transition-colors">Serviços</button></li>
+              <li><Link to="/imoveis" className="hover:text-secondary transition-colors">Ver Imóveis</Link></li>
             </ul>
           </div>
 
@@ -47,6 +50,35 @@ const Footer = () => {
               <li className="flex items-start gap-3"><MapPin className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" /><span>{c.address}</span></li>
               <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-secondary flex-shrink-0" /><span>{c.phone}</span></li>
               <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-secondary flex-shrink-0" /><span>{c.email}</span></li>
+            </ul>
+          </div>
+
+          {/* Área do Corretor / Admin */}
+          <div>
+            <h4 className="font-heading font-bold text-primary-foreground text-lg mb-5">Área Restrita</h4>
+            <ul className="space-y-3 text-sm text-primary-foreground/60">
+              {!user && (
+                <>
+                  <li>
+                    <Link to="/login" state={{ roleHint: "broker" }} className="flex items-center gap-2 hover:text-secondary transition-colors">
+                      <LogIn className="w-4 h-4" />
+                      Login Corretor
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/login" state={{ roleHint: "admin" }} className="flex items-center gap-2 hover:text-secondary transition-colors">
+                      <Settings className="w-4 h-4" />
+                      Painel Admin
+                    </Link>
+                  </li>
+                </>
+              )}
+              <li>
+                <Link to="/broker-register" className="flex items-center gap-2 hover:text-secondary transition-colors">
+                  <LogIn className="w-4 h-4" />
+                  Cadastrar como Corretor
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

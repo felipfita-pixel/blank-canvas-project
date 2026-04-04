@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Building, Settings, LogIn, LogOut } from "lucide-react";
+import { Menu, X, Building, Settings, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -35,34 +35,11 @@ const Header = () => {
   };
 
   const renderAuthActions = (mobile = false) => {
-    if (loading) return null;
+    if (loading || !user) return null;
 
     const sharedLoginClassName = mobile
       ? "w-full justify-start rounded-lg px-3"
       : "h-9 rounded-full px-4";
-
-    const sharedGhostClassName = mobile
-      ? "w-full justify-start rounded-lg px-3 text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
-      : "h-9 rounded-full px-4 text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground";
-
-    if (!user) {
-      return (
-        <>
-          <Button variant="ghost" asChild className={sharedGhostClassName}>
-            <Link to="/login" state={{ roleHint: "broker" }} onClick={() => setMobileOpen(false)}>
-              <LogIn className="w-4 h-4" />
-              Login Corretor
-            </Link>
-          </Button>
-          <Button variant="secondary" asChild className={sharedLoginClassName}>
-            <Link to="/login" state={{ roleHint: "admin" }} onClick={() => setMobileOpen(false)}>
-              <Settings className="w-4 h-4" />
-              Painel Admin
-            </Link>
-          </Button>
-        </>
-      );
-    }
 
     return (
       <>
