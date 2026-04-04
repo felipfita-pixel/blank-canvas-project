@@ -211,13 +211,8 @@ const PropertyDetail = () => {
                 </Badge>
               ) : null;
             })()}
-            <div className="absolute top-4 right-4 flex gap-2">
-              <button onClick={(e) => e.stopPropagation()} className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
-                <Heart className="w-5 h-5 text-foreground" />
-              </button>
-              <button onClick={(e) => e.stopPropagation()} className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
-                <Share2 className="w-5 h-5 text-foreground" />
-              </button>
+            <div className="absolute top-4 right-4">
+              <PropertyShareButtons property={property} />
             </div>
             {/* Click to enlarge hint */}
             <span className="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1.5 rounded-full">
