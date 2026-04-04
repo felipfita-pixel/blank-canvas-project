@@ -12,6 +12,7 @@ import { Bed, Bath, Maximize, Car, MapPin, ArrowRight, ChevronLeft, ChevronRight
 import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
+import PropertyShareButtons from "@/components/PropertyShareButtons";
 import PageMeta from "@/components/PageMeta";
 import propertyCondo from "@/assets/property-condo.jpg";
 
