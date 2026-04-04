@@ -12,11 +12,15 @@ const Header = () => {
   const navigate = useNavigate();
   const { user, loading, isAdmin, signOut } = useAuth();
 
+  const isHomePage = location.pathname === "/";
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const showSolidBg = scrolled || !isHomePage;
 
   const handleSectionNavigation = (sectionId: string) => {
     setMobileOpen(false);
