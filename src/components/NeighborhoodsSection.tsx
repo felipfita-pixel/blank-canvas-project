@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
+import PropertyShareButtons from "@/components/PropertyShareButtons";
 import bairroLeblon from "@/assets/bairro-leblon.jpg";
 import bairroBotafogo from "@/assets/bairro-botafogo.jpg";
 import bairroBarra from "@/assets/bairro-barra.jpg";

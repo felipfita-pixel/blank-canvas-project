@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
+import PropertyShareButtons from "@/components/PropertyShareButtons";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
