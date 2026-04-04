@@ -98,6 +98,12 @@ const Header = () => {
           >
             Imóveis
           </Link>
+          <Link
+            to="/anunciar-imovel"
+            className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300 font-body font-medium"
+          >
+            Anunciar Imóvel
+          </Link>
           <button
             type="button"
             onClick={() => handleSectionNavigation("contact")}
@@ -133,6 +139,13 @@ const Header = () => {
                 onClick={() => setMobileOpen(false)}
               >
                 Imóveis
+              </Link>
+              <Link
+                to="/anunciar-imovel"
+                className="block text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
+                onClick={() => setMobileOpen(false)}
+              >
+                Anunciar Imóvel
               </Link>
               <button
                 type="button"
