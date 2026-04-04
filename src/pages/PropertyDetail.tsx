@@ -259,9 +259,12 @@ const PropertyDetail = () => {
               )}
 
               {property.price > 0 && (
-                <p className="text-3xl font-bold text-secondary mb-8">
-                  {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
-                </p>
+                <div className="flex flex-wrap items-center gap-4 mb-8">
+                  <p className="text-3xl font-bold text-secondary">
+                    {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
+                  </p>
+                  <PropertyShareButtons property={property} variant="full" />
+                </div>
               )}
 
               {/* Details grid */}
