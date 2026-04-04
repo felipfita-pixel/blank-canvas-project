@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { staticProperties } from "@/data/staticProperties";
 import { Button } from "@/components/ui/button";
 import { Users, Phone, MessageCircle, User, Bed, Bath, Car, Maximize, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import { useNavigate } from "react-router-dom";
 import ScheduleModal from "@/components/ScheduleModal";
 import { useSiteContent } from "@/hooks/useSiteContent";
