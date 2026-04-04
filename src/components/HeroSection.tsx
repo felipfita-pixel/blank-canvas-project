@@ -1,28 +1,49 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Search, MapPin } from "lucide-react";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   const { get } = useSiteContent();
   const hero = get("hero");
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  return (
-    <section className="relative min-h-[45svh] flex items-center justify-center bg-primary overflow-hidden">
-      {/* Subtle decorative elements */}
-      <div className="absolute top-20 right-10 w-72 h-72 bg-secondary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-56 h-56 bg-secondary/5 rounded-full blur-3xl" />
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/imoveis?q=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate("/imoveis");
+    }
+  };
 
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+  return (
+    <section className="relative min-h-[55svh] flex items-center justify-center overflow-hidden">
+      {/* Background image */}
+      <img
+        src={heroBg}
+        alt="Imóveis de luxo no Rio de Janeiro"
+        width={1920}
+        height={1080}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-primary/75" />
+
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8"
+          className="mb-6"
         >
           <span className="text-xs sm:text-sm text-secondary tracking-[0.3em] uppercase font-body font-medium">
             Lançamentos Exclusivos
@@ -33,7 +54,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-[1.15] mb-6"
+          className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-[1.15] mb-4"
         >
           Encontre o imóvel dos seus{" "}
           <span className="text-secondary italic">sonhos</span>
@@ -43,29 +64,58 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45 }}
-          className="text-primary-foreground/60 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-10 font-body leading-relaxed"
+          className="text-primary-foreground/70 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-8 font-body leading-relaxed"
         >
           Seleção com curadoria dos melhores lançamentos imobiliários.
           <br className="hidden sm:block" />
           Atendimento personalizado e consultoria especializada.
         </motion.p>
 
+        {/* Smart search bar */}
+        <motion.form
+          onSubmit={handleSearch}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="max-w-2xl mx-auto mb-8"
+        >
+          <div className="flex items-center bg-card/95 backdrop-blur-sm rounded-full shadow-xl overflow-hidden border border-border/50">
+            <div className="flex items-center gap-2 pl-5 text-muted-foreground">
+              <MapPin className="w-5 h-5 text-secondary flex-shrink-0" />
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Busque por bairro, empreendimento ou cidade..."
+              className="flex-1 bg-transparent px-3 py-4 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+            />
+            <Button
+              type="submit"
+              className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-full m-1.5 px-6 py-2.5 font-semibold text-sm sm:text-base shadow-md"
+            >
+              <Search className="w-4 h-4 mr-2" />
+              Buscar
+            </Button>
+          </div>
+        </motion.form>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.65 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button
             asChild
             className="bg-secondary text-secondary-foreground hover:bg-orange-hover font-semibold rounded-lg px-8 py-3 shadow-md shadow-secondary/20 hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 text-sm sm:text-base"
           >
-            <Link to="/imoveis">Ver Imóveis</Link>
+            <Link to="/imoveis">Ver Todos os Imóveis</Link>
           </Button>
 
           <Button
             onClick={handleContact}
-            className="bg-primary-foreground text-primary font-semibold rounded-lg px-8 py-3 hover:bg-primary-foreground/90 shadow-md transition-all duration-300 text-sm sm:text-base"
+            className="bg-primary-foreground/15 text-primary-foreground font-semibold rounded-lg px-8 py-3 hover:bg-primary-foreground/25 border border-primary-foreground/20 backdrop-blur-sm transition-all duration-300 text-sm sm:text-base"
           >
             Falar Conosco
           </Button>
