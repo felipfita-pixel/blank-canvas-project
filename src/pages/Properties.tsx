@@ -12,6 +12,7 @@ import { Bed, Bath, Maximize, Car, MapPin, ArrowRight, ChevronLeft, ChevronRight
 import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
+import PropertyShareButtons from "@/components/PropertyShareButtons";
 import PageMeta from "@/components/PageMeta";
 import propertyCondo from "@/assets/property-condo.jpg";
 
@@ -254,6 +255,12 @@ const Properties = () => {
                               {p.bedrooms ? <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" /> {p.bedrooms} quarto{p.bedrooms > 1 ? 's' : ''}</span> : null}
                               {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
                             </div>
+                          </div>
+                          <div className="flex items-center gap-3 mt-3">
+                            {p.price > 0 && (
+                              <p className="text-lg font-bold text-secondary">{formatPrice(p.price)}</p>
+                            )}
+                            <PropertyShareButtons property={p} />
                           </div>
                         </div>
 
