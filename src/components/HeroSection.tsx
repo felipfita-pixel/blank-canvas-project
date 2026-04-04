@@ -99,6 +99,7 @@ const HeroSection = () => {
               filterPrice={filterPrice}
               onFilterPriceChange={setFilterPrice}
               neighborhoods={[]}
+              hideSearch
             />
             <Button
               onClick={handleSearch}
