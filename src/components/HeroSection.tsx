@@ -77,38 +77,7 @@ const HeroSection = () => {
           Atendimento personalizado e consultoria especializada.
         </motion.p>
 
-        {/* Search filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
-          className="max-w-4xl mx-auto mb-8"
-        >
-          <div className="bg-card/95 backdrop-blur-sm rounded-xl shadow-xl p-4 border border-border/50">
-            <SearchFilters
-              search={search}
-              onSearchChange={setSearch}
-              filterType={filterType}
-              onFilterTypeChange={setFilterType}
-              filterTransaction={filterTransaction}
-              onFilterTransactionChange={setFilterTransaction}
-              filterNeighborhood={filterNeighborhood}
-              onFilterNeighborhoodChange={setFilterNeighborhood}
-              filterBedrooms={filterBedrooms}
-              onFilterBedroomsChange={setFilterBedrooms}
-              filterPrice={filterPrice}
-              onFilterPriceChange={setFilterPrice}
-              neighborhoods={[]}
-              hideSearch
-            />
-            <Button
-              onClick={handleSearch}
-              className="w-full mt-3 bg-secondary text-secondary-foreground hover:bg-orange-hover font-semibold rounded-lg py-3 shadow-md"
-            >
-              Buscar Imóveis
-            </Button>
-          </div>
-        </motion.div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
