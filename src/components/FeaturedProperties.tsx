@@ -6,6 +6,7 @@ import { Bed, Bath, Maximize, MapPin, ArrowRight, ChevronLeft, ChevronRight } fr
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ImageLightbox from "@/components/ImageLightbox";
+import WatermarkImage from "@/components/WatermarkImage";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
