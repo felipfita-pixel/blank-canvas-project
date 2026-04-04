@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Maximize, Car, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
+import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PageMeta from "@/components/PageMeta";
 import propertyCondo from "@/assets/property-condo.jpg";
 
@@ -219,9 +220,18 @@ const Properties = () => {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             loading="lazy"
                           />
-                          {p.featured && (
-                            <Badge className="absolute top-3 left-3 bg-secondary text-secondary-foreground">Destaque</Badge>
-                          )}
+                          {(() => {
+                            const status = getPropertyStatus(p.title, p.description);
+                            if (status) return (
+                              <Badge className={`absolute top-3 left-3 ${statusConfig[status].className}`}>
+                                {statusConfig[status].label}
+                              </Badge>
+                            );
+                            if (p.featured) return (
+                              <Badge className="absolute top-3 left-3 bg-secondary text-secondary-foreground">Destaque</Badge>
+                            );
+                            return null;
+                          })()}
                           {p.images && p.images.length > 1 && (
                             <span className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
                               {p.images.length} fotos
