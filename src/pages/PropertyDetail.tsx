@@ -202,6 +202,14 @@ const PropertyDetail = () => {
                 </div>
               </>
             )}
+            {(() => {
+              const status = getPropertyStatus(property.title, property.description);
+              return status ? (
+                <Badge className={`absolute top-4 left-4 ${statusConfig[status].className}`}>
+                  {statusConfig[status].label}
+                </Badge>
+              ) : null;
+            })()}
             <div className="absolute top-4 right-4 flex gap-2">
               <button onClick={(e) => e.stopPropagation()} className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors shadow-lg">
                 <Heart className="w-5 h-5 text-foreground" />
