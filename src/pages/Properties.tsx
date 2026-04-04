@@ -226,77 +226,148 @@ const Properties = () => {
             <p className="text-sm">Tente ajustar os filtros ou volte mais tarde.</p>
           </div>
         ) : (
-          <>
-            <p className="text-sm text-muted-foreground mb-6">{filtered.length} imóvel(is) encontrado(s)</p>
-            <div className="flex flex-col divide-y divide-border">
-              {filtered.map((p) => (
-                <div key={p.id} className="group py-6 first:pt-0">
-                  <div className="flex flex-col sm:flex-row gap-5 items-start">
-                    {/* Image */}
-                    <div
-                      className="relative w-full sm:w-72 md:w-80 shrink-0 aspect-[4/3] sm:aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
-                      onClick={() => openLightbox(p)}
-                    >
-                      <img
-                        src={p.images && p.images.length > 0 ? p.images[0] : propertyCondo}
-                        alt={p.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                      {p.featured && (
-                        <Badge className="absolute top-3 left-3 bg-secondary text-secondary-foreground">Destaque</Badge>
-                      )}
-                      {p.images && p.images.length > 1 && (
-                        <span className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
-                          {p.images.length} fotos
-                        </span>
-                      )}
-                    </div>
+          (() => {
+            const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+            const safePage = Math.min(currentPage, totalPages);
+            const paginated = filtered.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
-                    {/* Details */}
-                    <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
-                      <div>
-                        <h3 className="text-xl font-heading font-bold text-foreground mb-1 line-clamp-1">{p.title}</h3>
-                        <p className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
-                          <MapPin className="w-3.5 h-3.5 shrink-0" />
-                          {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ''}` : p.city || ''}
-                        </p>
-                        {p.description && (
-                          <p className="text-sm text-muted-foreground/80 line-clamp-1 mb-3">{p.description}</p>
-                        )}
-                        <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
-                          {p.parking_spots ? <span className="flex items-center gap-1.5"><Car className="w-4 h-4" /> {p.parking_spots} vaga{p.parking_spots > 1 ? 's' : ''}</span> : null}
-                          {p.bedrooms ? <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" /> {p.bedrooms} quarto{p.bedrooms > 1 ? 's' : ''}</span> : null}
-                          {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
+            const goToPage = (page: number) => {
+              setCurrentPage(page);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            const getPageNumbers = () => {
+              const pages: (number | 'ellipsis')[] = [];
+              if (totalPages <= 5) {
+                for (let i = 1; i <= totalPages; i++) pages.push(i);
+              } else {
+                pages.push(1);
+                if (safePage > 3) pages.push('ellipsis');
+                for (let i = Math.max(2, safePage - 1); i <= Math.min(totalPages - 1, safePage + 1); i++) pages.push(i);
+                if (safePage < totalPages - 2) pages.push('ellipsis');
+                pages.push(totalPages);
+              }
+              return pages;
+            };
+
+            return (
+              <>
+                <p className="text-sm text-muted-foreground mb-6">
+                  {filtered.length} imóvel(is) encontrado(s)
+                  {totalPages > 1 && <span className="ml-2">· Página {safePage} de {totalPages}</span>}
+                </p>
+                <div className="flex flex-col divide-y divide-border">
+                  {paginated.map((p) => (
+                    <div key={p.id} className="group py-6 first:pt-0">
+                      <div className="flex flex-col sm:flex-row gap-5 items-start">
+                        {/* Image */}
+                        <div
+                          className="relative w-full sm:w-72 md:w-80 shrink-0 aspect-[4/3] sm:aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                          onClick={() => openLightbox(p)}
+                        >
+                          <img
+                            src={p.images && p.images.length > 0 ? p.images[0] : propertyCondo}
+                            alt={p.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          {p.featured && (
+                            <Badge className="absolute top-3 left-3 bg-secondary text-secondary-foreground">Destaque</Badge>
+                          )}
+                          {p.images && p.images.length > 1 && (
+                            <span className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+                              {p.images.length} fotos
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Details */}
+                        <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
+                          <div>
+                            <h3 className="text-xl font-heading font-bold text-foreground mb-1 line-clamp-1">{p.title}</h3>
+                            <p className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
+                              <MapPin className="w-3.5 h-3.5 shrink-0" />
+                              {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ''}` : p.city || ''}
+                            </p>
+                            {p.description && (
+                              <p className="text-sm text-muted-foreground/80 line-clamp-1 mb-3">{p.description}</p>
+                            )}
+                            <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
+                              {p.parking_spots ? <span className="flex items-center gap-1.5"><Car className="w-4 h-4" /> {p.parking_spots} vaga{p.parking_spots > 1 ? 's' : ''}</span> : null}
+                              {p.bedrooms ? <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" /> {p.bedrooms} quarto{p.bedrooms > 1 ? 's' : ''}</span> : null}
+                              {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Arrow button */}
+                        <div className="hidden sm:flex items-center self-center">
+                          <Link to={`/imovel/${p.id}`}>
+                            <Button
+                              size="icon"
+                              className="w-12 h-12 rounded-full bg-foreground text-background hover:bg-foreground/80"
+                            >
+                              <ArrowRight className="w-5 h-5" />
+                            </Button>
+                          </Link>
+                        </div>
+
+                        {/* Mobile: full-width button */}
+                        <div className="sm:hidden w-full">
+                          <Link to={`/imovel/${p.id}`} className="w-full">
+                            <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
+                              Ver Detalhes
+                            </Button>
+                          </Link>
                         </div>
                       </div>
                     </div>
-
-                    {/* Arrow button */}
-                    <div className="hidden sm:flex items-center self-center">
-                      <Link to={`/imovel/${p.id}`}>
-                        <Button
-                          size="icon"
-                          className="w-12 h-12 rounded-full bg-foreground text-background hover:bg-foreground/80"
-                        >
-                          <ArrowRight className="w-5 h-5" />
-                        </Button>
-                      </Link>
-                    </div>
-
-                    {/* Mobile: full-width button */}
-                    <div className="sm:hidden w-full">
-                      <Link to={`/imovel/${p.id}`} className="w-full">
-                        <Button className="w-full bg-primary text-primary-foreground hover:bg-navy-light rounded-lg">
-                          Ver Detalhes
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <nav className="flex items-center justify-center gap-2 mt-10 mb-4" aria-label="Paginação">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="w-10 h-10 rounded-full"
+                      onClick={() => goToPage(safePage - 1)}
+                      disabled={safePage === 1}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </Button>
+
+                    {getPageNumbers().map((page, i) =>
+                      page === 'ellipsis' ? (
+                        <span key={`ellipsis-${i}`} className="w-10 h-10 flex items-center justify-center text-muted-foreground">…</span>
+                      ) : (
+                        <Button
+                          key={page}
+                          variant={page === safePage ? "default" : "outline"}
+                          size="icon"
+                          className={`w-10 h-10 rounded-full ${page === safePage ? 'bg-primary text-primary-foreground' : ''}`}
+                          onClick={() => goToPage(page)}
+                        >
+                          {page}
+                        </Button>
+                      )
+                    )}
+
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="w-10 h-10 rounded-full"
+                      onClick={() => goToPage(safePage + 1)}
+                      disabled={safePage === totalPages}
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </nav>
+                )}
+              </>
+            );
+          })()
         )}
       </div>
 
