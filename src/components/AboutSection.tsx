@@ -267,6 +267,9 @@ const AboutSection = () => {
   const [filterCity, setFilterCity] = useState("all");
   const [filterNeighborhood, setFilterNeighborhood] = useState("all");
   const [filterType, setFilterType] = useState("all");
+  const [filterTransaction, setFilterTransaction] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterPrice, setFilterPrice] = useState("all");
   const [showMoreFilters, setShowMoreFilters] = useState(false);
 
   useEffect(() => {
