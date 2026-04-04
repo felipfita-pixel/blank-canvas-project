@@ -13,6 +13,7 @@ import WhereWeOperate from "@/components/WhereWeOperate";
 import NeighborhoodsSection from "@/components/NeighborhoodsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import PageMeta from "@/components/PageMeta";
 
 
 const Index = () => {
