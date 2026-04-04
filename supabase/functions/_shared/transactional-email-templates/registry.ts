@@ -12,9 +12,11 @@ export interface TemplateEntry {
 import { template as newContactNotification } from './new-contact-notification.tsx'
 import { template as newChatNotification } from './new-chat-notification.tsx'
 import { template as newSchedulingNotification } from './new-scheduling-notification.tsx'
+import { template as propertyListingConfirmation } from './property-listing-confirmation.tsx'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'new-contact-notification': newContactNotification,
   'new-chat-notification': newChatNotification,
   'new-scheduling-notification': newSchedulingNotification,
+  'property-listing-confirmation': propertyListingConfirmation,
 }

@@ -443,6 +443,54 @@ export type Database = {
           },
         ]
       }
+      property_listings: {
+        Row: {
+          area: number | null
+          bedrooms: number | null
+          cep: string
+          created_at: string
+          description: string | null
+          email: string
+          id: string
+          name: string
+          phone: string
+          price_range: string | null
+          property_type: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          area?: number | null
+          bedrooms?: number | null
+          cep?: string
+          created_at?: string
+          description?: string | null
+          email: string
+          id?: string
+          name: string
+          phone?: string
+          price_range?: string | null
+          property_type?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          area?: number | null
+          bedrooms?: number | null
+          cep?: string
+          created_at?: string
+          description?: string | null
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          price_range?: string | null
+          property_type?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       scheduling_requests: {
         Row: {
           created_at: string

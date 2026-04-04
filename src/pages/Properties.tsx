@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Maximize, Car, MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
+import PageMeta from "@/components/PageMeta";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
@@ -128,6 +129,11 @@ const Properties = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Imóveis à Venda e Aluguel | Corretores Associados & FF"
+        description="Veja apartamentos, casas e coberturas disponíveis na Barra da Tijuca, Recreio, Ilha Pura e Zona Sul do Rio de Janeiro."
+        path="/imoveis"
+      />
       <Header />
 
       {/* Hero */}
