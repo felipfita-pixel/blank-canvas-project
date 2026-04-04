@@ -111,6 +111,9 @@ const Properties = () => {
     fetchProps();
   }, []);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 12;
+
   const filtered = properties.filter((p) => {
     if (search && !p.title.toLowerCase().includes(search.toLowerCase()) && !p.neighborhood?.toLowerCase().includes(search.toLowerCase())) return false;
     if (filterType !== "all" && p.property_type !== filterType) return false;
