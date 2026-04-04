@@ -132,7 +132,16 @@ const BrokersOnlineSection = () => {
         <p className="text-muted-foreground mb-2 max-w-xl mx-auto">
           Acesse o chat e converse agora com um de nossos especialistas em imóveis
         </p>
-        <div className="flex items-center justify-center gap-2 mb-8">
+        <Button
+          onClick={() => {
+            const chatBtn = document.querySelector('[data-chat-widget-trigger]') as HTMLButtonElement;
+            if (chatBtn) chatBtn.click();
+          }}
+          className="mb-4 bg-primary text-primary-foreground hover:bg-primary/90 font-bold px-6 py-3 rounded-full text-base shadow-lg"
+        >
+          <MessageCircle className="w-5 h-5 mr-2" />
+          Iniciar Chat Agora
+        </Button>
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
