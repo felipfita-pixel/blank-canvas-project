@@ -108,10 +108,12 @@ const BrokersOnlineSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Online real brokers first, then offline real brokers, then bots
-  const onlineReal = realBrokers.filter(b => b.isRealOnline);
-  const offlineReal = realBrokers.filter(b => !b.isRealOnline);
-  const allBrokers = [...onlineReal, ...offlineReal, ...shuffledBots];
+  // Felipe Fita always first, then online real brokers, then offline real, then bots
+  const isFelipe = (b: Broker) => b.full_name?.toLowerCase().includes("felipe fita");
+  const felipeBrokers = realBrokers.filter(isFelipe);
+  const onlineReal = realBrokers.filter(b => !isFelipe(b) && b.isRealOnline);
+  const offlineReal = realBrokers.filter(b => !isFelipe(b) && !b.isRealOnline);
+  const allBrokers = [...felipeBrokers, ...onlineReal, ...offlineReal, ...shuffledBots];
 
   const handleContact = (broker: Broker) => {
     const msg = encodeURIComponent(`Olá, gostaria de falar com ${broker.full_name} sobre imóveis.`);
