@@ -87,6 +87,19 @@ const ChatWidget = () => {
     }
   }, []);
 
+  // Listen for open-chat-widget custom event (from PropertyShareButtons)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      setOpen(true);
+      if (detail?.prefill) {
+        setMessage(detail.prefill);
+      }
+    };
+    window.addEventListener("open-chat-widget", handler);
+    return () => window.removeEventListener("open-chat-widget", handler);
+  }, []);
+
   // Check broker online status
   useEffect(() => {
     const checkOnline = async () => {
