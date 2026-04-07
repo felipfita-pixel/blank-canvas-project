@@ -58,9 +58,7 @@ const PropertyShareButtons = ({ property, variant = "icon", className = "" }: Pr
   const handleWhatsApp = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const imageUrl = property.images?.[0] || "";
-    const fullMessage = imageUrl ? `${message}\n\n📷 ${imageUrl}` : message;
-    window.open(`https://wa.me/?text=${encodeURIComponent(fullMessage)}`, "_blank");
+    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   const handleCopyLink = async (e: React.MouseEvent) => {
