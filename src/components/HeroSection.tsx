@@ -15,18 +15,23 @@ const HeroSection = () => {
   const [search, setSearch] = useState("");
   const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
-  const [propertyTitles, setPropertyTitles] = useState<string[]>([]);
+
+  const quickCities = [
+    { label: "Rio de Janeiro", short: "RJ" },
+    { label: "São Paulo", short: "SP" },
+    { label: "Belo Horizonte", short: "BH" },
+    { label: "Minas Gerais", short: "MG" },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await supabase
         .from("properties")
-        .select("title, neighborhood, city")
+        .select("neighborhood, city")
         .eq("active", true);
-      const all = [...(data || []), ...staticProperties.map(p => ({ title: p.title, neighborhood: p.neighborhood, city: (p as any).city || null }))];
+      const all = [...(data || []), ...staticProperties.map(p => ({ neighborhood: p.neighborhood, city: (p as any).city || null }))];
       setNeighborhoods([...new Set(all.map(p => p.neighborhood).filter(Boolean) as string[])].sort());
       setCities([...new Set(all.map(p => p.city).filter(Boolean) as string[])].sort());
-      setPropertyTitles([...new Set(all.map(p => p.title).filter(Boolean))]);
     };
     fetchData();
   }, []);
@@ -99,10 +104,22 @@ const HeroSection = () => {
             onChange={handleSearch}
             neighborhoods={neighborhoods}
             cities={cities}
-            propertyTitles={propertyTitles}
-            placeholder="Buscar por título, bairro ou cidade..."
+            propertyTitles={[]}
+            placeholder="Buscar por bairro ou cidade..."
             className="[&_input]:bg-primary-foreground/15 [&_input]:text-primary-foreground [&_input]:placeholder:text-primary-foreground/50 [&_input]:border-primary-foreground/20 [&_input]:backdrop-blur-sm [&_svg]:text-primary-foreground/60"
           />
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
+            <span className="text-primary-foreground/60 text-xs font-body mr-1">Cidades:</span>
+            {quickCities.map((c) => (
+              <button
+                key={c.short}
+                onClick={() => navigate(`/imoveis?search=${encodeURIComponent(c.label)}`)}
+                className="px-3 py-1 rounded-full text-xs font-semibold bg-primary-foreground/15 text-primary-foreground border border-primary-foreground/20 hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all duration-200 backdrop-blur-sm"
+              >
+                {c.short}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
