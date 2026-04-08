@@ -30,6 +30,7 @@ import Unsubscribe from "./pages/Unsubscribe.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import AnunciarImovel from "./pages/AnunciarImovel.tsx";
 import BrokerDashboard from "./pages/BrokerDashboard.tsx";
+import Favorites from "./pages/Favorites.tsx";
 
 const queryClient = new QueryClient();
 
