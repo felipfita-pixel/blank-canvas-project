@@ -42,6 +42,15 @@ const FeaturedProperties = () => {
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxTitle, setLightboxTitle] = useState("");
+  const { isFavorite, toggleFavorite } = useFavorites();
+
+  // Filter states
+  const [search, setSearch] = useState("");
+  const [filterType, setFilterType] = useState("all");
+  const [filterTransaction, setFilterTransaction] = useState("all");
+  const [filterNeighborhood, setFilterNeighborhood] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterPrice, setFilterPrice] = useState("all");
 
   const openLightbox = (p: Property, imgIndex = 0) => {
     const imgs = p.images && p.images.length > 0
