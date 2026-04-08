@@ -1,11 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import SearchAutocomplete from "@/components/SearchAutocomplete";
-import { supabase } from "@/integrations/supabase/client";
-import { staticProperties } from "@/data/staticProperties";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
