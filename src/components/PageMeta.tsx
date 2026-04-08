@@ -6,7 +6,7 @@ interface PageMetaProps {
   path?: string;
 }
 
-const BASE_URL = "https://primal-blueprint-seed.lovable.app";
+const BASE_URL = "https://corretoresrj.com";
 
 const PageMeta = ({ title, description, path = "" }: PageMetaProps) => {
   useEffect(() => {
