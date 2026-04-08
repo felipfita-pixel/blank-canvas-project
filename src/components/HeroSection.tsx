@@ -91,7 +91,24 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="max-w-2xl mx-auto mb-6"
+        >
+          <SearchAutocomplete
+            value={search}
+            onChange={handleSearch}
+            neighborhoods={neighborhoods}
+            cities={cities}
+            propertyTitles={propertyTitles}
+            placeholder="Buscar por título, bairro ou cidade..."
+            className="[&_input]:bg-primary-foreground/15 [&_input]:text-primary-foreground [&_input]:placeholder:text-primary-foreground/50 [&_input]:border-primary-foreground/20 [&_input]:backdrop-blur-sm [&_svg]:text-primary-foreground/60"
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.75 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button
