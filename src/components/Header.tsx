@@ -165,6 +165,13 @@ const Header = () => {
               >
                 Contato
               </button>
+              <Link
+                to="/favoritos"
+                className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Heart className="w-4 h-4" /> Favoritos
+              </Link>
               <div className="space-y-1 pt-2">{renderAuthActions(true)}</div>
             </div>
           </motion.div>

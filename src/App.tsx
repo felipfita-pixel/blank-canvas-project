@@ -60,6 +60,7 @@ const App = () => (
             <Route path="/admin/chat" element={<ProtectedRoute requireAdmin><AdminLayout><AdminChatHistory /></AdminLayout></ProtectedRoute>} />
             <Route path="/admin/documentation" element={<ProtectedRoute requireAdmin><AdminLayout><AdminDocumentation /></AdminLayout></ProtectedRoute>} />
             <Route path="/broker-dashboard" element={<ProtectedRoute><BrokerDashboard /></ProtectedRoute>} />
+            <Route path="/favoritos" element={<Favorites />} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/anunciar-imovel" element={<AnunciarImovel />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
