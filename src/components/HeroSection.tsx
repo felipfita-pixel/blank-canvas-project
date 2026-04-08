@@ -15,18 +15,23 @@ const HeroSection = () => {
   const [search, setSearch] = useState("");
   const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
-  const [propertyTitles, setPropertyTitles] = useState<string[]>([]);
+
+  const quickCities = [
+    { label: "Rio de Janeiro", short: "RJ" },
+    { label: "São Paulo", short: "SP" },
+    { label: "Belo Horizonte", short: "BH" },
+    { label: "Minas Gerais", short: "MG" },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await supabase
         .from("properties")
-        .select("title, neighborhood, city")
+        .select("neighborhood, city")
         .eq("active", true);
-      const all = [...(data || []), ...staticProperties.map(p => ({ title: p.title, neighborhood: p.neighborhood, city: (p as any).city || null }))];
+      const all = [...(data || []), ...staticProperties.map(p => ({ neighborhood: p.neighborhood, city: (p as any).city || null }))];
       setNeighborhoods([...new Set(all.map(p => p.neighborhood).filter(Boolean) as string[])].sort());
       setCities([...new Set(all.map(p => p.city).filter(Boolean) as string[])].sort());
-      setPropertyTitles([...new Set(all.map(p => p.title).filter(Boolean))]);
     };
     fetchData();
   }, []);
