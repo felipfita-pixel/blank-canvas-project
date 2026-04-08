@@ -169,7 +169,31 @@ const FeaturedProperties = () => {
           </Link>
         </div>
 
+        <SearchFilters
+          search={search}
+          onSearchChange={setSearch}
+          filterType={filterType}
+          onFilterTypeChange={setFilterType}
+          filterTransaction={filterTransaction}
+          onFilterTransactionChange={setFilterTransaction}
+          filterNeighborhood={filterNeighborhood}
+          onFilterNeighborhoodChange={setFilterNeighborhood}
+          filterBedrooms={filterBedrooms}
+          onFilterBedroomsChange={setFilterBedrooms}
+          filterPrice={filterPrice}
+          onFilterPriceChange={setFilterPrice}
+          neighborhoods={neighborhoods}
+          cities={cities}
+          propertyTitles={propertyTitles}
+          className="mb-6"
+        />
+
+        <p className="text-sm text-muted-foreground mb-4">{filtered.length} imóvel(is) encontrado(s)</p>
+
         <div className="flex flex-col divide-y divide-border">
+          {paginated.length === 0 && (
+            <p className="text-center text-muted-foreground py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
+          )}
           {paginated.map((p) => (
             <div key={p.id} className="group py-6 first:pt-0">
               <div className="flex flex-col sm:flex-row gap-5 items-start">
