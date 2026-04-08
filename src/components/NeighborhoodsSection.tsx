@@ -160,6 +160,7 @@ const NeighborhoodsSection = () => {
                       <p className="text-lg font-bold text-secondary">{formatPrice(p.price)}</p>
                     )}
                     <PropertyShareButtons property={p} />
+                    <FavoriteButton isFavorite={isFavorite(p.id)} onToggle={() => toggleFavorite(p.id)} />
                   </div>
                   <Link to={`/imovel/${p.id}`} className="sm:hidden mt-4">
                     <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg">

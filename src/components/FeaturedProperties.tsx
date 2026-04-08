@@ -247,6 +247,7 @@ const FeaturedProperties = () => {
                       <p className="text-lg font-bold text-secondary">{formatPrice(p.price)}</p>
                     )}
                     <PropertyShareButtons property={p} />
+                    <FavoriteButton isFavorite={isFavorite(p.id)} onToggle={() => toggleFavorite(p.id)} />
                   </div>
                   {/* Mobile button */}
                   <Link to={`/imovel/${p.id}`} className="sm:hidden mt-4">
