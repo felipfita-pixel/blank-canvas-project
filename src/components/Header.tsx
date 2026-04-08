@@ -115,6 +115,13 @@ const Header = () => {
           >
             Contato
           </button>
+          <Link
+            to="/favoritos"
+            className="text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300"
+            title="Favoritos"
+          >
+            <Heart className="w-5 h-5" />
+          </Link>
           <div className="flex items-center gap-2">{renderAuthActions()}</div>
         </nav>
 
