@@ -36,6 +36,7 @@ const formatPrice = (price: number) =>
     : null;
 
 const NeighborhoodsSection = () => {
+  const { isFavorite, toggleFavorite } = useFavorites();
   const navigate = useNavigate();
   const [properties, setProperties] = useState<PropertyItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
