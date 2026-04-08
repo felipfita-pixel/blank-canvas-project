@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { staticProperties } from "@/data/staticProperties";
@@ -13,6 +13,8 @@ import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PropertyShareButtons from "@/components/PropertyShareButtons";
+import FavoriteButton from "@/components/FavoriteButton";
+import { useFavorites } from "@/hooks/useFavorites";
 import PageMeta from "@/components/PageMeta";
 import propertyCondo from "@/assets/property-condo.jpg";
 
@@ -25,6 +27,7 @@ interface Property {
   transaction_type: string;
   neighborhood: string | null;
   city: string | null;
+  state?: string | null;
   bedrooms: number | null;
   bathrooms: number | null;
   parking_spots: number | null;
@@ -46,11 +49,14 @@ const Properties = () => {
   const [filterNeighborhood, setFilterNeighborhood] = useState(searchParams.get("neighborhood") || "all");
   const [filterBedrooms, setFilterBedrooms] = useState(searchParams.get("bedrooms") || "all");
   const [filterPrice, setFilterPrice] = useState(searchParams.get("price") || "all");
-  const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
+  const [filterState, setFilterState] = useState(searchParams.get("state") || "all");
+  const [filterCity, setFilterCity] = useState(searchParams.get("city") || "all");
+
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
+  }, [search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice, filterState, filterCity]);
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
@@ -85,6 +91,7 @@ const Properties = () => {
         transaction_type: sp.transaction_type,
         neighborhood: sp.neighborhood,
         city: sp.city,
+        state: sp.state,
         bedrooms: sp.bedrooms,
         bathrooms: sp.bathrooms,
         parking_spots: sp.parking_spots,
@@ -102,18 +109,43 @@ const Properties = () => {
       ];
 
       setProperties(merged);
-      const hoods = [...new Set(merged.map((p) => p.neighborhood).filter(Boolean))] as string[];
-      setNeighborhoods(hoods.sort());
       setLoading(false);
     };
     fetchProps();
   }, []);
 
+  // Derived lists for filters
+  const neighborhoods = useMemo(() => {
+    const hoods = [...new Set(properties.map((p) => p.neighborhood).filter(Boolean))] as string[];
+    return hoods.sort();
+  }, [properties]);
+
+  const cities = useMemo(() => {
+    let list = [...new Set(properties.map((p) => p.city).filter(Boolean))] as string[];
+    if (filterState !== "all") {
+      list = [...new Set(
+        properties.filter((p) => (p.state || "RJ") === filterState).map((p) => p.city).filter(Boolean)
+      )] as string[];
+    }
+    return list.sort();
+  }, [properties, filterState]);
+
+  const states = useMemo(() => {
+    const list = [...new Set(properties.map((p) => p.state || "RJ").filter(Boolean))];
+    return list.sort();
+  }, [properties]);
+
+  const propertyTitles = useMemo(() => {
+    return properties.map((p) => p.title);
+  }, [properties]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 12;
 
   const filtered = properties.filter((p) => {
-    if (search && !p.title.toLowerCase().includes(search.toLowerCase()) && !p.neighborhood?.toLowerCase().includes(search.toLowerCase())) return false;
+    if (search && !p.title.toLowerCase().includes(search.toLowerCase()) && !p.neighborhood?.toLowerCase().includes(search.toLowerCase()) && !p.city?.toLowerCase().includes(search.toLowerCase())) return false;
+    if (filterState !== "all" && (p.state || "RJ") !== filterState) return false;
+    if (filterCity !== "all" && p.city !== filterCity) return false;
     if (filterType !== "all" && p.property_type !== filterType) return false;
     if (filterTransaction !== "all" && p.transaction_type !== filterTransaction) return false;
     if (filterNeighborhood !== "all" && p.neighborhood !== filterNeighborhood) return false;
@@ -129,6 +161,11 @@ const Properties = () => {
     return true;
   });
 
+  // Reset city when state changes
+  useEffect(() => {
+    setFilterCity("all");
+  }, [filterState]);
+
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
@@ -142,7 +179,7 @@ const Properties = () => {
       <div className="bg-primary pt-24 pb-12">
         <div className="container-main">
           <h1 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-2">Imóveis Disponíveis</h1>
-          <p className="text-primary-foreground/70">Encontre o imóvel ideal para você.</p>
+          <p className="text-primary-foreground/70">Encontre o imóvel ideal para você em qualquer região.</p>
         </div>
       </div>
 
@@ -162,7 +199,14 @@ const Properties = () => {
             onFilterBedroomsChange={setFilterBedrooms}
             filterPrice={filterPrice}
             onFilterPriceChange={setFilterPrice}
+            filterState={filterState}
+            onFilterStateChange={setFilterState}
+            filterCity={filterCity}
+            onFilterCityChange={setFilterCity}
             neighborhoods={neighborhoods}
+            cities={cities}
+            states={states}
+            propertyTitles={propertyTitles}
           />
         </div>
       </div>
@@ -233,6 +277,11 @@ const Properties = () => {
                             );
                             return null;
                           })()}
+                          <FavoriteButton
+                            isFavorite={isFavorite(p.id)}
+                            onToggle={() => toggleFavorite(p.id)}
+                            className="absolute top-3 right-3"
+                          />
                           {p.images && p.images.length > 1 && (
                             <span className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
                               {p.images.length} fotos
@@ -246,6 +295,7 @@ const Properties = () => {
                             <p className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
                               <MapPin className="w-3.5 h-3.5 shrink-0" />
                               {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ''}` : p.city || ''}
+                              {p.state && p.state !== "RJ" && ` - ${p.state}`}
                             </p>
                             {p.description && (
                               <p className="text-sm text-muted-foreground/80 line-clamp-1 mb-3">{p.description}</p>
