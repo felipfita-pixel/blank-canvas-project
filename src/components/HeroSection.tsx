@@ -104,10 +104,22 @@ const HeroSection = () => {
             onChange={handleSearch}
             neighborhoods={neighborhoods}
             cities={cities}
-            propertyTitles={propertyTitles}
-            placeholder="Buscar por título, bairro ou cidade..."
+            propertyTitles={[]}
+            placeholder="Buscar por bairro ou cidade..."
             className="[&_input]:bg-primary-foreground/15 [&_input]:text-primary-foreground [&_input]:placeholder:text-primary-foreground/50 [&_input]:border-primary-foreground/20 [&_input]:backdrop-blur-sm [&_svg]:text-primary-foreground/60"
           />
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
+            <span className="text-primary-foreground/60 text-xs font-body mr-1">Cidades:</span>
+            {quickCities.map((c) => (
+              <button
+                key={c.short}
+                onClick={() => navigate(`/imoveis?search=${encodeURIComponent(c.label)}`)}
+                className="px-3 py-1 rounded-full text-xs font-semibold bg-primary-foreground/15 text-primary-foreground border border-primary-foreground/20 hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all duration-200 backdrop-blur-sm"
+              >
+                {c.short}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
