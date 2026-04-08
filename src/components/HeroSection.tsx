@@ -11,6 +11,32 @@ import heroBg from "@/assets/hero-bg.jpg";
 const HeroSection = () => {
   const { get } = useSiteContent();
   const hero = get("hero");
+  const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+  const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
+  const [propertyTitles, setPropertyTitles] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await supabase
+        .from("properties")
+        .select("title, neighborhood, city")
+        .eq("active", true);
+      const all = [...(data || []), ...staticProperties.map(p => ({ title: p.title, neighborhood: p.neighborhood, city: (p as any).city || null }))];
+      setNeighborhoods([...new Set(all.map(p => p.neighborhood).filter(Boolean) as string[])].sort());
+      setCities([...new Set(all.map(p => p.city).filter(Boolean) as string[])].sort());
+      setPropertyTitles([...new Set(all.map(p => p.title).filter(Boolean))]);
+    };
+    fetchData();
+  }, []);
+
+  const handleSearch = (val: string) => {
+    setSearch(val);
+    if (val.length >= 2) {
+      navigate(`/imoveis?search=${encodeURIComponent(val)}`);
+    }
+  };
 
   const handleContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
