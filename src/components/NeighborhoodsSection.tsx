@@ -8,6 +8,8 @@ import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PropertyShareButtons from "@/components/PropertyShareButtons";
+import FavoriteButton from "@/components/FavoriteButton";
+import { useFavorites } from "@/hooks/useFavorites";
 import bairroLeblon from "@/assets/bairro-leblon.jpg";
 import bairroBotafogo from "@/assets/bairro-botafogo.jpg";
 import bairroBarra from "@/assets/bairro-barra.jpg";
