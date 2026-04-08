@@ -1,7 +1,5 @@
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, SlidersHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 const propertyTypeLabels: Record<string, string> = {
   apartment: "Apartamento",
@@ -24,7 +22,14 @@ interface SearchFiltersProps {
   onFilterBedroomsChange: (value: string) => void;
   filterPrice: string;
   onFilterPriceChange: (value: string) => void;
+  filterState?: string;
+  onFilterStateChange?: (value: string) => void;
+  filterCity?: string;
+  onFilterCityChange?: (value: string) => void;
   neighborhoods: string[];
+  cities?: string[];
+  states?: string[];
+  propertyTitles?: string[];
   typeOptions?: string[];
   hideSearch?: boolean;
   className?: string;
@@ -43,35 +48,66 @@ const SearchFilters = ({
   onFilterBedroomsChange,
   filterPrice,
   onFilterPriceChange,
+  filterState,
+  onFilterStateChange,
+  filterCity,
+  onFilterCityChange,
   neighborhoods,
+  cities = [],
+  states = [],
+  propertyTitles = [],
   typeOptions,
   hideSearch = false,
   className = "",
 }: SearchFiltersProps) => {
   const types = typeOptions || ["apartment", "house", "penthouse", "commercial", "land"];
+  const showLocationFilters = states.length > 0 || cities.length > 0;
 
   return (
     <div className={`space-y-3 ${className}`}>
-      {/* Search input row */}
+      {/* Search input row with autocomplete */}
       {!hideSearch && (
-        <div className="flex items-center gap-3">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              placeholder="Buscar por título ou bairro..."
-              value={search}
-              onChange={(e) => onSearchChange(e.target.value)}
-              className="pl-10 h-11 bg-background"
-            />
-          </div>
-          <Button variant="outline" size="icon" className="shrink-0 h-11 w-11">
-            <SlidersHorizontal className="w-4 h-4" />
-          </Button>
-        </div>
+        <SearchAutocomplete
+          value={search}
+          onChange={onSearchChange}
+          neighborhoods={neighborhoods}
+          cities={cities}
+          propertyTitles={propertyTitles}
+        />
       )}
 
       {/* Filter dropdowns row */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className={`grid grid-cols-2 sm:grid-cols-3 ${showLocationFilters ? 'lg:grid-cols-4 xl:grid-cols-7' : 'lg:grid-cols-5'} gap-3`}>
+        {/* State filter */}
+        {showLocationFilters && onFilterStateChange && (
+          <Select value={filterState || "all"} onValueChange={onFilterStateChange}>
+            <SelectTrigger className="h-10 bg-background">
+              <SelectValue placeholder="Todos os estados" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Todos os estados</SelectItem>
+              {states.map((s) => (
+                <SelectItem key={s} value={s}>{s}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+
+        {/* City filter */}
+        {showLocationFilters && onFilterCityChange && (
+          <Select value={filterCity || "all"} onValueChange={onFilterCityChange}>
+            <SelectTrigger className="h-10 bg-background">
+              <SelectValue placeholder="Todas as cidades" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Todas as cidades</SelectItem>
+              {cities.map((c) => (
+                <SelectItem key={c} value={c}>{c}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+
         <Select value={filterType} onValueChange={onFilterTypeChange}>
           <SelectTrigger className="h-10 bg-background">
             <SelectValue placeholder="Todos os tipos" />
