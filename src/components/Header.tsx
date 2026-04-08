@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Building, Settings, LogOut } from "lucide-react";
+import { Menu, X, Building, Settings, LogOut, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -115,6 +115,13 @@ const Header = () => {
           >
             Contato
           </button>
+          <Link
+            to="/favoritos"
+            className="text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300"
+            title="Favoritos"
+          >
+            <Heart className="w-5 h-5" />
+          </Link>
           <div className="flex items-center gap-2">{renderAuthActions()}</div>
         </nav>
 
@@ -158,6 +165,13 @@ const Header = () => {
               >
                 Contato
               </button>
+              <Link
+                to="/favoritos"
+                className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Heart className="w-4 h-4" /> Favoritos
+              </Link>
               <div className="space-y-1 pt-2">{renderAuthActions(true)}</div>
             </div>
           </motion.div>
