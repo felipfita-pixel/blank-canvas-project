@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { staticProperties } from "@/data/staticProperties";
@@ -9,6 +9,9 @@ import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PropertyShareButtons from "@/components/PropertyShareButtons";
+import FavoriteButton from "@/components/FavoriteButton";
+import { useFavorites } from "@/hooks/useFavorites";
+import SearchFilters from "@/components/SearchFilters";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
@@ -39,6 +42,15 @@ const FeaturedProperties = () => {
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxTitle, setLightboxTitle] = useState("");
+  const { isFavorite, toggleFavorite } = useFavorites();
+
+  // Filter states
+  const [search, setSearch] = useState("");
+  const [filterType, setFilterType] = useState("all");
+  const [filterTransaction, setFilterTransaction] = useState("all");
+  const [filterNeighborhood, setFilterNeighborhood] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterPrice, setFilterPrice] = useState("all");
 
   const openLightbox = (p: Property, imgIndex = 0) => {
     const imgs = p.images && p.images.length > 0
@@ -85,12 +97,41 @@ const FeaturedProperties = () => {
     fetch();
   }, []);
 
+  // Derived filter options
+  const neighborhoods = useMemo(() => [...new Set(properties.map(p => p.neighborhood).filter(Boolean) as string[])].sort(), [properties]);
+  const cities = useMemo(() => [...new Set(properties.map(p => p.city).filter(Boolean) as string[])].sort(), [properties]);
+  const propertyTitles = useMemo(() => properties.map(p => p.title), [properties]);
+
+  // Filtered properties
+  const filtered = useMemo(() => {
+    return properties.filter(p => {
+      if (search) {
+        const q = search.toLowerCase();
+        if (!p.title.toLowerCase().includes(q) && !(p.neighborhood || "").toLowerCase().includes(q) && !(p.city || "").toLowerCase().includes(q)) return false;
+      }
+      if (filterType !== "all" && (p as any).property_type !== filterType) return false;
+      if (filterTransaction !== "all" && p.transaction_type !== filterTransaction) return false;
+      if (filterNeighborhood !== "all" && p.neighborhood !== filterNeighborhood) return false;
+      if (filterBedrooms !== "all") {
+        const b = parseInt(filterBedrooms);
+        if (b === 4 ? (p.bedrooms || 0) < 4 : (p.bedrooms || 0) !== b) return false;
+      }
+      if (filterPrice !== "all") {
+        if (filterPrice === "above") { if (p.price <= 5000000) return false; }
+        else { if (p.price > parseInt(filterPrice)) return false; }
+      }
+      return true;
+    });
+  }, [properties, search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
+
+  useEffect(() => { setCurrentPage(1); }, [search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
+
   if (loading) return null;
   if (properties.length === 0) return null;
 
-  const totalPages = Math.ceil(properties.length / ITEMS_PER_PAGE);
-  const safePage = Math.min(currentPage, totalPages);
-  const paginated = properties.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const safePage = Math.min(currentPage, totalPages || 1);
+  const paginated = filtered.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
@@ -128,7 +169,31 @@ const FeaturedProperties = () => {
           </Link>
         </div>
 
+        <SearchFilters
+          search={search}
+          onSearchChange={setSearch}
+          filterType={filterType}
+          onFilterTypeChange={setFilterType}
+          filterTransaction={filterTransaction}
+          onFilterTransactionChange={setFilterTransaction}
+          filterNeighborhood={filterNeighborhood}
+          onFilterNeighborhoodChange={setFilterNeighborhood}
+          filterBedrooms={filterBedrooms}
+          onFilterBedroomsChange={setFilterBedrooms}
+          filterPrice={filterPrice}
+          onFilterPriceChange={setFilterPrice}
+          neighborhoods={neighborhoods}
+          cities={cities}
+          propertyTitles={propertyTitles}
+          className="mb-6"
+        />
+
+        <p className="text-sm text-muted-foreground mb-4">{filtered.length} imóvel(is) encontrado(s)</p>
+
         <div className="flex flex-col divide-y divide-border">
+          {paginated.length === 0 && (
+            <p className="text-center text-muted-foreground py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
+          )}
           {paginated.map((p) => (
             <div key={p.id} className="group py-6 first:pt-0">
               <div className="flex flex-col sm:flex-row gap-5 items-start">
@@ -182,6 +247,7 @@ const FeaturedProperties = () => {
                       <p className="text-lg font-bold text-secondary">{formatPrice(p.price)}</p>
                     )}
                     <PropertyShareButtons property={p} />
+                    <FavoriteButton isFavorite={isFavorite(p.id)} onToggle={() => toggleFavorite(p.id)} />
                   </div>
                   {/* Mobile button */}
                   <Link to={`/imovel/${p.id}`} className="sm:hidden mt-4">

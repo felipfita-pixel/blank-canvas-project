@@ -8,6 +8,8 @@ import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PropertyShareButtons from "@/components/PropertyShareButtons";
+import FavoriteButton from "@/components/FavoriteButton";
+import { useFavorites } from "@/hooks/useFavorites";
 import bairroLeblon from "@/assets/bairro-leblon.jpg";
 import bairroBotafogo from "@/assets/bairro-botafogo.jpg";
 import bairroBarra from "@/assets/bairro-barra.jpg";
@@ -34,6 +36,7 @@ const formatPrice = (price: number) =>
     : null;
 
 const NeighborhoodsSection = () => {
+  const { isFavorite, toggleFavorite } = useFavorites();
   const navigate = useNavigate();
   const [properties, setProperties] = useState<PropertyItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -157,6 +160,7 @@ const NeighborhoodsSection = () => {
                       <p className="text-lg font-bold text-secondary">{formatPrice(p.price)}</p>
                     )}
                     <PropertyShareButtons property={p} />
+                    <FavoriteButton isFavorite={isFavorite(p.id)} onToggle={() => toggleFavorite(p.id)} />
                   </div>
                   <Link to={`/imovel/${p.id}`} className="sm:hidden mt-4">
                     <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg">
