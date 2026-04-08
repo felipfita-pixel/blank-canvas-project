@@ -97,12 +97,41 @@ const FeaturedProperties = () => {
     fetch();
   }, []);
 
+  // Derived filter options
+  const neighborhoods = useMemo(() => [...new Set(properties.map(p => p.neighborhood).filter(Boolean) as string[])].sort(), [properties]);
+  const cities = useMemo(() => [...new Set(properties.map(p => p.city).filter(Boolean) as string[])].sort(), [properties]);
+  const propertyTitles = useMemo(() => properties.map(p => p.title), [properties]);
+
+  // Filtered properties
+  const filtered = useMemo(() => {
+    return properties.filter(p => {
+      if (search) {
+        const q = search.toLowerCase();
+        if (!p.title.toLowerCase().includes(q) && !(p.neighborhood || "").toLowerCase().includes(q) && !(p.city || "").toLowerCase().includes(q)) return false;
+      }
+      if (filterType !== "all" && (p as any).property_type !== filterType) return false;
+      if (filterTransaction !== "all" && p.transaction_type !== filterTransaction) return false;
+      if (filterNeighborhood !== "all" && p.neighborhood !== filterNeighborhood) return false;
+      if (filterBedrooms !== "all") {
+        const b = parseInt(filterBedrooms);
+        if (b === 4 ? (p.bedrooms || 0) < 4 : (p.bedrooms || 0) !== b) return false;
+      }
+      if (filterPrice !== "all") {
+        if (filterPrice === "above") { if (p.price <= 5000000) return false; }
+        else { if (p.price > parseInt(filterPrice)) return false; }
+      }
+      return true;
+    });
+  }, [properties, search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
+
+  useEffect(() => { setCurrentPage(1); }, [search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
+
   if (loading) return null;
   if (properties.length === 0) return null;
 
-  const totalPages = Math.ceil(properties.length / ITEMS_PER_PAGE);
-  const safePage = Math.min(currentPage, totalPages);
-  const paginated = properties.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const safePage = Math.min(currentPage, totalPages || 1);
+  const paginated = filtered.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
