@@ -115,6 +115,7 @@ const AdminContent = () => {
     { key: "cta_banner", label: "📢 Banner CTA" },
     { key: "lifestyle", label: "🏡 Estilo de Vida" },
     
+    { key: "videos", label: "🎬 Vídeos do YouTube" },
     { key: "testimonials", label: "⭐ Depoimentos" },
     { key: "services", label: "🛎️ Serviços" },
     { key: "where_we_operate", label: "📍 Onde Atuamos" },
@@ -219,8 +220,24 @@ const AdminContent = () => {
                     />
                   )}
 
+                  {/* Videos */}
+                  {key === "videos" && (
+                    <>
+                      {(sec.content.items || []).map((vid: any, i: number) => (
+                        <div key={i} className="border border-border rounded-lg p-3 space-y-2">
+                          <div className="grid sm:grid-cols-2 gap-3">
+                            <Field label="Título do vídeo" value={vid.title} onChange={(v) => updateContentArrayItem(key, "items", i, "title", v)} />
+                            <Field label="URL do YouTube" value={vid.url} onChange={(v) => updateContentArrayItem(key, "items", i, "url", v)} />
+                          </div>
+                          <Button variant="ghost" size="sm" className="text-destructive" onClick={() => removeContentArrayItem(key, "items", i)}><Trash2 className="w-3 h-3 mr-1" /> Remover</Button>
+                        </div>
+                      ))}
+                      <Button variant="outline" size="sm" onClick={() => addContentArrayItem(key, "items", { title: "", url: "" })}>
+                        <Plus className="w-3 h-3 mr-1" /> Adicionar Vídeo
+                      </Button>
+                    </>
+                  )}
 
-                  {/* Testimonials */}
                   {key === "testimonials" && (
                     <>
                       {(sec.content.items || []).map((t: any, i: number) => (

@@ -12,6 +12,7 @@ import FeaturedProperties from "@/components/FeaturedProperties";
 import WhereWeOperate from "@/components/WhereWeOperate";
 import NeighborhoodsSection from "@/components/NeighborhoodsSection";
 import ContactSection from "@/components/ContactSection";
+import VideosSection from "@/components/VideosSection";
 import Footer from "@/components/Footer";
 import PageMeta from "@/components/PageMeta";
 
@@ -48,6 +49,7 @@ const Index = () => {
       <ServicesSection />
       <FeaturedProperties />
       <NeighborhoodsSection />
+      <VideosSection />
       <ContactSection />
       <WhereWeOperate />
       <Footer />
