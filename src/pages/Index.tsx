@@ -49,6 +49,7 @@ const Index = () => {
       <ServicesSection />
       <FeaturedProperties />
       <NeighborhoodsSection />
+      <VideosSection />
       <ContactSection />
       <WhereWeOperate />
       <Footer />
