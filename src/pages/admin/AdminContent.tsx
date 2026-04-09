@@ -115,6 +115,7 @@ const AdminContent = () => {
     { key: "cta_banner", label: "📢 Banner CTA" },
     { key: "lifestyle", label: "🏡 Estilo de Vida" },
     
+    { key: "videos", label: "🎬 Vídeos do YouTube" },
     { key: "testimonials", label: "⭐ Depoimentos" },
     { key: "services", label: "🛎️ Serviços" },
     { key: "where_we_operate", label: "📍 Onde Atuamos" },

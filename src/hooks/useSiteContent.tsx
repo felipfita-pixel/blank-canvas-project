@@ -108,6 +108,16 @@ const defaults: Record<string, SiteSection> = {
       facebook: "",
     },
   },
+  videos: {
+    section_key: "videos",
+    title: "Nossos Vídeos",
+    subtitle: "Confira nossos vídeos e conheça melhor nossos empreendimentos.",
+    content: {
+      items: [
+        { title: "Apresentação FF Imobiliária", url: "https://www.youtube.com/watch?v=UqSV7m8v0jQ" },
+      ],
+    },
+  },
   cta_banner: {
     section_key: "cta_banner",
     title: "Quer lançar sua campanha e fazer parte do nosso time?",
