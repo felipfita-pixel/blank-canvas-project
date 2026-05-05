@@ -33,6 +33,10 @@ const Footer = () => {
             </h3>
             <p className="text-primary-foreground/40 text-xs tracking-[0.2em] uppercase mb-4">{section.subtitle}</p>
             <p className="text-primary-foreground/60 text-sm leading-relaxed mb-6 max-w-sm">{c.description}</p>
+            <div>
+              <p className="text-primary-foreground/80 text-xs uppercase tracking-wider mb-3 font-semibold">Compartilhe nosso site</p>
+              <SiteShareButtons />
+            </div>
           </div>
 
           <div>
