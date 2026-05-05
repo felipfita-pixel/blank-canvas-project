@@ -215,16 +215,33 @@ const PropertyShowcase = () => {
               transition={{ duration: 0.6 }}
               className="absolute inset-0 w-full h-full"
             >
-              <WatermarkImage
-                src={image}
-                alt={p.title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
+              <button
+                type="button"
+                onClick={() => { setLightboxIndex(0); setLightboxOpen(true); }}
+                className="absolute inset-0 w-full h-full cursor-zoom-in group"
+                aria-label="Ampliar foto"
+              >
+                <WatermarkImage
+                  src={image}
+                  alt={p.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              </button>
             </motion.div>
           </AnimatePresence>
           <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-primary/40 to-transparent pointer-events-none" />
         </div>
       </div>
+
+      <ImageLightbox
+        images={(p.images && p.images.length > 0 ? p.images : [image]).map((src) => ({ src, alt: p.title }))}
+        currentIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        onNavigate={setLightboxIndex}
+        propertyTitle={p.title}
+        propertyId={p.id}
+      />
     </section>
   );
 };
