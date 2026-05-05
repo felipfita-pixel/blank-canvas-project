@@ -1,4 +1,4 @@
-import { MessageCircle, Share2, Copy, Check } from "lucide-react";
+import { MessageCircle, Share2, Copy, Check, Facebook, Instagram, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useState } from "react";
