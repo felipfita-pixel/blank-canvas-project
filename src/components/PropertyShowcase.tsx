@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { staticProperties } from "@/data/staticProperties";
 import SiteVisitCounter from "@/components/SiteVisitCounter";
 import WatermarkImage from "@/components/WatermarkImage";
+import ImageLightbox from "@/components/ImageLightbox";
 import propertyCondo from "@/assets/property-condo.jpg";
 
 interface Property {
