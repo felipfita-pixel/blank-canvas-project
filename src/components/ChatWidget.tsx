@@ -178,10 +178,7 @@ const ChatWidget = () => {
     
     const fetchMessages = async () => {
       const { data } = await supabase
-        .from("chat_messages")
-        .select("id, message, is_from_client, created_at, file_url, file_name, file_type, sender_name")
-        .eq("conversation_id", conversationId)
-        .order("created_at", { ascending: true });
+        .rpc("get_conversation_messages", { p_conversation_id: conversationId });
       if (data) setMessages(data as ChatMessage[]);
     };
     fetchMessages();

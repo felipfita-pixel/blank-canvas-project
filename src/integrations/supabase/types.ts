@@ -674,6 +674,19 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      get_conversation_messages: {
+        Args: { p_conversation_id: string }
+        Returns: {
+          created_at: string
+          file_name: string
+          file_type: string
+          file_url: string
+          id: string
+          is_from_client: boolean
+          message: string
+          sender_name: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
