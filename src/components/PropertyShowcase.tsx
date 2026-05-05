@@ -32,6 +32,8 @@ const PropertyShowcase = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [current, setCurrent] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   useEffect(() => {
     const load = async () => {
