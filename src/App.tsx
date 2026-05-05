@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ScrollToTop from "@/components/ScrollToTop";
 import AdminLayout from "@/components/AdminLayout";
 import BrokerChatPanel from "@/components/BrokerChatPanel";
 import ChatWidget from "@/components/ChatWidget";
