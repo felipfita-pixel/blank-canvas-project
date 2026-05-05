@@ -2,6 +2,7 @@ import { MapPin, Phone, Mail, LogIn, Settings } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useAuth } from "@/hooks/useAuth";
+import SiteShareButtons from "@/components/SiteShareButtons";
 
 const Footer = () => {
   const { get } = useSiteContent();
