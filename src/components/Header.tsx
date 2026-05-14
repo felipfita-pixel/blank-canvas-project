@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Building, Settings, LogOut, Heart } from "lucide-react";
+import { Menu, X, Building, Settings, LogOut, Heart, Share2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -122,6 +123,26 @@ const Header = () => {
           >
             <Heart className="w-5 h-5" />
           </Link>
+          <button
+            type="button"
+            onClick={async () => {
+              const url = window.location.origin;
+              const text = "Corretores Associados & FF Imobiliária - Encontre o imóvel dos seus sonhos!";
+              if (navigator.share) {
+                try { await navigator.share({ title: document.title, text, url }); } catch {}
+              } else {
+                try {
+                  await navigator.clipboard.writeText(`${text}\n${url}`);
+                  toast?.success?.("Link copiado!");
+                } catch {}
+              }
+            }}
+            className="text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300"
+            title="Compartilhar site"
+            aria-label="Compartilhar site"
+          >
+            <Share2 className="w-5 h-5" />
+          </button>
           <div className="flex items-center gap-2">{renderAuthActions()}</div>
         </nav>
 
@@ -172,6 +193,25 @@ const Header = () => {
               >
                 <Heart className="w-4 h-4" /> Favoritos
               </Link>
+              <button
+                type="button"
+                className="flex items-center gap-2 w-full text-left text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
+                onClick={async () => {
+                  setMobileOpen(false);
+                  const url = window.location.origin;
+                  const text = "Corretores Associados & FF Imobiliária - Encontre o imóvel dos seus sonhos!";
+                  if (navigator.share) {
+                    try { await navigator.share({ title: document.title, text, url }); } catch {}
+                  } else {
+                    try {
+                      await navigator.clipboard.writeText(`${text}\n${url}`);
+                      toast.success("Link copiado!");
+                    } catch {}
+                  }
+                }}
+              >
+                <Share2 className="w-4 h-4" /> Compartilhar site
+              </button>
               <div className="space-y-1 pt-2">{renderAuthActions(true)}</div>
             </div>
           </motion.div>
