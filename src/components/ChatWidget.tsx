@@ -129,19 +129,25 @@ const ChatWidget = () => {
   // Subscribe to typing indicator
   useEffect(() => {
     if (!conversationId) return;
+    let cancelled = false;
+    let typingToken = "";
 
     const channel = supabase
       .channel(`typing-${conversationId}`)
       .on("postgres_changes", { event: "UPDATE", schema: "public", table: "broker_presence" }, (payload) => {
         const row = payload.new as Record<string, unknown>;
-        if (row.is_typing_conversation === conversationId) {
+        if (typingToken && row.is_typing_conversation === typingToken) {
           setBrokerTyping(true);
           setTimeout(() => setBrokerTyping(false), 3500);
         }
       })
       .subscribe();
 
-    return () => { supabase.removeChannel(channel); };
+    void hashConversationId(conversationId).then((token) => {
+      if (!cancelled) typingToken = token;
+    });
+
+    return () => { cancelled = true; supabase.removeChannel(channel); };
   }, [conversationId]);
 
   const scrollToBottom = useCallback(() => {
