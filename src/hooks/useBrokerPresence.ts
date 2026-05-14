@@ -56,17 +56,20 @@ export const useBrokerPresence = () => {
   const setTyping = useCallback(
     (conversationId: string) => {
       if (!user) return;
-      supabase.from("broker_presence").upsert(
-        { user_id: user.id, is_online: true, is_typing_conversation: conversationId, last_seen_at: new Date().toISOString() },
-        { onConflict: "user_id" }
-      );
-      if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-      typingTimeoutRef.current = setTimeout(() => {
-        supabase.from("broker_presence").upsert(
-          { user_id: user.id, is_online: true, is_typing_conversation: "", last_seen_at: new Date().toISOString() },
+      void (async () => {
+        const token = await hashConversationId(conversationId);
+        await supabase.from("broker_presence").upsert(
+          { user_id: user.id, is_online: true, is_typing_conversation: token, last_seen_at: new Date().toISOString() },
           { onConflict: "user_id" }
         );
-      }, 3000);
+        if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+        typingTimeoutRef.current = setTimeout(() => {
+          supabase.from("broker_presence").upsert(
+            { user_id: user.id, is_online: true, is_typing_conversation: "", last_seen_at: new Date().toISOString() },
+            { onConflict: "user_id" }
+          );
+        }, 3000);
+      })();
     },
     [user]
   );
