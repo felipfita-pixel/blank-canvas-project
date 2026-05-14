@@ -1,0 +1,1 @@
+UPDATE public.broker_presence SET is_typing_conversation = '' WHERE is_typing_conversation IS NOT NULL AND is_typing_conversation <> '';
