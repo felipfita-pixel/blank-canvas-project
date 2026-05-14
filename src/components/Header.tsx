@@ -4,6 +4,7 @@ import { Menu, X, Building, Settings, LogOut, Heart, Share2 } from "lucide-react
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
