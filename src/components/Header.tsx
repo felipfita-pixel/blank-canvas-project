@@ -193,6 +193,25 @@ const Header = () => {
               >
                 <Heart className="w-4 h-4" /> Favoritos
               </Link>
+              <button
+                type="button"
+                className="flex items-center gap-2 w-full text-left text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
+                onClick={async () => {
+                  setMobileOpen(false);
+                  const url = window.location.origin;
+                  const text = "Corretores Associados & FF Imobiliária - Encontre o imóvel dos seus sonhos!";
+                  if (navigator.share) {
+                    try { await navigator.share({ title: document.title, text, url }); } catch {}
+                  } else {
+                    try {
+                      await navigator.clipboard.writeText(`${text}\n${url}`);
+                      toast.success("Link copiado!");
+                    } catch {}
+                  }
+                }}
+              >
+                <Share2 className="w-4 h-4" /> Compartilhar site
+              </button>
               <div className="space-y-1 pt-2">{renderAuthActions(true)}</div>
             </div>
           </motion.div>
