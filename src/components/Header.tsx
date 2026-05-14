@@ -122,6 +122,26 @@ const Header = () => {
           >
             <Heart className="w-5 h-5" />
           </Link>
+          <button
+            type="button"
+            onClick={async () => {
+              const url = window.location.origin;
+              const text = "Corretores Associados & FF Imobiliária - Encontre o imóvel dos seus sonhos!";
+              if (navigator.share) {
+                try { await navigator.share({ title: document.title, text, url }); } catch {}
+              } else {
+                try {
+                  await navigator.clipboard.writeText(`${text}\n${url}`);
+                  toast?.success?.("Link copiado!");
+                } catch {}
+              }
+            }}
+            className="text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300"
+            title="Compartilhar site"
+            aria-label="Compartilhar site"
+          >
+            <Share2 className="w-5 h-5" />
+          </button>
           <div className="flex items-center gap-2">{renderAuthActions()}</div>
         </nav>
 
