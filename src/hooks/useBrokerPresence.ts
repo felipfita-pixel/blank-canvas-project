@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { hashConversationId } from "@/lib/conversationHash";
 
 const HEARTBEAT_INTERVAL = 30000; // 30s
 
