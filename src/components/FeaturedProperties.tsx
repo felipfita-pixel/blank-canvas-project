@@ -234,7 +234,7 @@ const FeaturedProperties = () => {
                       {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ""}` : p.city || ""}
                     </p>
                     {(p as any).description && (
-                      <p className="text-sm text-muted-foreground/80 line-clamp-1 mb-3">{(p as any).description}</p>
+                      <p className="text-sm text-primary-foreground/90 line-clamp-2 mb-3">{(p as any).description}</p>
                     )}
                     <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
                       {p.bedrooms ? <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" /> {p.bedrooms} quarto{p.bedrooms > 1 ? "s" : ""}</span> : null}
