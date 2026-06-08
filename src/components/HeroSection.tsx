@@ -1,14 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   const { get } = useSiteContent();
   const hero = get("hero");
   const navigate = useNavigate();
+
+  const [transaction, setTransaction] = useState<"sale" | "rent">("sale");
+  const [query, setQuery] = useState("");
+  const [propType, setPropType] = useState("all");
+
   const quickCities = [
     { label: "Rio de Janeiro", short: "RJ" },
     { label: "São Paulo", short: "SP" },
@@ -16,12 +23,29 @@ const HeroSection = () => {
     { label: "Minas Gerais", short: "MG" },
   ];
 
+  const propertyTypes = [
+    { value: "all", label: "Todos os tipos" },
+    { value: "apartment", label: "Apartamento" },
+    { value: "house", label: "Casa" },
+    { value: "commercial", label: "Comercial" },
+    { value: "land", label: "Terreno" },
+  ];
+
   const handleContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    const params = new URLSearchParams();
+    params.set("transaction", transaction);
+    if (query.trim()) params.set("q", query.trim());
+    if (propType !== "all") params.set("type", propType);
+    navigate(`/imoveis?${params.toString()}`);
+  };
+
   return (
-    <section className="relative min-h-[55svh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[60svh] flex items-center justify-center overflow-hidden">
       <img
         src={heroBg}
         alt="Imóveis de luxo no Rio de Janeiro"
@@ -31,7 +55,7 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-primary/75" />
 
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto w-full">
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto w-full py-16">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,19 +88,82 @@ const HeroSection = () => {
           Atendimento personalizado e consultoria especializada.
         </motion.p>
 
+        {/* Sawala-style search */}
+        <motion.form
+          onSubmit={handleSearch}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/15 rounded-2xl p-3 sm:p-4 mb-6 shadow-xl shadow-primary/40"
+        >
+          {/* Transaction tabs */}
+          <div className="flex items-center gap-1 mb-3 bg-primary/40 rounded-full p-1 w-fit mx-auto">
+            <button
+              type="button"
+              onClick={() => setTransaction("sale")}
+              className={`px-5 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-all ${
+                transaction === "sale"
+                  ? "bg-secondary text-secondary-foreground shadow-md"
+                  : "text-primary-foreground/70 hover:text-primary-foreground"
+              }`}
+            >
+              Venda
+            </button>
+            <button
+              type="button"
+              onClick={() => setTransaction("rent")}
+              className={`px-5 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-all ${
+                transaction === "rent"
+                  ? "bg-secondary text-secondary-foreground shadow-md"
+                  : "text-primary-foreground/70 hover:text-primary-foreground"
+              }`}
+            >
+              Locação
+            </button>
+          </div>
 
+          {/* Search row */}
+          <div className="flex flex-col sm:flex-row gap-2 items-stretch">
+            <div className="flex-1 relative">
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              <Input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Cidade, bairro ou condomínio"
+                className="pl-9 h-11 bg-background border-0 text-foreground placeholder:text-muted-foreground rounded-lg"
+              />
+            </div>
+            <select
+              value={propType}
+              onChange={(e) => setPropType(e.target.value)}
+              className="h-11 px-3 rounded-lg bg-background border-0 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary sm:w-44"
+            >
+              {propertyTypes.map((t) => (
+                <option key={t.value} value={t.value}>{t.label}</option>
+              ))}
+            </select>
+            <Button
+              type="submit"
+              className="h-11 bg-secondary text-secondary-foreground hover:bg-orange-hover font-semibold rounded-lg px-6 shadow-md shadow-secondary/20"
+            >
+              <Search className="w-4 h-4 mr-2" />
+              Buscar
+            </Button>
+          </div>
+        </motion.form>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.65 }}
           className="flex flex-wrap items-center justify-center gap-2 mb-6"
         >
           <span className="text-primary-foreground/60 text-xs font-body mr-1">Cidades:</span>
           {quickCities.map((c) => (
             <button
               key={c.short}
-              onClick={() => navigate(`/imoveis?search=${encodeURIComponent(c.label)}`)}
+              type="button"
+              onClick={() => navigate(`/imoveis?q=${encodeURIComponent(c.label)}`)}
               className="px-3 py-1 rounded-full text-xs font-semibold bg-primary-foreground/15 text-primary-foreground border border-primary-foreground/20 hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-all duration-200 backdrop-blur-sm"
             >
               {c.short}
