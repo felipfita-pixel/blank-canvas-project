@@ -171,7 +171,12 @@ const PropertyShowcase = () => {
 
               {/* Price */}
               {p.price > 0 && (
-                <p className="text-secondary font-bold text-xl mb-6 tracking-wide">{formatPrice(p.price)}</p>
+                <p className="text-secondary font-bold text-2xl mb-6 tracking-wide">
+                  {formatPrice(p.price)}
+                  {p.transaction_type === "rent" && (
+                    <span className="text-base font-medium text-secondary/80">/mês</span>
+                  )}
+                </p>
               )}
 
               {/* CTA Button */}
