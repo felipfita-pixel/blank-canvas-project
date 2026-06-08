@@ -244,7 +244,12 @@ const FeaturedProperties = () => {
                   </div>
                   <div className="flex items-center gap-3 mt-3">
                     {p.price > 0 && (
-                      <p className="text-lg font-bold text-secondary">{formatPrice(p.price)}</p>
+                      <p className="text-xl font-bold text-secondary">
+                        {formatPrice(p.price)}
+                        {(p as any).transaction_type === "rent" && (
+                          <span className="text-sm font-medium text-secondary/80">/mês</span>
+                        )}
+                      </p>
                     )}
                     <PropertyShareButtons property={p} />
                     <FavoriteButton isFavorite={isFavorite(p.id)} onToggle={() => toggleFavorite(p.id)} />
