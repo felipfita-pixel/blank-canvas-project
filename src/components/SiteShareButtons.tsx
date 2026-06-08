@@ -90,15 +90,17 @@ const SiteShareButtons = ({
   return (
     <div className={`flex flex-wrap gap-2 ${className}`}>
       {links.map((l) => (
-        <button
+        <a
           key={l.name}
-          onClick={l.onClick}
+          href={l.href}
+          target="_blank"
+          rel="noopener noreferrer"
           title={`Compartilhar no ${l.name}`}
           aria-label={`Compartilhar no ${l.name}`}
           className={`${sizeClass} rounded-full flex items-center justify-center text-white transition-all shadow-sm hover:scale-110 ${l.color}`}
         >
           <l.icon className={iconSize} />
-        </button>
+        </a>
       ))}
       <button
         onClick={handleCopy}
