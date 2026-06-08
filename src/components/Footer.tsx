@@ -31,10 +31,10 @@ const Footer = () => {
               <span className="text-secondary italic">CORRETORES</span>{" "}
               <span className="text-primary-foreground">ASSOCIADOS</span>
             </h3>
-            <p className="text-primary-foreground/40 text-xs tracking-[0.2em] uppercase mb-4">{section.subtitle}</p>
-            <p className="text-primary-foreground/60 text-sm leading-relaxed mb-6 max-w-sm">{c.description}</p>
+            <p className="text-primary-foreground/70 text-sm tracking-[0.2em] uppercase mb-4">{section.subtitle}</p>
+            <p className="text-primary-foreground/80 text-base leading-relaxed mb-6 max-w-sm">{c.description}</p>
             <div>
-              <p className="text-primary-foreground/80 text-xs uppercase tracking-wider mb-3 font-semibold">Compartilhe nosso site</p>
+              <p className="text-primary-foreground/90 text-sm uppercase tracking-wider mb-3 font-semibold">Compartilhe nosso site</p>
               <SiteShareButtons />
             </div>
           </div>
