@@ -28,8 +28,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-12">
           <div>
             <h3 className="font-heading text-xl font-bold mb-1">
-              <span className="text-secondary italic">CORRETORES</span>{" "}
-              <span className="text-primary-foreground">ASSOCIADOS</span>
+              <span className="text-secondary italic">Atendimento</span>{" "}
+              <span className="text-primary-foreground">em todo o território nacional</span>
             </h3>
             <p className="text-primary-foreground/70 text-sm tracking-[0.2em] uppercase mb-4">{section.subtitle}</p>
             <p className="text-primary-foreground/80 text-base leading-relaxed mb-6 max-w-sm">{c.description}</p>
