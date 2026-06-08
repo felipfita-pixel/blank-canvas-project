@@ -6,26 +6,26 @@
 
 @layer base {
   :root {
-    --background: 37 39% 94%;
-    --foreground: 60 6% 20%;
+    --background: 136 40% 12%;
+    --foreground: 0 0% 100%;
 
-    --card: 37 39% 97%;
-    --card-foreground: 60 6% 20%;
+    --card: 139 34% 17%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 37 39% 97%;
-    --popover-foreground: 60 6% 20%;
+    --popover: 139 34% 17%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 109 15% 53%;
+    --primary: 122 22% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 105 20% 69%;
-    --secondary-foreground: 60 6% 20%;
+    --secondary: 116 24% 69%;
+    --secondary-foreground: 136 40% 12%;
 
-    --muted: 92 24% 86%;
-    --muted-foreground: 60 6% 35%;
+    --muted: 139 34% 22%;
+    --muted-foreground: 116 24% 75%;
 
-    --accent: 105 20% 69%;
-    --accent-foreground: 60 6% 20%;
+    --accent: 122 22% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --whatsapp: 142 70% 49%;
     --whatsapp-foreground: 0 0% 100%;
@@ -34,27 +34,27 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 92 24% 80%;
-    --input: 92 24% 80%;
-    --ring: 109 15% 53%;
+    --border: 139 34% 25%;
+    --input: 139 34% 25%;
+    --ring: 122 22% 45%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 37 39% 97%;
-    --sidebar-foreground: 60 6% 20%;
-    --sidebar-primary: 109 15% 53%;
+    --sidebar-background: 136 40% 12%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 122 22% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 92 24% 86%;
-    --sidebar-accent-foreground: 60 6% 20%;
-    --sidebar-border: 92 24% 80%;
-    --sidebar-ring: 109 15% 53%;
+    --sidebar-accent: 139 34% 22%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 139 34% 25%;
+    --sidebar-ring: 122 22% 45%;
 
-    --navy: 109 15% 53%;
-    --navy-light: 105 20% 69%;
-    --navy-dark: 60 6% 20%;
-    --orange: 105 20% 69%;
-    --orange-hover: 109 15% 53%;
-    --cream: 37 39% 94%;
+    --navy: 136 40% 12%;
+    --navy-light: 122 22% 45%;
+    --navy-dark: 136 40% 8%;
+    --orange: 122 22% 45%;
+    --orange-hover: 116 24% 69%;
+    --cream: 116 24% 69%;
   }
 
   .dark {
