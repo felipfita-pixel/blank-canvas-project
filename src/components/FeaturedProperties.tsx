@@ -201,7 +201,7 @@ const FeaturedProperties = () => {
             <p className="text-center text-muted-foreground py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
           )}
           {paginated.map((p) => (
-            <div key={p.id} className="group bg-card/95 border border-border rounded-2xl p-5 shadow-md">
+            <div key={p.id} className="group bg-[hsl(140_45%_9%)] border border-secondary/20 rounded-2xl p-5 shadow-md">
               <div className="flex flex-col sm:flex-row gap-5 items-start">
                 {/* Image */}
                 <div
