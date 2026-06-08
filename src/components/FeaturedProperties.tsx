@@ -157,10 +157,16 @@ const FeaturedProperties = () => {
       <div className="container-main">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <h2 className="text-3xl font-heading font-bold text-secondary italic">
+            <h2
+              className="text-3xl font-heading font-bold text-secondary italic"
+              style={{ textShadow: "0 2px 6px rgba(0,0,0,0.6)" }}
+            >
               Imóveis em Destaque
             </h2>
-            <p className="text-muted-foreground mt-2 max-w-xl">
+            <p
+              className="text-muted-foreground mt-2 max-w-xl"
+              style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
+            >
               Os melhores imóveis selecionados para você. Alto padrão, localização privilegiada e excelente custo-benefício.
             </p>
           </div>
