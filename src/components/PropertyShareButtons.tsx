@@ -55,9 +55,6 @@ const PropertyShareButtons = ({ property, variant = "icon", className = "" }: Pr
   const propertyUrl = `${window.location.origin}/imovel/${property.id}`;
   const message = buildShareMessage(property, propertyUrl);
 
-  const handleWhatsApp = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
 
   const handleCopyLink = async (e: React.MouseEvent) => {
     e.preventDefault();
