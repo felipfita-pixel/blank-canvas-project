@@ -51,7 +51,7 @@ const Footer = () => {
 
           <div>
             <h4 className="font-heading font-bold text-primary-foreground text-lg mb-5">Contato</h4>
-            <ul className="space-y-4 text-sm text-primary-foreground/60">
+            <ul className="space-y-4 text-base text-primary-foreground/80">
               <li className="flex items-start gap-3"><MapPin className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" /><span>{c.address}</span></li>
               <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-secondary flex-shrink-0" /><span>{c.phone}</span></li>
               <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-secondary flex-shrink-0" /><span>{c.email}</span></li>
