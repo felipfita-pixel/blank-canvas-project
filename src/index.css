@@ -6,26 +6,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 213 35% 15%;
+    --background: 37 39% 94%;
+    --foreground: 60 6% 20%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 213 35% 15%;
+    --card: 37 39% 97%;
+    --card-foreground: 60 6% 20%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 213 35% 15%;
+    --popover: 37 39% 97%;
+    --popover-foreground: 60 6% 20%;
 
-    --primary: 213 60% 22%;
+    --primary: 109 15% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 34 95% 55%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 105 20% 69%;
+    --secondary-foreground: 60 6% 20%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 213 15% 50%;
+    --muted: 92 24% 86%;
+    --muted-foreground: 60 6% 35%;
 
-    --accent: 34 95% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 105 20% 69%;
+    --accent-foreground: 60 6% 20%;
 
     --whatsapp: 142 70% 49%;
     --whatsapp-foreground: 0 0% 100%;
@@ -34,27 +34,27 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214 20% 90%;
-    --input: 214 20% 90%;
-    --ring: 213 60% 22%;
+    --border: 92 24% 80%;
+    --input: 92 24% 80%;
+    --ring: 109 15% 53%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 37 39% 97%;
+    --sidebar-foreground: 60 6% 20%;
+    --sidebar-primary: 109 15% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 92 24% 86%;
+    --sidebar-accent-foreground: 60 6% 20%;
+    --sidebar-border: 92 24% 80%;
+    --sidebar-ring: 109 15% 53%;
 
-    --navy: 213 60% 22%;
-    --navy-light: 213 45% 30%;
-    --navy-dark: 213 65% 14%;
-    --orange: 34 95% 55%;
-    --orange-hover: 34 95% 48%;
-    --cream: 40 30% 97%;
+    --navy: 109 15% 53%;
+    --navy-light: 105 20% 69%;
+    --navy-dark: 60 6% 20%;
+    --orange: 105 20% 69%;
+    --orange-hover: 109 15% 53%;
+    --cream: 37 39% 94%;
   }
 
   .dark {
