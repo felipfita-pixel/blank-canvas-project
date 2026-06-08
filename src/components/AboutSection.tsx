@@ -150,12 +150,12 @@ const CampaignResults = ({ properties, navigate }: { properties: FeaturedPropert
         </p>
       ) : (
         <>
-          <div className="flex flex-col divide-y divide-border">
+          <div className="flex flex-col gap-4">
             {paginated.map((property, index) => {
               const image = property.images && property.images.length > 0 ? property.images[0] : fallbackImages[index % fallbackImages.length];
 
               return (
-                <div key={property.id} className="group py-5 first:pt-0">
+                <div key={property.id} className="group bg-card border border-border rounded-2xl p-4 shadow-md">
                   <div className="flex flex-col sm:flex-row gap-4 items-start">
                     {/* Image */}
                     <div
@@ -464,7 +464,7 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="section-padding bg-cream">
+    <section id="about" className="section-padding bg-background">
       <div className="container-main">
         <div className="grid lg:grid-cols-[1fr_260px] gap-6 items-start">
           <div>
