@@ -160,7 +160,7 @@ const FeaturedProperties = () => {
             <h2 className="text-3xl font-heading font-bold text-secondary italic">
               Imóveis em Destaque
             </h2>
-            <p className="text-muted-foreground mt-2 max-w-xl">
+            <p className="text-secondary-foreground/85 mt-2 max-w-xl font-medium">
               Os melhores imóveis selecionados para você. Alto padrão, localização privilegiada e excelente custo-benefício.
             </p>
           </div>
@@ -188,11 +188,11 @@ const FeaturedProperties = () => {
           className="mb-6"
         />
 
-        <p className="text-sm text-muted-foreground mb-4">{filtered.length} imóvel(is) encontrado(s)</p>
+        <p className="text-sm text-secondary-foreground/80 mb-4 font-medium">{filtered.length} imóvel(is) encontrado(s)</p>
 
-        <div className="flex flex-col divide-y divide-border">
+        <div className="flex flex-col divide-y divide-secondary-foreground/35">
           {paginated.length === 0 && (
-            <p className="text-center text-muted-foreground py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
+            <p className="text-center text-secondary-foreground/80 py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
           )}
           {paginated.map((p) => (
             <div key={p.id} className="group py-6 first:pt-0">
@@ -228,15 +228,15 @@ const FeaturedProperties = () => {
                 {/* Details */}
                 <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
                   <div>
-                    <h3 className="text-xl font-heading font-bold text-foreground mb-1 line-clamp-1">{p.title}</h3>
-                    <p className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
+                    <h3 className="text-xl font-heading font-bold text-secondary-foreground mb-1 line-clamp-1">{p.title}</h3>
+                    <p className="flex items-center gap-1 text-sm text-secondary-foreground/75 mb-1 font-medium">
                       <MapPin className="w-3.5 h-3.5 shrink-0" />
                       {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ""}` : p.city || ""}
                     </p>
                     {(p as any).description && (
-                      <p className="text-sm text-primary-foreground/90 line-clamp-2 mb-3">{(p as any).description}</p>
+                      <p className="text-sm text-secondary-foreground/90 line-clamp-2 mb-3 leading-relaxed font-medium">{(p as any).description}</p>
                     )}
-                    <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
+                    <div className="flex flex-wrap items-center gap-4 text-secondary-foreground/80 text-sm font-medium">
                       {p.bedrooms ? <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" /> {p.bedrooms} quarto{p.bedrooms > 1 ? "s" : ""}</span> : null}
                       {p.bathrooms ? <span className="flex items-center gap-1.5"><Bath className="w-4 h-4" /> {p.bathrooms} banheiro{p.bathrooms > 1 ? "s" : ""}</span> : null}
                       {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
