@@ -1,47 +1,45 @@
 #!/usr/bin/env node
 /**
- * Visual regression: detects light/bright areas on the home page that should
- * be dark (per the dark green theme). Fails when bright-pixel ratio exceeds
- * a threshold, indicating an unintended light background slipped in.
+ * Visual regression: scans a screenshot for "light" pixels that don't belong
+ * to the dark-green theme. Fails when the bright-pixel ratio exceeds the
+ * threshold, indicating an unintended light background (e.g. cream/white card)
+ * has reappeared.
  *
  * Usage:
- *   node scripts/check-light-areas.mjs [url] [--threshold=0.15]
+ *   node scripts/check-light-areas.mjs <screenshot.png> [--threshold=0.15] [--luma=180]
  *
- * Requires: playwright (already in devDeps via lovable-agent-playwright-config)
+ * Output:
+ *   - test-results/visual/<name>-overlay.png : red-highlighted heat-map of light pixels
+ *   - exit code 0 on pass, 1 on fail
+ *
+ * Tip: capture the screenshot of the running preview via the agent's
+ * browser--screenshot tool (full_page: true), save the PNG, then run this
+ * script. In CI, use Playwright to capture first.
  */
-import { chromium } from "playwright";
 import { PNG } from "pngjs";
 import fs from "node:fs";
 import path from "node:path";
 
 const args = process.argv.slice(2);
-const url = args.find((a) => !a.startsWith("--")) || process.env.PREVIEW_URL || "http://localhost:8080/";
-const threshold = parseFloat(
-  (args.find((a) => a.startsWith("--threshold=")) || "--threshold=0.15").split("=")[1],
-);
-// A pixel is "light" if its luminance is above this (0..255). The dark-green
-// theme should sit well below 80; cream/white surfaces are >200.
-const LIGHT_LUMA = 180;
+const input = args.find((a) => !a.startsWith("--"));
+if (!input) {
+  console.error("usage: check-light-areas.mjs <screenshot.png> [--threshold=0.15] [--luma=180]");
+  process.exit(2);
+}
+const opt = (k, d) => {
+  const a = args.find((x) => x.startsWith(`--${k}=`));
+  return a ? parseFloat(a.split("=")[1]) : d;
+};
+const threshold = opt("threshold", 0.15);
+const LIGHT_LUMA = opt("luma", 180);
 
 const OUT_DIR = path.resolve("test-results/visual");
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
-const browser = await chromium.launch();
-const ctx = await browser.newContext({ viewport: { width: 1280, height: 1600 } });
-const page = await ctx.newPage();
-await page.goto(url, { waitUntil: "networkidle", timeout: 60_000 });
-await page.waitForTimeout(1500); // let fonts/images settle
-
-const buf = await page.screenshot({ fullPage: true });
-const outPng = path.join(OUT_DIR, "home.png");
-fs.writeFileSync(outPng, buf);
-
-const png = PNG.sync.read(buf);
+const png = PNG.sync.read(fs.readFileSync(input));
 const { width, height, data } = png;
-
 let lightCount = 0;
 const total = width * height;
-// Heat-map of light regions for debugging.
 const overlay = new PNG({ width, height });
 for (let i = 0; i < data.length; i += 4) {
   const r = data[i], g = data[i + 1], b = data[i + 2];
@@ -54,15 +52,15 @@ for (let i = 0; i < data.length; i += 4) {
   overlay.data[i + 3] = 255;
 }
 const ratio = lightCount / total;
-fs.writeFileSync(path.join(OUT_DIR, "home-light-overlay.png"), PNG.sync.write(overlay));
-
-await browser.close();
+const base = path.basename(input, path.extname(input));
+const overlayPath = path.join(OUT_DIR, `${base}-overlay.png`);
+fs.writeFileSync(overlayPath, PNG.sync.write(overlay));
 
 const pct = (ratio * 100).toFixed(2);
-const summary = `light pixels: ${lightCount}/${total} (${pct}%) — threshold ${(threshold * 100).toFixed(2)}%`;
+const summary = `light pixels: ${lightCount}/${total} (${pct}%) — threshold ${(threshold * 100).toFixed(2)}% — luma>${LIGHT_LUMA}`;
+console.log(`overlay: ${overlayPath}`);
 if (ratio > threshold) {
   console.error(`FAIL — ${summary}`);
-  console.error(`See overlay: ${path.join(OUT_DIR, "home-light-overlay.png")}`);
   process.exit(1);
 }
 console.log(`OK — ${summary}`);
