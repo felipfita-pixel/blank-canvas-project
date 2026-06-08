@@ -29,59 +29,37 @@ const SiteShareButtons = ({
       name: "WhatsApp",
       icon: MessageCircle,
       color: "bg-green-600 hover:bg-green-700",
-      onClick: () => window.open(`https://wa.me/?text=${encodeURIComponent(fullMessage)}`, "_blank"),
+      href: `https://wa.me/?text=${encodeURIComponent(fullMessage)}`,
     },
     {
       name: "Facebook",
       icon: Facebook,
       color: "bg-blue-600 hover:bg-blue-700",
-      onClick: () =>
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`,
-          "_blank"
-        ),
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`,
     },
     {
       name: "Instagram",
       icon: Instagram,
       color: "bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 hover:opacity-90",
-      onClick: async () => {
-        try {
-          await navigator.clipboard.writeText(fullMessage);
-          toast.success("Texto copiado! Cole no Instagram Stories ou Direct.");
-        } catch {}
-        window.open(instagramUrl, "_blank");
-      },
+      href: instagramUrl,
     },
     {
       name: "Telegram",
       icon: Send,
       color: "bg-sky-500 hover:bg-sky-600",
-      onClick: () =>
-        window.open(
-          `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
-          "_blank"
-        ),
+      href: `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
     },
     {
       name: "X (Twitter)",
       icon: Twitter,
       color: "bg-black hover:bg-neutral-800",
-      onClick: () =>
-        window.open(
-          `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
-          "_blank"
-        ),
+      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
       color: "bg-blue-700 hover:bg-blue-800",
-      onClick: () =>
-        window.open(
-          `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
-          "_blank"
-        ),
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
     },
   ];
 
@@ -112,15 +90,17 @@ const SiteShareButtons = ({
   return (
     <div className={`flex flex-wrap gap-2 ${className}`}>
       {links.map((l) => (
-        <button
+        <a
           key={l.name}
-          onClick={l.onClick}
+          href={l.href}
+          target="_blank"
+          rel="noopener noreferrer"
           title={`Compartilhar no ${l.name}`}
           aria-label={`Compartilhar no ${l.name}`}
           className={`${sizeClass} rounded-full flex items-center justify-center text-white transition-all shadow-sm hover:scale-110 ${l.color}`}
         >
           <l.icon className={iconSize} />
-        </button>
+        </a>
       ))}
       <button
         onClick={handleCopy}

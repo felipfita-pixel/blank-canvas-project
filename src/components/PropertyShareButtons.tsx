@@ -55,11 +55,6 @@ const PropertyShareButtons = ({ property, variant = "icon", className = "" }: Pr
   const propertyUrl = `${window.location.origin}/imovel/${property.id}`;
   const message = buildShareMessage(property, propertyUrl);
 
-  const handleWhatsApp = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
-  };
 
   const handleCopyLink = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -88,13 +83,15 @@ const PropertyShareButtons = ({ property, variant = "icon", className = "" }: Pr
   if (variant === "full") {
     return (
       <div className={`flex flex-wrap gap-2 ${className}`}>
-        <Button
-          onClick={handleWhatsApp}
-          size="sm"
-          className="bg-green-600 hover:bg-green-700 text-white rounded-lg gap-1.5"
+        <a
+          href={`https://wa.me/?text=${encodeURIComponent(message)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-700 transition-colors"
         >
           <MessageCircle className="w-4 h-4" /> WhatsApp
-        </Button>
+        </a>
         <Button
           onClick={handleChat}
           size="sm"
@@ -115,64 +112,54 @@ const PropertyShareButtons = ({ property, variant = "icon", className = "" }: Pr
     );
   }
 
-  const handleFacebook = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(propertyUrl)}&quote=${encodeURIComponent(message)}`,
-      "_blank"
-    );
-  };
-
-  const handleInstagram = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    try {
-      await navigator.clipboard.writeText(message);
-      toast.success("Texto copiado! Cole no Instagram Stories ou Direct.");
-    } catch {}
-    window.open("https://instagram.com/", "_blank");
-  };
-
-  const handleTelegram = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(
-      `https://t.me/share/url?url=${encodeURIComponent(propertyUrl)}&text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
-  };
-
   return (
     <div className={`flex gap-1.5 flex-wrap ${className}`}>
-      <button
-        onClick={handleWhatsApp}
+      <a
+        href={`https://wa.me/?text=${encodeURIComponent(message)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
         title="Compartilhar via WhatsApp"
         className="w-9 h-9 rounded-full bg-green-600 hover:bg-green-700 flex items-center justify-center text-white transition-colors shadow-sm"
       >
         <MessageCircle className="w-4 h-4" />
-      </button>
-      <button
-        onClick={handleFacebook}
+      </a>
+      <a
+        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(propertyUrl)}&quote=${encodeURIComponent(message)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
         title="Compartilhar no Facebook"
         className="w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-700 flex items-center justify-center text-white transition-colors shadow-sm"
       >
         <Facebook className="w-4 h-4" />
-      </button>
-      <button
-        onClick={handleInstagram}
+      </a>
+      <a
+        href="https://instagram.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={async (e) => {
+          e.stopPropagation();
+          try {
+            await navigator.clipboard.writeText(message);
+            toast.success("Texto copiado! Cole no Instagram Stories ou Direct.");
+          } catch {}
+        }}
         title="Compartilhar no Instagram"
         className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 hover:opacity-90 flex items-center justify-center text-white transition-all shadow-sm"
       >
         <Instagram className="w-4 h-4" />
-      </button>
-      <button
-        onClick={handleTelegram}
+      </a>
+      <a
+        href={`https://t.me/share/url?url=${encodeURIComponent(propertyUrl)}&text=${encodeURIComponent(message)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
         title="Compartilhar no Telegram"
         className="w-9 h-9 rounded-full bg-sky-500 hover:bg-sky-600 flex items-center justify-center text-white transition-colors shadow-sm"
       >
         <Send className="w-4 h-4" />
-      </button>
+      </a>
       <button
         onClick={handleChat}
         title="Enviar via Chat"
