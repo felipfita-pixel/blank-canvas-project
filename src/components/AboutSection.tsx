@@ -150,12 +150,12 @@ const CampaignResults = ({ properties, navigate }: { properties: FeaturedPropert
         </p>
       ) : (
         <>
-          <div className="flex flex-col divide-y divide-border">
+          <div className="flex flex-col gap-4">
             {paginated.map((property, index) => {
               const image = property.images && property.images.length > 0 ? property.images[0] : fallbackImages[index % fallbackImages.length];
 
               return (
-                <div key={property.id} className="group py-5 first:pt-0">
+                <div key={property.id} className="group bg-card border border-border rounded-2xl p-4 shadow-md">
                   <div className="flex flex-col sm:flex-row gap-4 items-start">
                     {/* Image */}
                     <div
@@ -464,11 +464,11 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="section-padding bg-cream">
+    <section id="about" className="section-padding bg-background">
       <div className="container-main">
         <div className="grid lg:grid-cols-[1fr_260px] gap-6 items-start">
           <div>
-            <h2 className="text-3xl font-heading font-bold text-primary mb-1 italic">{about.title}</h2>
+            <h2 className="text-3xl font-heading font-bold text-secondary mb-1 italic">{about.title}</h2>
             <div className="w-12 h-1 bg-secondary rounded mb-4" />
             <p className="text-muted-foreground mb-6 leading-relaxed text-sm">{about.subtitle}</p>
 
@@ -477,7 +477,7 @@ const AboutSection = () => {
             </h3>
             <p className="text-sm text-muted-foreground mb-4">{about.content.campaign_subtitle || ""}</p>
 
-            <div className="bg-card rounded-xl border border-border p-4 mb-4 shadow-sm">
+            <div className="bg-card rounded-xl border border-border p-4 mb-4 shadow-md">
               <SearchFilters
                 search={searchQuery}
                 onSearchChange={setSearchQuery}
