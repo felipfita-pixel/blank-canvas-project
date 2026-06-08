@@ -129,7 +129,7 @@ const defaults: Record<string, SiteSection> = {
     title: "CORRETORES ASSOCIADOS",
     subtitle: "Consultoria Imobiliária FF",
     content: {
-      description: "Especialistas no mercado imobiliário de alto padrão no Rio de Janeiro. Comprometidos com a excelência e a satisfação total de nossos clientes.",
+      description: "Especialistas no mercado imobiliário de alto padrão. Presentes no Rio de Janeiro e em todo o Brasil, comprometidos com a excelência e a satisfação total de nossos clientes.",
       address: "Barra da Tijuca, Rio de Janeiro - RJ",
       phone: "(21) 97531-6631",
       email: "contato@ffimobiliaria.com.br",

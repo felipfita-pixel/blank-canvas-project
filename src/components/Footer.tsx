@@ -91,7 +91,7 @@ const Footer = () => {
 
       <div className="border-t border-primary-foreground/10">
         <div className="container-main px-4 sm:px-6 lg:px-8 py-6 text-center">
-          <p className="text-sm text-primary-foreground/60">© 2026 Corretores Associados. Todos os direitos reservados.</p>
+          <p className="text-sm text-primary-foreground/60">© 2026 Consultoria Imobiliária FF. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
