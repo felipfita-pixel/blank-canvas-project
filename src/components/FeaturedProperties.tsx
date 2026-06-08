@@ -196,12 +196,12 @@ const FeaturedProperties = () => {
 
         <p className="text-sm text-muted-foreground mb-4">{filtered.length} imóvel(is) encontrado(s)</p>
 
-        <div className="flex flex-col divide-y divide-border">
+        <div className="flex flex-col gap-4">
           {paginated.length === 0 && (
             <p className="text-center text-muted-foreground py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
           )}
           {paginated.map((p) => (
-            <div key={p.id} className="group py-6 first:pt-0">
+            <div key={p.id} className="group bg-card/95 border border-border rounded-2xl p-5 shadow-md">
               <div className="flex flex-col sm:flex-row gap-5 items-start">
                 {/* Image */}
                 <div
