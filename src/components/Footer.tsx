@@ -41,7 +41,7 @@ const Footer = () => {
 
           <div>
             <h4 className="font-heading font-bold text-primary-foreground text-lg mb-5">Links Rápidos</h4>
-            <ul className="space-y-3 text-sm text-primary-foreground/60">
+            <ul className="space-y-3 text-base text-primary-foreground/80">
               <li><button type="button" onClick={() => handleSectionNavigation("about")} className="hover:text-secondary transition-colors">Apresentação</button></li>
               <li><button type="button" onClick={() => handleSectionNavigation("lifestyle")} className="hover:text-secondary transition-colors">Ilha Pura</button></li>
               <li><button type="button" onClick={() => handleSectionNavigation("services")} className="hover:text-secondary transition-colors">Serviços</button></li>
