@@ -74,7 +74,7 @@ const NeighborhoodsSection = () => {
 
   if (properties.length === 0) {
     return (
-      <section id="neighborhoods" className="section-padding bg-cream">
+      <section id="neighborhoods" className="section-padding bg-transparent">
         <div className="container-main">
           <p className="text-sm text-muted-foreground py-12 text-center">Nenhum imóvel disponível no momento.</p>
         </div>
@@ -106,7 +106,7 @@ const NeighborhoodsSection = () => {
   };
 
   return (
-    <section id="neighborhoods" className="section-padding bg-cream">
+    <section id="neighborhoods" className="section-padding bg-transparent">
       <div className="container-main">
         <div className="flex flex-col divide-y divide-border">
           {paginated.map((p, i) => (
