@@ -247,11 +247,11 @@ const Properties = () => {
 
             return (
               <>
-                <p className="text-sm text-secondary-foreground/80 mb-6 font-medium">
+                <p className="text-sm text-foreground/80 mb-6 font-medium">
                   {filtered.length} imóvel(is) encontrado(s)
                   {totalPages > 1 && <span className="ml-2">· Página {safePage} de {totalPages}</span>}
                 </p>
-                <div className="flex flex-col divide-y divide-secondary-foreground/35">
+                <div className="flex flex-col divide-y divide-foreground/20">
                   {paginated.map((p) => (
                     <div key={p.id} className="group py-6 first:pt-0">
                       <div className="flex flex-col sm:flex-row gap-5 items-start">
@@ -291,16 +291,16 @@ const Properties = () => {
 
                         <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
                           <div>
-                            <h3 className="text-xl font-heading font-bold text-secondary-foreground mb-1 line-clamp-1">{p.title}</h3>
-                            <p className="flex items-center gap-1 text-sm text-secondary-foreground/75 mb-1 font-medium">
+                            <h3 className="text-xl font-heading font-bold text-foreground mb-1 line-clamp-1">{p.title}</h3>
+                            <p className="flex items-center gap-1 text-sm text-foreground/80 mb-1 font-medium">
                               <MapPin className="w-3.5 h-3.5 shrink-0" />
                               {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ''}` : p.city || ''}
                               {p.state && p.state !== "RJ" && ` - ${p.state}`}
                             </p>
                             {p.description && (
-                              <p className="text-sm text-secondary-foreground/90 line-clamp-2 mb-3 leading-relaxed font-medium">{p.description}</p>
+                              <p className="text-sm text-foreground/90 line-clamp-2 mb-3 leading-relaxed font-medium">{p.description}</p>
                             )}
-                            <div className="flex flex-wrap items-center gap-4 text-secondary-foreground/80 text-sm font-medium">
+                            <div className="flex flex-wrap items-center gap-4 text-foreground/80 text-sm font-medium">
                               {p.parking_spots ? <span className="flex items-center gap-1.5"><Car className="w-4 h-4" /> {p.parking_spots} vaga{p.parking_spots > 1 ? 's' : ''}</span> : null}
                               {p.bedrooms ? <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" /> {p.bedrooms} quarto{p.bedrooms > 1 ? 's' : ''}</span> : null}
                               {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
