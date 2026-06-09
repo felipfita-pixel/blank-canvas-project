@@ -287,6 +287,7 @@ const Properties = () => {
                               {p.images.length} fotos
                             </span>
                           )}
+                          <PropertyViewBadge propertyId={p.id} className="absolute bottom-3 left-3" />
                         </div>
 
                         <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
