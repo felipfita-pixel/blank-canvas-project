@@ -8,6 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
+import AdminPropertyViews from "@/components/admin/AdminPropertyViews";
 
 const StatCard = ({ icon: Icon, label, value, color, onClick }: { icon: any; label: string; value: number; color: string; onClick?: () => void }) => (
   <div
@@ -442,6 +443,7 @@ const AdminDashboard = () => {
           </div>
         </ScrollArea>
       </div>
+      <AdminPropertyViews />
     </div>
   );
 };
