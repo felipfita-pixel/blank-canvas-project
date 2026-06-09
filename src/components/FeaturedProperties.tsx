@@ -229,6 +229,7 @@ const FeaturedProperties = () => {
                       {p.images.length} fotos
                     </span>
                   )}
+                  <PropertyViewBadge propertyId={p.id} className="absolute top-3 right-3" />
                 </div>
 
                 {/* Details */}
