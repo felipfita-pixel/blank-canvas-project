@@ -12,6 +12,8 @@ import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Maximize, Car, MapPin, ArrowLeft, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PropertyShareButtons from "@/components/PropertyShareButtons";
+import PropertyViewBadge from "@/components/PropertyViewBadge";
+import { trackPropertyView } from "@/lib/propertyViews";
 const placeholderImage = "/placeholder.svg";
 
 interface Property {
@@ -114,6 +116,7 @@ const PropertyDetail = () => {
       setLoading(false);
     };
     fetchData();
+    if (id) trackPropertyView(id);
   }, [id]);
 
   if (loading) {
@@ -253,10 +256,13 @@ const PropertyDetail = () => {
               <h1 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-2">{property.title}</h1>
 
               {location && (
-                <p className="flex items-center gap-1 text-muted-foreground mb-4">
+                <p className="flex items-center gap-1 text-muted-foreground mb-2">
                   <MapPin className="w-4 h-4" /> {location}
                 </p>
               )}
+              <div className="mb-4">
+                <PropertyViewBadge propertyId={property.id} variant="inline" />
+              </div>
 
               {property.price > 0 && (
                 <div className="flex flex-wrap items-center gap-4 mb-8">
