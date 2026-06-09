@@ -512,6 +512,27 @@ export type Database = {
         }
         Relationships: []
       }
+      property_views: {
+        Row: {
+          created_at: string
+          id: string
+          property_id: string
+          session_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          property_id: string
+          session_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          property_id?: string
+          session_id?: string
+        }
+        Relationships: []
+      }
       scheduling_requests: {
         Row: {
           created_at: string
@@ -664,6 +685,19 @@ export type Database = {
         }
         Relationships: []
       }
+      property_view_counts: {
+        Row: {
+          property_id: string | null
+          views: number | null
+        }
+        Relationships: []
+      }
+      property_views_total: {
+        Row: {
+          total: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       delete_email: {
@@ -723,6 +757,10 @@ export type Database = {
           p_user_id: string
         }
         Returns: undefined
+      }
+      track_property_view: {
+        Args: { p_property_id: string; p_session_id: string }
+        Returns: number
       }
     }
     Enums: {

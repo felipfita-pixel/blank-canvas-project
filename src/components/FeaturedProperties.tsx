@@ -9,6 +9,7 @@ import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PropertyShareButtons from "@/components/PropertyShareButtons";
+import PropertyViewBadge from "@/components/PropertyViewBadge";
 import FavoriteButton from "@/components/FavoriteButton";
 import { useFavorites } from "@/hooks/useFavorites";
 import SearchFilters from "@/components/SearchFilters";
@@ -229,6 +230,7 @@ const FeaturedProperties = () => {
                       {p.images.length} fotos
                     </span>
                   )}
+                  <PropertyViewBadge propertyId={p.id} className="absolute top-3 right-3" />
                 </div>
 
                 {/* Details */}

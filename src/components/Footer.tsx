@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useAuth } from "@/hooks/useAuth";
 import SiteShareButtons from "@/components/SiteShareButtons";
+import TotalPropertyViewsBadge from "@/components/TotalPropertyViewsBadge";
 
 const Footer = () => {
   const { get } = useSiteContent();
@@ -90,7 +91,8 @@ const Footer = () => {
       </div>
 
       <div className="border-t border-primary-foreground/10">
-        <div className="container-main px-4 sm:px-6 lg:px-8 py-6 text-center">
+        <div className="container-main px-4 sm:px-6 lg:px-8 py-6 text-center flex flex-col items-center gap-3">
+          <TotalPropertyViewsBadge />
           <p className="text-sm text-primary-foreground/60">© 2026 Corretores Associados. Todos os direitos reservados.</p>
         </div>
       </div>

@@ -13,6 +13,7 @@ import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PropertyShareButtons from "@/components/PropertyShareButtons";
+import PropertyViewBadge from "@/components/PropertyViewBadge";
 import FavoriteButton from "@/components/FavoriteButton";
 import { useFavorites } from "@/hooks/useFavorites";
 import PageMeta from "@/components/PageMeta";
@@ -287,6 +288,7 @@ const Properties = () => {
                               {p.images.length} fotos
                             </span>
                           )}
+                          <PropertyViewBadge propertyId={p.id} className="absolute bottom-3 left-3" />
                         </div>
 
                         <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
