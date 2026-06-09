@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, Upload, X, ImageIcon, Link } from "lucide-react";
+import { Plus, Pencil, Trash2, Upload, X, ImageIcon, Link, Star, ArrowLeft, ArrowRight } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface Property {
@@ -94,6 +94,44 @@ const AdminProperties = () => {
 
   const removeImage = (index: number) => {
     setForm((prev) => ({ ...prev, images: prev.images.filter((_, i) => i !== index) }));
+  };
+
+  const moveImage = (index: number, dir: -1 | 1) => {
+    setForm((prev) => {
+      const arr = [...prev.images];
+      const newIdx = index + dir;
+      if (newIdx < 0 || newIdx >= arr.length) return prev;
+      [arr[index], arr[newIdx]] = [arr[newIdx], arr[index]];
+      return { ...prev, images: arr };
+    });
+  };
+
+  const setAsMain = (index: number) => {
+    setForm((prev) => {
+      if (index === 0) return prev;
+      const arr = [...prev.images];
+      const [picked] = arr.splice(index, 1);
+      arr.unshift(picked);
+      return { ...prev, images: arr };
+    });
+    toast.success("Foto principal definida");
+  };
+
+  const onDragStart = (e: React.DragEvent, index: number) => {
+    e.dataTransfer.setData("text/plain", String(index));
+    e.dataTransfer.effectAllowed = "move";
+  };
+  const onDragOver = (e: React.DragEvent) => { e.preventDefault(); e.dataTransfer.dropEffect = "move"; };
+  const onDrop = (e: React.DragEvent, targetIndex: number) => {
+    e.preventDefault();
+    const sourceIndex = Number(e.dataTransfer.getData("text/plain"));
+    if (Number.isNaN(sourceIndex) || sourceIndex === targetIndex) return;
+    setForm((prev) => {
+      const arr = [...prev.images];
+      const [moved] = arr.splice(sourceIndex, 1);
+      arr.splice(targetIndex, 0, moved);
+      return { ...prev, images: arr };
+    });
   };
 
   const handleAddImageByUrl = () => {
@@ -264,20 +302,73 @@ const AdminProperties = () => {
             <div>
               <label className="text-xs font-bold uppercase tracking-wider mb-1.5 block">Imagens</label>
               {form.images.length > 0 && (
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-3">
-                  {form.images.map((url, i) => (
-                    <div key={i} className="relative group aspect-square rounded-lg overflow-hidden border border-border">
-                      <img src={url} alt="" className="w-full h-full object-cover" />
-                      <button
-                        type="button"
-                        onClick={() => removeImage(i)}
-                        className="absolute top-1 right-1 w-6 h-6 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                <>
+                  <p className="text-xs text-muted-foreground mb-2">
+                    A primeira imagem é a <strong>foto principal</strong>. Arraste para reordenar ou use os controles.
+                  </p>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-3">
+                    {form.images.map((url, i) => (
+                      <div
+                        key={`${url}-${i}`}
+                        draggable
+                        onDragStart={(e) => onDragStart(e, i)}
+                        onDragOver={onDragOver}
+                        onDrop={(e) => onDrop(e, i)}
+                        className={`relative group aspect-square rounded-lg overflow-hidden border ${
+                          i === 0 ? "border-secondary ring-2 ring-secondary" : "border-border"
+                        } cursor-move`}
                       >
-                        <X className="w-3 h-3" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                        <img src={url} alt="" className="w-full h-full object-cover pointer-events-none" />
+
+                        {i === 0 && (
+                          <span className="absolute top-1 left-1 bg-secondary text-secondary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+                            <Star className="w-3 h-3 fill-current" /> Principal
+                          </span>
+                        )}
+
+                        <button
+                          type="button"
+                          onClick={() => removeImage(i)}
+                          title="Remover"
+                          className="absolute top-1 right-1 w-6 h-6 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+
+                        <div className="absolute bottom-0 inset-x-0 flex items-center justify-between gap-1 p-1 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button
+                            type="button"
+                            onClick={() => moveImage(i, -1)}
+                            disabled={i === 0}
+                            title="Mover para a esquerda"
+                            className="w-6 h-6 rounded bg-white/20 hover:bg-white/30 text-white flex items-center justify-center disabled:opacity-30"
+                          >
+                            <ArrowLeft className="w-3 h-3" />
+                          </button>
+                          {i !== 0 && (
+                            <button
+                              type="button"
+                              onClick={() => setAsMain(i)}
+                              title="Definir como principal"
+                              className="px-2 h-6 rounded bg-secondary text-secondary-foreground text-[10px] font-semibold hover:bg-orange-hover"
+                            >
+                              Principal
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => moveImage(i, 1)}
+                            disabled={i === form.images.length - 1}
+                            title="Mover para a direita"
+                            className="w-6 h-6 rounded bg-white/20 hover:bg-white/30 text-white flex items-center justify-center disabled:opacity-30"
+                          >
+                            <ArrowRight className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
               )}
               <div className="flex gap-2">
                 <label className="flex-1 flex items-center justify-center gap-2 border-2 border-dashed border-border rounded-lg p-4 cursor-pointer hover:border-primary/50 hover:bg-muted/30 transition-colors">
