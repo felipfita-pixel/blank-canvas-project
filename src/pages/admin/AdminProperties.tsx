@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Plus, Pencil, Trash2, Upload, X, ImageIcon, Link, Star, ArrowLeft, ArrowRight } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import PropertyCsvImport from "@/components/admin/PropertyCsvImport";
+import PropertyCollectionsManager from "@/components/admin/PropertyCollectionsManager";
 
 interface Property {
   id: string;
