@@ -39,6 +39,42 @@ const TEMPLATE_SAMPLE = [
   "false",
 ];
 
+// Exemplos realistas (estilo ficha Lopes) para o usuário ver o formato preenchido
+const TEMPLATE_EXAMPLES: string[][] = [
+  [
+    "Apartamento 3 quartos com vista mar - Barra da Tijuca",
+    "Apartamento alto padrão na Av. Lúcio Costa, 3 quartos sendo 1 suíte, sala ampla com varanda, cozinha planejada, 2 vagas. Prédio com piscina, academia e segurança 24h.",
+    "apartment", "sale", "1450000", "120", "3", "2", "2", "1",
+    "Barra da Tijuca", "Av. Lúcio Costa, 3600", "Rio de Janeiro", "RJ", "22630-010",
+    "https://exemplo.com/barra-1.jpg|https://exemplo.com/barra-2.jpg|https://exemplo.com/barra-3.jpg",
+    "true",
+  ],
+  [
+    "Cobertura duplex 4 quartos - Ipanema",
+    "Cobertura duplex 4 quartos, 3 suítes, terraço com piscina privativa e vista para o mar de Ipanema. 3 vagas. Acabamento de luxo.",
+    "apartment", "sale", "8900000", "320", "4", "4", "3", "3",
+    "Ipanema", "Rua Vinícius de Moraes, 200", "Rio de Janeiro", "RJ", "22411-010",
+    "https://exemplo.com/ipanema-1.jpg|https://exemplo.com/ipanema-2.jpg",
+    "true",
+  ],
+  [
+    "Casa 4 quartos em condomínio - Recreio",
+    "Casa em condomínio fechado, 4 quartos, 2 suítes, quintal amplo, churrasqueira, 4 vagas. Próximo à praia.",
+    "house", "sale", "1950000", "280", "4", "3", "4", "2",
+    "Recreio dos Bandeirantes", "Rua Professor Henrique Costa, 1500", "Rio de Janeiro", "RJ", "22790-000",
+    "https://exemplo.com/recreio-1.jpg|https://exemplo.com/recreio-2.jpg",
+    "false",
+  ],
+  [
+    "Apartamento 2 quartos para alugar - Botafogo",
+    "Apartamento reformado, 2 quartos, sala, cozinha americana, 1 vaga. Próximo ao metrô Botafogo.",
+    "apartment", "rent", "4500", "75", "2", "1", "1", "0",
+    "Botafogo", "Rua Voluntários da Pátria, 300", "Rio de Janeiro", "RJ", "22270-010",
+    "https://exemplo.com/botafogo-1.jpg|https://exemplo.com/botafogo-2.jpg",
+    "false",
+  ],
+];
+
 const num = (v: unknown): number | null => {
   if (v === null || v === undefined || v === "") return null;
   const s = String(v).replace(/[^\d,.-]/g, "").replace(/\.(?=\d{3}(\D|$))/g, "").replace(",", ".");
@@ -122,6 +158,17 @@ const PropertyCsvImport = ({ onImported }: Props) => {
     const a = document.createElement("a");
     a.href = url;
     a.download = "modelo-importacao-imoveis.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadExample = () => {
+    const csv = Papa.unparse({ fields: [...TEMPLATE_HEADERS], data: TEMPLATE_EXAMPLES });
+    const blob = new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "exemplo-imoveis-preenchido.csv";
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -333,6 +380,9 @@ const PropertyCsvImport = ({ onImported }: Props) => {
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" size="sm" onClick={downloadTemplate} disabled={analyzing || importing}>
               <FileDown className="w-4 h-4 mr-2" /> Baixar modelo
+            </Button>
+            <Button variant="outline" size="sm" onClick={downloadExample} disabled={analyzing || importing}>
+              <FileDown className="w-4 h-4 mr-2" /> Baixar exemplo preenchido
             </Button>
             <Button size="sm" onClick={() => inputRef.current?.click()} disabled={analyzing || importing}>
               {analyzing ? (
