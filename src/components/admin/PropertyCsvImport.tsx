@@ -336,7 +336,7 @@ const PropertyCsvImport = ({ onImported }: Props) => {
             </Button>
             <Button size="sm" onClick={() => inputRef.current?.click()} disabled={analyzing || importing}>
               {analyzing ? (
-                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analisando...</>
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> {progress || "Analisando..."}</>
               ) : (
                 <><Upload className="w-4 h-4 mr-2" /> Analisar CSV</>
               )}
@@ -355,7 +355,11 @@ const PropertyCsvImport = ({ onImported }: Props) => {
           {analysis && (
             <div className="space-y-4 mt-2">
               <p className="text-xs text-muted-foreground">
-                Arquivo: <span className="font-mono">{analysis.fileName}</span> · {analysis.totalRows} linha(s)
+                Arquivo: <span className="font-mono">{analysis.fileName}</span> · {analysis.totalRows} linha(s) ·
+                {" "}{analysis.totalImages} imagem(ns) verificada(s)
+                {analysis.brokenImageCount > 0 && (
+                  <span className="text-destructive font-semibold"> · {analysis.brokenImageCount} quebrada(s)</span>
+                )}
               </p>
 
               <div className="grid grid-cols-3 gap-3">
@@ -386,12 +390,28 @@ const PropertyCsvImport = ({ onImported }: Props) => {
                 <details className="border border-border rounded-lg p-3" open>
                   <summary className="cursor-pointer text-sm font-semibold text-emerald-600">
                     ✓ {analysis.valid.length} imóvel(is) prontos para importar
+                    {analysis.valid.some((v) => v.brokenImages.length > 0) && (
+                      <span className="text-amber-600 ml-2 font-normal">
+                        (alguns com fotos quebradas — serão removidas)
+                      </span>
+                    )}
                   </summary>
-                  <div className="mt-2 max-h-48 overflow-y-auto text-xs space-y-1">
+                  <div className="mt-2 max-h-56 overflow-y-auto text-xs space-y-1">
                     {analysis.valid.slice(0, 100).map((v) => (
-                      <div key={v.line} className="flex justify-between gap-2 py-1 border-b border-border/50">
-                        <span className="truncate">L{v.line} · {v.title} {v.neighborhood && <span className="text-muted-foreground">({v.neighborhood})</span>}</span>
-                        <span className="text-muted-foreground shrink-0">R$ {v.price.toLocaleString("pt-BR")}</span>
+                      <div key={v.line} className="py-1 border-b border-border/50">
+                        <div className="flex justify-between gap-2">
+                          <span className="truncate">L{v.line} · {v.title} {v.neighborhood && <span className="text-muted-foreground">({v.neighborhood})</span>}</span>
+                          <span className="text-muted-foreground shrink-0">R$ {v.price.toLocaleString("pt-BR")}</span>
+                        </div>
+                        {v.brokenImages.length > 0 && (
+                          <div className="text-amber-600 mt-0.5 pl-3">
+                            ⚠ {v.brokenImages.length} foto(s) quebrada(s) ignorada(s):
+                            <ul className="list-disc ml-4 break-all">
+                              {v.brokenImages.slice(0, 3).map((u, i) => <li key={i} className="font-mono">{u}</li>)}
+                              {v.brokenImages.length > 3 && <li>+ {v.brokenImages.length - 3}...</li>}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     ))}
                     {analysis.valid.length > 100 && <p className="text-muted-foreground italic">+ {analysis.valid.length - 100} restantes...</p>}
@@ -421,13 +441,19 @@ const PropertyCsvImport = ({ onImported }: Props) => {
                   <summary className="cursor-pointer text-sm font-semibold text-destructive">
                     ✕ {analysis.invalid.length} linha(s) com erro — não serão importadas
                   </summary>
-                  <div className="mt-2 max-h-48 overflow-y-auto text-xs space-y-1">
+                  <div className="mt-2 max-h-56 overflow-y-auto text-xs space-y-1">
                     {analysis.invalid.map((it) => (
                       <div key={it.line} className="py-1 border-b border-border/50">
                         <span className="font-medium">L{it.line}:</span> {it.title}
                         <ul className="ml-4 list-disc text-destructive">
                           {it.issues.map((iss, idx) => <li key={idx}>{iss}</li>)}
                         </ul>
+                        {it.brokenImages && it.brokenImages.length > 0 && (
+                          <ul className="ml-4 list-disc text-destructive/80 break-all">
+                            {it.brokenImages.slice(0, 5).map((u, i) => <li key={i} className="font-mono text-[10px]">{u}</li>)}
+                            {it.brokenImages.length > 5 && <li>+ {it.brokenImages.length - 5}...</li>}
+                          </ul>
+                        )}
                       </div>
                     ))}
                   </div>
