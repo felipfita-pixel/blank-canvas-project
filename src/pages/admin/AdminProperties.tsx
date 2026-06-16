@@ -189,6 +189,11 @@ const AdminProperties = () => {
         <PropertyCsvImport onImported={fetchProperties} />
       </div>
 
+      <div className="mb-6">
+        <PropertyCollectionsManager />
+      </div>
+
+
 
       {loading ? (
         <div className="text-center py-12 text-muted-foreground">Carregando...</div>
