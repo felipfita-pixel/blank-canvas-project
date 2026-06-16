@@ -68,10 +68,10 @@ const FeaturedProperties = () => {
       const [propsRes, colRes, itemRes] = await Promise.all([
         supabase
           .from("properties")
-          .select("id, title, neighborhood, price, bedrooms, bathrooms, area, images, featured, transaction_type, description, city")
+          .select("id, title, neighborhood, price, bedrooms, bathrooms, area, images, featured, transaction_type, description, city, created_at")
           .eq("active", true)
           .order("created_at", { ascending: false })
-          .limit(200),
+          .limit(1000),
         supabase
           .from("property_collections")
           .select("id, position")
@@ -122,11 +122,13 @@ const FeaturedProperties = () => {
             }
           }
         }
-        const rest = all.filter((p) => p.featured && !used.has(p.id));
-        ordered = [...curated, ...rest].slice(0, 60);
+        const rest = all
+          .filter((p) => !used.has(p.id))
+          .sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
+        ordered = [...curated, ...rest];
       } else {
         const featured = all.filter((p) => p.featured);
-        ordered = featured.slice(0, 60);
+        ordered = featured;
       }
 
       setProperties(ordered);
