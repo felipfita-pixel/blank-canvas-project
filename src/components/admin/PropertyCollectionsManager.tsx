@@ -74,6 +74,7 @@ const PropertyCollectionsManager = () => {
   const [drag, setDrag] = useState<DragSource | null>(null);
   const [pickerOpen, setPickerOpen] = useState<string | null>(null);
   const [pickerSearch, setPickerSearch] = useState("");
+  const [unassignedSearch, setUnassignedSearch] = useState("");
   const [editing, setEditing] = useState<Collection | null>(null);
   const [editName, setEditName] = useState("");
 
