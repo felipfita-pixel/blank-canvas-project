@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, Upload, X, ImageIcon, Link, Star, ArrowLeft, ArrowRight } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import PropertyCsvImport from "@/components/admin/PropertyCsvImport";
 
 interface Property {
   id: string;
@@ -182,6 +183,11 @@ const AdminProperties = () => {
           <Plus className="w-4 h-4 mr-2" /> Novo Imóvel
         </Button>
       </div>
+
+      <div className="mb-6">
+        <PropertyCsvImport onImported={fetchProperties} />
+      </div>
+
 
       {loading ? (
         <div className="text-center py-12 text-muted-foreground">Carregando...</div>
