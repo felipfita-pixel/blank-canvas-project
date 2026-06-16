@@ -65,16 +65,25 @@ const FeaturedProperties = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await supabase
-        .from("properties")
-        .select("id, title, neighborhood, price, bedrooms, bathrooms, area, images, featured, transaction_type, description, city")
-        .eq("active", true)
-        .eq("featured", true)
-        .order("created_at", { ascending: false })
-        .limit(60);
+      const [propsRes, colRes, itemRes] = await Promise.all([
+        supabase
+          .from("properties")
+          .select("id, title, neighborhood, price, bedrooms, bathrooms, area, images, featured, transaction_type, description, city")
+          .eq("active", true)
+          .order("created_at", { ascending: false })
+          .limit(200),
+        supabase
+          .from("property_collections")
+          .select("id, position")
+          .order("position", { ascending: true }),
+        supabase
+          .from("property_collection_items")
+          .select("collection_id, property_id, position")
+          .order("position", { ascending: true }),
+      ]);
 
-      const dbProps = (data as Property[]) || [];
-      const staticAsProps: Property[] = staticProperties.slice(0, 60).map((sp) => ({
+      const dbProps = (propsRes.data as Property[]) || [];
+      const staticAsProps: Property[] = staticProperties.map((sp) => ({
         id: sp.id,
         title: sp.title,
         neighborhood: sp.neighborhood,
@@ -88,11 +97,39 @@ const FeaturedProperties = () => {
         description: (sp as any).description || null,
         city: (sp as any).city || null,
       }));
-      const merged = [
+      const all: Property[] = [
         ...dbProps,
-        ...staticAsProps.filter((sp) => !dbProps.some((dp) => dp.title === sp.title)),
+        ...staticAsProps.filter((sp) => !dbProps.some((dp) => dp.id === sp.id || dp.title === sp.title)),
       ];
-      setProperties(merged);
+
+      const collections = (colRes.data ?? []) as { id: string; position: number }[];
+      const items = (itemRes.data ?? []) as { collection_id: string; property_id: string; position: number }[];
+
+      let ordered: Property[];
+      if (collections.length > 0 && items.length > 0) {
+        const byId = new Map(all.map((p) => [p.id, p]));
+        const used = new Set<string>();
+        const curated: Property[] = [];
+        for (const col of collections) {
+          const colItems = items
+            .filter((it) => it.collection_id === col.id)
+            .sort((a, b) => a.position - b.position);
+          for (const it of colItems) {
+            const p = byId.get(it.property_id);
+            if (p && !used.has(p.id)) {
+              curated.push(p);
+              used.add(p.id);
+            }
+          }
+        }
+        const rest = all.filter((p) => p.featured && !used.has(p.id));
+        ordered = [...curated, ...rest].slice(0, 60);
+      } else {
+        const featured = all.filter((p) => p.featured);
+        ordered = featured.slice(0, 60);
+      }
+
+      setProperties(ordered);
       setLoading(false);
     };
     fetch();
