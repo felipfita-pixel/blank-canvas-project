@@ -162,6 +162,17 @@ const PropertyCsvImport = ({ onImported }: Props) => {
     URL.revokeObjectURL(url);
   };
 
+  const downloadExample = () => {
+    const csv = Papa.unparse({ fields: [...TEMPLATE_HEADERS], data: TEMPLATE_EXAMPLES });
+    const blob = new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "exemplo-imoveis-preenchido.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
