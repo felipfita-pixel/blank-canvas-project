@@ -381,6 +381,9 @@ const PropertyCsvImport = ({ onImported }: Props) => {
             <Button variant="outline" size="sm" onClick={downloadTemplate} disabled={analyzing || importing}>
               <FileDown className="w-4 h-4 mr-2" /> Baixar modelo
             </Button>
+            <Button variant="outline" size="sm" onClick={downloadExample} disabled={analyzing || importing}>
+              <FileDown className="w-4 h-4 mr-2" /> Baixar exemplo preenchido
+            </Button>
             <Button size="sm" onClick={() => inputRef.current?.click()} disabled={analyzing || importing}>
               {analyzing ? (
                 <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> {progress || "Analisando..."}</>
