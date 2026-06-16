@@ -504,11 +504,22 @@ const PropertyCollectionsManager = () => {
 
       {/* Unassigned pool */}
       <div className="mt-6">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">
-          Não atribuídos ({unassigned.length})
-        </h3>
-        <div className="max-h-64 overflow-y-auto rounded-lg border border-border bg-background p-2 grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          {unassigned.slice(0, 60).map((p) => (
+        <div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+            Não atribuídos ({unassigned.length})
+          </h3>
+          <div className="relative w-full sm:w-72">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              value={unassignedSearch}
+              onChange={(e) => setUnassignedSearch(e.target.value)}
+              placeholder="Buscar não atribuídos..."
+              className="pl-9 h-9"
+            />
+          </div>
+        </div>
+        <div className="max-h-96 overflow-y-auto rounded-lg border border-border bg-background p-2 grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          {filteredUnassigned.map((p) => (
             <div
               key={p.id}
               className="flex items-center gap-2 p-2 rounded border border-border bg-card text-xs"
@@ -521,14 +532,11 @@ const PropertyCollectionsManager = () => {
               <span className="flex-1 min-w-0 truncate text-foreground">{p.title}</span>
             </div>
           ))}
-          {unassigned.length === 0 && (
+          {filteredUnassigned.length === 0 && (
             <p className="col-span-full text-center py-4 text-muted-foreground">
-              Todos os imóveis já estão em pastas.
-            </p>
-          )}
-          {unassigned.length > 60 && (
-            <p className="col-span-full text-center text-muted-foreground pt-1">
-              + {unassigned.length - 60} imóveis ocultos (use "Adicionar imóvel" em uma pasta para buscar).
+              {unassigned.length === 0
+                ? "Todos os imóveis já estão em pastas."
+                : "Nenhum imóvel encontrado para a busca."}
             </p>
           )}
         </div>
