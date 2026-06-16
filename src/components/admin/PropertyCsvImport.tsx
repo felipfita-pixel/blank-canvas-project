@@ -63,10 +63,11 @@ type ValidRow = {
   title: string;
   neighborhood: string | null;
   price: number;
+  brokenImages: string[];
   data: Record<string, unknown>;
 };
 type SkippedRow = { line: number; title: string; neighborhood: string | null; reason: string };
-type InvalidRow = { line: number; title: string; issues: string[] };
+type InvalidRow = { line: number; title: string; issues: string[]; brokenImages?: string[] };
 
 interface Analysis {
   fileName: string;
@@ -74,7 +75,38 @@ interface Analysis {
   valid: ValidRow[];
   duplicates: SkippedRow[];
   invalid: InvalidRow[];
+  totalImages: number;
+  brokenImageCount: number;
 }
+
+// Validate image URL by trying to load it (bypasses CORS). Resolves to true if reachable.
+const checkImageUrl = (url: string, timeoutMs = 8000): Promise<boolean> =>
+  new Promise((resolve) => {
+    const img = new Image();
+    const timer = setTimeout(() => {
+      img.src = "";
+      resolve(false);
+    }, timeoutMs);
+    img.onload = () => { clearTimeout(timer); resolve(img.naturalWidth > 0); };
+    img.onerror = () => { clearTimeout(timer); resolve(false); };
+    img.src = url;
+  });
+
+// Run an async mapper with concurrency limit
+async function pMap<T, R>(items: T[], limit: number, mapper: (item: T, idx: number) => Promise<R>): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (true) {
+      const i = cursor++;
+      if (i >= items.length) return;
+      results[i] = await mapper(items[i], i);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
+
 
 const PropertyCsvImport = ({ onImported }: Props) => {
   const [analyzing, setAnalyzing] = useState(false);
@@ -157,6 +189,7 @@ const PropertyCsvImport = ({ onImported }: Props) => {
 
             valid.push({
               line, title, neighborhood, price: price!,
+              brokenImages: [],
               data: {
                 title,
                 description: row.description?.trim() || null,
@@ -180,12 +213,62 @@ const PropertyCsvImport = ({ onImported }: Props) => {
             });
           });
 
-          setAnalysis({ fileName: file.name, totalRows: rows.length, valid, duplicates, invalid });
+          // Validate all image URLs (with concurrency + cache)
+          const allUrls = new Set<string>();
+          valid.forEach((v) => (v.data.images as string[]).forEach((u) => allUrls.add(u)));
+          const urlList = [...allUrls];
+          const urlStatus = new Map<string, boolean>();
+
+          if (urlList.length > 0) {
+            setProgress(`Validando 0/${urlList.length} imagens...`);
+            let done = 0;
+            await pMap(urlList, 8, async (u) => {
+              const ok = await checkImageUrl(u);
+              urlStatus.set(u, ok);
+              done++;
+              if (done % 5 === 0 || done === urlList.length) {
+                setProgress(`Validando ${done}/${urlList.length} imagens...`);
+              }
+            });
+          }
+
+          let brokenImageCount = 0;
+          const stillValid: ValidRow[] = [];
+          valid.forEach((v) => {
+            const imgs = v.data.images as string[];
+            const broken = imgs.filter((u) => urlStatus.get(u) === false);
+            const working = imgs.filter((u) => urlStatus.get(u) !== false);
+            brokenImageCount += broken.length;
+            if (working.length === 0) {
+              invalid.push({
+                line: v.line,
+                title: v.title,
+                issues: ["todas as fotos estão quebradas/inacessíveis"],
+                brokenImages: broken,
+              });
+              return;
+            }
+            v.data.images = working;
+            v.brokenImages = broken;
+            stillValid.push(v);
+          });
+
+          setProgress("");
+          setAnalysis({
+            fileName: file.name,
+            totalRows: rows.length,
+            valid: stillValid,
+            duplicates,
+            invalid,
+            totalImages: allUrls.size,
+            brokenImageCount,
+          });
         } catch (err) {
           const message = err instanceof Error ? err.message : "Erro desconhecido";
           toast.error(`Falha ao analisar CSV: ${message}`);
         } finally {
           setAnalyzing(false);
+          setProgress("");
         }
       },
       error: (err) => {
@@ -194,6 +277,7 @@ const PropertyCsvImport = ({ onImported }: Props) => {
       },
     });
   };
+
 
   const confirmImport = async () => {
     if (!analysis || analysis.valid.length === 0) return;
