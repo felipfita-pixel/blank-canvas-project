@@ -464,6 +464,68 @@ export type Database = {
           },
         ]
       }
+      property_collection_items: {
+        Row: {
+          collection_id: string
+          created_at: string
+          id: string
+          position: number
+          property_id: string
+        }
+        Insert: {
+          collection_id: string
+          created_at?: string
+          id?: string
+          position?: number
+          property_id: string
+        }
+        Update: {
+          collection_id?: string
+          created_at?: string
+          id?: string
+          position?: number
+          property_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_collection_items_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "property_collections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      property_collections: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          position: number
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          position?: number
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          position?: number
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       property_listings: {
         Row: {
           area: number | null
