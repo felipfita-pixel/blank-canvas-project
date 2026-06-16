@@ -28,6 +28,7 @@ interface Property {
   transaction_type: string;
   description?: string | null;
   city?: string | null;
+  created_at?: string | null;
 }
 
 const ITEMS_PER_PAGE = 12;
