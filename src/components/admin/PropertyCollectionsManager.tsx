@@ -150,6 +150,18 @@ const PropertyCollectionsManager = () => {
     [allProps, assignedIds],
   );
 
+  const filteredUnassigned = useMemo(
+    () =>
+      unassignedSearch
+        ? unassigned.filter((p) =>
+            `${p.title} ${p.neighborhood ?? ""}`
+              .toLowerCase()
+              .includes(unassignedSearch.toLowerCase()),
+          )
+        : unassigned,
+    [unassigned, unassignedSearch],
+  );
+
   // ---------- Mutations ----------
   const createCollection = async () => {
     const name = window.prompt("Nome da pasta (ex: Lançamentos, Aluguel Zona Sul):")?.trim();
