@@ -31,6 +31,7 @@ interface PropLite {
 
 interface ItemRow {
   id: string;
+  collection_id: string;
   property_id: string;
   position: number;
 }
