@@ -177,7 +177,9 @@ const PropertyCsvImport = ({ onImported }: Props) => {
           // Insert in batches of 50
           let inserted = 0;
           for (let i = 0; i < toInsert.length; i += 50) {
-            const batch = toInsert.slice(i, i + 50);
+            const batch = toInsert.slice(i, i + 50) as unknown as Parameters<
+              ReturnType<typeof supabase.from<"properties">>["insert"]
+            >[0];
             const { error } = await supabase.from("properties").insert(batch);
             if (error) {
               errors.push(`Lote ${i / 50 + 1}: ${error.message}`);
