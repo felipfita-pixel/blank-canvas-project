@@ -60,12 +60,24 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-6"
+          className="mb-2"
         >
           <span className="text-xs sm:text-sm text-secondary tracking-[0.3em] uppercase font-body font-medium">
             Lançamentos Exclusivos
           </span>
         </motion.div>
+
+        <motion.a
+          href="https://ilhapura.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="inline-block mb-6 text-primary-foreground/90 hover:text-secondary text-sm font-body tracking-wide underline underline-offset-4 decoration-secondary/60 hover:decoration-secondary transition-colors"
+        >
+          Ilha Pura — Conheça o lançamento
+        </motion.a>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
