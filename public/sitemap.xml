@@ -1741,12 +1741,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://corretoresrj.com/imovel/632f4b75-926c-4f02-be92-fbd8672fdebc</loc>
-    <lastmod>2026-04-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://corretoresrj.com/imovel/5ebe22c9-5f5a-4fe5-9117-8a42a9f96884</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -1791,6 +1785,12 @@
   <url>
     <loc>https://corretoresrj.com/imovel/72112d5e-0889-4d36-9ab7-002b784b7e78</loc>
     <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://corretoresrj.com/imovel/632f4b75-926c-4f02-be92-fbd8672fdebc</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
