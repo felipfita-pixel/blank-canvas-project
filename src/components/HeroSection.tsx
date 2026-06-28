@@ -74,8 +74,13 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="inline-block mb-6 text-primary-foreground/90 hover:text-secondary text-sm font-body tracking-wide underline underline-offset-4 decoration-secondary/60 hover:decoration-secondary transition-colors"
+          className="inline-flex items-center gap-2 mb-6 text-primary-foreground/90 hover:text-secondary text-sm font-body tracking-wide underline underline-offset-4 decoration-secondary/60 hover:decoration-secondary transition-colors"
         >
+          <img
+            src="https://ilhapura.app/favicon.ico"
+            alt="Ilha Pura"
+            className="w-5 h-5 rounded-full object-cover border border-secondary/40"
+          />
           Ilha Pura — Conheça o lançamento
         </motion.a>
 
