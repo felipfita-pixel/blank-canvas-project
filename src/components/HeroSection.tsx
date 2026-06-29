@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-presenter.jpg";
+import heroBg from "@/assets/hero-palestra.png";
 
 const HeroSection = () => {
   const { get } = useSiteContent();
