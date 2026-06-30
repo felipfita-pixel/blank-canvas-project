@@ -13,7 +13,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[70svh] flex items-center overflow-hidden">
+    <section className="relative min-h-[70svh] flex items-end overflow-hidden">
       <img
         src={heroBg}
         alt="Apresentação Ilha Pura Park - Barra da Tijuca"
