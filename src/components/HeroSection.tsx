@@ -45,15 +45,6 @@ const HeroSection = () => {
               Lançamento Ilha Pura
             </motion.a>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="text-primary-foreground/80 text-sm sm:text-base lg:text-lg max-w-lg md:ml-auto mb-8 font-body leading-relaxed"
-            >
-              Consultoria especializada em imóveis de alto padrão. Atendimento
-              personalizado com curadoria dos melhores lançamentos.
-            </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
