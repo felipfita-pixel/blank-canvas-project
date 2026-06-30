@@ -45,16 +45,6 @@ const HeroSection = () => {
               Lançamento Ilha Pura
             </motion.a>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold text-primary-foreground leading-[1.15] mb-5"
-            >
-              O endereço mais desejado da{" "}
-              <span className="text-secondary italic">Barra da Tijuca</span>
-            </motion.h1>
-
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -69,8 +59,13 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center md:justify-end justify-center gap-3"
+              className="flex flex-col sm:flex-row items-center md:justify-end justify-center gap-4"
             >
+              <span className="text-xs sm:text-sm font-display font-bold text-primary-foreground leading-tight text-center sm:text-right max-w-[160px]">
+                O endereço mais desejado da{" "}
+                <span className="text-secondary italic">Barra da Tijuca</span>
+              </span>
+
               <Button
                 asChild
                 className="bg-secondary text-secondary-foreground hover:bg-orange-hover font-semibold rounded-lg px-8 py-3 shadow-md shadow-secondary/20 hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 text-sm sm:text-base"
