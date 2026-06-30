@@ -66,11 +66,11 @@ const BrokersOnlineSection = () => {
       // Fetch brokers and online presence in parallel
       const [brokersRes, presenceRes] = await Promise.all([
         supabase.from("brokers_public").select("id, full_name, avatar_url, neighborhoods, user_id"),
-        supabase.from("broker_presence").select("user_id, is_online").eq("is_online", true),
+        supabase.rpc("get_online_broker_ids"),
       ]);
 
-      const onlineUserIds = new Set(
-        (presenceRes.data || []).map((p: { user_id: string }) => p.user_id)
+      const onlineBrokerIds = new Set(
+        ((presenceRes.data as { broker_id: string }[] | null) || []).map((p) => p.broker_id)
       );
 
       if (brokersRes.data) {
@@ -82,7 +82,7 @@ const BrokersOnlineSection = () => {
             neighborhoods: b.neighborhoods,
             isBot: false,
             isAttending: false,
-            isRealOnline: b.user_id ? onlineUserIds.has(b.user_id) : false,
+            isRealOnline: onlineBrokerIds.has(b.id),
           }))
         );
       }
