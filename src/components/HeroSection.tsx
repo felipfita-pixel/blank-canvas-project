@@ -19,7 +19,7 @@ const HeroSection = () => {
         alt="Apresentação Ilha Pura Park - Barra da Tijuca"
         width={1920}
         height={1080}
-        className="absolute inset-0 w-full h-full object-cover object-[20%_top] md:object-[30%_25%]"
+        className="absolute inset-0 w-full h-full object-cover object-[20%_center] md:object-[30%_center]"
       />
       {/* Gradient overlay — darker on the right to protect text, lighter over the face on the left */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-primary/50 to-primary/85" />
