@@ -13,13 +13,13 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[70svh] flex items-end overflow-hidden">
+    <section className="relative min-h-[70svh] flex items-center overflow-hidden">
       <img
         src={heroBg}
         alt="Apresentação Ilha Pura Park - Barra da Tijuca"
         width={1920}
         height={1080}
-        className="absolute inset-0 w-full h-full object-cover object-[20%_top] md:object-[30%_25%]"
+        className="absolute inset-0 w-full h-full object-cover object-[20%_center] md:object-[30%_center]"
       />
       {/* Gradient overlay — darker on the right to protect text, lighter over the face on the left */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-primary/50 to-primary/85" />
@@ -45,18 +45,32 @@ const HeroSection = () => {
               Lançamento Ilha Pura
             </motion.a>
 
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold text-primary-foreground leading-[1.15] mb-5"
+            >
+              O endereço mais desejado da{" "}
+              <span className="text-secondary italic">Barra da Tijuca</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="text-primary-foreground/80 text-sm sm:text-base lg:text-lg max-w-lg md:ml-auto mb-8 font-body leading-relaxed"
+            >
+              Consultoria especializada em imóveis de alto padrão. Atendimento
+              personalizado com curadoria dos melhores lançamentos.
+            </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center md:justify-end justify-center gap-4"
+              className="flex flex-col sm:flex-row items-center md:justify-end justify-center gap-3"
             >
-              <span className="text-xs sm:text-sm font-display font-bold text-primary-foreground leading-tight text-center sm:text-right max-w-[160px]">
-                O endereço mais desejado da{" "}
-                <span className="text-secondary italic">Barra da Tijuca</span>
-              </span>
-
               <Button
                 asChild
                 className="bg-secondary text-secondary-foreground hover:bg-orange-hover font-semibold rounded-lg px-8 py-3 shadow-md shadow-secondary/20 hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 text-sm sm:text-base"
