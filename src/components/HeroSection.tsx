@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-palestra.png";
 
 const HeroSection = () => {
   const { get } = useSiteContent();
@@ -13,21 +12,13 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[70svh] flex items-center overflow-hidden">
-      <img
-        src={heroBg}
-        alt="Apresentação Ilha Pura Park - Barra da Tijuca"
-        width={1920}
-        height={1080}
-        className="absolute inset-0 w-full h-full object-cover object-[20%_center] md:object-[30%_center]"
-      />
-      {/* Gradient overlay — darker on the right to protect text, lighter over the face on the left */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-primary/50 to-primary/85" />
-      <div className="absolute inset-0 md:hidden bg-primary/55" />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-primary">
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-navy-dark/80" />
 
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16">
         <div className="container-main">
-          <div className="max-w-xl md:ml-auto text-center md:text-right">
+          <div className="max-w-xl mx-auto text-center">
             <motion.a
               href="https://ilhapura.app"
               target="_blank"
@@ -45,21 +36,11 @@ const HeroSection = () => {
               Lançamento Ilha Pura
             </motion.a>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold text-primary-foreground leading-[1.15] mb-5"
-            >
-              O endereço mais desejado da{" "}
-              <span className="text-secondary italic">Barra da Tijuca</span>
-            </motion.h1>
-
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="text-primary-foreground/80 text-sm sm:text-base lg:text-lg max-w-lg md:ml-auto mb-8 font-body leading-relaxed"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-primary-foreground/80 text-sm sm:text-base lg:text-lg max-w-lg mx-auto mb-8 font-body leading-relaxed"
             >
               Consultoria especializada em imóveis de alto padrão. Atendimento
               personalizado com curadoria dos melhores lançamentos.
@@ -68,8 +49,8 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center md:justify-end justify-center gap-3"
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3"
             >
               <Button
                 asChild
