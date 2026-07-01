@@ -783,6 +783,12 @@ export type Database = {
           sender_name: string
         }[]
       }
+      get_online_broker_ids: {
+        Args: never
+        Returns: {
+          broker_id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
