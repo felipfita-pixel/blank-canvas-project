@@ -28,7 +28,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="absolute top-24 left-4 sm:left-8 lg:left-12 z-10 inline-flex items-center gap-2 text-white/95 hover:text-secondary text-xs sm:text-sm font-body tracking-[0.25em] uppercase underline underline-offset-4 decoration-secondary/70 hover:decoration-secondary transition-colors"
+        className="absolute top-24 left-4 sm:left-8 lg:left-12 z-30 inline-flex items-center gap-2 text-white/95 hover:text-secondary text-xs sm:text-sm font-body tracking-[0.25em] uppercase underline underline-offset-4 decoration-secondary/70 hover:decoration-secondary transition-colors"
       >
         <img
           src="https://ilhapura.app/favicon.ico"
