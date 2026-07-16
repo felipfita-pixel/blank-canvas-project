@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
-import { X, Send, Loader2, Home } from "lucide-react";
+import { X, Send, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import logoOficial from "@/assets/logo-ff.jpeg";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -180,24 +181,29 @@ const CorretoresIA = () => {
           {/* Glow */}
           <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{ background: "radial-gradient(circle at 30% 30%, rgba(212,175,55,0.35), transparent 65%)" }} />
-          {/* House icon */}
-          <Home
-            className="w-8 h-8 relative z-10"
-            style={{ color: "#d4af37", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.5))" }}
-            strokeWidth={1.5}
+          {/* Logo oficial CorretoresRJ */}
+          <img
+            src={logoOficial}
+            alt="CorretoresRJ"
+            draggable={false}
+            className="w-11 h-11 rounded-lg object-cover relative z-10"
+            style={{
+              border: "1px solid rgba(212,175,55,0.5)",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.4)",
+            }}
           />
           <span
-            className="absolute z-20 text-[9px] font-bold tracking-wider"
+            className="absolute z-20 text-[9px] font-bold tracking-wider bottom-1 right-1 px-1 rounded"
             style={{
               color: "#d4af37",
-              top: "58%",
+              background: "rgba(15,26,48,0.85)",
               textShadow: "0 1px 2px rgba(0,0,0,0.6)",
               fontFamily: "'Playfair Display', serif",
             }}
           >
             IA
           </span>
-          <span className="absolute top-1 left-1 right-1 h-1/3 rounded-t-xl opacity-40"
+          <span className="absolute top-1 left-1 right-1 h-1/3 rounded-t-xl opacity-30 pointer-events-none"
             style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.35), transparent)" }} />
         </motion.button>
         <span
@@ -235,19 +241,13 @@ const CorretoresIA = () => {
             >
               <div className="flex items-center gap-3">
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center relative"
+                  className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center relative"
                   style={{
                     background: "linear-gradient(145deg, #1a2744, #0a1220)",
                     border: "1px solid rgba(212,175,55,0.5)",
                   }}
                 >
-                  <Home className="w-5 h-5" style={{ color: "#d4af37" }} strokeWidth={1.5} />
-                  <span
-                    className="absolute text-[7px] font-bold"
-                    style={{ color: "#d4af37", top: "56%", fontFamily: "'Playfair Display', serif" }}
-                  >
-                    IA
-                  </span>
+                  <img src={logoOficial} alt="CorretoresRJ" className="w-full h-full object-cover" />
                 </div>
                 <div className="leading-tight">
                   <p
