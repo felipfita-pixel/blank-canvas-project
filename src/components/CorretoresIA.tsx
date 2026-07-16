@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import { X, Send, Loader2, Home } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
