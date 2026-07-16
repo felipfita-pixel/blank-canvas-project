@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
-import { X, Send, Loader2, Home } from "lucide-react";
+import { X, Send, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import logoOficial from "@/assets/logo-ff.jpeg";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
