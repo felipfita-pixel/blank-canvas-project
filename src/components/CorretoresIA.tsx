@@ -6,6 +6,10 @@ import { supabase } from "@/integrations/supabase/client";
 type Msg = { role: "user" | "assistant"; content: string };
 
 const STORAGE_KEY = "corretores_ia_history";
+const POS_KEY = "corretores_ia_btn_pos";
+const BTN_SIZE = 64; // w-16
+const LABEL_H = 28;
+const MARGIN = 8;
 const GREETING: Msg = {
   role: "assistant",
   content:
