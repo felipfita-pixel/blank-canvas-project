@@ -77,6 +77,68 @@ const CorretoresIA = () => {
     }
   };
 
+  // Draggable button position
+  const getDefaultPos = () => {
+    if (typeof window === "undefined") return { x: 0, y: 0 };
+    return {
+      x: window.innerWidth - BTN_SIZE - 24,
+      y: window.innerHeight - 160 - BTN_SIZE,
+    };
+  };
+  const [pos, setPos] = useState<{ x: number; y: number }>(() => {
+    try {
+      const raw = localStorage.getItem(POS_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch {}
+    return getDefaultPos();
+  });
+  const [dragging, setDragging] = useState(false);
+  const dragStartRef = useRef<{ x: number; y: number; t: number } | null>(null);
+  const suppressClickRef = useRef(false);
+
+  const clamp = (p: { x: number; y: number }) => {
+    if (typeof window === "undefined") return p;
+    const maxX = window.innerWidth - BTN_SIZE - MARGIN;
+    const maxY = window.innerHeight - BTN_SIZE - LABEL_H - MARGIN;
+    return {
+      x: Math.min(Math.max(MARGIN, p.x), maxX),
+      y: Math.min(Math.max(MARGIN, p.y), maxY),
+    };
+  };
+
+  useEffect(() => {
+    const onResize = () => setPos((p) => clamp(p));
+    window.addEventListener("resize", onResize);
+    setPos((p) => clamp(p));
+    return () => window.removeEventListener("resize", onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleDragStart = (_: unknown, info: PanInfo) => {
+    dragStartRef.current = { x: info.point.x, y: info.point.y, t: Date.now() };
+    setDragging(true);
+  };
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
+    const next = clamp({ x: pos.x + info.offset.x, y: pos.y + info.offset.y });
+    setPos(next);
+    try { localStorage.setItem(POS_KEY, JSON.stringify(next)); } catch {}
+    const start = dragStartRef.current;
+    const dist = start
+      ? Math.hypot(info.point.x - start.x, info.point.y - start.y)
+      : 0;
+    suppressClickRef.current = dist > 5;
+    setDragging(false);
+  };
+  const handleClick = () => {
+    if (suppressClickRef.current) {
+      suppressClickRef.current = false;
+      return;
+    }
+    setOpen(true);
+  };
+
+
+
   return (
     <>
       {/* Floating button — casa 3D estilo alto padrão */}
