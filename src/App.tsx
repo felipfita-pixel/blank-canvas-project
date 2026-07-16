@@ -9,6 +9,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import AdminLayout from "@/components/AdminLayout";
 import BrokerChatPanel from "@/components/BrokerChatPanel";
 import ChatWidget from "@/components/ChatWidget";
+import CorretoresIA from "@/components/CorretoresIA";
 import Index from "./pages/Index.tsx";
 import Login from "./pages/Login.tsx";
 import BrokerRegister from "./pages/BrokerRegister.tsx";
@@ -70,6 +71,7 @@ const App = () => (
           </Routes>
           <BrokerChatPanel />
           <ChatWidget />
+          <CorretoresIA />
         </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
