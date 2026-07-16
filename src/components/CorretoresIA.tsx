@@ -181,24 +181,29 @@ const CorretoresIA = () => {
           {/* Glow */}
           <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{ background: "radial-gradient(circle at 30% 30%, rgba(212,175,55,0.35), transparent 65%)" }} />
-          {/* House icon */}
-          <Home
-            className="w-8 h-8 relative z-10"
-            style={{ color: "#d4af37", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.5))" }}
-            strokeWidth={1.5}
+          {/* Logo oficial CorretoresRJ */}
+          <img
+            src={logoOficial}
+            alt="CorretoresRJ"
+            draggable={false}
+            className="w-11 h-11 rounded-lg object-cover relative z-10"
+            style={{
+              border: "1px solid rgba(212,175,55,0.5)",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.4)",
+            }}
           />
           <span
-            className="absolute z-20 text-[9px] font-bold tracking-wider"
+            className="absolute z-20 text-[9px] font-bold tracking-wider bottom-1 right-1 px-1 rounded"
             style={{
               color: "#d4af37",
-              top: "58%",
+              background: "rgba(15,26,48,0.85)",
               textShadow: "0 1px 2px rgba(0,0,0,0.6)",
               fontFamily: "'Playfair Display', serif",
             }}
           >
             IA
           </span>
-          <span className="absolute top-1 left-1 right-1 h-1/3 rounded-t-xl opacity-40"
+          <span className="absolute top-1 left-1 right-1 h-1/3 rounded-t-xl opacity-30 pointer-events-none"
             style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.35), transparent)" }} />
         </motion.button>
         <span
