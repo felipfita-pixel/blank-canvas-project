@@ -141,12 +141,30 @@ const CorretoresIA = () => {
 
   return (
     <>
-      {/* Floating button — casa 3D estilo alto padrão */}
-      <div className="fixed bottom-40 right-4 sm:right-6 z-40 flex flex-col items-center gap-1.5">
+      {/* Floating button — casa 3D estilo alto padrão (arrastável) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        dragElastic={0}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        animate={{ x: pos.x, y: pos.y, scale: dragging ? 1.05 : 1, opacity: dragging ? 0.9 : 1 }}
+        transition={{ type: "spring", stiffness: 500, damping: 40 }}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 9999,
+          touchAction: "none",
+          cursor: dragging ? "grabbing" : "grab",
+          filter: dragging ? "drop-shadow(0 12px 24px rgba(0,0,0,0.35))" : "none",
+        }}
+        className="flex flex-col items-center gap-1.5 select-none"
+      >
         <motion.button
-          onClick={() => setOpen(true)}
-          whileHover={{ scale: 1.08, y: -2 }}
-          whileTap={{ scale: 0.95 }}
+          onClick={handleClick}
+          whileHover={dragging ? undefined : { scale: 1.08, y: -2 }}
+          whileTap={dragging ? undefined : { scale: 0.95 }}
           aria-label="Abrir Corretores IA"
           className="group relative w-16 h-16 rounded-2xl flex items-center justify-center overflow-hidden"
           style={{
@@ -155,7 +173,9 @@ const CorretoresIA = () => {
             boxShadow:
               "0 10px 30px -8px rgba(212,175,55,0.45), 0 4px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)",
             border: "1px solid rgba(212,175,55,0.4)",
+            cursor: dragging ? "grabbing" : "pointer",
           }}
+          draggable={false}
         >
           {/* Glow */}
           <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -166,7 +186,6 @@ const CorretoresIA = () => {
             style={{ color: "#d4af37", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.5))" }}
             strokeWidth={1.5}
           />
-          {/* IA label centered on house */}
           <span
             className="absolute z-20 text-[9px] font-bold tracking-wider"
             style={{
@@ -178,12 +197,11 @@ const CorretoresIA = () => {
           >
             IA
           </span>
-          {/* Highlight */}
           <span className="absolute top-1 left-1 right-1 h-1/3 rounded-t-xl opacity-40"
             style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.35), transparent)" }} />
         </motion.button>
         <span
-          className="text-[10px] font-semibold tracking-wider uppercase text-white px-2 py-0.5 rounded-full"
+          className="text-[10px] font-semibold tracking-wider uppercase text-white px-2 py-0.5 rounded-full pointer-events-none"
           style={{
             background: "linear-gradient(135deg, #1a2744, #0f1a30)",
             border: "1px solid rgba(212,175,55,0.5)",
@@ -193,7 +211,8 @@ const CorretoresIA = () => {
         >
           Corretores IA
         </span>
-      </div>
+      </motion.div>
+
 
       {/* Chat panel */}
       <AnimatePresence>
