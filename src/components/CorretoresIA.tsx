@@ -1,11 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import { X, Send, Loader2, Home } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
 const STORAGE_KEY = "corretores_ia_history";
+const POS_KEY = "corretores_ia_btn_pos";
+const BTN_SIZE = 64; // w-16
+const LABEL_H = 28;
+const MARGIN = 8;
 const GREETING: Msg = {
   role: "assistant",
   content:
@@ -73,14 +77,94 @@ const CorretoresIA = () => {
     }
   };
 
+  // Draggable button position
+  const getDefaultPos = () => {
+    if (typeof window === "undefined") return { x: 0, y: 0 };
+    return {
+      x: window.innerWidth - BTN_SIZE - 24,
+      y: window.innerHeight - 160 - BTN_SIZE,
+    };
+  };
+  const [pos, setPos] = useState<{ x: number; y: number }>(() => {
+    try {
+      const raw = localStorage.getItem(POS_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch {}
+    return getDefaultPos();
+  });
+  const [dragging, setDragging] = useState(false);
+  const dragStartRef = useRef<{ x: number; y: number; t: number } | null>(null);
+  const suppressClickRef = useRef(false);
+
+  const clamp = (p: { x: number; y: number }) => {
+    if (typeof window === "undefined") return p;
+    const maxX = window.innerWidth - BTN_SIZE - MARGIN;
+    const maxY = window.innerHeight - BTN_SIZE - LABEL_H - MARGIN;
+    return {
+      x: Math.min(Math.max(MARGIN, p.x), maxX),
+      y: Math.min(Math.max(MARGIN, p.y), maxY),
+    };
+  };
+
+  useEffect(() => {
+    const onResize = () => setPos((p) => clamp(p));
+    window.addEventListener("resize", onResize);
+    setPos((p) => clamp(p));
+    return () => window.removeEventListener("resize", onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleDragStart = (_: unknown, info: PanInfo) => {
+    dragStartRef.current = { x: info.point.x, y: info.point.y, t: Date.now() };
+    setDragging(true);
+  };
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
+    const next = clamp({ x: pos.x + info.offset.x, y: pos.y + info.offset.y });
+    setPos(next);
+    try { localStorage.setItem(POS_KEY, JSON.stringify(next)); } catch {}
+    const start = dragStartRef.current;
+    const dist = start
+      ? Math.hypot(info.point.x - start.x, info.point.y - start.y)
+      : 0;
+    suppressClickRef.current = dist > 5;
+    setDragging(false);
+  };
+  const handleClick = () => {
+    if (suppressClickRef.current) {
+      suppressClickRef.current = false;
+      return;
+    }
+    setOpen(true);
+  };
+
+
+
   return (
     <>
-      {/* Floating button — casa 3D estilo alto padrão */}
-      <div className="fixed bottom-40 right-4 sm:right-6 z-40 flex flex-col items-center gap-1.5">
+      {/* Floating button — casa 3D estilo alto padrão (arrastável) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        dragElastic={0}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        animate={{ x: pos.x, y: pos.y, scale: dragging ? 1.05 : 1, opacity: dragging ? 0.9 : 1 }}
+        transition={{ type: "spring", stiffness: 500, damping: 40 }}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 9999,
+          touchAction: "none",
+          cursor: dragging ? "grabbing" : "grab",
+          filter: dragging ? "drop-shadow(0 12px 24px rgba(0,0,0,0.35))" : "none",
+        }}
+        className="flex flex-col items-center gap-1.5 select-none"
+      >
         <motion.button
-          onClick={() => setOpen(true)}
-          whileHover={{ scale: 1.08, y: -2 }}
-          whileTap={{ scale: 0.95 }}
+          onClick={handleClick}
+          whileHover={dragging ? undefined : { scale: 1.08, y: -2 }}
+          whileTap={dragging ? undefined : { scale: 0.95 }}
           aria-label="Abrir Corretores IA"
           className="group relative w-16 h-16 rounded-2xl flex items-center justify-center overflow-hidden"
           style={{
@@ -89,7 +173,9 @@ const CorretoresIA = () => {
             boxShadow:
               "0 10px 30px -8px rgba(212,175,55,0.45), 0 4px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)",
             border: "1px solid rgba(212,175,55,0.4)",
+            cursor: dragging ? "grabbing" : "pointer",
           }}
+          draggable={false}
         >
           {/* Glow */}
           <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -100,7 +186,6 @@ const CorretoresIA = () => {
             style={{ color: "#d4af37", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.5))" }}
             strokeWidth={1.5}
           />
-          {/* IA label centered on house */}
           <span
             className="absolute z-20 text-[9px] font-bold tracking-wider"
             style={{
@@ -112,12 +197,11 @@ const CorretoresIA = () => {
           >
             IA
           </span>
-          {/* Highlight */}
           <span className="absolute top-1 left-1 right-1 h-1/3 rounded-t-xl opacity-40"
             style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.35), transparent)" }} />
         </motion.button>
         <span
-          className="text-[10px] font-semibold tracking-wider uppercase text-white px-2 py-0.5 rounded-full"
+          className="text-[10px] font-semibold tracking-wider uppercase text-white px-2 py-0.5 rounded-full pointer-events-none"
           style={{
             background: "linear-gradient(135deg, #1a2744, #0f1a30)",
             border: "1px solid rgba(212,175,55,0.5)",
@@ -127,7 +211,8 @@ const CorretoresIA = () => {
         >
           Corretores IA
         </span>
-      </div>
+      </motion.div>
+
 
       {/* Chat panel */}
       <AnimatePresence>
