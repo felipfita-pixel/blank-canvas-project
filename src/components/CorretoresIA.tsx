@@ -241,19 +241,13 @@ const CorretoresIA = () => {
             >
               <div className="flex items-center gap-3">
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center relative"
+                  className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center relative"
                   style={{
                     background: "linear-gradient(145deg, #1a2744, #0a1220)",
                     border: "1px solid rgba(212,175,55,0.5)",
                   }}
                 >
-                  <Home className="w-5 h-5" style={{ color: "#d4af37" }} strokeWidth={1.5} />
-                  <span
-                    className="absolute text-[7px] font-bold"
-                    style={{ color: "#d4af37", top: "56%", fontFamily: "'Playfair Display', serif" }}
-                  >
-                    IA
-                  </span>
+                  <img src={logoOficial} alt="CorretoresRJ" className="w-full h-full object-cover" />
                 </div>
                 <div className="leading-tight">
                   <p
