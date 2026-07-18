@@ -47,7 +47,6 @@ const Footer = () => {
               <li><button type="button" onClick={() => handleSectionNavigation("lifestyle")} className="hover:text-secondary transition-colors">Ilha Pura</button></li>
               <li><button type="button" onClick={() => handleSectionNavigation("services")} className="hover:text-secondary transition-colors">Serviços</button></li>
                <li><Link to="/imoveis" className="hover:text-secondary transition-colors">Ver Imóveis</Link></li>
-               <li><Link to="/seo-manager" className="hover:text-secondary transition-colors">Gestão de SEO</Link></li>
             </ul>
           </div>
 

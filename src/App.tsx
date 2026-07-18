@@ -70,7 +70,7 @@ const App = () => (
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/anunciar-imovel" element={<AnunciarImovel />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
-            <Route path="/seo-manager" element={<SeoManager />} />
+            <Route path="/admin/seo" element={<ProtectedRoute requireAdmin><AdminLayout><SeoManager /></AdminLayout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BrokerChatPanel />
