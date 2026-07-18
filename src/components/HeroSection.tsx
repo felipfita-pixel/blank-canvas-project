@@ -20,23 +20,42 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
 
-      {/* Top-left: Ilha Pura link */}
-      <motion.a
-        href="https://ilhapura.app"
-        target="_blank"
-        rel="noopener noreferrer"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="absolute top-24 left-4 sm:left-8 lg:left-12 z-30 inline-flex items-center gap-2 text-white/95 hover:text-secondary text-xs sm:text-sm font-body tracking-[0.25em] uppercase underline underline-offset-4 decoration-secondary/70 hover:decoration-secondary transition-colors"
-      >
-        <img
-          src="https://ilhapura.app/favicon.ico"
-          alt="Ilha Pura"
-          className="w-5 h-5 rounded-full object-cover border border-secondary/50"
-        />
-        Lançamento Ilha Pura
-      </motion.a>
+      {/* Top-left: Partners links */}
+      <div className="absolute top-24 left-4 sm:left-8 lg:left-12 z-30 flex flex-col gap-3">
+        <motion.a
+          href="https://ilhapura.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="inline-flex items-center gap-2 text-white/95 hover:text-secondary text-xs sm:text-sm font-body tracking-[0.25em] uppercase underline underline-offset-4 decoration-secondary/70 hover:decoration-secondary transition-colors"
+        >
+          <img
+            src="https://ilhapura.app/favicon.ico"
+            alt="Ilha Pura"
+            className="w-5 h-5 rounded-full object-cover border border-secondary/50"
+          />
+          Lançamento Ilha Pura
+        </motion.a>
+
+        <motion.a
+          href="https://elo27.com/app/rede-social"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="inline-flex items-center gap-2 text-white/95 hover:text-secondary text-xs sm:text-sm font-body tracking-[0.25em] uppercase underline underline-offset-4 decoration-secondary/70 hover:decoration-secondary transition-colors"
+        >
+          <img
+            src="https://elo27.com/favicon.ico"
+            alt="Elo27"
+            className="w-5 h-5 rounded-full object-cover border border-secondary/50"
+          />
+          Rede Social Elo27
+        </motion.a>
+      </div>
 
       {/* Left side: headline + description + buttons */}
       <div className="relative z-10 min-h-screen flex items-center px-4 sm:px-8 lg:px-12">
