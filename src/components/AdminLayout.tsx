@@ -2,7 +2,7 @@ import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   LayoutDashboard, Users, Building2, FileText, Mail, ShieldCheck, LogOut, Settings, Landmark, Home, MessageSquare,
-  Wifi, WifiOff, Menu as MenuIcon, X as CloseIcon,
+  Wifi, WifiOff, Menu as MenuIcon, X as CloseIcon, Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ReactNode, useState, useEffect, useCallback } from "react";
@@ -18,6 +18,7 @@ const menuItems = [
   { title: "Chat ao Vivo", url: "/admin/chat", icon: MessageSquare },
   { title: "Administradores", url: "/admin/users", icon: ShieldCheck },
   { title: "Configurações", url: "/admin/settings", icon: Settings },
+  { title: "Gestão de SEO", url: "/admin/seo", icon: Search },
   { title: "Documentação", url: "/admin/documentation", icon: FileText },
 ];
 
