@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
+import { HelmetProvider } from "react-helmet-async";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
 import AdminLayout from "@/components/AdminLayout";
@@ -33,11 +34,13 @@ import LandingPage from "./pages/LandingPage.tsx";
 import AnunciarImovel from "./pages/AnunciarImovel.tsx";
 import BrokerDashboard from "./pages/BrokerDashboard.tsx";
 import Favorites from "./pages/Favorites.tsx";
+import SeoManager from "./pages/SeoManager.tsx";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -67,6 +70,7 @@ const App = () => (
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/anunciar-imovel" element={<AnunciarImovel />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
+            <Route path="/seo-manager" element={<SeoManager />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BrokerChatPanel />
@@ -75,7 +79,8 @@ const App = () => (
         </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
-  </QueryClientProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;
