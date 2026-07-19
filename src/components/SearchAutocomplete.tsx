@@ -75,9 +75,9 @@ const SearchAutocomplete = ({
   };
 
   const typeColors: Record<string, string> = {
-    bairro: "bg-blue-100 text-blue-700",
-    cidade: "bg-green-100 text-green-700",
-    imóvel: "bg-orange-100 text-orange-700",
+    bairro: "bg-blue-900/40 text-blue-300",
+    cidade: "bg-green-900/40 text-green-300",
+    imóvel: "bg-orange-900/40 text-orange-300",
   };
 
   return (

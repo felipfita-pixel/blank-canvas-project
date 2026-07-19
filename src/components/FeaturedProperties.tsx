@@ -242,7 +242,7 @@ const FeaturedProperties = () => {
             <p className="text-center text-muted-foreground py-12">Nenhum imóvel encontrado com os filtros selecionados.</p>
           )}
           {paginated.map((p) => (
-            <div key={p.id} className="group bg-[hsl(140_45%_9%)] border border-secondary/20 rounded-2xl p-5 shadow-md">
+            <div key={p.id} className="group bg-card border border-border rounded-2xl p-5 shadow-md hover:shadow-lg transition-all">
               <div className="flex flex-col sm:flex-row gap-5 items-start">
                 {/* Image */}
                 <div
@@ -276,15 +276,15 @@ const FeaturedProperties = () => {
                 {/* Details */}
                 <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
                   <div>
-                    <h3 className="text-xl font-heading font-bold text-card-foreground mb-1 line-clamp-1">{p.title}</h3>
-                    <p className="flex items-center gap-1 text-sm text-card-foreground/90 mb-1">
+                    <h3 className="text-xl font-heading font-bold text-foreground mb-1 line-clamp-1">{p.title}</h3>
+                    <p className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
                       <MapPin className="w-3.5 h-3.5 shrink-0" />
                       {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ""}` : p.city || ""}
                     </p>
                     {(p as any).description && (
-                      <p className="text-sm text-card-foreground/85 line-clamp-2 mb-3">{(p as any).description}</p>
+                      <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{(p as any).description}</p>
                     )}
-                    <div className="flex flex-wrap items-center gap-4 text-card-foreground/90 text-sm">
+                    <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
                       {p.bedrooms ? <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" /> {p.bedrooms} quarto{p.bedrooms > 1 ? "s" : ""}</span> : null}
                       {p.bathrooms ? <span className="flex items-center gap-1.5"><Bath className="w-4 h-4" /> {p.bathrooms} banheiro{p.bathrooms > 1 ? "s" : ""}</span> : null}
                       {p.area ? <span className="flex items-center gap-1.5"><Maximize className="w-4 h-4" /> {p.area}m²</span> : null}
