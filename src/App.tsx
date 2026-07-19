@@ -72,6 +72,7 @@ const App = () => (
             <Route path="/anunciar-imovel" element={<AnunciarImovel />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="/admin/seo" element={<ProtectedRoute requireAdmin><AdminLayout><SeoManager /></AdminLayout></ProtectedRoute>} />
+            <Route path="/calculadora-investidor" element={<InvestorCalculator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BrokerChatPanel />
