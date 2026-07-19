@@ -36,7 +36,7 @@ const HeroSection = () => {
             alt="Ilha Pura"
             className="w-5 h-5 rounded-full object-cover border border-secondary/50"
           />
-          Lançamento Ilha Pura
+          # https://ilhapura.app
         </motion.a>
 
         <motion.a
