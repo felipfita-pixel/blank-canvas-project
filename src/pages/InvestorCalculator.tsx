@@ -92,6 +92,19 @@ const InvestorCalculator = () => {
     setData({ ...data, [e.target.name]: value });
   };
 
+  useEffect(() => {
+    const saved = localStorage.getItem("investor_sim_data");
+    if (saved && !searchParams.get("price")) {
+      try {
+        setData(JSON.parse(saved));
+      } catch (e) {}
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("investor_sim_data", JSON.stringify(data));
+  }, [data]);
+
   const runAiAnalysis = async () => {
     setIsAiLoading(true);
     try {
