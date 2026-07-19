@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,25 +6,25 @@
 
 @layer base {
   :root {
-    --background: 140 45% 6%;
+    --background: 213 65% 8%;
     --foreground: 0 0% 100%;
 
-    --card: 139 34% 17%;
+    --card: 213 60% 12%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 139 34% 17%;
+    --popover: 213 60% 12%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 136 40% 12%;
+    --primary: 213 65% 10%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 116 24% 69%;
+    --secondary: 45 90% 55%;
     --secondary-foreground: 136 40% 12%;
 
-    --muted: 139 34% 22%;
-    --muted-foreground: 116 24% 75%;
+    --muted: 213 32% 17%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 136 40% 12%;
+    --accent: 45 90% 55%;
     --accent-foreground: 0 0% 100%;
 
     --whatsapp: 142 70% 49%;
@@ -34,27 +34,27 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 139 34% 25%;
-    --input: 139 34% 25%;
-    --ring: 122 22% 45%;
+    --border: 213 32% 20%;
+    --input: 213 32% 20%;
+    --ring: 45 90% 55%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 136 40% 12%;
+    --sidebar-background: 213 65% 10%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 122 22% 45%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 139 34% 22%;
+    --sidebar-primary: 45 90% 55%;
+    --sidebar-primary-foreground: 213 65% 10%;
+    --sidebar-accent: 213 32% 17%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 139 34% 25%;
-    --sidebar-ring: 122 22% 45%;
+    --sidebar-border: 213 32% 20%;
+    --sidebar-ring: 45 90% 55%;
 
-    --navy: 136 40% 12%;
-    --navy-light: 122 22% 45%;
-    --navy-dark: 136 40% 8%;
+    --navy: 213 65% 10%;
+    --navy-light: 213 45% 20%;
+    --navy-dark: 213 65% 6%;
     --orange: 38 70% 60%;
     --orange-hover: 38 75% 68%;
-    --cream: 140 45% 8%;
+    --cream: 213 65% 4%;
   }
 
   .dark {
