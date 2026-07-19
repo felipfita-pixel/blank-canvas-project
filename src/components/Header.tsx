@@ -109,6 +109,12 @@ const Header = () => {
           >
             Anunciar Imóvel
           </Link>
+          <Link
+            to="/calculadora-investidor"
+            className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300 font-body font-medium"
+          >
+            Calculadora
+          </Link>
           <button
             type="button"
             onClick={() => handleSectionNavigation("contact")}
