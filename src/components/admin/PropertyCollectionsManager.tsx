@@ -392,10 +392,10 @@ const PropertyCollectionsManager = () => {
         <div>
           <h2 className="text-lg font-heading font-bold text-foreground flex items-center gap-2">
             <Folder className="w-5 h-5 text-secondary" />
-            Pastas de Imóveis
+            Organização por Pastas (Sincronização Total)
           </h2>
           <p className="text-xs text-muted-foreground mt-1">
-            Crie pastas, arraste para reordenar e arraste imóveis entre elas. A ordem é refletida em <strong>Imóveis em Destaque</strong> na página inicial.
+            Organize os imóveis em pastas. A ordem definida aqui reflete automaticamente em todas as seções e campanhas do site.
           </p>
         </div>
         <Button

@@ -178,9 +178,12 @@ const AdminProperties = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-heading font-bold text-foreground">Imóveis</h1>
-        <Button onClick={openNew} className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-3xl font-heading font-bold text-foreground">Imóveis Disponíveis</h1>
+          <p className="text-muted-foreground mt-1">Gerenciamento centralizado de todo o catálogo imobiliário.</p>
+        </div>
+        <Button onClick={openNew} className="bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-xl shadow-lg shadow-secondary/20">
           <Plus className="w-4 h-4 mr-2" /> Novo Imóvel
         </Button>
       </div>

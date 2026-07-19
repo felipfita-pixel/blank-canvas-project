@@ -496,7 +496,10 @@ const AboutSection = () => {
               />
             </div>
 
-            <CampaignResults properties={filteredProperties} navigate={navigate} />
+      <div className="bg-muted/50 rounded-2xl p-6 mb-12 border border-border">
+        <h2 className="text-2xl font-heading font-bold text-foreground mb-4">Campanhas e Imóveis</h2>
+        <CampaignResults properties={filteredProperties} navigate={navigate} />
+      </div>
 
             <ScheduleModal open={scheduleOpen} onOpenChange={setScheduleOpen} />
           </div>
