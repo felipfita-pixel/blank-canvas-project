@@ -35,6 +35,7 @@ import AnunciarImovel from "./pages/AnunciarImovel.tsx";
 import BrokerDashboard from "./pages/BrokerDashboard.tsx";
 import Favorites from "./pages/Favorites.tsx";
 import SeoManager from "./pages/SeoManager.tsx";
+import InvestorCalculator from "./pages/InvestorCalculator.tsx";
 
 const queryClient = new QueryClient();
 
