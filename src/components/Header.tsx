@@ -185,6 +185,13 @@ const Header = () => {
               >
                 Anunciar Imóvel
               </Link>
+              <Link
+                to="/calculadora-investidor"
+                className="block text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
+                onClick={() => setMobileOpen(false)}
+              >
+                Calculadora do Investidor
+              </Link>
               <button
                 type="button"
                 className="block w-full text-left text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
