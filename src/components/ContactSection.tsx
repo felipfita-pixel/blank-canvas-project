@@ -74,7 +74,7 @@ const ContactSection = () => {
       <div className="container-main">
         <div className="max-w-5xl mx-auto bg-card rounded-3xl overflow-hidden shadow-2xl shadow-navy-dark/10">
           <div className="grid lg:grid-cols-[380px_1fr]">
-            <div className="bg-gradient-to-b from-navy to-navy-dark p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+            <div className="bg-gradient-to-b from-navy to-navy-dark/90 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
               <div>
                 <h2 className="text-3xl font-heading font-bold text-primary-foreground mb-4">{section.title}</h2>
                 <p className="text-primary-foreground/70 text-sm leading-relaxed">{section.subtitle}</p>

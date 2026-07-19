@@ -107,7 +107,7 @@ const PropertyShowcase = () => {
     <section className="relative w-full overflow-hidden">
       <div className="relative flex flex-col lg:flex-row h-[380px] sm:h-[420px] lg:h-[480px]">
         {/* Details side — dark navy */}
-        <div className="relative lg:w-[35%] w-full bg-primary flex flex-col justify-center px-8 sm:px-10 lg:px-12 py-8 lg:py-10 z-10">
+        <div className="relative lg:w-[35%] w-full bg-primary/95 backdrop-blur-md flex flex-col justify-center px-8 sm:px-10 lg:px-12 py-8 lg:py-10 z-10 border-r border-border">
           <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80 pointer-events-none" />
 
           <AnimatePresence mode="wait">

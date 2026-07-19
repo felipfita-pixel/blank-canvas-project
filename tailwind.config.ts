@@ -16,7 +16,7 @@ export default {
       fontFamily: {
         heading: ['Montserrat', 'sans-serif'],
         display: ['Playfair Display', 'serif'],
-        body: ['Tahoma', 'Verdana', 'Geneva', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

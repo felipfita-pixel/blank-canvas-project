@@ -116,22 +116,22 @@ function AdminSidebar({ open, onClose }: { open: boolean; onClose: () => void })
         />
       )}
       <aside
-        className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-navy text-white flex flex-col border-r border-white/10 transform transition-transform duration-200 ${
+        className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-card text-foreground flex flex-col border-r border-border transform transition-transform duration-200 ${
           open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
-        <div className="p-5 border-b border-white/10 flex items-start justify-between">
+        <div className="p-5 border-b border-border flex items-start justify-between">
           <div>
-            <h2 className="font-heading font-bold text-lg text-white">FF Imobiliária</h2>
-            <p className="text-xs text-white/50 mt-1 truncate">{user?.email}</p>
+            <h2 className="font-heading font-bold text-lg text-foreground">FF Imobiliária</h2>
+            <p className="text-[10px] text-muted-foreground mt-0.5 truncate uppercase tracking-widest font-medium">{user?.email}</p>
           </div>
-          <button onClick={onClose} className="md:hidden text-white/70 hover:text-white" aria-label="Fechar">
+          <button onClick={onClose} className="md:hidden text-muted-foreground hover:text-foreground" aria-label="Fechar">
             <CloseIcon className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="px-3 pt-4 pb-2">
-          <p className="text-white/40 text-xs uppercase tracking-wider px-2">Menu</p>
+        <div className="px-3 pt-6 pb-2">
+          <p className="text-muted-foreground/50 text-[10px] uppercase tracking-[0.2em] px-3 font-bold">Principal</p>
         </div>
 
         <nav className="flex-1 px-3 overflow-y-auto">
@@ -143,10 +143,10 @@ function AdminSidebar({ open, onClose }: { open: boolean; onClose: () => void })
                   end={item.url === "/admin"}
                   onClick={onClose}
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-sm ${
+                    `flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-sm group ${
                       isActive
-                        ? "bg-secondary text-secondary-foreground font-semibold"
-                        : "text-white/80 hover:bg-white/10 hover:text-white"
+                        ? "bg-secondary text-secondary-foreground font-bold shadow-md shadow-secondary/20"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`
                   }
                 >
@@ -158,13 +158,13 @@ function AdminSidebar({ open, onClose }: { open: boolean; onClose: () => void })
           </ul>
         </nav>
 
-        <div className="p-3 border-t border-white/10">
+        <div className="p-4 border-t border-border">
           <button
             onClick={handleSignOut}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-white/80 hover:bg-destructive/20 hover:text-destructive w-full transition-colors"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:bg-destructive/10 hover:text-destructive w-full transition-colors"
           >
             <LogOut className="w-4 h-4" />
-            <span>Sair</span>
+            <span className="font-medium">Sair</span>
           </button>
         </div>
       </aside>
