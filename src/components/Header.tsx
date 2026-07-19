@@ -101,7 +101,7 @@ const Header = () => {
             to="/imoveis"
             className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-300 font-body font-medium"
           >
-            Imóveis
+            Portfólio
           </Link>
           <Link
             to="/anunciar-imovel"
@@ -170,7 +170,7 @@ const Header = () => {
                 className="block text-primary-foreground/80 hover:text-primary-foreground py-2.5 px-3 rounded-lg transition-colors text-sm"
                 onClick={() => setMobileOpen(false)}
               >
-                Imóveis
+                Portfólio
               </Link>
               <Link
                 to="/anunciar-imovel"

@@ -202,7 +202,7 @@ const FeaturedProperties = () => {
               className="text-3xl font-heading font-bold text-secondary italic"
               style={{ textShadow: "0 2px 6px rgba(0,0,0,0.6)" }}
             >
-              Imóveis Disponíveis
+              Portfólio
             </h2>
             <p
               className="text-muted-foreground mt-2 max-w-xl"
@@ -212,7 +212,7 @@ const FeaturedProperties = () => {
             </p>
           </div>
           <Link to="/imoveis" className="hidden sm:flex items-center gap-1 text-secondary font-medium hover:underline whitespace-nowrap">
-            Ver mais imóveis <ArrowRight className="w-4 h-4" />
+            Acessar portfólio completo <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
@@ -368,7 +368,7 @@ const FeaturedProperties = () => {
         {/* Mobile link */}
         <div className="mt-8 text-center sm:hidden">
           <Link to="/imoveis">
-            <Button variant="outline" className="rounded-full px-8">Ver todos os imóveis</Button>
+            <Button variant="outline" className="rounded-full px-8">Ver portfólio completo</Button>
           </Link>
         </div>
       </div>

@@ -170,7 +170,7 @@ const Properties = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
-        title="Imóveis à Venda e Aluguel | Corretores Associados & FF"
+        title="Portfólio de Imóveis | Corretores Associados & FF"
         description="Veja apartamentos, casas e coberturas disponíveis na Barra da Tijuca, Recreio, Ilha Pura e Zona Sul do Rio de Janeiro."
         path="/imoveis"
       />
@@ -179,8 +179,8 @@ const Properties = () => {
       {/* Hero */}
       <div className="bg-primary pt-24 pb-12">
         <div className="container-main">
-          <h1 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-2">Imóveis Disponíveis</h1>
-          <p className="text-primary-foreground/70">Encontre o imóvel ideal para você em qualquer região.</p>
+          <h1 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-2 text-secondary italic">Portfólio de Imóveis</h1>
+          <p className="text-primary-foreground/70">Uma vitrine inteligente com todos os imóveis ativos do nosso sistema.</p>
         </div>
       </div>
 
