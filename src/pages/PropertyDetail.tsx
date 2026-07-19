@@ -330,7 +330,7 @@ const PropertyDetail = () => {
               )}
 
               {/* CTA */}
-              <div className="bg-primary/95 border border-secondary/20 rounded-2xl p-6 text-primary-foreground shadow-2xl">
+              <div className="bg-primary/95 border border-secondary/20 rounded-2xl p-6 text-primary-foreground shadow-2xl space-y-4">
                 <h3 className="font-heading font-bold text-xl mb-3">Interessado neste imóvel?</h3>
                 <p className="text-primary-foreground/70 text-sm mb-6 leading-relaxed">
                   Agende agora mesmo uma visita exclusiva e conheça todos os detalhes deste empreendimento.
@@ -340,6 +340,11 @@ const PropertyDetail = () => {
                     <MessageCircle className="w-4 h-4 mr-2" /> Agendar Visita
                   </Button>
                 </a>
+                <Link to={`/calculadora-investidor?price=${property.price}&area=${property.area}&bairro=${property.neighborhood || ""}&city=${property.city || ""}&iptu=500&condo=1200`}>
+                  <Button variant="outline" size="lg" className="w-full border-secondary/40 text-secondary hover:bg-secondary/10 rounded-full font-bold h-14 uppercase tracking-widest text-xs">
+                    <TrendingUp className="w-4 h-4 mr-2" /> Analisar este investimento
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
