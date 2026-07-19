@@ -165,7 +165,7 @@ const PropertyDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="fixed inset-x-0 top-0 z-50 bg-primary shadow-lg shadow-primary/30">
+      <div className="fixed inset-x-0 top-0 z-50 bg-primary/95 backdrop-blur-md border-b border-border shadow-lg">
         <Header />
       </div>
 
@@ -179,7 +179,7 @@ const PropertyDetail = () => {
           </div>
           <div className="container-main px-4 sm:px-6 lg:px-8">
           <div
-            className="relative aspect-[16/9] max-h-[500px] overflow-hidden cursor-pointer rounded-xl"
+            className="relative aspect-[16/9] lg:aspect-[21/9] max-h-[600px] overflow-hidden cursor-pointer rounded-2xl shadow-2xl"
             onClick={() => setLightboxOpen(true)}
           >
             <WatermarkImage
@@ -253,7 +253,7 @@ const PropertyDetail = () => {
                 {property.featured && <Badge className="bg-secondary text-secondary-foreground text-xs">Destaque</Badge>}
               </div>
 
-              <h1 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-2">{property.title}</h1>
+              <h1 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4 leading-tight">{property.title}</h1>
 
               {location && (
                 <p className="flex items-center gap-1 text-muted-foreground mb-2">
@@ -265,11 +265,16 @@ const PropertyDetail = () => {
               </div>
 
               {property.price > 0 && (
-                <div className="flex flex-wrap items-center gap-4 mb-8">
-                  <p className="text-3xl font-bold text-secondary">
-                    {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
-                  </p>
-                  <PropertyShareButtons property={property} variant="full" />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-10 py-6 border-y border-border">
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Valor do Investimento</p>
+                    <p className="text-4xl font-bold text-secondary">
+                      {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
+                    </p>
+                  </div>
+                  <div className="flex-1 flex justify-end">
+                    <PropertyShareButtons property={property} variant="full" />
+                  </div>
                 </div>
               )}
 
@@ -277,7 +282,7 @@ const PropertyDetail = () => {
               {details.length > 0 && (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-8">
                   {details.map((d, i) => (
-                    <div key={i} className="bg-muted/50 rounded-xl p-4 text-center">
+                    <div key={i} className="bg-card border border-border rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-all">
                       <d.icon className="w-5 h-5 text-primary mx-auto mb-1" />
                       <p className="text-lg font-bold text-foreground">{d.value}</p>
                       <p className="text-xs text-muted-foreground">{d.label}</p>
@@ -325,11 +330,13 @@ const PropertyDetail = () => {
               )}
 
               {/* CTA */}
-              <div className="bg-primary rounded-xl p-5 text-primary-foreground">
-                <h3 className="font-heading font-bold text-lg mb-2">Interessado neste imóvel?</h3>
-                <p className="text-primary-foreground/70 text-sm mb-4">Entre em contato e agende uma visita.</p>
+              <div className="bg-primary/95 border border-secondary/20 rounded-2xl p-6 text-primary-foreground shadow-2xl">
+                <h3 className="font-heading font-bold text-xl mb-3">Interessado neste imóvel?</h3>
+                <p className="text-primary-foreground/70 text-sm mb-6 leading-relaxed">
+                  Agende agora mesmo uma visita exclusiva e conheça todos os detalhes deste empreendimento.
+                </p>
                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                  <Button className="w-full bg-secondary text-secondary-foreground hover:bg-orange-hover rounded-lg font-semibold">
+                  <Button size="lg" className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full font-bold h-14 uppercase tracking-widest text-xs">
                     <MessageCircle className="w-4 h-4 mr-2" /> Agendar Visita
                   </Button>
                 </a>
