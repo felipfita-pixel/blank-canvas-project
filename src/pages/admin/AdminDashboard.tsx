@@ -12,16 +12,16 @@ import AdminPropertyViews from "@/components/admin/AdminPropertyViews";
 
 const StatCard = ({ icon: Icon, label, value, color, onClick }: { icon: any; label: string; value: number; color: string; onClick?: () => void }) => (
   <div
-    className={`bg-card rounded-xl p-6 shadow-sm border border-border transition-all ${onClick ? "cursor-pointer hover:shadow-md hover:border-secondary/40" : ""}`}
+    className={`bg-card rounded-2xl p-6 shadow-sm border border-border transition-all duration-300 ${onClick ? "cursor-pointer hover:shadow-xl hover:border-secondary/40 hover:-translate-y-1" : ""}`}
     onClick={onClick}
   >
     <div className="flex items-center justify-between">
-      <div>
-        <p className="text-sm text-muted-foreground">{label}</p>
-        <p className="text-3xl font-heading font-bold text-foreground mt-1">{value}</p>
+      <div className="space-y-1">
+        <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] font-bold">{label}</p>
+        <p className="text-4xl font-heading font-bold text-foreground tabular-nums tracking-tighter">{value}</p>
       </div>
-      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${color}`}>
-        <Icon className="w-6 h-6 text-primary-foreground" />
+      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${color}`}>
+        <Icon className="w-7 h-7 text-primary-foreground" />
       </div>
     </div>
   </div>
@@ -262,16 +262,16 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-heading font-bold text-foreground mb-6 print:text-lg print:mb-2">Dashboard</h1>
+      <h1 className="text-4xl font-heading font-bold text-foreground mb-8 tracking-tight print:text-lg print:mb-2">Painel de Performance</h1>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6 print:hidden">
-        <StatCard icon={Building2} label="Imóveis cadastrados" value={stats.properties} color="bg-navy" onClick={() => navigate("/admin/properties")} />
+        <StatCard icon={Building2} label="Acervo de Imóveis" value={stats.properties} color="bg-primary/90" onClick={() => navigate("/admin/properties")} />
         <StatCard icon={Users} label="Corretores aprovados" value={stats.brokers} color="bg-secondary" onClick={() => navigate("/admin/brokers")} />
         <StatCard icon={TrendingUp} label="Corretores pendentes" value={stats.pendingBrokers} color="bg-orange-hover" onClick={() => navigate("/admin/brokers")} />
         <StatCard icon={Mail} label="Mensagens não lidas" value={stats.messages} color="bg-destructive" onClick={() => navigate("/admin/messages")} />
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 print:hidden">
-        <StatCard icon={MessageSquare} label="Chats não lidos" value={stats.chatMessages} color="bg-navy-light" onClick={() => navigate("/admin/messages")} />
-        <StatCard icon={Landmark} label="Empresas cadastradas" value={stats.companies} color="bg-navy-light" onClick={() => navigate("/admin/companies")} />
+        <StatCard icon={MessageSquare} label="Chats não lidos" value={stats.chatMessages} color="bg-primary/80" onClick={() => navigate("/admin/messages")} />
+        <StatCard icon={Landmark} label="Empresas cadastradas" value={stats.companies} color="bg-primary/80" onClick={() => navigate("/admin/companies")} />
         <StatCard icon={Landmark} label="Empresas pendentes" value={stats.pendingCompanies} color="bg-orange-hover" onClick={() => navigate("/admin/companies")} />
         <StatCard icon={BarChart3} label="Total de leads" value={stats.totalLeads} color="bg-secondary" />
       </div>
