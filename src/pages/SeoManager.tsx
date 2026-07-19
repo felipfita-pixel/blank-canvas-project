@@ -99,7 +99,7 @@ const SeoManager = () => {
               SEO Manager <span className="text-secondary italic">para Empresas</span>
             </h1>
             <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed">
-              Como faço para usar o SEO Manager para este site? 
+              Configurar meu SEO Manager no corretoresrj.com. 
               Transformamos seu site em uma máquina de captação de leads orgânicos através de estratégias avançadas de SEO.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
