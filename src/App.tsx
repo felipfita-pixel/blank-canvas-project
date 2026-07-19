@@ -35,6 +35,7 @@ import AnunciarImovel from "./pages/AnunciarImovel.tsx";
 import BrokerDashboard from "./pages/BrokerDashboard.tsx";
 import Favorites from "./pages/Favorites.tsx";
 import SeoManager from "./pages/SeoManager.tsx";
+import InvestorCalculator from "./pages/InvestorCalculator.tsx";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +72,7 @@ const App = () => (
             <Route path="/anunciar-imovel" element={<AnunciarImovel />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="/admin/seo" element={<ProtectedRoute requireAdmin><AdminLayout><SeoManager /></AdminLayout></ProtectedRoute>} />
+            <Route path="/calculadora-investidor" element={<InvestorCalculator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BrokerChatPanel />
