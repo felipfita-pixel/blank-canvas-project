@@ -18,7 +18,7 @@ const menuItems = [
   { title: "Chat ao Vivo", url: "/admin/chat", icon: MessageSquare },
   { title: "Administradores", url: "/admin/users", icon: ShieldCheck },
   { title: "Configurações", url: "/admin/settings", icon: Settings },
-  { title: "Gestão de SEO", url: "/admin/seo", icon: Search },
+  { title: "SEO Manager", url: "/admin/seo", icon: Search },
   { title: "Documentação", url: "/admin/documentation", icon: FileText },
 ];
 
