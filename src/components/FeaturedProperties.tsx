@@ -202,7 +202,7 @@ const FeaturedProperties = () => {
               className="text-3xl font-heading font-bold text-secondary italic"
               style={{ textShadow: "0 2px 6px rgba(0,0,0,0.6)" }}
             >
-              Imóveis em Destaque
+              Imóveis Disponíveis
             </h2>
             <p
               className="text-muted-foreground mt-2 max-w-xl"
