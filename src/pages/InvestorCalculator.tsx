@@ -125,7 +125,7 @@ const InvestorCalculator = () => {
         year: i,
         patrimony: data.price * Math.pow(1 + data.appreciation / 100, i),
         debt: Math.max(0, results.financedAmount * (1 - (i / data.term))), // Simplified linear debt reduction for chart
-        cumulativeRent: results.rentEstimate * 12 * i
+        cumulativeRent: data.rentEstimate * 12 * i
       });
     }
     return arr;
