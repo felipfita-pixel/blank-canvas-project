@@ -46,7 +46,7 @@ const Footer = () => {
               <li><button type="button" onClick={() => handleSectionNavigation("about")} className="hover:text-secondary transition-colors">Apresentação</button></li>
               <li><button type="button" onClick={() => handleSectionNavigation("lifestyle")} className="hover:text-secondary transition-colors">Ilha Pura</button></li>
               <li><button type="button" onClick={() => handleSectionNavigation("services")} className="hover:text-secondary transition-colors">Serviços</button></li>
-               <li><Link to="/imoveis" className="hover:text-secondary transition-colors">Ver Imóveis</Link></li>
+               <li><Link to="/imoveis" className="hover:text-secondary transition-colors">Portfólio</Link></li>
             </ul>
           </div>
 
