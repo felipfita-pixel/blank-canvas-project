@@ -155,7 +155,7 @@ const CampaignResults = ({ properties, navigate }: { properties: FeaturedPropert
               const image = property.images && property.images.length > 0 ? property.images[0] : fallbackImages[index % fallbackImages.length];
 
               return (
-                <div key={property.id} className="group bg-card border border-border rounded-2xl p-4 shadow-md">
+                <div key={property.id} className="group bg-card border border-border rounded-2xl p-4 shadow-md hover:shadow-lg transition-all">
                   <div className="flex flex-col sm:flex-row gap-4 items-start">
                     {/* Image */}
                     <div
@@ -468,7 +468,7 @@ const AboutSection = () => {
       <div className="container-main">
         <div className="grid lg:grid-cols-[1fr_260px] gap-6 items-start">
           <div>
-            <h2 className="text-3xl font-heading font-bold text-secondary mb-1 italic">{about.title}</h2>
+            <h2 className="text-3xl font-heading font-bold text-secondary mb-1 italic tracking-tight">{about.title}</h2>
             <div className="w-12 h-1 bg-secondary rounded mb-4" />
             <p className="text-muted-foreground mb-6 leading-relaxed text-sm">{about.subtitle}</p>
 
@@ -518,7 +518,7 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <ScrollArea className="h-[420px]">
+            <ScrollArea className="h-[450px]">
               <div className="p-2 space-y-1.5">
                 {allBrokersList.slice(0, 30).map((broker) => (
                   <div key={broker.id} className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-muted/50 transition-colors">

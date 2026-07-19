@@ -9,7 +9,7 @@ const ServicesSection = () => {
   const items = section.content.items || [];
 
   return (
-    <section id="services" className="section-padding bg-cream">
+    <section id="services" className="section-padding bg-background/50 border-t border-border">
       <div className="container-main text-center">
         <h2 className="text-3xl font-heading font-bold text-primary mb-10 italic">{section.title}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
