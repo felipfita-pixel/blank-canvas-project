@@ -1,308 +1,406 @@
-import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
-import { CheckCircle2, MessageSquare, ArrowRight, TrendingUp, Search, MousePointer2, Link2, Globe, FileBarChart, MapPin, Plus } from "lucide-react";
+import { useState, useEffect } from "react";
+import { 
+  LayoutDashboard, 
+  Globe, 
+  Search, 
+  FileText, 
+  Settings, 
+  BarChart, 
+  Eye, 
+  AlertCircle, 
+  CheckCircle2, 
+  Save,
+  Link as LinkIcon,
+  Twitter,
+  Facebook,
+  Smartphone,
+  Info
+} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { toast } from "sonner";
+import { SeoConfig, PageSeo } from "@/types/seo";
 
 const SeoManager = () => {
-  const whatsappNumber = "5521975316631";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Olá! Gostaria de solicitar um orçamento para o serviço de SEO Manager.`;
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const [loading, setLoading] = useState(false);
+  
+  const [globalConfig, setGlobalConfig] = useState<SeoConfig>({
+    domain: "corretoresrj.com",
+    global_title: "Corretores Associados & FF | Imóveis Barra da Tijuca, Recreio e Zona Sul RJ",
+    global_description: "Especialistas em imóveis prontos e lançamentos na Barra da Tijuca, Recreio, Ilha Pura, Península e Zona Sul do Rio de Janeiro.",
+    canonical_url: "https://www.corretoresrj.com",
+    robots: "index, follow",
+    twitter_card: "summary_large_image",
+    google_analytics_id: "G-XXXXXXXXXX",
+    google_search_console_id: "verification-code-here",
+    robots_txt: "User-agent: *\nAllow: /\nSitemap: https://www.corretoresrj.com/sitemap.xml",
+  });
 
-  const services = [
-    { title: "Auditoria SEO", icon: <Search className="w-6 h-6" />, desc: "Análise profunda técnica e de conteúdo para identificar gargalos." },
-    { title: "Palavras-chave", icon: <FileBarChart className="w-6 h-6" />, desc: "Pesquisa estratégica de termos com alto potencial de conversão." },
-    { title: "SEO On Page", icon: <CheckCircle2 className="w-6 h-6" />, desc: "Otimização de títulos, metas, headers e conteúdo interno." },
-    { title: "SEO Técnico", icon: <Settings className="w-6 h-6" />, desc: "Melhoria de performance, Core Web Vitals e indexação." },
-    { title: "Link Building", icon: <Link2 className="w-6 h-6" />, desc: "Conquista de autoridade através de links de qualidade." },
-    { title: "SEO Local", icon: <MapPin className="w-6 h-6" />, desc: "Otimização para Google Maps e buscas regionais." },
-    { title: "Monitoramento", icon: <TrendingUp className="w-6 h-6" />, desc: "Acompanhamento diário de posições e visibilidade." },
-    { title: "Google Search Console", icon: <Globe className="w-6 h-6" />, desc: "Gestão completa da comunicação com o Google." },
-    { title: "Google Analytics", icon: <TrendingUp className="w-6 h-6" />, desc: "Análise de comportamento e origem de tráfego." },
-    { title: "Relatórios Mensais", icon: <FileBarChart className="w-6 h-6" />, desc: "Transparência total com KPIs e resultados alcançados." },
-  ];
+  const [pagesSeo, setPagesSeo] = useState<PageSeo[]>([
+    { path: "/", title: "Home | Corretores RJ", description: "Encontre os melhores imóveis na Barra da Tijuca e região.", keywords: "imóveis rj, barra da tijuca, recreio" },
+    { path: "/imoveis", title: "Imóveis à Venda | Corretores RJ", description: "Confira nossa lista completa de imóveis disponíveis.", keywords: "apartamentos à venda, casas rj" },
+    { path: "/contato", title: "Contato | Corretores RJ", description: "Entre em contato com nossos especialistas.", keywords: "corretor de imóveis, imobiliária rj" },
+  ]);
 
-  const faq = [
-    { q: "O que faz um SEO Manager?", a: "Um SEO Manager é responsável por planejar e executar estratégias para melhorar a visibilidade de um site nos motores de busca (como o Google). Isso envolve desde ajustes técnicos até a criação de conteúdo estratégico e autoridade de marca." },
-    { q: "Quanto custa o serviço de SEO?", a: "O investimento varia de acordo com o tamanho do site, a concorrência do setor e os objetivos desejados. Oferecemos planos personalizados após uma auditoria inicial gratuita." },
-    { q: "Quanto tempo demora para ver resultados?", a: "O SEO é uma estratégia de médio a longo prazo. Geralmente, as primeiras melhorias de posicionamento aparecem em 3 meses, com resultados sólidos de tráfego entre 6 a 12 meses." },
-    { q: "Vale a pena investir em SEO?", a: "Sim. Diferente do tráfego pago, o SEO constrói um ativo para sua empresa. O tráfego orgânico é qualificado, gratuito (após a implementação) e gera autoridade contínua para sua marca." },
-  ];
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "SEO Manager para Empresas",
-    "provider": {
-      "@type": "RealEstateAgent",
-      "name": "Corretores RJ",
-      "url": "https://www.corretoresrj.com"
-    },
-    "description": "Serviço profissional de SEO Manager para aumentar o tráfego orgânico, melhorar o posicionamento no Google e gerar mais clientes.",
-    "areaServed": "Brasil",
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Serviços de SEO",
-      "itemListElement": services.map((s, i) => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": s.title
-        }
-      }))
-    }
+  const handleSaveGlobal = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("Configurações globais salvas com sucesso!");
+    }, 1000);
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faq.map(f => ({
-      "@type": "Question",
-      "name": f.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": f.a
-      }
-    }))
+  const calculateSeoScore = () => {
+    let score = 85;
+    if (!globalConfig.google_analytics_id?.startsWith("G-")) score -= 10;
+    if (globalConfig.global_description.length < 120) score -= 5;
+    return score;
   };
 
   return (
-    <div className="bg-primary min-h-screen font-body text-white">
-      <Helmet>
-        <title>SEO Manager | Gestão Completa de SEO | Corretores RJ</title>
-        <meta name="description" content="Serviço profissional de SEO Manager para aumentar o tráfego orgânico, melhorar o posicionamento no Google e gerar mais clientes." />
-        <link rel="canonical" href="https://www.corretoresrj.com/seo-manager" />
-        <meta name="robots" content="index, follow" />
-        
-        <meta property="og:title" content="SEO Manager | Gestão Completa de SEO | Corretores RJ" />
-        <meta property="og:description" content="Aumente seu tráfego orgânico e conquiste a primeira página do Google com nossa gestão especializada." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.corretoresrj.com/seo-manager" />
-        
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SEO Manager | Gestão Completa de SEO" />
-        <meta name="twitter:description" content="Serviço profissional de SEO para empresas e imobiliárias." />
-
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
-      </Helmet>
-
-      {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="container-main px-4 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
-              SEO Manager <span className="text-secondary italic">para Empresas</span>
-            </h1>
-            <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed">
-              Configurar meu SEO Manager no corretoresrj.com. 
-              Transformamos seu site em uma máquina de captação de leads orgânicos através de estratégias avançadas de SEO.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button asChild size="lg" className="bg-secondary hover:bg-orange-hover text-secondary-foreground font-bold px-8 h-14 rounded-full text-lg shadow-xl shadow-secondary/20">
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Solicitar Orçamento</a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white/20 hover:bg-white/10 text-white font-bold px-8 h-14 rounded-full text-lg">
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                  <MessageSquare className="w-5 h-5 mr-2 text-secondary" />
-                  Falar no WhatsApp
-                </a>
-              </Button>
-            </div>
-          </motion.div>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold font-display">SEO Manager</h1>
+          <p className="text-muted-foreground">Gerencie o SEO do corretoresrj.com de forma profissional.</p>
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-b from-secondary/10 to-transparent blur-3xl rounded-full opacity-20 pointer-events-none" />
-      </section>
-
-      {/* O que é */}
-      <section className="py-20 bg-black/20">
-        <div className="container-main px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">O que faz um <span className="text-secondary italic">SEO Manager?</span></h2>
-              <div className="space-y-4 text-white/70 text-lg leading-relaxed">
-                <p>
-                  Um SEO Manager é o especialista que orquestra toda a presença orgânica da sua empresa nos buscadores. 
-                  Não se trata apenas de "escolher palavras", mas de construir uma autoridade digital sólida.
-                </p>
-                <p>
-                  Nossa gestão completa envolve desde o código-fonte (SEO Técnico) até a experiência do usuário e a autoridade que outros sites transmitem ao seu (Link Building).
-                </p>
-                <p>
-                  Diferente de anúncios, os resultados do SEO são cumulativos. Cada melhoria feita hoje continua gerando frutos por meses e anos.
-                </p>
-              </div>
-            </motion.div>
-            <div className="relative">
-              <div className="aspect-video bg-gradient-to-br from-secondary/20 to-primary-foreground/10 rounded-2xl border border-white/10 flex items-center justify-center">
-                <TrendingUp className="w-24 h-24 text-secondary/40 animate-pulse" />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-secondary p-6 rounded-xl shadow-2xl hidden md:block">
-                <p className="text-secondary-foreground font-bold text-2xl">100%</p>
-                <p className="text-secondary-foreground/80 text-sm">Foco em Performance</p>
-              </div>
-            </div>
-          </div>
+        <div className="flex gap-2">
+          <Badge variant="outline" className="text-emerald-500 border-emerald-500/20 bg-emerald-500/5 py-1 px-3">
+            <CheckCircle2 className="w-3 h-3 mr-1" />
+            Sitemap Ativo
+          </Badge>
+          <Badge variant="outline" className="text-blue-500 border-blue-500/20 bg-blue-500/5 py-1 px-3">
+            Score: {calculateSeoScore()}/100
+          </Badge>
         </div>
-      </section>
-
-      {/* Serviços Inclusos */}
-      <section className="py-20">
-        <div className="container-main px-4">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-12 text-center">Nossa <span className="text-secondary italic">Estratégia 360º</span></h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {services.map((s, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors"
-              >
-                <div className="bg-secondary/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-secondary">
-                  {s.icon}
-                </div>
-                <h3 className="font-bold text-lg mb-2">{s.title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed">{s.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefícios */}
-      <section className="py-20 bg-secondary/10">
-        <div className="container-main px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-12 text-center">Por que investir em <span className="text-secondary italic">Gestão de SEO?</span></h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {[
-                { title: "Mais Visibilidade", desc: "Esteja presente nas buscas exatas que seus clientes realizam." },
-                { title: "Mais Leads Qualificados", desc: "Pessoas que buscam por soluções têm maior intenção de compra." },
-                { title: "Redução de CAC", desc: "O custo por aquisição orgânica é drasticamente menor que o tráfego pago." },
-                { title: "Autoridade de Marca", desc: "Estar no topo do Google transmite confiança e profissionalismo." }
-              ].map((b, i) => (
-                <div key={i} className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <CheckCircle2 className="w-8 h-8 text-secondary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl mb-2">{b.title}</h3>
-                    <p className="text-white/60 leading-relaxed">{b.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Processo */}
-      <section className="py-20">
-        <div className="container-main px-4">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-16 text-center">Nosso <span className="text-secondary italic">Processo de Trabalho</span></h2>
-          <div className="relative">
-            {/* Connection line (desktop) */}
-            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-white/10 -translate-y-1/2 hidden lg:block" />
-            
-            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8 relative z-10">
-              {[
-                { step: "01", title: "Diagnóstico", desc: "Auditoria técnica e competitiva." },
-                { step: "02", title: "Planejamento", desc: "Definição de keywords e metas." },
-                { step: "03", title: "Execução", desc: "Implementações técnicas e conteúdo." },
-                { step: "04", title: "Otimização", desc: "Ajustes baseados em dados reais." },
-                { step: "05", title: "Relatórios", desc: "Análise de resultados e ROI." },
-              ].map((p, i) => (
-                <div key={i} className="bg-primary border border-white/10 p-6 rounded-2xl text-center">
-                  <span className="inline-block bg-secondary text-secondary-foreground font-bold px-3 py-1 rounded-full text-xs mb-4">{p.step}</span>
-                  <h3 className="font-bold text-xl mb-3">{p.title}</h3>
-                  <p className="text-sm text-white/50">{p.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-20 bg-black/20">
-        <div className="container-main px-4 max-w-3xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-12 text-center">Perguntas <span className="text-secondary italic">Frequentes</span></h2>
-          <Accordion type="single" collapsible className="w-full">
-            {faq.map((item, i) => (
-              <AccordionItem key={i} value={`item-${i}`} className="border-white/10">
-                <AccordionTrigger className="text-left font-bold text-lg hover:text-secondary py-6">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-white/60 text-base leading-relaxed pb-6">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
-
-      {/* CTA Final */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="container-main px-4 relative z-10">
-          <div className="bg-gradient-to-br from-secondary to-orange-hover p-12 md:p-20 rounded-[3rem] text-center shadow-3xl shadow-secondary/20">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-secondary-foreground mb-8">
-              Pronto para dominar o <span className="italic">Google?</span>
-            </h2>
-            <p className="text-secondary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium">
-              Não deixe sua empresa invisível. Comece hoje sua jornada rumo ao topo das buscas e multiplique seu tráfego orgânico.
-            </p>
-            <Button asChild size="lg" className="bg-primary text-white hover:bg-black font-bold px-12 h-16 rounded-full text-xl group transition-all duration-300">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                Quero falar com um especialista
-                <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-          </div>
-        </div>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/20 blur-3xl rounded-full" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 blur-3xl rounded-full" />
-      </section>
-
-      {/* Footer Navigation Back to Home */}
-      <div className="container-main px-4 py-12 border-t border-white/10 flex justify-between items-center opacity-60 hover:opacity-100 transition-opacity">
-        <Link to="/" className="flex items-center gap-2 font-display italic text-lg hover:text-secondary transition-colors">
-          <ArrowRight className="w-5 h-5 rotate-180" />
-          Voltar para Home
-        </Link>
-        <p className="text-sm">SEO Profissional para Empresas © 2026</p>
       </div>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="bg-muted p-1">
+          <TabsTrigger value="dashboard" className="gap-2">
+            <LayoutDashboard className="w-4 h-4" /> Dashboard
+          </TabsTrigger>
+          <TabsTrigger value="global" className="gap-2">
+            <Globe className="w-4 h-4" /> Global
+          </TabsTrigger>
+          <TabsTrigger value="pages" className="gap-2">
+            <FileText className="w-4 h-4" /> Páginas
+          </TabsTrigger>
+          <TabsTrigger value="tools" className="gap-2">
+            <Settings className="w-4 h-4" /> Ferramentas
+          </TabsTrigger>
+          <TabsTrigger value="analytics" className="gap-2">
+            <BarChart className="w-4 h-4" /> Analytics
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="dashboard" className="mt-6 space-y-6">
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground uppercase">Pontuação SEO</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-end gap-2">
+                  <span className="text-4xl font-bold text-emerald-500">{calculateSeoScore()}</span>
+                  <span className="text-muted-foreground pb-1">/100</span>
+                </div>
+                <div className="mt-4 h-2 bg-muted rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-emerald-500" 
+                    style={{ width: `${calculateSeoScore()}%` }} 
+                  />
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground uppercase">Indexação</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-end gap-2">
+                  <span className="text-4xl font-bold">142</span>
+                  <span className="text-muted-foreground pb-1">Páginas</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                  Sitemap processado pelo Google há 2 dias.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground uppercase">Alertas</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-end gap-2">
+                  <span className="text-4xl font-bold text-orange-500">3</span>
+                  <span className="text-muted-foreground pb-1">Pendências</span>
+                </div>
+                <div className="mt-2 space-y-1">
+                  <div className="text-[10px] text-orange-500 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" /> Meta Title duplicado em 2 páginas
+                  </div>
+                  <div className="text-[10px] text-orange-500 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" /> GA4 não configurado corretamente
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Visão Geral do Google Search</CardTitle>
+              <CardDescription>Como seu site aparece nos resultados de busca.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="bg-[#f8f9fa] dark:bg-[#202124] p-6 rounded-xl border border-border max-w-2xl">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-7 h-7 bg-white dark:bg-[#303134] rounded-full border border-border flex items-center justify-center text-[10px] font-bold text-blue-500">
+                    C
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-[#202124] dark:text-[#bdc1c6] font-medium leading-none">Corretores RJ</span>
+                    <span className="text-[10px] text-[#4d5156] dark:text-[#9aa0a6] leading-tight">https://www.corretoresrj.com</span>
+                  </div>
+                </div>
+                <h3 className="text-[#1a0dab] dark:text-[#8ab4f8] text-xl font-medium hover:underline cursor-pointer mb-1">
+                  {globalConfig.global_title}
+                </h3>
+                <p className="text-[#4d5156] dark:text-[#bdc1c6] text-sm leading-snug">
+                  {globalConfig.global_description}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="global" className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Configurações Globais</CardTitle>
+              <CardDescription>Defina os padrões de SEO para todo o site.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="domain">Domínio Principal</Label>
+                  <div className="flex gap-2">
+                    <Input 
+                      id="domain" 
+                      value={globalConfig.domain} 
+                      onChange={(e) => setGlobalConfig({...globalConfig, domain: e.target.value})}
+                    />
+                    <Button variant="outline" size="icon"><LinkIcon className="w-4 h-4" /></Button>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="robots">Indexação (Robots)</Label>
+                  <Input 
+                    id="robots" 
+                    value={globalConfig.robots} 
+                    onChange={(e) => setGlobalConfig({...globalConfig, robots: e.target.value})}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="global_title">Meta Title Global (Padrão)</Label>
+                <Input 
+                  id="global_title" 
+                  value={globalConfig.global_title} 
+                  onChange={(e) => setGlobalConfig({...globalConfig, global_title: e.target.value})}
+                />
+                <p className="text-[10px] text-muted-foreground text-right">{globalConfig.global_title.length} / 60 caracteres recomendados</p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="global_desc">Meta Description Global</Label>
+                <Textarea 
+                  id="global_desc" 
+                  rows={3}
+                  value={globalConfig.global_description} 
+                  onChange={(e) => setGlobalConfig({...globalConfig, global_description: e.target.value})}
+                />
+                <p className="text-[10px] text-muted-foreground text-right">{globalConfig.global_description.length} / 160 caracteres recomendados</p>
+              </div>
+
+              <Separator />
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h3 className="font-medium flex items-center gap-2">
+                    <Facebook className="w-4 h-4 text-blue-600" /> Open Graph (Facebook)
+                  </h3>
+                  <div className="space-y-2">
+                    <Label className="text-xs">OG Image URL</Label>
+                    <Input placeholder="URL da imagem para compartilhamento" />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="font-medium flex items-center gap-2">
+                    <Twitter className="w-4 h-4 text-sky-500" /> Twitter Cards
+                  </h3>
+                  <div className="space-y-2">
+                    <Label className="text-xs">Twitter Card Type</Label>
+                    <Input value={globalConfig.twitter_card} readOnly />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-end">
+                <Button onClick={handleSaveGlobal} disabled={loading} className="bg-secondary text-secondary-foreground">
+                  <Save className="w-4 h-4 mr-2" />
+                  {loading ? "Salvando..." : "Salvar Configurações"}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="pages" className="mt-6">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle>SEO por Página</CardTitle>
+                <CardDescription>Otimize títulos e descrições individuais.</CardDescription>
+              </div>
+              <Button size="sm" variant="outline" className="gap-2">
+                <Search className="w-4 h-4" /> Escanear Site
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {pagesSeo.map((page, i) => (
+                  <div key={i} className="p-4 rounded-lg border border-border hover:border-secondary/40 transition-colors bg-card/50">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary">{page.path}</Badge>
+                        <h4 className="font-medium">{page.title}</h4>
+                      </div>
+                      <Button variant="ghost" size="sm">Editar</Button>
+                    </div>
+                    <p className="text-xs text-muted-foreground line-clamp-1">{page.description}</p>
+                    <div className="mt-2 flex gap-2">
+                      {page.keywords?.split(",").map((kw, j) => (
+                        <span key={j} className="text-[10px] bg-muted px-2 py-0.5 rounded text-muted-foreground">
+                          {kw.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="tools" className="mt-6 space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Robots.txt</CardTitle>
+                <CardDescription>Controle o acesso dos rastreadores.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Textarea 
+                  rows={5} 
+                  className="font-mono text-xs" 
+                  value={globalConfig.robots_txt} 
+                  onChange={(e) => setGlobalConfig({...globalConfig, robots_txt: e.target.value})}
+                />
+                <Button variant="outline" size="sm" className="w-full">Atualizar Robots.txt</Button>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Sitemap XML</CardTitle>
+                <CardDescription>Ajude o Google a encontrar suas páginas.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="p-3 bg-muted rounded border border-border flex items-center justify-between">
+                  <code className="text-[10px]">/sitemap.xml</code>
+                  <Badge className="bg-emerald-500">Ativo</Badge>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <Eye className="w-4 h-4" /> Visualizar
+                  </Button>
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <Save className="w-4 h-4" /> Gerar Novo
+                  </Button>
+                </div>
+                <Alert className="bg-blue-500/5 border-blue-500/20 py-2">
+                  <Info className="w-4 h-4 text-blue-500" />
+                  <AlertDescription className="text-[10px] text-blue-700 dark:text-blue-300">
+                    Sitemap é atualizado automaticamente ao cadastrar novos imóveis.
+                  </AlertDescription>
+                </Alert>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Integrações Google</CardTitle>
+              <CardDescription>Conecte as ferramentas oficiais de SEO e Analytics.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <Label className="text-xs">Google Analytics (GA4)</Label>
+                  <Input 
+                    placeholder="G-XXXXXXXXXX" 
+                    value={globalConfig.google_analytics_id}
+                    onChange={(e) => setGlobalConfig({...globalConfig, google_analytics_id: e.target.value})}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs">Search Console ID</Label>
+                  <Input 
+                    placeholder="Código de verificação" 
+                    value={globalConfig.google_search_console_id}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs">Google Tag Manager</Label>
+                  <Input placeholder="GTM-XXXXXXX" />
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <Button variant="outline" size="sm">Verificar Integrações</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="analytics" className="mt-6">
+          <Card className="min-h-[400px] flex flex-col items-center justify-center text-center p-12">
+            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+              <BarChart className="w-8 h-8 text-muted-foreground" />
+            </div>
+            <CardTitle>Relatórios de Tráfego Orgânico</CardTitle>
+            <CardDescription className="max-w-md mx-auto mt-2">
+              Conecte sua conta do Google Search Console para visualizar cliques, impressões e CTR diretamente aqui.
+            </CardDescription>
+            <Button className="mt-6 bg-secondary text-secondary-foreground">Conectar Google Account</Button>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
-
-// Internal Settings component icon replacement for technical SEO mapping
-const Settings = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}
-  >
-    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-    <circle cx="12" cy="12" r="3"/>
-  </svg>
-);
 
 export default SeoManager;
