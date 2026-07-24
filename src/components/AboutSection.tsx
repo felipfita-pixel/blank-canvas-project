@@ -100,8 +100,6 @@ interface FeaturedProperty {
   property_type?: string | null;
   description?: string | null;
   address?: string | null;
-  condo_value?: number | null;
-  iptu_value?: number | null;
 }
 
 const CAMPAIGN_PER_PAGE = 12;
@@ -295,7 +293,7 @@ const AboutSection = () => {
     const fetchProperties = async () => {
       const { data } = await supabase
         .from("properties")
-        .select("id, title, images, neighborhood, price, bedrooms, bathrooms, parking_spots, area, suites, city, property_type, description, address, condo_value, iptu_value")
+        .select("id, title, images, neighborhood, price, bedrooms, bathrooms, parking_spots, area, suites, city, property_type, description, address")
         .eq("active", true)
         .order("featured", { ascending: false })
         .order("created_at", { ascending: false });
@@ -418,8 +416,6 @@ const AboutSection = () => {
         property.address,
         property.description,
         property.property_type ? propertyTypeLabels[property.property_type] ?? property.property_type : "",
-        property.condo_value ? `condominio ${property.condo_value}` : "",
-        property.iptu_value ? `iptu ${property.iptu_value}` : "",
       ]
         .map((value) => normalizeText(value))
         .join(" ");
