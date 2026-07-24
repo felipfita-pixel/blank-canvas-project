@@ -100,11 +100,18 @@ const PropertyQuiz = ({ open, onOpenChange }: QuizProps) => {
         created_at: new Date().toISOString(),
       };
 
-      const { error } = await supabase.from("leads").insert([
+      // Use 'contact_messages' for lead capture as a standard fallback in this schema
+      const { error } = await supabase.from("contact_messages" as any).insert([
         {
-          name: answers.name,
-          whatsapp: answers.whatsapp,
-          details: JSON.stringify(leadData),
+          full_name: answers.name,
+          phone: answers.whatsapp,
+          message: `[QUIZ MEU IMÓVEL IDEAL]
+Objetivo: ${answers.goal}
+Região: ${answers.region}
+Quartos: ${answers.bedrooms}
+Orçamento: R$ ${answers.budget}
+Prazo: ${answers.timeframe}`,
+          property_id: null
         }
       ]);
 
