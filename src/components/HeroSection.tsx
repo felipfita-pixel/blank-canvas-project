@@ -86,7 +86,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold text-white leading-[1] tracking-tight mb-8"
           >
-            Sua <span className="italic font-medium text-secondary">residência</span> de luxo no Rio.
+            Encontre seu imóvel ideal no <span className="italic font-medium text-secondary">Rio de Janeiro</span>.
           </motion.h1>
 
           <motion.p
@@ -95,8 +95,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-white/80 text-lg sm:text-xl font-body leading-relaxed max-w-xl mb-12"
           >
-            Curadoria exclusiva dos imóveis mais desejados do Rio de Janeiro. 
-            Atendimento personalizado focado no seu estilo de vida.
+            Imóveis selecionados, lançamentos exclusivos e oportunidades de investimento com especialistas da região.
           </motion.p>
 
           <motion.div
@@ -110,13 +109,13 @@ const HeroSection = () => {
               size="lg"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold rounded-full px-10 py-7 text-sm tracking-[0.2em] uppercase shadow-2xl shadow-secondary/20 transition-all hover:scale-105 active:scale-95"
             >
-              <Link to="/imoveis">Explorar Portfólio</Link>
+              <Link to="/imoveis">Comprar Imóvel</Link>
             </Button>
             <button
               onClick={handleContact}
               className="group flex items-center gap-3 text-white font-medium text-sm sm:text-base hover:text-secondary transition-colors px-4 py-2"
             >
-              Falar com um especialista
+              Falar com Especialista
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </button>
           </motion.div>
