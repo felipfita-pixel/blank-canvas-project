@@ -26,12 +26,17 @@ interface Property {
   active: boolean;
   featured: boolean;
   images: string[];
+  condo_value?: number;
+  iptu_value?: number;
+  developer?: string;
+  status?: string;
 }
 
 const emptyProperty = {
   title: "", description: "", property_type: "apartment", transaction_type: "sale",
   price: 0, area: 0, bedrooms: 0, bathrooms: 0, parking_spots: 0, suites: 0,
   neighborhood: "", address: "", active: true, featured: false, images: [] as string[],
+  condo_value: 0, iptu_value: 0, developer: "", status: "",
 };
 
 const AdminProperties = () => {
@@ -308,6 +313,31 @@ const AdminProperties = () => {
                 <Input value={form.address} onChange={(e) => update("address", e.target.value)} className="h-10 rounded-lg" />
               </div>
             </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider mb-1.5 block">Construtora / Empreendimento</label>
+                <Input value={form.developer} onChange={(e) => update("developer", e.target.value)} placeholder="Ex: Cyrela, Mozak..." className="h-10 rounded-lg" />
+              </div>
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider mb-1.5 block">Status do Imóvel</label>
+                <select value={form.status} onChange={(e) => update("status", e.target.value)} className="w-full h-10 rounded-lg border border-input bg-background px-3 text-sm">
+                  <option value="">Selecione...</option>
+                  <option value="ready">Pronto para Morar</option>
+                  <option value="construction">Em Construção</option>
+                  <option value="launch">Lançamento</option>
+                  <option value="pre-launch">Pré-lançamento</option>
+                </select>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider mb-1.5 block">Condomínio (R$)</label>
+                <Input type="number" value={form.condo_value} onChange={(e) => update("condo_value", Number(e.target.value))} className="h-10 rounded-lg" />
+              </div>
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider mb-1.5 block">IPTU (Anual R$)</label>
+                <Input type="number" value={form.iptu_value} onChange={(e) => update("iptu_value", Number(e.target.value))} className="h-10 rounded-lg" />
+              </div>
             <div>
               <label className="text-xs font-bold uppercase tracking-wider mb-1.5 block">Descrição</label>
               <Textarea value={form.description} onChange={(e) => update("description", e.target.value)} className="rounded-lg min-h-[80px]" />

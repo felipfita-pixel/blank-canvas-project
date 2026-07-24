@@ -35,6 +35,10 @@ interface Property {
   images: string[] | null;
   featured: boolean | null;
   broker_id: string | null;
+  condo_value?: number;
+  iptu_value?: number;
+  developer?: string;
+  status?: string;
 }
 
 interface Broker {
@@ -264,17 +268,47 @@ const PropertyDetail = () => {
                 <PropertyViewBadge propertyId={property.id} variant="inline" />
               </div>
 
-              {property.price > 0 && (
-                <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-10 py-6 border-y border-border">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-10 py-6 border-y border-border">
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Valor do Investimento</p>
+                  <p className="text-4xl font-bold text-secondary">
+                    {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
+                  </p>
+                </div>
+                {(property.condo_value || property.iptu_value) && (
+                  <div className="flex gap-6 border-l border-border pl-6">
+                    {property.condo_value > 0 && (
+                      <div>
+                        <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-0.5">Condomínio</p>
+                        <p className="text-sm font-semibold text-foreground">{formatPrice(property.condo_value)}</p>
+                      </div>
+                    )}
+                    {property.iptu_value > 0 && (
+                      <div>
+                        <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-0.5">IPTU</p>
+                        <p className="text-sm font-semibold text-foreground">{formatPrice(property.iptu_value)}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                <div className="flex-1 flex justify-end">
+                  <PropertyShareButtons property={property} variant="full" />
+                </div>
+              </div>
+
+              {property.developer && (
+                <div className="mb-6 p-4 bg-muted/30 rounded-xl border border-border/50 flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Valor do Investimento</p>
-                    <p className="text-4xl font-bold text-secondary">
-                      {formatPrice(property.price)}{property.transaction_type === "rent" ? "/mês" : ""}
-                    </p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">Empreendimento / Construtora</p>
+                    <p className="text-lg font-bold text-primary italic">{property.developer}</p>
                   </div>
-                  <div className="flex-1 flex justify-end">
-                    <PropertyShareButtons property={property} variant="full" />
-                  </div>
+                  {property.status && (
+                    <Badge variant="secondary" className="bg-secondary/10 text-secondary border-secondary/20">
+                      {property.status === "ready" ? "Pronto para Morar" : 
+                       property.status === "construction" ? "Em Construção" : 
+                       property.status === "launch" ? "Lançamento" : "Pré-lançamento"}
+                    </Badge>
+                  )}
                 </div>
               )}
 
@@ -340,7 +374,7 @@ const PropertyDetail = () => {
                     <MessageCircle className="w-4 h-4 mr-2" /> Agendar Visita
                   </Button>
                 </a>
-                <Link to={`/calculadora-investidor?price=${property.price}&area=${property.area}&bairro=${property.neighborhood || ""}&city=${property.city || ""}&iptu=500&condo=1200`}>
+                <Link to={`/calculadora-investidor?price=${property.price}&area=${property.area}&bairro=${property.neighborhood || ""}&city=${property.city || ""}&iptu=${property.iptu_value || 0}&condo=${property.condo_value || 0}`}>
                   <Button variant="outline" size="lg" className="w-full border-secondary/40 text-secondary hover:bg-secondary/10 rounded-full font-bold h-14 uppercase tracking-widest text-xs">
                     <TrendingUp className="w-4 h-4 mr-2" /> Analisar este investimento
                   </Button>
