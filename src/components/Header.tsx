@@ -88,7 +88,7 @@ const Header = () => {
           <Building className="w-8 h-8 text-secondary" />
           <div className="flex flex-col leading-none">
             <span className="font-display text-base sm:text-lg font-bold text-primary-foreground tracking-normal italic">
-              Corretores Associados & FF
+              Corretores RJ
             </span>
             <span className="font-display text-[9px] sm:text-[10px] text-primary-foreground/50 tracking-[0.2em] uppercase mt-0.5">
               Consultor Imobiliário

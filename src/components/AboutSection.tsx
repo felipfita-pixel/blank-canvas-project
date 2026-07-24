@@ -416,6 +416,8 @@ const AboutSection = () => {
         property.address,
         property.description,
         property.property_type ? propertyTypeLabels[property.property_type] ?? property.property_type : "",
+        property.condo_value ? `condominio ${property.condo_value}` : "",
+        property.iptu_value ? `iptu ${property.iptu_value}` : "",
       ]
         .map((value) => normalizeText(value))
         .join(" ");
