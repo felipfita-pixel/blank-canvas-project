@@ -141,14 +141,20 @@ const FeaturedProperties = () => {
   // Derived filter options
   const neighborhoods = useMemo(() => [...new Set(properties.map(p => p.neighborhood).filter(Boolean) as string[])].sort(), [properties]);
   const cities = useMemo(() => [...new Set(properties.map(p => p.city).filter(Boolean) as string[])].sort(), [properties]);
+  const developers = useMemo(() => [...new Set(properties.map(p => (p as any).developer).filter(Boolean) as string[])].sort(), [properties]);
   const propertyTitles = useMemo(() => properties.map(p => p.title), [properties]);
+
+  // Filter states for new fields
+  const [filterCondo, setFilterCondo] = useState("all");
+  const [filterDeveloper, setFilterDeveloper] = useState("all");
+  const [filterStatus, setFilterStatus] = useState("all");
 
   // Filtered properties
   const filtered = useMemo(() => {
     return properties.filter(p => {
       if (search) {
         const q = search.toLowerCase();
-        if (!p.title.toLowerCase().includes(q) && !(p.neighborhood || "").toLowerCase().includes(q) && !(p.city || "").toLowerCase().includes(q)) return false;
+        if (!p.title.toLowerCase().includes(q) && !(p.neighborhood || "").toLowerCase().includes(q) && !(p.city || "").toLowerCase().includes(q) && !((p as any).developer || "").toLowerCase().includes(q)) return false;
       }
       if (filterType !== "all" && (p as any).property_type !== filterType) return false;
       if (filterTransaction !== "all" && p.transaction_type !== filterTransaction) return false;
@@ -161,11 +167,18 @@ const FeaturedProperties = () => {
         if (filterPrice === "above") { if (p.price <= 5000000) return false; }
         else { if (p.price > parseInt(filterPrice)) return false; }
       }
+      if (filterCondo !== "all") {
+        const val = (p as any).condo_value || 0;
+        if (filterCondo === "above") { if (val <= 2000) return false; }
+        else { if (val > parseInt(filterCondo)) return false; }
+      }
+      if (filterDeveloper !== "all" && (p as any).developer !== filterDeveloper) return false;
+      if (filterStatus !== "all" && (p as any).status !== filterStatus) return false;
       return true;
     });
-  }, [properties, search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
+  }, [properties, search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice, filterCondo, filterDeveloper, filterStatus]);
 
-  useEffect(() => { setCurrentPage(1); }, [search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice]);
+  useEffect(() => { setCurrentPage(1); }, [search, filterType, filterTransaction, filterNeighborhood, filterBedrooms, filterPrice, filterCondo, filterDeveloper, filterStatus]);
 
   if (loading) return null;
   if (properties.length === 0) return null;
@@ -229,8 +242,15 @@ const FeaturedProperties = () => {
           onFilterBedroomsChange={setFilterBedrooms}
           filterPrice={filterPrice}
           onFilterPriceChange={setFilterPrice}
+          filterCondo={filterCondo}
+          onFilterCondoChange={setFilterCondo}
+          filterDeveloper={filterDeveloper}
+          onFilterDeveloperChange={setFilterDeveloper}
+          filterStatus={filterStatus}
+          onFilterStatusChange={setFilterStatus}
           neighborhoods={neighborhoods}
           cities={cities}
+          developers={developers}
           propertyTitles={propertyTitles}
           className="mb-6"
         />
@@ -280,6 +300,7 @@ const FeaturedProperties = () => {
                     <p className="flex items-center gap-1 text-sm text-muted-foreground mb-1">
                       <MapPin className="w-3.5 h-3.5 shrink-0" />
                       {p.neighborhood ? `${p.neighborhood}${p.city ? `, ${p.city}` : ""}` : p.city || ""}
+                      {(p as any).developer && <span className="ml-2 px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] rounded uppercase font-bold">{(p as any).developer}</span>}
                     </p>
                     {(p as any).description && (
                       <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{(p as any).description}</p>
