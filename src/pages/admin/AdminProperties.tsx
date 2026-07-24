@@ -26,10 +26,10 @@ interface Property {
   active: boolean;
   featured: boolean;
   images: string[];
-  condo_value?: number;
-  iptu_value?: number;
-  developer?: string;
-  status?: string;
+  condo_value: number;
+  iptu_value: number;
+  developer: string;
+  status: string;
 }
 
 const emptyProperty = {
