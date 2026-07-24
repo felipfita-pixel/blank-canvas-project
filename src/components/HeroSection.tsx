@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Building2, ArrowRight } from "lucide-react";
+import { Building2, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PropertyQuiz from "./PropertyQuiz";
 import heroImg from "@/assets/hero-padrao.jpg";
 
 const HeroSection = () => {
+  const [quizOpen, setQuizOpen] = useState(false);
+
   const handleContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -113,12 +117,13 @@ const HeroSection = () => {
             </Button>
             
             <Button
-              asChild
+              onClick={() => setQuizOpen(true)}
               variant="outline"
               size="lg"
-              className="border-white/20 text-white hover:bg-white/10 font-bold rounded-full px-8 py-6 text-xs tracking-[0.2em] uppercase transition-all"
+              className="border-white/20 text-white hover:bg-white/10 font-bold rounded-full px-8 py-6 text-xs tracking-[0.2em] uppercase transition-all flex items-center gap-2"
             >
-              <Link to="/calculadora-investidor">Investir</Link>
+              <Sparkles className="w-4 h-4 text-secondary" />
+              Meu Imóvel Ideal
             </Button>
 
             <Button
@@ -148,6 +153,8 @@ const HeroSection = () => {
 
       {/* Decorative Corner */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-white/5 to-transparent pointer-events-none" />
+      
+      <PropertyQuiz open={quizOpen} onOpenChange={setQuizOpen} />
     </section>
   );
 };
