@@ -338,6 +338,7 @@ const AdminProperties = () => {
                 <label className="text-xs font-bold uppercase tracking-wider mb-1.5 block">IPTU (Anual R$)</label>
                 <Input type="number" value={form.iptu_value} onChange={(e) => update("iptu_value", Number(e.target.value))} className="h-10 rounded-lg" />
               </div>
+            </div>
             <div>
               <label className="text-xs font-bold uppercase tracking-wider mb-1.5 block">Descrição</label>
               <Textarea value={form.description} onChange={(e) => update("description", e.target.value)} className="rounded-lg min-h-[80px]" />
