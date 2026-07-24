@@ -26,11 +26,18 @@ interface SearchFiltersProps {
   onFilterStateChange?: (value: string) => void;
   filterCity?: string;
   onFilterCityChange?: (value: string) => void;
+  filterCondo?: string;
+  onFilterCondoChange?: (value: string) => void;
+  filterDeveloper?: string;
+  onFilterDeveloperChange?: (value: string) => void;
+  filterStatus?: string;
+  onFilterStatusChange?: (value: string) => void;
   neighborhoods: string[];
   cities?: string[];
   states?: string[];
   propertyTitles?: string[];
   typeOptions?: string[];
+  developers?: string[];
   hideSearch?: boolean;
   className?: string;
 }
@@ -52,11 +59,18 @@ const SearchFilters = ({
   onFilterStateChange,
   filterCity,
   onFilterCityChange,
+  filterCondo,
+  onFilterCondoChange,
+  filterDeveloper,
+  onFilterDeveloperChange,
+  filterStatus,
+  onFilterStatusChange,
   neighborhoods,
   cities = [],
   states = [],
   propertyTitles = [],
   typeOptions,
+  developers = [],
   hideSearch = false,
   className = "",
 }: SearchFiltersProps) => {
@@ -77,7 +91,7 @@ const SearchFilters = ({
       )}
 
       {/* Filter dropdowns row */}
-      <div className={`grid grid-cols-2 sm:grid-cols-3 ${showLocationFilters ? 'lg:grid-cols-4 xl:grid-cols-7' : 'lg:grid-cols-5'} gap-3`}>
+      <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-3`}>
         {/* State filter */}
         {showLocationFilters && onFilterStateChange && (
           <Select value={filterState || "all"} onValueChange={onFilterStateChange}>
@@ -169,6 +183,46 @@ const SearchFilters = ({
             <SelectItem value="2000000">Até R$ 2 milhões</SelectItem>
             <SelectItem value="5000000">Até R$ 5 milhões</SelectItem>
             <SelectItem value="above">Acima de R$ 5 milhões</SelectItem>
+          </SelectContent>
+        </Select>
+
+        {/* Condo filter */}
+        <Select value={filterCondo || "all"} onValueChange={onFilterCondoChange}>
+          <SelectTrigger className="h-10 bg-background">
+            <SelectValue placeholder="Condomínio" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Qualquer condomínio</SelectItem>
+            <SelectItem value="500">Até R$ 500</SelectItem>
+            <SelectItem value="1000">Até R$ 1.000</SelectItem>
+            <SelectItem value="2000">Até R$ 2.000</SelectItem>
+            <SelectItem value="above">Acima de R$ 2.000</SelectItem>
+          </SelectContent>
+        </Select>
+
+        {/* Developer filter */}
+        <Select value={filterDeveloper || "all"} onValueChange={onFilterDeveloperChange}>
+          <SelectTrigger className="h-10 bg-background">
+            <SelectValue placeholder="Construtora" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todas as construtoras</SelectItem>
+            {developers.map((d) => (
+              <SelectItem key={d} value={d}>{d}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        {/* Status filter */}
+        <Select value={filterStatus || "all"} onValueChange={onFilterStatusChange}>
+          <SelectTrigger className="h-10 bg-background">
+            <SelectValue placeholder="Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todos os status</SelectItem>
+            <SelectItem value="ready">Pronto</SelectItem>
+            <SelectItem value="construction">Em Construção</SelectItem>
+            <SelectItem value="launch">Lançamento</SelectItem>
           </SelectContent>
         </Select>
       </div>

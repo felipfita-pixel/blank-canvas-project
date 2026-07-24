@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Building2, ArrowRight } from "lucide-react";
+import { Building2, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PropertyQuiz from "./PropertyQuiz";
 import heroImg from "@/assets/hero-padrao.jpg";
 
 const HeroSection = () => {
+  const [quizOpen, setQuizOpen] = useState(false);
+
   const handleContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -102,15 +106,35 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-5"
+            className="flex flex-wrap items-center gap-4"
           >
             <Button
               asChild
               size="lg"
-              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold rounded-full px-10 py-7 text-sm tracking-[0.2em] uppercase shadow-2xl shadow-secondary/20 transition-all hover:scale-105 active:scale-95"
+              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold rounded-full px-8 py-6 text-xs tracking-[0.2em] uppercase shadow-2xl shadow-secondary/20 transition-all hover:scale-105 active:scale-95"
             >
               <Link to="/imoveis">Comprar Imóvel</Link>
             </Button>
+            
+            <Button
+              onClick={() => setQuizOpen(true)}
+              variant="outline"
+              size="lg"
+              className="border-white/20 text-white hover:bg-white/10 font-bold rounded-full px-8 py-6 text-xs tracking-[0.2em] uppercase transition-all flex items-center gap-2"
+            >
+              <Sparkles className="w-4 h-4 text-secondary" />
+              Meu Imóvel Ideal
+            </Button>
+
+            <Button
+              asChild
+              variant="ghost"
+              size="lg"
+              className="text-white hover:text-secondary hover:bg-transparent font-bold rounded-full px-8 py-6 text-xs tracking-[0.2em] uppercase transition-all"
+            >
+              <Link to="/imoveis?status=launch">Lançamentos</Link>
+            </Button>
+
             <button
               onClick={handleContact}
               className="group flex items-center gap-3 text-white font-medium text-sm sm:text-base hover:text-secondary transition-colors px-4 py-2"
@@ -129,6 +153,8 @@ const HeroSection = () => {
 
       {/* Decorative Corner */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-white/5 to-transparent pointer-events-none" />
+      
+      <PropertyQuiz open={quizOpen} onOpenChange={setQuizOpen} />
     </section>
   );
 };

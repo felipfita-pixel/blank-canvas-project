@@ -9,7 +9,7 @@ import ImageLightbox from "@/components/ImageLightbox";
 import WatermarkImage from "@/components/WatermarkImage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Bed, Bath, Maximize, Car, MapPin, ArrowLeft, ChevronLeft, ChevronRight, MessageCircle, TrendingUp } from "lucide-react";
+import { Bed, Bath, Maximize, Car, MapPin, ArrowLeft, ChevronLeft, ChevronRight, MessageCircle, TrendingUp, Sparkles, Send, Heart, Share2 } from "lucide-react";
 import { getPropertyStatus, statusConfig } from "@/lib/propertyStatus";
 import PropertyShareButtons from "@/components/PropertyShareButtons";
 import PropertyViewBadge from "@/components/PropertyViewBadge";
@@ -365,20 +365,36 @@ const PropertyDetail = () => {
 
               {/* CTA */}
               <div className="bg-primary/95 border border-secondary/20 rounded-2xl p-6 text-primary-foreground shadow-2xl space-y-4">
+                <div className="flex items-center gap-2 text-secondary mb-1">
+                  <Sparkles className="w-4 h-4" />
+                  <span className="text-[10px] uppercase font-bold tracking-[0.2em]">Oportunidade ELO27</span>
+                </div>
                 <h3 className="font-heading font-bold text-xl mb-3">Interessado neste imóvel?</h3>
                 <p className="text-primary-foreground/70 text-sm mb-6 leading-relaxed">
-                  Agende agora mesmo uma visita exclusiva e conheça todos os detalhes deste empreendimento.
+                  Agende agora mesmo uma visita exclusiva ou solicite uma análise de investimento completa para este imóvel.
                 </p>
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full font-bold h-14 uppercase tracking-widest text-xs">
-                    <MessageCircle className="w-4 h-4 mr-2" /> Agendar Visita
+                <div className="grid gap-3">
+                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                    <Button size="lg" className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full font-bold h-14 uppercase tracking-widest text-xs">
+                      <MessageCircle className="w-4 h-4 mr-2" /> Agendar Visita
+                    </Button>
+                  </a>
+                  
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="w-full border-secondary text-secondary hover:bg-secondary/10 rounded-full font-bold h-14 uppercase tracking-widest text-xs"
+                    onClick={() => window.open(`https://wa.me/5521975316631?text=Olá! Tenho interesse no imóvel ID ${property.id}: ${property.title}`, '_blank')}
+                  >
+                    <Send className="w-4 h-4 mr-2" /> Tenho Interesse
                   </Button>
-                </a>
-                <Link to={`/calculadora-investidor?price=${property.price}&area=${property.area}&bairro=${property.neighborhood || ""}&city=${property.city || ""}&iptu=${property.iptu_value || 0}&condo=${property.condo_value || 0}`}>
-                  <Button variant="outline" size="lg" className="w-full border-secondary/40 text-secondary hover:bg-secondary/10 rounded-full font-bold h-14 uppercase tracking-widest text-xs">
-                    <TrendingUp className="w-4 h-4 mr-2" /> Analisar este investimento
-                  </Button>
-                </Link>
+
+                  <Link to={`/calculadora-investidor?price=${property.price}&area=${property.area || ""}&bairro=${property.neighborhood || ""}&city=${property.city || ""}&iptu=${property.iptu_value || 0}&condo=${property.condo_value || 0}`}>
+                    <Button variant="ghost" size="lg" className="w-full text-secondary hover:bg-secondary/10 rounded-full font-bold h-14 uppercase tracking-widest text-xs">
+                      <TrendingUp className="w-4 h-4 mr-2" /> Analisar ROI
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

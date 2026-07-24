@@ -415,6 +415,8 @@ const AboutSection = () => {
         property.city,
         property.address,
         property.description,
+        (property as any).developer,
+        (property as any).status,
         property.property_type ? propertyTypeLabels[property.property_type] ?? property.property_type : "",
       ]
         .map((value) => normalizeText(value))
