@@ -26,10 +26,10 @@ interface Property {
   active: boolean;
   featured: boolean;
   images: string[];
-  condo_value: number;
-  iptu_value: number;
-  developer: string;
-  status: string;
+  condo_value?: number | null;
+  iptu_value?: number | null;
+  developer?: string | null;
+  status?: string | null;
 }
 
 const emptyProperty = {
@@ -60,7 +60,19 @@ const AdminProperties = () => {
   useEffect(() => { fetchProperties(); }, []);
 
   const openNew = () => { setEditing(null); setForm(emptyProperty); setDialogOpen(true); };
-  const openEdit = (p: Property) => { setEditing(p); setForm({ ...p, images: p.images || [] }); setDialogOpen(true); };
+  const openEdit = (p: Property) => { 
+    setEditing(p); 
+    setForm({ 
+      ...emptyProperty,
+      ...p, 
+      images: p.images || [],
+      condo_value: p.condo_value || 0,
+      iptu_value: p.iptu_value || 0,
+      developer: p.developer || "",
+      status: p.status || "",
+    }); 
+    setDialogOpen(true); 
+  };
 
   const handleImageUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
